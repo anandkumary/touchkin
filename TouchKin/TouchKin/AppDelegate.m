@@ -7,7 +7,6 @@
 //
 
 #import "AppDelegate.h"
-#import "TKLoginVC.h"
 
 @interface AppDelegate ()
 
@@ -19,11 +18,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    self.window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
-    TKLoginVC *login = [[TKLoginVC alloc] initWithNibName:@"TKLoginVC" bundle:nil];
-    
-    self.window.rootViewController = login;
-    [self.window makeKeyAndVisible];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+
     
     return YES;
 }

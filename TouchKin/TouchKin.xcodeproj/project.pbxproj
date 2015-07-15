@@ -7,13 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4441FA681B5688D100A7B7F9 /* TouchKin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4441FA671B5688D100A7B7F9 /* TouchKin.storyboard */; };
+		4441FA9D1B568A0300A7B7F9 /* TKIntroVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4441FA9C1B568A0300A7B7F9 /* TKIntroVC.m */; };
+		4441FAA01B568AF000A7B7F9 /* TKRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4441FA9F1B568AF000A7B7F9 /* TKRootViewController.m */; };
+		4441FAA41B56937000A7B7F9 /* UIColor+Navigation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4441FAA31B56937000A7B7F9 /* UIColor+Navigation.m */; };
+		4441FAA81B5694EB00A7B7F9 /* TKNavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4441FAA71B5694EB00A7B7F9 /* TKNavigationView.m */; };
+		4441FAAB1B56AB3300A7B7F9 /* TKRegisterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4441FAAA1B56AB3300A7B7F9 /* TKRegisterVC.m */; };
 		4451755A1B55DD2D00EDEF97 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 445175591B55DD2D00EDEF97 /* main.m */; };
 		4451755D1B55DD2D00EDEF97 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4451755C1B55DD2D00EDEF97 /* AppDelegate.m */; };
 		445175651B55DD2D00EDEF97 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 445175641B55DD2D00EDEF97 /* Images.xcassets */; };
 		445175681B55DD2D00EDEF97 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 445175661B55DD2D00EDEF97 /* LaunchScreen.xib */; };
 		445175741B55DD2E00EDEF97 /* TouchKinTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 445175731B55DD2E00EDEF97 /* TouchKinTests.m */; };
 		445175811B55DDCE00EDEF97 /* TKLoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4451757F1B55DDCE00EDEF97 /* TKLoginVC.m */; };
-		445175821B55DDCE00EDEF97 /* TKLoginVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 445175801B55DDCE00EDEF97 /* TKLoginVC.xib */; };
 		445175861B55E74100EDEF97 /* MLClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 445175851B55E74100EDEF97 /* MLClient.m */; };
 		445175891B55E7D900EDEF97 /* MLNetworkModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 445175881B55E7D900EDEF97 /* MLNetworkModel.m */; };
 /* End PBXBuildFile section */
@@ -29,6 +34,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4441FA671B5688D100A7B7F9 /* TouchKin.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TouchKin.storyboard; sourceTree = "<group>"; };
+		4441FA9B1B568A0300A7B7F9 /* TKIntroVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKIntroVC.h; sourceTree = "<group>"; };
+		4441FA9C1B568A0300A7B7F9 /* TKIntroVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKIntroVC.m; sourceTree = "<group>"; };
+		4441FA9E1B568AF000A7B7F9 /* TKRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKRootViewController.h; sourceTree = "<group>"; };
+		4441FA9F1B568AF000A7B7F9 /* TKRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKRootViewController.m; sourceTree = "<group>"; };
+		4441FAA21B56937000A7B7F9 /* UIColor+Navigation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Navigation.h"; sourceTree = "<group>"; };
+		4441FAA31B56937000A7B7F9 /* UIColor+Navigation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Navigation.m"; sourceTree = "<group>"; };
+		4441FAA61B5694EB00A7B7F9 /* TKNavigationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKNavigationView.h; sourceTree = "<group>"; };
+		4441FAA71B5694EB00A7B7F9 /* TKNavigationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKNavigationView.m; sourceTree = "<group>"; };
+		4441FAA91B56AB3300A7B7F9 /* TKRegisterVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKRegisterVC.h; sourceTree = "<group>"; };
+		4441FAAA1B56AB3300A7B7F9 /* TKRegisterVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKRegisterVC.m; sourceTree = "<group>"; };
 		445175541B55DD2D00EDEF97 /* TouchKin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TouchKin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		445175581B55DD2D00EDEF97 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		445175591B55DD2D00EDEF97 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -41,7 +57,6 @@
 		445175731B55DD2E00EDEF97 /* TouchKinTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TouchKinTests.m; sourceTree = "<group>"; };
 		4451757E1B55DDCE00EDEF97 /* TKLoginVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKLoginVC.h; sourceTree = "<group>"; };
 		4451757F1B55DDCE00EDEF97 /* TKLoginVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKLoginVC.m; sourceTree = "<group>"; };
-		445175801B55DDCE00EDEF97 /* TKLoginVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TKLoginVC.xib; sourceTree = "<group>"; };
 		445175841B55E74100EDEF97 /* MLClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLClient.h; sourceTree = "<group>"; };
 		445175851B55E74100EDEF97 /* MLClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLClient.m; sourceTree = "<group>"; };
 		445175871B55E7D900EDEF97 /* MLNetworkModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLNetworkModel.h; sourceTree = "<group>"; };
@@ -66,6 +81,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4441FAA11B5692AA00A7B7F9 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				4441FAA21B56937000A7B7F9 /* UIColor+Navigation.h */,
+				4441FAA31B56937000A7B7F9 /* UIColor+Navigation.m */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		4441FAA51B5694BD00A7B7F9 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				4441FAA61B5694EB00A7B7F9 /* TKNavigationView.h */,
+				4441FAA71B5694EB00A7B7F9 /* TKNavigationView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		4451754B1B55DD2D00EDEF97 = {
 			isa = PBXGroup;
 			children = (
@@ -87,10 +120,15 @@
 		445175561B55DD2D00EDEF97 /* TouchKin */ = {
 			isa = PBXGroup;
 			children = (
+				4441FAA51B5694BD00A7B7F9 /* View */,
+				4441FAA11B5692AA00A7B7F9 /* Utilities */,
 				445175831B55E71300EDEF97 /* Services */,
 				4451757D1B55DDAD00EDEF97 /* Controllers */,
 				4451755B1B55DD2D00EDEF97 /* AppDelegate.h */,
 				4451755C1B55DD2D00EDEF97 /* AppDelegate.m */,
+				4441FA9E1B568AF000A7B7F9 /* TKRootViewController.h */,
+				4441FA9F1B568AF000A7B7F9 /* TKRootViewController.m */,
+				4441FA671B5688D100A7B7F9 /* TouchKin.storyboard */,
 				445175641B55DD2D00EDEF97 /* Images.xcassets */,
 				445175661B55DD2D00EDEF97 /* LaunchScreen.xib */,
 				445175571B55DD2D00EDEF97 /* Supporting Files */,
@@ -129,7 +167,10 @@
 			children = (
 				4451757E1B55DDCE00EDEF97 /* TKLoginVC.h */,
 				4451757F1B55DDCE00EDEF97 /* TKLoginVC.m */,
-				445175801B55DDCE00EDEF97 /* TKLoginVC.xib */,
+				4441FA9B1B568A0300A7B7F9 /* TKIntroVC.h */,
+				4441FA9C1B568A0300A7B7F9 /* TKIntroVC.m */,
+				4441FAA91B56AB3300A7B7F9 /* TKRegisterVC.h */,
+				4441FAAA1B56AB3300A7B7F9 /* TKRegisterVC.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -227,7 +268,7 @@
 			files = (
 				445175681B55DD2D00EDEF97 /* LaunchScreen.xib in Resources */,
 				445175651B55DD2D00EDEF97 /* Images.xcassets in Resources */,
-				445175821B55DDCE00EDEF97 /* TKLoginVC.xib in Resources */,
+				4441FA681B5688D100A7B7F9 /* TouchKin.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -248,8 +289,13 @@
 				4451755D1B55DD2D00EDEF97 /* AppDelegate.m in Sources */,
 				445175861B55E74100EDEF97 /* MLClient.m in Sources */,
 				4451755A1B55DD2D00EDEF97 /* main.m in Sources */,
+				4441FAA01B568AF000A7B7F9 /* TKRootViewController.m in Sources */,
+				4441FAA81B5694EB00A7B7F9 /* TKNavigationView.m in Sources */,
 				445175891B55E7D900EDEF97 /* MLNetworkModel.m in Sources */,
+				4441FA9D1B568A0300A7B7F9 /* TKIntroVC.m in Sources */,
 				445175811B55DDCE00EDEF97 /* TKLoginVC.m in Sources */,
+				4441FAAB1B56AB3300A7B7F9 /* TKRegisterVC.m in Sources */,
+				4441FAA41B56937000A7B7F9 /* UIColor+Navigation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
