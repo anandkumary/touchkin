@@ -14,6 +14,8 @@
 		445175741B55DD2E00EDEF97 /* TouchKinTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 445175731B55DD2E00EDEF97 /* TouchKinTests.m */; };
 		445175811B55DDCE00EDEF97 /* TKLoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4451757F1B55DDCE00EDEF97 /* TKLoginVC.m */; };
 		445175821B55DDCE00EDEF97 /* TKLoginVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 445175801B55DDCE00EDEF97 /* TKLoginVC.xib */; };
+		445175861B55E74100EDEF97 /* MLClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 445175851B55E74100EDEF97 /* MLClient.m */; };
+		445175891B55E7D900EDEF97 /* MLNetworkModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 445175881B55E7D900EDEF97 /* MLNetworkModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +42,10 @@
 		4451757E1B55DDCE00EDEF97 /* TKLoginVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKLoginVC.h; sourceTree = "<group>"; };
 		4451757F1B55DDCE00EDEF97 /* TKLoginVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKLoginVC.m; sourceTree = "<group>"; };
 		445175801B55DDCE00EDEF97 /* TKLoginVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TKLoginVC.xib; sourceTree = "<group>"; };
+		445175841B55E74100EDEF97 /* MLClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLClient.h; sourceTree = "<group>"; };
+		445175851B55E74100EDEF97 /* MLClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLClient.m; sourceTree = "<group>"; };
+		445175871B55E7D900EDEF97 /* MLNetworkModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLNetworkModel.h; sourceTree = "<group>"; };
+		445175881B55E7D900EDEF97 /* MLNetworkModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLNetworkModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +87,7 @@
 		445175561B55DD2D00EDEF97 /* TouchKin */ = {
 			isa = PBXGroup;
 			children = (
+				445175831B55E71300EDEF97 /* Services */,
 				4451757D1B55DDAD00EDEF97 /* Controllers */,
 				4451755B1B55DD2D00EDEF97 /* AppDelegate.h */,
 				4451755C1B55DD2D00EDEF97 /* AppDelegate.m */,
@@ -125,6 +132,17 @@
 				445175801B55DDCE00EDEF97 /* TKLoginVC.xib */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		445175831B55E71300EDEF97 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				445175841B55E74100EDEF97 /* MLClient.h */,
+				445175851B55E74100EDEF97 /* MLClient.m */,
+				445175871B55E7D900EDEF97 /* MLNetworkModel.h */,
+				445175881B55E7D900EDEF97 /* MLNetworkModel.m */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -228,7 +246,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				4451755D1B55DD2D00EDEF97 /* AppDelegate.m in Sources */,
+				445175861B55E74100EDEF97 /* MLClient.m in Sources */,
 				4451755A1B55DD2D00EDEF97 /* main.m in Sources */,
+				445175891B55E7D900EDEF97 /* MLNetworkModel.m in Sources */,
 				445175811B55DDCE00EDEF97 /* TKLoginVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -418,6 +438,7 @@
 				445175791B55DD2E00EDEF97 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4451757A1B55DD2E00EDEF97 /* Build configuration list for PBXNativeTarget "TouchKinTests" */ = {
 			isa = XCConfigurationList;
@@ -426,6 +447,7 @@
 				4451757C1B55DD2E00EDEF97 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
