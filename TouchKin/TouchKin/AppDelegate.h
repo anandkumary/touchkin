@@ -11,7 +11,10 @@
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (nonatomic, assign) BOOL isConnectedToWifi;
+@property (nonatomic, assign) BOOL isConnectedTo3G;
 
+-(BOOL) isNetWorkConnected;
 
 @end
 

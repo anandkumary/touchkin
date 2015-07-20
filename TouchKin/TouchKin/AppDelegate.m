@@ -7,8 +7,14 @@
 //
 
 #import "AppDelegate.h"
+#import "Reachability.h"
 
 @interface AppDelegate ()
+@property(nonatomic, assign) NetworkStatus internetStatus;
+
+@property (nonatomic) Reachability *internetReachability;
+@property (nonatomic) Reachability *wifiReachability;
+
 
 @end
 
@@ -19,9 +25,64 @@
     // Override point for customization after application launch.
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    
+    [[UIDevice currentDevice] setBatteryMonitoringEnabled:YES];
+    UIDevice *myDevice = [UIDevice currentDevice];
+    
+    [myDevice setBatteryMonitoringEnabled:YES];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
 
+    Reachability * hostReach = [Reachability reachabilityWithHostname:@"www.apple.com"];
+    [hostReach startNotifier];
+
+    self.internetStatus = [hostReach currentReachabilityStatus];
+    
+    self.internetReachability = [Reachability reachabilityForInternetConnection];
+    [self.internetReachability startNotifier];
+    [self updateInterfaceWithReachability:self.internetReachability];
+    
+    self.wifiReachability = [Reachability reachabilityForLocalWiFi];
+    [self.wifiReachability startNotifier];
+    [self updateInterfaceWithReachability:self.wifiReachability];
+    
     
     return YES;
+}
+
+- (void)updateInterfaceWithReachability:(Reachability *)reachability
+{
+    
+    if ([reachability currentReachabilityStatus] == ReachableViaWWAN)
+        {
+        self.isConnectedTo3G = YES;
+        }
+    
+    if ([reachability currentReachabilityStatus] == ReachableViaWiFi)
+        {
+        self.isConnectedToWifi = YES;
+        }
+}
+
+
+-(void)reachabilityChanged: (NSNotification *)note
+{
+    Reachability *curReach = [note object];
+    self.internetStatus = [curReach currentReachabilityStatus];
+    
+    if(self.internetStatus == NotReachable){
+        
+        self.isConnectedTo3G = NO;
+        self.isConnectedToWifi = NO;
+    }
+    
+    [self updateInterfaceWithReachability:curReach];
+
+}
+
+-(BOOL) isNetWorkConnected {
+    
+    return (self.internetStatus != NotReachable) ? YES : NO;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

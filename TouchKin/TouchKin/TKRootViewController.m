@@ -20,6 +20,37 @@ static NSString * const KINTROSCREEN = @"TKIntroVC";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    NSDictionary *attributes = @{
+                                 NSForegroundColorAttributeName: [UIColor whiteColor],
+                                 NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue" size:12.0]
+                                 };
+   
+   
+    [[UITabBarItem appearance] setTitleTextAttributes:attributes forState:UIControlStateNormal];
+    [[UITabBarItem appearance] setTitleTextAttributes:attributes forState:UIControlStateSelected];
+   
+    UITabBar *tabBar = self.tabBar;
+    UITabBarItem *tabBarItem1 = [tabBar.items objectAtIndex:0];
+    UITabBarItem *tabBarItem2 = [tabBar.items objectAtIndex:1];
+    UITabBarItem *tabBarItem3 = [tabBar.items objectAtIndex:2];
+    
+    tabBarItem1.title = @"Me";
+    tabBarItem2.title = @"Kinbook";
+    tabBarItem3.title = @"Message";
+
+    
+    tabBarItem1.selectedImage = [[UIImage imageNamed:@"avatar"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    tabBarItem1.image = [[UIImage imageNamed:@"avatar"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    
+    tabBarItem2.selectedImage = [[UIImage imageNamed:@"kinbook"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    tabBarItem2.image = [[UIImage imageNamed:@"kinbook"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    
+    tabBarItem3.selectedImage = [[UIImage imageNamed:@"message"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    tabBarItem3.image = [[UIImage imageNamed:@"message"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+
+    
+    
 }
 
 -(void) viewWillLayoutSubviews {
@@ -27,14 +58,8 @@ static NSString * const KINTROSCREEN = @"TKIntroVC";
     [super viewWillLayoutSubviews];
 
     dispatch_async(dispatch_get_main_queue(), ^(void){
-        
-        TKIntroVC *introVC = [self.storyboard instantiateViewControllerWithIdentifier:KINTROSCREEN];
-        
-         UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:introVC];
-        
-        [navController setNavigationBarHidden:YES];
-        
-        [self presentViewController:navController animated:NO completion:nil];
+        // [self showLogin];
+
     });
     
    
@@ -44,6 +69,17 @@ static NSString * const KINTROSCREEN = @"TKIntroVC";
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void) showLogin {
+   
+   TKIntroVC *introVC = [self.storyboard instantiateViewControllerWithIdentifier:KINTROSCREEN];
+  
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:introVC];
+  
+   [navController setNavigationBarHidden:YES];
+  
+   [self presentViewController:navController animated:NO completion:nil];
 }
 
 /*
