@@ -7,7 +7,10 @@
 //
 
 #import "AppDelegate.h"
+#import "TKDataEngine.h"
 #import "Reachability.h"
+#import <CoreTelephony/CTTelephonyNetworkInfo.h>
+#import <CoreTelephony/CTCarrier.h>
 
 @interface AppDelegate ()
 @property(nonatomic, assign) NetworkStatus internetStatus;
@@ -46,8 +49,22 @@
     [self.wifiReachability startNotifier];
     [self updateInterfaceWithReachability:self.wifiReachability];
     
+    [self updateCarrierInfo];
+    
+    [self setUpTokenRegistration:application];
     
     return YES;
+}
+
+-(void) setUpTokenRegistration:(UIApplication *)application {
+    
+    UIUserNotificationType userNotificationTypes = (UIUserNotificationTypeAlert |
+                                                    UIUserNotificationTypeBadge |
+                                                    UIUserNotificationTypeSound);
+    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:userNotificationTypes
+                                                                             categories:nil];
+    [application registerUserNotificationSettings:settings];
+    [application registerForRemoteNotifications];
 }
 
 - (void)updateInterfaceWithReachability:(Reachability *)reachability
@@ -105,6 +122,60 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+-(void)updateCarrierInfo {
+    
+    CTTelephonyNetworkInfo *telephonyInfo = [CTTelephonyNetworkInfo new];
+    
+    CTCarrier *carrier = telephonyInfo.subscriberCellularProvider;
+    
+    NSLog(@"country code is: %@ -> %@", carrier.isoCountryCode,carrier.mobileNetworkCode);
+    
+//    NSLocale *currentLocale = [NSLocale currentLocale];  // get the current locale.
+//    NSString *countryCode = [currentLocale objectForKey:NSLocaleCountryCode];
+    
+    // NSArray *cty = [NSLocale ISOCountryCodes];
+    
+    //  NSLog(@"country code is: %@ -> %@", countryCode, cty);
+
+
+    
+    NSLog(@"Current Radio Access Technology: %@", telephonyInfo.currentRadioAccessTechnology);
+    [NSNotificationCenter.defaultCenter addObserverForName:CTRadioAccessTechnologyDidChangeNotification
+                                                    object:nil
+                                                     queue:nil
+                                                usingBlock:^(NSNotification *note)
+    {
+    NSLog(@"New Radio Access Technology: %@", telephonyInfo.currentRadioAccessTechnology);
+    }];
+}
+
+-(void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+{    
+    
+    NSString * token = [NSString stringWithFormat:@"%@", deviceToken];
+    //Format token as you need:
+    token = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
+    token = [token stringByReplacingOccurrencesOfString:@">" withString:@""];
+    token = [token stringByReplacingOccurrencesOfString:@"<" withString:@""];
+    NSLog(@"%@",token);
+    
+    [[TKDataEngine sharedManager] setToken:token];
+    // [[NSUserDefaults standardUserDefaults] setValue:token forKey:@"deviceToken"];
+    
+}
+
+
+- (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forRemoteNotification:(NSDictionary *)userInfo completionHandler:(void(^)())completionHandler
+{
+    //handle the actions
+    if ([identifier isEqualToString:@"declineAction"]){
+        
+    }
+    else if ([identifier isEqualToString:@"answerAction"]){
+        
+    }
 }
 
 @end

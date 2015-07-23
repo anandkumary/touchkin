@@ -7,8 +7,9 @@
 //
 
 #import "MLNetworkModel.h"
+#import "TKDataEngine.h"
 
-static NSString *const KDomainUrl = @"http://162.243.49.99/";
+static NSString *const KDomainUrl = @"http://54.69.183.186:1340/";
 
 @implementation MLNetworkModel
 
@@ -34,6 +35,13 @@ static NSString *const KDomainUrl = @"http://162.243.49.99/";
     
     [self.defaultHeaders setObject:@"application/json" forKey:@"Accept"];
     [self.defaultHeaders setObject:@"application/json" forKey:@"content-type"];
+    
+    NSString *sessionId = [[TKDataEngine sharedManager] getSessionId];
+    if(sessionId.length){
+        
+        NSString *sessionToken = [NSString stringWithFormat:@"Bearer %@",sessionId];
+        [self.defaultHeaders setObject:sessionToken forKey:@"Authorization"];
+    }
     
 }
 

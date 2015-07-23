@@ -71,4 +71,48 @@
     [baseVC openMenu];
 }
 
+-(void) addLeftSideImage:(UIImage *)image forTarget:(id)target {
+   
+    [self.navView.leftButton setImage:image forState:UIControlStateNormal];
+    
+    [self.navView.leftButton addTarget:target action:@selector(navleftBarAction:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+-(void) addRightSideImage:(UIImage *)image forTarget:(id)target {
+    
+    [self.navView.rightButton setImage:image forState:UIControlStateNormal];
+    
+    [self.navView.rightButton addTarget:target action:@selector(navRightBarAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+}
+
+-(void) addLeftSideTitle:(NSString *)title forTarget:(id)target {
+    
+    [self.navView.leftButton setTitle:title forState:UIControlStateNormal];
+    
+    [self.navView.leftButton setImage:nil forState:UIControlStateNormal];
+    
+    [self.navView.leftButton.titleLabel setFont:[UIFont systemFontOfSize:14]];
+    
+    self.navView.leftButton.titleLabel.textColor = [UIColor lightGrayColor];
+    
+    [self.navView.leftButton addTarget:target action:@selector(navleftBarAction:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+-(void) addRightSideTitle:(NSString *)title forTarget:(id)target {
+    
+    [self.navView.rightButton setTitle:title forState:UIControlStateNormal];
+    
+    [self.navView.rightButton setImage:nil forState:UIControlStateNormal];
+    
+    [self.navView.rightButton.titleLabel setFont:[UIFont systemFontOfSize:14]];
+    
+    self.navView.rightButton.titleLabel.textColor = [UIColor lightGrayColor];
+    
+    [self.navView.rightButton addTarget:target action:@selector(navRightBarAction:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+
+
+
 @end

@@ -9,9 +9,12 @@
 
 #import "TKRegisterVC.h"
 #import "TKNavigationView.h"
+#import "TKDataEngine.h"
+#import "MLNetworkModel.h"
 
 @interface TKRegisterVC ()
 @property (weak, nonatomic) IBOutlet TKNavigationView *navigationView;
+@property (weak, nonatomic) IBOutlet UITextField *otpTextField;
 
 @end
 
@@ -20,6 +23,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.navigationView.title = @"Verify OTP";
 }
 
 -(void)viewWillLayoutSubviews {
@@ -41,5 +45,33 @@
     // Pass the selected object to the new view controller.
 }
 */
+- (IBAction)otpSendButtonAction:(id)sender {
+    
+    TKDataEngine *engine = [TKDataEngine sharedManager];
+    
+    NSString *phone = [engine getPhoneNumber];
+    NSString *deviceToken = [engine getDeviceToken];
+    NSString *OtpCode = self.otpTextField.text;
+    
+    
+   NSDictionary *dict = @{@"mobile": phone,@"code":[NSNumber numberWithInteger:OtpCode.integerValue] ,@"mobile_os": @"ios",@"mobile_device_id": deviceToken};
+    
+    MLNetworkModel *model = [[MLNetworkModel alloc] init];
+    [model postRequestPath:@"user/verify-mobile" withParameter:dict withHandler:^(id responseObject, NSError *error) {
+       
+        NSLog(@"resss =%@",responseObject);
+        
+    }];
+    
+    
+}
+- (IBAction)backButtonAction:(id)sender {
+    
+    [self.navigationController popViewControllerAnimated:YES];
+}
+- (IBAction)nextButtonAction:(id)sender {
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 @end

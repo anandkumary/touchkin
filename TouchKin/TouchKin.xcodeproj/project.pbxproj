@@ -8,9 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		44091E631B5C8A83008BB282 /* UILabel+Attribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 44091E621B5C8A83008BB282 /* UILabel+Attribute.m */; };
+		44091E651B5C8FBF008BB282 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44091E641B5C8FBF008BB282 /* CoreTelephony.framework */; };
 		441382701B57FAD300DFB0BC /* TKSideMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4413826F1B57FAD300DFB0BC /* TKSideMenuView.m */; };
 		441382731B57FC2F00DFB0BC /* TKBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 441382721B57FC2F00DFB0BC /* TKBaseViewController.m */; };
 		441382771B58042D00DFB0BC /* TKMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 441382761B58042D00DFB0BC /* TKMenuCell.m */; };
+		442A943C1B5FD92B00C07A4F /* TKPassCodeField.m in Sources */ = {isa = PBXBuildFile; fileRef = 442A943B1B5FD92B00C07A4F /* TKPassCodeField.m */; };
+		442A943F1B5FDACE00C07A4F /* TKPassCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 442A943E1B5FDACE00C07A4F /* TKPassCodeView.m */; };
 		44384B0C1B572A8600C8E35A /* TKCircularView.m in Sources */ = {isa = PBXBuildFile; fileRef = 44384B0B1B572A8600C8E35A /* TKCircularView.m */; };
 		443EA0071B594E2800A685CE /* TKMeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 443EA0061B594E2800A685CE /* TKMeViewController.m */; };
 		443EA00D1B595BA600A685CE /* TKPageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 443EA00C1B595BA600A685CE /* TKPageController.m */; };
@@ -29,6 +32,10 @@
 		445175811B55DDCE00EDEF97 /* TKLoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4451757F1B55DDCE00EDEF97 /* TKLoginVC.m */; };
 		445175861B55E74100EDEF97 /* MLClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 445175851B55E74100EDEF97 /* MLClient.m */; };
 		445175891B55E7D900EDEF97 /* MLNetworkModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 445175881B55E7D900EDEF97 /* MLNetworkModel.m */; };
+		445B02581B5E7E7A004696B3 /* TKDataEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 445B02571B5E7E7A004696B3 /* TKDataEngine.m */; };
+		445B025C1B5E7F0F004696B3 /* Country.m in Sources */ = {isa = PBXBuildFile; fileRef = 445B025B1B5E7F0F004696B3 /* Country.m */; };
+		445B025E1B5E7F7F004696B3 /* countries.json in Resources */ = {isa = PBXBuildFile; fileRef = 445B025D1B5E7F7F004696B3 /* countries.json */; };
+		445B02641B5E8198004696B3 /* TKCountryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 445B02631B5E8198004696B3 /* TKCountryVC.m */; };
 		4490136A1B5A4D01007B312C /* TKMyFamilyCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 449013691B5A4D01007B312C /* TKMyFamilyCollectionCell.m */; };
 		4490136D1B5A4D23007B312C /* TKMyFamilyRequestCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4490136C1B5A4D23007B312C /* TKMyFamilyRequestCell.m */; };
 		449013701B5A4F9D007B312C /* TKMyFamilyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4490136F1B5A4F9D007B312C /* TKMyFamilyVC.m */; };
@@ -57,12 +64,17 @@
 /* Begin PBXFileReference section */
 		44091E611B5C8A83008BB282 /* UILabel+Attribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+Attribute.h"; sourceTree = "<group>"; };
 		44091E621B5C8A83008BB282 /* UILabel+Attribute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+Attribute.m"; sourceTree = "<group>"; };
+		44091E641B5C8FBF008BB282 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		4413826E1B57FAD300DFB0BC /* TKSideMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKSideMenuView.h; sourceTree = "<group>"; };
 		4413826F1B57FAD300DFB0BC /* TKSideMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKSideMenuView.m; sourceTree = "<group>"; };
 		441382711B57FC2F00DFB0BC /* TKBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKBaseViewController.h; sourceTree = "<group>"; };
 		441382721B57FC2F00DFB0BC /* TKBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKBaseViewController.m; sourceTree = "<group>"; };
 		441382751B58042D00DFB0BC /* TKMenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKMenuCell.h; sourceTree = "<group>"; };
 		441382761B58042D00DFB0BC /* TKMenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKMenuCell.m; sourceTree = "<group>"; };
+		442A943A1B5FD92B00C07A4F /* TKPassCodeField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKPassCodeField.h; sourceTree = "<group>"; };
+		442A943B1B5FD92B00C07A4F /* TKPassCodeField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKPassCodeField.m; sourceTree = "<group>"; };
+		442A943D1B5FDACE00C07A4F /* TKPassCodeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKPassCodeView.h; sourceTree = "<group>"; };
+		442A943E1B5FDACE00C07A4F /* TKPassCodeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKPassCodeView.m; sourceTree = "<group>"; };
 		44384B0A1B572A8600C8E35A /* TKCircularView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKCircularView.h; sourceTree = "<group>"; };
 		44384B0B1B572A8600C8E35A /* TKCircularView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKCircularView.m; sourceTree = "<group>"; };
 		443EA0051B594E2800A685CE /* TKMeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKMeViewController.h; sourceTree = "<group>"; };
@@ -98,6 +110,13 @@
 		445175851B55E74100EDEF97 /* MLClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLClient.m; sourceTree = "<group>"; };
 		445175871B55E7D900EDEF97 /* MLNetworkModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLNetworkModel.h; sourceTree = "<group>"; };
 		445175881B55E7D900EDEF97 /* MLNetworkModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLNetworkModel.m; sourceTree = "<group>"; };
+		445B02561B5E7E7A004696B3 /* TKDataEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKDataEngine.h; sourceTree = "<group>"; };
+		445B02571B5E7E7A004696B3 /* TKDataEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKDataEngine.m; sourceTree = "<group>"; };
+		445B025A1B5E7F0F004696B3 /* Country.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Country.h; sourceTree = "<group>"; };
+		445B025B1B5E7F0F004696B3 /* Country.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Country.m; sourceTree = "<group>"; };
+		445B025D1B5E7F7F004696B3 /* countries.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = countries.json; sourceTree = "<group>"; };
+		445B02621B5E8198004696B3 /* TKCountryVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKCountryVC.h; sourceTree = "<group>"; };
+		445B02631B5E8198004696B3 /* TKCountryVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKCountryVC.m; sourceTree = "<group>"; };
 		449013641B5A2CC4007B312C /* Define.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Define.h; sourceTree = "<group>"; };
 		449013681B5A4D01007B312C /* TKMyFamilyCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKMyFamilyCollectionCell.h; sourceTree = "<group>"; };
 		449013691B5A4D01007B312C /* TKMyFamilyCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKMyFamilyCollectionCell.m; sourceTree = "<group>"; };
@@ -128,6 +147,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				44091E651B5C8FBF008BB282 /* CoreTelephony.framework in Frameworks */,
 				44EA499A1B59D6C70027C368 /* Foundation.framework in Frameworks */,
 				44EA49981B59D5FE0027C368 /* SystemConfiguration.framework in Frameworks */,
 			);
@@ -159,9 +179,19 @@
 			path = "Custom Cell";
 			sourceTree = "<group>";
 		};
+		442A94391B5FD90700C07A4F /* Passcode */ = {
+			isa = PBXGroup;
+			children = (
+				442A943A1B5FD92B00C07A4F /* TKPassCodeField.h */,
+				442A943B1B5FD92B00C07A4F /* TKPassCodeField.m */,
+			);
+			path = Passcode;
+			sourceTree = "<group>";
+		};
 		4441FAA11B5692AA00A7B7F9 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				445B025D1B5E7F7F004696B3 /* countries.json */,
 				44EA499B1B59D7420027C368 /* Reachability.h */,
 				44EA499C1B59D7420027C368 /* Reachability.m */,
 				4441FAA21B56937000A7B7F9 /* UIColor+Navigation.h */,
@@ -169,6 +199,8 @@
 				449013641B5A2CC4007B312C /* Define.h */,
 				44091E611B5C8A83008BB282 /* UILabel+Attribute.h */,
 				44091E621B5C8A83008BB282 /* UILabel+Attribute.m */,
+				445B02561B5E7E7A004696B3 /* TKDataEngine.h */,
+				445B02571B5E7E7A004696B3 /* TKDataEngine.m */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -176,6 +208,7 @@
 		4441FAA51B5694BD00A7B7F9 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				442A94391B5FD90700C07A4F /* Passcode */,
 				4441FAA61B5694EB00A7B7F9 /* TKNavigationView.h */,
 				4441FAA71B5694EB00A7B7F9 /* TKNavigationView.m */,
 				44384B0A1B572A8600C8E35A /* TKCircularView.h */,
@@ -189,6 +222,8 @@
 				44C9DB0F1B588E8400714340 /* TKHeaderTitleView.m */,
 				443EA0141B596AB400A685CE /* TKDashboardView.h */,
 				443EA0151B596AB400A685CE /* TKDashboardView.m */,
+				442A943D1B5FDACE00C07A4F /* TKPassCodeView.h */,
+				442A943E1B5FDACE00C07A4F /* TKPassCodeView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -196,6 +231,7 @@
 		4451754B1B55DD2D00EDEF97 = {
 			isa = PBXGroup;
 			children = (
+				44091E641B5C8FBF008BB282 /* CoreTelephony.framework */,
 				44EA49991B59D6C70027C368 /* Foundation.framework */,
 				44EA49971B59D5FE0027C368 /* SystemConfiguration.framework */,
 				445175561B55DD2D00EDEF97 /* TouchKin */,
@@ -216,6 +252,7 @@
 		445175561B55DD2D00EDEF97 /* TouchKin */ = {
 			isa = PBXGroup;
 			children = (
+				445B02591B5E7EFA004696B3 /* Model */,
 				441382741B58040C00DFB0BC /* Custom Cell */,
 				4441FAA51B5694BD00A7B7F9 /* View */,
 				4441FAA11B5692AA00A7B7F9 /* Utilities */,
@@ -280,6 +317,8 @@
 				443EA00C1B595BA600A685CE /* TKPageController.m */,
 				4490136E1B5A4F9D007B312C /* TKMyFamilyVC.h */,
 				4490136F1B5A4F9D007B312C /* TKMyFamilyVC.m */,
+				445B02621B5E8198004696B3 /* TKCountryVC.h */,
+				445B02631B5E8198004696B3 /* TKCountryVC.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -293,6 +332,15 @@
 				445175881B55E7D900EDEF97 /* MLNetworkModel.m */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		445B02591B5E7EFA004696B3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				445B025A1B5E7F0F004696B3 /* Country.h */,
+				445B025B1B5E7F0F004696B3 /* Country.m */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -344,6 +392,11 @@
 				TargetAttributes = {
 					445175531B55DD2D00EDEF97 = {
 						CreatedOnToolsVersion = 6.4;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					4451756C1B55DD2E00EDEF97 = {
 						CreatedOnToolsVersion = 6.4;
@@ -375,6 +428,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				445B025E1B5E7F7F004696B3 /* countries.json in Resources */,
 				445175681B55DD2D00EDEF97 /* LaunchScreen.xib in Resources */,
 				445175651B55DD2D00EDEF97 /* Images.xcassets in Resources */,
 				4441FA681B5688D100A7B7F9 /* TouchKin.storyboard in Resources */,
@@ -397,6 +451,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				445B02581B5E7E7A004696B3 /* TKDataEngine.m in Sources */,
 				4451755D1B55DD2D00EDEF97 /* AppDelegate.m in Sources */,
 				44C9DB131B5892A200714340 /* TKKinBookVC.m in Sources */,
 				445175861B55E74100EDEF97 /* MLClient.m in Sources */,
@@ -407,6 +462,7 @@
 				443EA0161B596AB400A685CE /* TKDashboardView.m in Sources */,
 				4441FAA01B568AF000A7B7F9 /* TKRootViewController.m in Sources */,
 				4441FAA81B5694EB00A7B7F9 /* TKNavigationView.m in Sources */,
+				445B025C1B5E7F0F004696B3 /* Country.m in Sources */,
 				445175891B55E7D900EDEF97 /* MLNetworkModel.m in Sources */,
 				44C9DB101B588E8400714340 /* TKHeaderTitleView.m in Sources */,
 				44091E631B5C8A83008BB282 /* UILabel+Attribute.m in Sources */,
@@ -418,11 +474,14 @@
 				443EA00D1B595BA600A685CE /* TKPageController.m in Sources */,
 				445175811B55DDCE00EDEF97 /* TKLoginVC.m in Sources */,
 				449013701B5A4F9D007B312C /* TKMyFamilyVC.m in Sources */,
+				442A943F1B5FDACE00C07A4F /* TKPassCodeView.m in Sources */,
 				44EA49A41B59F0E50027C368 /* TKMyConnectionCell.m in Sources */,
+				445B02641B5E8198004696B3 /* TKCountryVC.m in Sources */,
 				4441FAAB1B56AB3300A7B7F9 /* TKRegisterVC.m in Sources */,
 				441382731B57FC2F00DFB0BC /* TKBaseViewController.m in Sources */,
 				44384B0C1B572A8600C8E35A /* TKCircularView.m in Sources */,
 				4441FAA41B56937000A7B7F9 /* UIColor+Navigation.m in Sources */,
+				442A943C1B5FD92B00C07A4F /* TKPassCodeField.m in Sources */,
 				441382771B58042D00DFB0BC /* TKMenuCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -541,10 +600,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: anand kumar (62WJL7AD7N)";
 				INFOPLIST_FILE = TouchKin/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "e37fd968-ce68-4c64-a76a-cc90eb2399ff";
 			};
 			name = Debug;
 		};
@@ -552,10 +613,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: anand kumar (62WJL7AD7N)";
 				INFOPLIST_FILE = TouchKin/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "e37fd968-ce68-4c64-a76a-cc90eb2399ff";
 			};
 			name = Release;
 		};

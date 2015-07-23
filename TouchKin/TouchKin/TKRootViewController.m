@@ -8,10 +8,13 @@
 
 #import "TKRootViewController.h"
 #import "TKIntroVC.h"
+#import "TKDataEngine.h"
 
 static NSString * const KINTROSCREEN = @"TKIntroVC";
 
-@interface TKRootViewController ()
+@interface TKRootViewController () {
+    BOOL isLoginShown;
+}
 
 @end
 
@@ -56,12 +59,26 @@ static NSString * const KINTROSCREEN = @"TKIntroVC";
 -(void) viewWillLayoutSubviews {
     
     [super viewWillLayoutSubviews];
-
-    dispatch_async(dispatch_get_main_queue(), ^(void){
-        // [self showLogin];
-
-    });
     
+    NSString *mobile = [[TKDataEngine sharedManager] getPhoneNumber];
+    NSDate *expDate = [NSDate dateWithTimeIntervalSince1970:(double)[[TKDataEngine sharedManager] getExpDate]];
+    
+//    NSLog(@"exp =%@  ->  date = %@",expDate,[NSDate date]);
+//    
+//    if([expDate compare:[NSDate date]] == NSOrderedDescending){
+//        NSLog(@"is Greater");
+//    }
+    
+    if( mobile.length == 0 || [expDate compare:[NSDate date]] == NSOrderedAscending){
+        
+        if(!isLoginShown){
+            isLoginShown = YES;
+            dispatch_async(dispatch_get_main_queue(), ^(void){
+                [self showLogin];
+                
+            });
+        }
+    }
    
 }
 
