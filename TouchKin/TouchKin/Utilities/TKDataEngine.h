@@ -14,13 +14,18 @@
 @property (nonatomic, copy) NSString *token;
 @property (nonatomic, copy) NSString *sessionId;
 @property (nonatomic, copy) NSString *phoneNumber;
+@property (nonatomic, strong) NSMutableArray *familyList;
+
 
 -(NSString *) getDeviceToken;
--(NSString *) getSessionId;
+-(NSString *) getUserId;
 -(NSString *) getPhoneNumber;
+-(NSString *) getSessionToken;
 -(double) getExpDate;
 
 -(void) saveUserInfo:(NSDictionary *)userDict;
+
+-(void) getMyFamilyInfo;
 
 + (id)sharedManager;
 

@@ -439,7 +439,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fFP-gJ-pcz" customClass="TKPassCodeView">
-                                <rect key="frame" x="0.0" y="74" width="375" height="172"/>
+                                <rect key="frame" x="0.0" y="74" width="375" height="128"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Verify OTP code received to your mobile" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b7W-zq-6Tm">
                                         <rect key="frame" x="54" y="8" width="267" height="43"/>
@@ -454,7 +454,7 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="172" id="2KG-H7-qfe"/>
+                                    <constraint firstAttribute="height" constant="128" id="2KG-H7-qfe"/>
                                     <constraint firstItem="b7W-zq-6Tm" firstAttribute="top" secondItem="fFP-gJ-pcz" secondAttribute="top" constant="8" id="E6r-Lc-bPa"/>
                                     <constraint firstAttribute="centerX" secondItem="b7W-zq-6Tm" secondAttribute="centerX" id="T3o-MZ-Bhi"/>
                                 </constraints>
@@ -489,8 +489,8 @@
                                     <action selector="nextButtonAction:" destination="nbP-Pe-RE7" eventType="touchUpInside" id="855-Qk-Me6"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P0O-yK-c6A">
-                                <rect key="frame" x="20" y="252" width="334" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P0O-yK-c6A">
+                                <rect key="frame" x="20" y="205" width="334" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="U9z-zp-UT8"/>
                                 </constraints>
@@ -529,13 +529,14 @@
                             <constraint firstAttribute="centerX" secondItem="P0O-yK-c6A" secondAttribute="centerX" constant="0.5" id="iFD-We-Bl8"/>
                             <constraint firstItem="ahq-SD-Vyb" firstAttribute="leading" secondItem="I4Q-iC-8KO" secondAttribute="leadingMargin" constant="10" id="jfb-3W-bFs"/>
                             <constraint firstItem="6HN-Ph-CiT" firstAttribute="top" secondItem="yGJ-0U-p9J" secondAttribute="bottom" constant="33" id="stH-ig-7sy"/>
-                            <constraint firstItem="P0O-yK-c6A" firstAttribute="top" secondItem="fFP-gJ-pcz" secondAttribute="bottom" constant="20" id="waX-tS-gva"/>
+                            <constraint firstItem="P0O-yK-c6A" firstAttribute="top" secondItem="fFP-gJ-pcz" secondAttribute="bottom" constant="3" id="waX-tS-gva"/>
                             <constraint firstAttribute="trailingMargin" secondItem="yGJ-0U-p9J" secondAttribute="trailing" constant="10" id="zsm-5o-c8e"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="navigationView" destination="P0P-qL-rd5" id="iJK-22-9ih"/>
+                        <outlet property="passcodeview" destination="fFP-gJ-pcz" id="77G-1J-HKW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3gE-Xj-Drj" userLabel="First Responder" sceneMemberID="firstResponder"/>

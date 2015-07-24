@@ -8,6 +8,8 @@
 
 #import "TKMyFamilyCollectionCell.h"
 #import "TKMyConnectionCell.h"
+#import "UIImageView+WebCache.h"
+#import "MyConnection.h"
 
 @interface TKMyFamilyCollectionCell()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
@@ -25,7 +27,7 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     
-    return 10;
+    return self.connectList.count;
 }
 
 // The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
@@ -38,8 +40,23 @@
     [cell.avatar setBackgroundColor:[UIColor redColor]];
     [cell.avatar setClipsToBounds:YES];
     
+    MyConnection *connect = [self.connectList objectAtIndex:indexPath.item];
+    
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://s3-ap-southeast-1.amazonaws.com/touchkin-dev/avatars/%@.jpeg",connect.userId]];
+    
+    [cell.avatar setImageWithURL:url completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+       
+        cell.avatar.image = image;
+    }];
+    
     return cell;
     
+}
+
+-(void) setConnectList:(NSMutableArray *)connectList {
+    _connectList = connectList;
+    
+    [self.myCircleCollectionView reloadData];
 }
 
 @end

@@ -10,6 +10,11 @@
 #import "TKMyFamilyRequestCell.h"
 #import "TKMyFamilyCollectionCell.h"
 
+#import "TKDataEngine.h"
+#import "MyCircle.h"
+#import "OthersCircle.h"
+#import "UIImageView+WebCache.h"
+
 @interface TKMyFamilyVC () {
     NSInteger selectedSection;
     
@@ -17,6 +22,7 @@
 
 }
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
+@property (nonatomic, strong) NSMutableArray *familyList;
 
 @end
 
@@ -35,6 +41,10 @@
     
     self.type = NAVIGATIONTYPENORMAL;
     self.title = @"My Family";
+    
+    self.familyList = [[TKDataEngine sharedManager] familyList];
+    
+    NSLog(@"family = %@",[[TKDataEngine sharedManager] familyList]);
     
 }
 
@@ -64,13 +74,41 @@
     img.layer.borderWidth  = 2.0;
     [view addSubview:img];
     
+    img.clipsToBounds = YES;
+    
+    NSURL *url = nil;
+    
+   
     UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(85, 90/2 - 20/2, 180, 20)];
     [lbl setText:@"Anand Kumar"];
+    
+    MyCircle *circle = [self.familyList objectAtIndex:index];
+    
+    if(![circle isKindOfClass:[MyCircle class]]){
+        OthersCircle *others = [self.familyList objectAtIndex:index];
+        [lbl setText:others.fname];
+        url = [NSURL URLWithString:[NSString stringWithFormat:@"https://s3-ap-southeast-1.amazonaws.com/touchkin-dev/avatars/%@.jpeg",others.userId]];
+    }
+    else{
+       [lbl setText:circle.userName];
+        
+         url = [NSURL URLWithString:[NSString stringWithFormat:@"https://s3-ap-southeast-1.amazonaws.com/touchkin-dev/avatars/%@.jpeg",circle.userId]];
+    }
 
     [lbl setTextColor:[UIColor colorWithRed:(70.0/255.0) green:(69.0/255.0) blue:(69.0/255.0) alpha:1.0]];
     
     [view addSubview:lbl];
     
+    __weak typeof(UIImageView *) weakSelf = img;
+
+    [img setImageWithURL:url completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [weakSelf setImage:image];
+
+        });
+        
+    }];
     
     
     UIButton *headerButton = [[UIButton alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width - 50, 90/2 - 40/2, 40, 40)];
@@ -104,7 +142,7 @@
 
 #pragma  mark - UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 10;
+    return self.familyList.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -125,6 +163,18 @@
     }
     else {
         TKMyFamilyCollectionCell *cell = [tableView dequeueReusableCellWithIdentifier:@"collectionCell"];
+        
+        MyCircle *circle = [self.familyList objectAtIndex:indexPath.section];
+        
+        if([circle isKindOfClass:[MyCircle class]]){
+            
+            cell.connectList = circle.myConnectionList;
+        }else {
+            
+            OthersCircle *others = [self.familyList objectAtIndex:indexPath.section];
+            
+            cell.connectList = others.connectionList;
+        }
         
         return cell;
     }

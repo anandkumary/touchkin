@@ -56,6 +56,8 @@
     
     [self setNeedsLayout];
     
+    [passcodeField becomeFirstResponder];
+    
 }
 
 - (BOOL)passcodeField:(TKPassCodeField *)aPasscodeField shouldInsertText:(NSString *)aText {
@@ -75,9 +77,14 @@
 
 #pragma mark - Actions
 
-- (void)passcodeControlEditingChanged:(id)sender
+- (void)passcodeControlEditingChanged:(TKPassCodeField *)sender
 {
-   
+    if(sender.passcode.length == sender.maximumLength){
+       
+        if([self.delegate respondsToSelector:@selector(passcode:didTextEntered:) ]){
+            [self.delegate passcode:self didTextEntered:sender.passcode];
+        }
+    }
 }
 
 

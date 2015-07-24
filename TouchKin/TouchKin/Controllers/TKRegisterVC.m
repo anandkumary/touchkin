@@ -11,10 +11,12 @@
 #import "TKNavigationView.h"
 #import "TKDataEngine.h"
 #import "MLNetworkModel.h"
+#import "TKPassCodeView.h"
 
-@interface TKRegisterVC ()
+@interface TKRegisterVC ()<TKPassCodeViewDelegate>
+
 @property (weak, nonatomic) IBOutlet TKNavigationView *navigationView;
-@property (weak, nonatomic) IBOutlet UITextField *otpTextField;
+@property (weak, nonatomic) IBOutlet TKPassCodeView *passcodeview;
 
 @end
 
@@ -24,6 +26,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.navigationView.title = @"Verify OTP";
+    self.passcodeview.delegate = self;
 }
 
 -(void)viewWillLayoutSubviews {
@@ -45,19 +48,32 @@
     // Pass the selected object to the new view controller.
 }
 */
-- (IBAction)otpSendButtonAction:(id)sender {
+-(void) passcode:(TKPassCodeView *)view didTextEntered:(NSString *)text {
     
     TKDataEngine *engine = [TKDataEngine sharedManager];
     
     NSString *phone = [engine getPhoneNumber];
     NSString *deviceToken = [engine getDeviceToken];
-    NSString *OtpCode = self.otpTextField.text;
+    NSString *OtpCode = text;
     
     
    NSDictionary *dict = @{@"mobile": phone,@"code":[NSNumber numberWithInteger:OtpCode.integerValue] ,@"mobile_os": @"ios",@"mobile_device_id": deviceToken};
     
     MLNetworkModel *model = [[MLNetworkModel alloc] init];
     [model postRequestPath:@"user/verify-mobile" withParameter:dict withHandler:^(id responseObject, NSError *error) {
+        
+        [engine saveUserInfo:responseObject];
+
+        [engine setPhoneNumber:responseObject[@"mobile"]];
+        [engine setSessionId:responseObject[@"id"]];
+        
+        [engine getMyFamilyInfo];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            [self dismissViewControllerAnimated:YES completion:nil];
+        });
+
        
         NSLog(@"resss =%@",responseObject);
         

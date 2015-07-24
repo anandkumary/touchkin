@@ -126,13 +126,22 @@
         if(![responseObject objectForKey:@"message"]){
             
             TKDataEngine *engine =  [TKDataEngine sharedManager];
+            
+            [engine saveUserInfo:responseObject];
             [engine setPhoneNumber:responseObject[@"mobile"]];
             [engine setSessionId:responseObject[@"id"]];
-            [engine saveUserInfo:responseObject];
+            
+            [engine getMyFamilyInfo];
             
              dispatch_async(dispatch_get_main_queue(), ^{
                  
-                 [self dismissViewControllerAnimated:YES completion:nil];
+                 if(responseObject[@"mobile_verified"]){
+                    [self dismissViewControllerAnimated:YES completion:nil];
+                 }
+                 else{
+                     [self  forwardButtonAction:nil];
+                 }
+                
              });
         }
         else {

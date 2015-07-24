@@ -36,10 +36,10 @@ static NSString *const KDomainUrl = @"http://54.69.183.186:1340/";
     [self.defaultHeaders setObject:@"application/json" forKey:@"Accept"];
     [self.defaultHeaders setObject:@"application/json" forKey:@"content-type"];
     
-    NSString *sessionId = [[TKDataEngine sharedManager] getSessionId];
-    if(sessionId.length){
+    NSString *ssToken= [[TKDataEngine sharedManager] getSessionToken];
+    if(ssToken.length){
         
-        NSString *sessionToken = [NSString stringWithFormat:@"Bearer %@",sessionId];
+        NSString *sessionToken = [NSString stringWithFormat:@"Bearer %@",ssToken];
         [self.defaultHeaders setObject:sessionToken forKey:@"Authorization"];
     }
     

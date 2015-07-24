@@ -53,6 +53,7 @@ static NSString * const KINTROSCREEN = @"TKIntroVC";
     tabBarItem3.image = [[UIImage imageNamed:@"message"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
 
     
+    [[TKDataEngine sharedManager] getMyFamilyInfo];
     
 }
 
@@ -79,7 +80,7 @@ static NSString * const KINTROSCREEN = @"TKIntroVC";
             });
         }
     }
-   
+    
 }
 
 
