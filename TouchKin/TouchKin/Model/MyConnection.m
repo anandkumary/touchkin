@@ -32,7 +32,11 @@
 
         self.gender = dict[@"gender"];
         self.mobile = dict[@"mobile"];
-        self.yob   = [dict[@"yob"] intValue];
+        
+        if(dict[@"yob"]){
+            self.yob  = ([dict[@"yob"]isKindOfClass:[NSNull class]]) ? 0 :  [dict[@"yob"] intValue];
+        }
+
         
         if(dict[@"places"]){
             
