@@ -103,9 +103,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ydb-aO-5kZ">
-                                <rect key="frame" x="0.0" y="70" width="375" height="300"/>
+                                <rect key="frame" x="0.0" y="70" width="375" height="469"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="300" id="mwM-kl-ser"/>
+                                    <constraint firstAttribute="height" constant="469" id="FMX-ZL-beN"/>
                                 </constraints>
                             </containerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="taT-qF-1w2">
@@ -139,14 +139,15 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Ydb-aO-5kZ" firstAttribute="top" secondItem="xnQ-9v-AwA" secondAttribute="bottom" constant="70" id="0El-hX-Be0"/>
                             <constraint firstAttribute="trailingMargin" secondItem="udT-X9-ILB" secondAttribute="trailing" constant="59" id="3xx-VO-JbE"/>
                             <constraint firstItem="KDH-MC-tKJ" firstAttribute="top" secondItem="udT-X9-ILB" secondAttribute="bottom" constant="22" id="RPx-DX-lZ4"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Ydb-aO-5kZ" secondAttribute="trailing" constant="-16" id="VgX-kZ-FzH"/>
-                            <constraint firstItem="Ydb-aO-5kZ" firstAttribute="leading" secondItem="NhD-bx-Lrk" secondAttribute="leadingMargin" constant="-16" id="ajY-2l-zp0"/>
+                            <constraint firstItem="Ydb-aO-5kZ" firstAttribute="top" secondItem="xnQ-9v-AwA" secondAttribute="bottom" constant="70" id="Wtf-h7-ADN"/>
+                            <constraint firstAttribute="trailing" secondItem="Ydb-aO-5kZ" secondAttribute="trailing" id="Zqr-FE-Gm9"/>
                             <constraint firstItem="KDH-MC-tKJ" firstAttribute="top" secondItem="taT-qF-1w2" secondAttribute="bottom" constant="22" id="h7h-29-iuw"/>
                             <constraint firstItem="udT-X9-ILB" firstAttribute="leading" secondItem="taT-qF-1w2" secondAttribute="trailing" priority="750" constant="71" id="mX1-5I-1vg"/>
+                            <constraint firstItem="Ydb-aO-5kZ" firstAttribute="leading" secondItem="NhD-bx-Lrk" secondAttribute="leading" id="mnq-Zz-JR3"/>
                             <constraint firstItem="taT-qF-1w2" firstAttribute="leading" secondItem="NhD-bx-Lrk" secondAttribute="leadingMargin" constant="59" id="p97-jE-0Ug"/>
+                            <constraint firstItem="KDH-MC-tKJ" firstAttribute="top" secondItem="Ydb-aO-5kZ" secondAttribute="bottom" constant="79" id="xLi-ug-XqI"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Me" image="avatar" id="0Pr-1a-x57"/>
