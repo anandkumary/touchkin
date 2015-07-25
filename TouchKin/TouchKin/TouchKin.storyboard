@@ -896,6 +896,7 @@
                                     <constraint firstItem="MgS-Ap-30x" firstAttribute="top" secondItem="9hO-WW-KZH" secondAttribute="top" id="AEN-x6-5cA"/>
                                     <constraint firstItem="Mq8-mL-IfF" firstAttribute="top" secondItem="9hO-WW-KZH" secondAttribute="top" id="FhD-o4-ucK"/>
                                     <constraint firstAttribute="bottom" secondItem="Mq8-mL-IfF" secondAttribute="bottom" id="HNR-tl-tKo"/>
+                                    <constraint firstAttribute="width" constant="375" id="Rn2-Gw-DCD"/>
                                     <constraint firstItem="MgS-Ap-30x" firstAttribute="leading" secondItem="9hO-WW-KZH" secondAttribute="leading" id="aOi-df-7F7"/>
                                     <constraint firstItem="Mq8-mL-IfF" firstAttribute="leading" secondItem="9hO-WW-KZH" secondAttribute="leading" id="mWd-7F-tUY"/>
                                     <constraint firstAttribute="width" constant="375" id="q7m-V3-HIN"/>
@@ -925,10 +926,16 @@
                             <constraint firstAttribute="trailing" secondItem="9hO-WW-KZH" secondAttribute="trailing" id="le8-Cv-vg3"/>
                             <constraint firstItem="8OS-ff-B4r" firstAttribute="leading" secondItem="tE4-o4-jMD" secondAttribute="leading" id="paU-aX-eYG"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="le8-Cv-vg3"/>
+                            </mask>
+                        </variation>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="containerView" destination="8OS-ff-B4r" id="wk3-Qf-vtc"/>
+                        <outlet property="leftSideConstraint" destination="303-oy-lYx" id="dR8-LM-3sr"/>
                         <outlet property="sideMenu" destination="9hO-WW-KZH" id="gcO-gQ-TvR"/>
                     </connections>
                 </viewController>
