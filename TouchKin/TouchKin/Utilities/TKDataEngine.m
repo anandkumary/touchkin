@@ -132,6 +132,8 @@ static NSString * const KGENDER = @"gender";
         self.model = [[MLNetworkModel alloc] init];
     }
     
+    self.familyList = nil;
+    
     [self.model getRequestPath:@"user/family" withParameter:nil withHandler:^(id responseObject, NSError *error) {
         
         // NSLog(@"res = %@",responseObject);
