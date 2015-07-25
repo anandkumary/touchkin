@@ -919,19 +919,13 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="8OS-ff-B4r" firstAttribute="top" secondItem="tE4-o4-jMD" secondAttribute="topMargin" id="MoA-Sz-GRQ"/>
-                            <constraint firstAttribute="trailing" secondItem="9hO-WW-KZH" secondAttribute="trailing" id="ac0-WL-5mo"/>
                             <constraint firstItem="9hO-WW-KZH" firstAttribute="leading" secondItem="tE4-o4-jMD" secondAttribute="leading" id="bmp-SC-gtm"/>
                             <constraint firstItem="9hO-WW-KZH" firstAttribute="top" secondItem="tE4-o4-jMD" secondAttribute="topMargin" id="kCj-vC-c36"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="8OS-ff-B4r" secondAttribute="trailing" constant="-16" id="lIx-L0-pdR"/>
+                            <constraint firstAttribute="trailing" secondItem="8OS-ff-B4r" secondAttribute="trailing" id="lIx-L0-pdR"/>
                             <constraint firstItem="zGc-JE-Exl" firstAttribute="top" secondItem="8OS-ff-B4r" secondAttribute="bottom" id="lSh-ip-gVG"/>
-                            <constraint firstItem="8OS-ff-B4r" firstAttribute="leading" secondItem="tE4-o4-jMD" secondAttribute="leadingMargin" constant="-16" id="paU-aX-eYG"/>
+                            <constraint firstItem="8OS-ff-B4r" firstAttribute="leading" secondItem="tE4-o4-jMD" secondAttribute="leading" id="paU-aX-eYG"/>
                             <constraint firstItem="zGc-JE-Exl" firstAttribute="top" secondItem="9hO-WW-KZH" secondAttribute="bottom" id="phF-HP-wbh"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="ac0-WL-5mo"/>
-                            </mask>
-                        </variation>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>

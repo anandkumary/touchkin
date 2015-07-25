@@ -47,7 +47,7 @@
         
         [self.view layoutIfNeeded];
     }
-    else if (height == 667.0){
+    else if (height >= 667.0){
         
         self.bgImage.transform = CGAffineTransformMakeScale(1.4, 1.4);
         
