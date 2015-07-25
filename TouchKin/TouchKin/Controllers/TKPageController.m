@@ -47,6 +47,18 @@
         
         [self.view layoutIfNeeded];
     }
+    else if (height == 667.0){
+        
+        self.bgImage.transform = CGAffineTransformMakeScale(1.4, 1.4);
+        
+        self.bgImageViewConstriant.constant += 60;
+        self.bottomLabelConstraint.constant += 65;
+        
+        [self.bgImage layoutIfNeeded];
+        
+        [self.view layoutIfNeeded];
+        
+    }
     
     // self.topLabel.text = @"Its 7:30 am for Eric in New York";
     
