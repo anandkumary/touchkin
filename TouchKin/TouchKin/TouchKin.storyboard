@@ -804,7 +804,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="188" height="667"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="188" id="xHP-ql-m4O"/>
+                                            <constraint firstAttribute="width" constant="188" id="uE1-9W-efT"/>
                                         </constraints>
                                         <color key="sectionIndexBackgroundColor" red="0.97254901960784312" green="0.97254901960784312" blue="0.97254901960784312" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <view key="tableHeaderView" contentMode="scaleToFill" id="fl0-ea-HpF">
@@ -892,15 +892,14 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="MgS-Ap-30x" firstAttribute="leading" secondItem="9hO-WW-KZH" secondAttribute="leading" id="2bE-qj-bpl"/>
-                                    <constraint firstAttribute="trailing" secondItem="MgS-Ap-30x" secondAttribute="trailing" id="TTd-Uu-kVh"/>
-                                    <constraint firstAttribute="bottom" secondItem="MgS-Ap-30x" secondAttribute="bottom" id="V20-U1-YCN"/>
-                                    <constraint firstItem="Mq8-mL-IfF" firstAttribute="top" secondItem="9hO-WW-KZH" secondAttribute="top" id="dfE-ny-DVk"/>
-                                    <constraint firstItem="MgS-Ap-30x" firstAttribute="top" secondItem="9hO-WW-KZH" secondAttribute="top" id="dom-Cp-eXr"/>
-                                    <constraint firstAttribute="bottom" secondItem="Mq8-mL-IfF" secondAttribute="bottom" id="gdD-1x-ZW7"/>
+                                    <constraint firstAttribute="bottom" secondItem="MgS-Ap-30x" secondAttribute="bottom" id="9D0-Hh-6ad"/>
+                                    <constraint firstItem="MgS-Ap-30x" firstAttribute="top" secondItem="9hO-WW-KZH" secondAttribute="top" id="AEN-x6-5cA"/>
+                                    <constraint firstItem="Mq8-mL-IfF" firstAttribute="top" secondItem="9hO-WW-KZH" secondAttribute="top" id="FhD-o4-ucK"/>
+                                    <constraint firstAttribute="bottom" secondItem="Mq8-mL-IfF" secondAttribute="bottom" id="HNR-tl-tKo"/>
+                                    <constraint firstItem="MgS-Ap-30x" firstAttribute="leading" secondItem="9hO-WW-KZH" secondAttribute="leading" id="aOi-df-7F7"/>
+                                    <constraint firstItem="Mq8-mL-IfF" firstAttribute="leading" secondItem="9hO-WW-KZH" secondAttribute="leading" id="mWd-7F-tUY"/>
                                     <constraint firstAttribute="width" constant="375" id="q7m-V3-HIN"/>
-                                    <constraint firstItem="Mq8-mL-IfF" firstAttribute="leading" secondItem="9hO-WW-KZH" secondAttribute="leading" id="vG8-xV-fsa"/>
-                                    <constraint firstAttribute="width" constant="375" id="vay-zA-FlA"/>
+                                    <constraint firstAttribute="trailing" secondItem="MgS-Ap-30x" secondAttribute="trailing" id="usE-dh-MV5"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -910,7 +909,6 @@
                                 <connections>
                                     <outlet property="avatar" destination="Goz-IW-UC4" id="OzG-CO-70C"/>
                                     <outlet property="bgImage" destination="MgS-Ap-30x" id="vzE-SG-M0Y"/>
-                                    <outlet property="menuLeftConstriant" destination="bmp-SC-gtm" id="LFg-a5-aq7"/>
                                     <outlet property="menuTable" destination="Mq8-mL-IfF" id="nNc-gb-tgc"/>
                                     <outlet property="userName" destination="evb-0s-rTI" id="Uqt-F2-aUs"/>
                                 </connections>
@@ -918,19 +916,19 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="9hO-WW-KZH" firstAttribute="leading" secondItem="tE4-o4-jMD" secondAttribute="leading" id="303-oy-lYx"/>
+                            <constraint firstItem="zGc-JE-Exl" firstAttribute="top" secondItem="9hO-WW-KZH" secondAttribute="bottom" id="DOs-6E-0O5"/>
                             <constraint firstItem="8OS-ff-B4r" firstAttribute="top" secondItem="tE4-o4-jMD" secondAttribute="topMargin" id="MoA-Sz-GRQ"/>
-                            <constraint firstItem="9hO-WW-KZH" firstAttribute="leading" secondItem="tE4-o4-jMD" secondAttribute="leading" id="bmp-SC-gtm"/>
-                            <constraint firstItem="9hO-WW-KZH" firstAttribute="top" secondItem="tE4-o4-jMD" secondAttribute="topMargin" id="kCj-vC-c36"/>
+                            <constraint firstItem="9hO-WW-KZH" firstAttribute="top" secondItem="tE4-o4-jMD" secondAttribute="top" id="abH-CZ-h7h"/>
                             <constraint firstAttribute="trailing" secondItem="8OS-ff-B4r" secondAttribute="trailing" id="lIx-L0-pdR"/>
                             <constraint firstItem="zGc-JE-Exl" firstAttribute="top" secondItem="8OS-ff-B4r" secondAttribute="bottom" id="lSh-ip-gVG"/>
+                            <constraint firstAttribute="trailing" secondItem="9hO-WW-KZH" secondAttribute="trailing" id="le8-Cv-vg3"/>
                             <constraint firstItem="8OS-ff-B4r" firstAttribute="leading" secondItem="tE4-o4-jMD" secondAttribute="leading" id="paU-aX-eYG"/>
-                            <constraint firstItem="zGc-JE-Exl" firstAttribute="top" secondItem="9hO-WW-KZH" secondAttribute="bottom" id="phF-HP-wbh"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="containerView" destination="8OS-ff-B4r" id="wk3-Qf-vtc"/>
-                        <outlet property="leftSideConstraint" destination="bmp-SC-gtm" id="fZp-mE-bOb"/>
                         <outlet property="sideMenu" destination="9hO-WW-KZH" id="gcO-gQ-TvR"/>
                     </connections>
                 </viewController>
