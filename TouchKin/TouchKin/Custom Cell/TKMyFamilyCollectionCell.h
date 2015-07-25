@@ -7,8 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Define.h"
 
 @interface TKMyFamilyCollectionCell : UITableViewCell
+
+@property (nonatomic, assign) FamilyType familyType;
+
 @property (weak, nonatomic) IBOutlet UICollectionView *myCircleCollectionView;
 
 @property (nonatomic, strong) NSMutableArray *connectList;

@@ -134,12 +134,14 @@ static NSString * const KGENDER = @"gender";
     
     [self.model getRequestPath:@"user/family" withParameter:nil withHandler:^(id responseObject, NSError *error) {
         
-        NSLog(@"res = %@",responseObject);
+        // NSLog(@"res = %@",responseObject);
         
         NSDictionary *dict = responseObject;
         
         [self parseCareGiverFor:dict[@"care_givers"]];
         [self parseCareReciverFor:dict[@"care_receivers"]];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"MyFamilyCircle" object:nil];
     }];
 }
 

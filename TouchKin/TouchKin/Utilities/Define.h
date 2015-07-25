@@ -17,3 +17,8 @@ typedef NS_ENUM(NSInteger, NavigationType) {
     NAVIGATIONTYPEMORE,
     NAVIGATIONTYPENORMAL
 };
+
+typedef NS_ENUM(NSInteger, FamilyType) {
+    MYFAMILYTYPE,
+    OTHERSFAMILYTYPE
+};

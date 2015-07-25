@@ -27,7 +27,7 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     
-    return self.connectList.count;
+    return self.connectList.count + ((MYFAMILYTYPE == self.familyType) ? 1 : 0);
 }
 
 // The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
@@ -39,6 +39,13 @@
     [cell.avatar.layer setCornerRadius:cell.avatar.frame.size.width/2];
     [cell.avatar setBackgroundColor:[UIColor redColor]];
     [cell.avatar setClipsToBounds:YES];
+    
+    if(self.connectList.count == indexPath.item && MYFAMILYTYPE == self.familyType){
+        
+        cell.avatar.image = [UIImage imageNamed:@"add_avatar"];
+        
+        return cell;
+    }
     
     MyConnection *connect = [self.connectList objectAtIndex:indexPath.item];
     

@@ -14,6 +14,8 @@
 @property (nonatomic, copy) NSString *navTitle;
 @property (nonatomic, assign) NavigationType type;
 
+-(void) reloadGroupData;
+
 -(void) addLeftSideImage:(UIImage *)image forTarget:(id)target;
 -(void) addLeftSideTitle:(NSString *)title forTarget:(id)target;
 -(void) addRightSideImage:(UIImage *)image forTarget:(id)target;

@@ -10,6 +10,7 @@
 #import "TKHomeBaseNavigationView.h"
 #import "TKBaseViewController.h"
 #import "AppDelegate.h"
+#import "TKDataEngine.h"
 
 @interface TKHomeBaseController ()
 @property (nonatomic,strong)  TKHomeBaseNavigationView *navView;
@@ -112,7 +113,8 @@
     [self.navView.rightButton addTarget:target action:@selector(navRightBarAction:) forControlEvents:UIControlEventTouchUpInside];
 }
 
-
-
-
+-(void) reloadGroupData {
+    
+    self.navView.groupList = [[TKDataEngine sharedManager] familyList];
+}
 @end

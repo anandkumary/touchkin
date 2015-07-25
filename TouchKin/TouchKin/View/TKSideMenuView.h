@@ -19,6 +19,10 @@
 @property (nonatomic, weak)IBOutlet NSLayoutConstraint *menuLeftConstriant;
 @property (nonatomic, weak) IBOutlet UIImageView *bgImage;
 
+@property (nonatomic, weak) IBOutlet UIImageView *avatar;
+
+@property (nonatomic, weak) IBOutlet UILabel *userName;
+
 @property (nonatomic,assign) id<SideMenuDelegate> delegate;
 
 @end

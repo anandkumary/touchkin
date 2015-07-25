@@ -10,6 +10,8 @@
 #import "TKRootViewController.h"
 #import "TKSideMenuView.h"
 #import "TKMyFamilyVC.h"
+#import "UIImageView+WebCache.h"
+#import "TKDataEngine.h"
 
 @interface TKBaseViewController ()<SideMenuDelegate>
 
@@ -29,6 +31,10 @@
     self.rootVC = (TKRootViewController *)self.childViewControllers.lastObject;
     
     self.sideMenu.delegate = self;
+    
+    self.sideMenu.avatar.layer.cornerRadius = self.sideMenu.avatar.frame.size.width/2;
+    
+    self.sideMenu.avatar.clipsToBounds = YES;
     
     self.leftSideConstraint.constant = -self.sideMenu.frame.size.width;
     
@@ -59,6 +65,8 @@
     [self.sideMenu updateConstraintsIfNeeded];
     self.sideMenu.bgImage.backgroundColor = [UIColor clearColor];
     
+    [self updateUserProfilePic];
+    
     [UIView animateWithDuration:0.5 animations:^{
         [self.view layoutIfNeeded];
     }completion:^(BOOL finished) {
@@ -66,6 +74,24 @@
     self.sideMenu.bgImage.backgroundColor = [UIColor colorWithRed:(171.0/255.0) green:(171.0/255.0) blue:(171.0/255.0) alpha:0.5];
     }];
 
+}
+
+-(void) updateUserProfilePic {
+    
+    NSString *userID = [[TKDataEngine sharedManager] getUserId];
+    
+    if(userID){
+       
+        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://s3-ap-southeast-1.amazonaws.com/touchkin-dev/avatars/%@.jpeg",[[TKDataEngine sharedManager] getUserId]]];
+        
+        // self.sideMenu.userName =
+        
+        [self.sideMenu.avatar setImageWithURL:url completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+            
+            self.sideMenu.avatar.image = image;
+        }];
+    }
+    
 }
 
 -(void)closeMenu {

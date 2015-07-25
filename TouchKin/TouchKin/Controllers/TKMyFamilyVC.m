@@ -42,9 +42,9 @@
     self.type = NAVIGATIONTYPENORMAL;
     self.title = @"My Family";
     
-    self.familyList = [[TKDataEngine sharedManager] familyList];
+    self.familyList = [[NSMutableArray alloc] initWithArray: [[TKDataEngine sharedManager] familyList]];
     
-    NSLog(@"family = %@",[[TKDataEngine sharedManager] familyList]);
+    //NSLog(@"family = %@",[[TKDataEngine sharedManager] familyList]);
     
 }
 
@@ -149,7 +149,7 @@
     
     NSInteger totalRows = 0;
     if(selectedSection == section && previousSelected != selectedSection){
-        totalRows = 2;
+        totalRows = 1;
     }
     
     return totalRows;
@@ -168,11 +168,13 @@
         
         if([circle isKindOfClass:[MyCircle class]]){
             
+            cell.familyType = MYFAMILYTYPE;
             cell.connectList = circle.myConnectionList;
         }else {
             
             OthersCircle *others = [self.familyList objectAtIndex:indexPath.section];
             
+            cell.familyType = OTHERSFAMILYTYPE;
             cell.connectList = others.connectionList;
         }
         
@@ -199,7 +201,7 @@
         
         [self.tableview beginUpdates];
         
-        [self.tableview deleteRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:0 inSection:previousSelected],[NSIndexPath indexPathForRow:1 inSection:previousSelected],nil] withRowAnimation:UITableViewRowAnimationFade];
+        [self.tableview deleteRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:0 inSection:previousSelected],nil] withRowAnimation:UITableViewRowAnimationFade];
         
         [self.tableview endUpdates];
         
@@ -208,7 +210,8 @@
         
     }
     
-    if(previousSelected != sender.tag){
+    if(previousSelected != sender.tag)
+        {
         
         selectedSection = sender.tag;
         
@@ -216,7 +219,7 @@
             
             [self.tableview beginUpdates];
             
-            [self.tableview insertRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:0 inSection:selectedSection],[NSIndexPath indexPathForRow:1 inSection:selectedSection],nil] withRowAnimation:UITableViewRowAnimationMiddle];
+            [self.tableview insertRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:0 inSection:selectedSection],nil] withRowAnimation:UITableViewRowAnimationMiddle];
             
             [self.tableview endUpdates];
         });

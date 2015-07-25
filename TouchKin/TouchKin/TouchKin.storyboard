@@ -906,9 +906,11 @@
                                     </mask>
                                 </variation>
                                 <connections>
+                                    <outlet property="avatar" destination="Goz-IW-UC4" id="OzG-CO-70C"/>
                                     <outlet property="bgImage" destination="MgS-Ap-30x" id="vzE-SG-M0Y"/>
                                     <outlet property="menuLeftConstriant" destination="bmp-SC-gtm" id="LFg-a5-aq7"/>
                                     <outlet property="menuTable" destination="Mq8-mL-IfF" id="nNc-gb-tgc"/>
+                                    <outlet property="userName" destination="evb-0s-rTI" id="Uqt-F2-aUs"/>
                                 </connections>
                             </view>
                         </subviews>

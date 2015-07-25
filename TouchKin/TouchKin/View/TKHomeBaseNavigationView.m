@@ -9,6 +9,9 @@
 #import "TKHomeBaseNavigationView.h"
 #import "TKMyConnectionCell.h"
 #import "UIColor+Navigation.h"
+#import "UIImageView+WebCache.h"
+#import "MyCircle.h"
+#import "OthersCircle.h"
 
 @interface TKHomeBaseNavigationView()<TKHeaderTitleDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
 
@@ -45,8 +48,14 @@
 }
 
 -(void) headerView :(TKHeaderTitleView *)view didSelectedTitle:(NSString *)headerTitle {
-    NSLog(@"header tapped");
-    [self animateCollectionViewDown];
+    //  NSLog(@"header tapped");
+    
+    if(self.topConstraint.constant != 69){
+        [self animateCollectionViewDown];
+    }
+    else{
+        [self animateCollectionViewUp];
+    }
 }
 
 -(void) animateCollectionViewDown {
@@ -94,8 +103,17 @@
     [_collectionView registerNib:[UINib nibWithNibName:@"TKMyConnectionCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"myConnection"];
 }
 
+-(void) setGroupList:(NSMutableArray *)groupList {
+    _groupList = groupList;
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.collectionView reloadData];
+    });
+    
+}
+
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 10;
+    return self.groupList.count + 1;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -103,7 +121,31 @@
     TKMyConnectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"myConnection" forIndexPath:indexPath];
     
     cell.avatar.layer.cornerRadius = cell.avatar.frame.size.width/2;
-
+    
+    if(self.groupList.count != indexPath.item){
+       
+        MyCircle *circle = [self.groupList objectAtIndex:indexPath.item];
+        OthersCircle *others = nil;
+        
+        NSString *userId = nil;
+        
+        if(![circle isKindOfClass:[MyCircle class]]){
+            
+            others = (OthersCircle *)circle;
+            userId = others.userId;
+        }
+        else{
+            userId = circle.userId;
+        }
+        
+        NSURL  *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://s3-ap-southeast-1.amazonaws.com/touchkin-dev/avatars/%@.jpeg",userId]];
+        
+        [cell.avatar setImageWithURL:url completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+            
+            cell.avatar.image = image;
+        }];
+    }
+    
     return cell;
     
 }
