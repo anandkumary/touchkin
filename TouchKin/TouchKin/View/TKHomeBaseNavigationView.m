@@ -152,6 +152,22 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     
+    if(self.groupList.count != indexPath.item) {
+        
+        OthersCircle *others = [self.groupList objectAtIndex:indexPath.item];
+        
+        self.title = (indexPath.row == 0) ? @"Me" : others.fname;
+      
+        if([self.delegate respondsToSelector:@selector(didSelectHeaderTitleAtIndex:)]){
+            [self.delegate didSelectHeaderTitleAtIndex:indexPath.item];
+        }
+
+    }
+    else {
+        //Add new care taker
+    }
+    
+    
     [self animateCollectionViewUp];
 }
 

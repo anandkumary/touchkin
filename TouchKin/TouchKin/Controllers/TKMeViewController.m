@@ -8,12 +8,16 @@
 
 #import "TKMeViewController.h"
 #import "TKPageController.h"
+#import "TKDataEngine.h"
 
 @interface TKMeViewController ()<UIPageViewControllerDataSource>
 @property (weak, nonatomic) IBOutlet UIView *containerView;
 
 @property (strong, nonatomic) UIPageViewController *pageController;
 
+@property (nonatomic, strong) NSMutableArray *familyList;
+
+@property (nonatomic, assign) NSInteger selctedIndex;
 @end
 
 @implementation TKMeViewController
@@ -33,20 +37,14 @@
     
     self.pageController.view.frame = frame;
     
-    TKPageController *initialViewController = [self viewControllerAtIndex:0];
-    
-    initialViewController.view.clipsToBounds = YES;
-    
-    NSArray *viewControllers = [NSArray arrayWithObject:initialViewController];
-    
-    [self.pageController setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
-    
     [self.containerView addSubview:self.pageController.view];
     [self.containerView setClipsToBounds:YES];
     
     [self.containerView setBackgroundColor:[UIColor clearColor]];
     
     [self addMyCircleObserver];
+    
+    // [self setDelegate:self];
     
 }
 
@@ -62,7 +60,32 @@
 
 -(void)updateMyCircle:(NSNotification *)notify {
     
+    self.familyList = [[TKDataEngine sharedManager] familyList];
+    
+    self.selctedIndex = 0;
+    
+//    self.pageController.dataSource = nil;
+//    self.pageController.dataSource = self;
+    
+    [self addDefaultpages];
+    
     [self reloadGroupData];
+}
+
+-(void) addDefaultpages {
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        TKPageController *initialViewController = [self viewControllerAtIndex:0];
+        
+        initialViewController.view.clipsToBounds = YES;
+        
+        NSArray *viewControllers = [NSArray arrayWithObject:initialViewController];
+        
+        [self.pageController setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
+    });
+    
+   
 }
 
 - (void)dealloc
@@ -100,7 +123,7 @@
     NSUInteger index = [(TKPageController *)viewController index];
     index++;
     
-    if (index == 3) {
+    if (index == 3 || self.selctedIndex == 0) {
         return nil;
     }
     
@@ -115,11 +138,31 @@
     childViewController.boardType = index % 3;
     childViewController.view.clipsToBounds = YES;
     
+    MyCircle *circle = [self.familyList objectAtIndex:self.selctedIndex];
+    if(![circle isKindOfClass:[MyCircle class]]){
+        
+        childViewController.others = (OthersCircle *)circle;
+    }
+    else {
+        childViewController.circle = circle;
+    }
+    
     CGRect frame = childViewController.view.frame;
     frame.size.height = self.containerView.frame.size.height;
     childViewController.view.frame = frame;
     
     return childViewController;
+    
+}
+
+-(void) didSelectHeaderTitleAtIndex:(NSInteger)index {
+    
+    self.selctedIndex = index;
+    
+    self.pageController.dataSource = nil;
+    self.pageController.dataSource = self;
+    
+    [self addDefaultpages];
     
 }
 

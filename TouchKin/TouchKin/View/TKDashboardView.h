@@ -13,4 +13,6 @@
 
 @property (nonatomic, assign) DashboardType type;
 
+@property (nonatomic, copy) NSString *urlString;
+
 @end

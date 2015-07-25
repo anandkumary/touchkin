@@ -17,6 +17,8 @@
 @property (weak, nonatomic) IBOutlet UIView *bgImage;
 @property (weak, nonatomic) IBOutlet TKCircularView *circularView;
 @property (weak, nonatomic) IBOutlet TKDashboardView *dashboardView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bgImageViewConstriant;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomLabelConstraint;
 
 @end
 
@@ -31,6 +33,20 @@
     self.dashboardView.layer.cornerRadius = self.dashboardView.frame.size.width/2;
     
     self.dashboardView.type = self.boardType;
+    
+   CGFloat height = [UIScreen mainScreen].bounds.size.height;
+    
+    if(height == 480){
+    
+        self.bgImage.transform = CGAffineTransformMakeScale(0.9, 0.9);
+        
+        self.bgImageViewConstriant.constant -= 10;
+        self.bottomLabelConstraint.constant -= 15;
+    
+        [self.bgImage layoutIfNeeded];
+        
+        [self.view layoutIfNeeded];
+    }
     
     // self.topLabel.text = @"Its 7:30 am for Eric in New York";
     
@@ -53,4 +69,22 @@
 }
 */
 
+-(void) setCircle:(MyCircle *)circle {
+    _circle = circle;
+    
+    NSString *urlString = [NSString stringWithFormat:@"https://s3-ap-southeast-1.amazonaws.com/touchkin-dev/avatars/%@.jpeg",circle.userId];
+    
+    self.dashboardView.urlString = urlString;
+    
+    
+}
+
+-(void) setOthers:(OthersCircle *)others {
+    _others = others;
+    
+     NSString *urlString = [NSString stringWithFormat:@"https://s3-ap-southeast-1.amazonaws.com/touchkin-dev/avatars/%@.jpeg",others.userId];
+    
+    self.dashboardView.urlString = urlString;
+
+}
 @end

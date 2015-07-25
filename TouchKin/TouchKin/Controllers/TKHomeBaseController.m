@@ -12,7 +12,7 @@
 #import "AppDelegate.h"
 #import "TKDataEngine.h"
 
-@interface TKHomeBaseController ()
+@interface TKHomeBaseController ()<TKHomeBaseNavigationViewDelegate>
 @property (nonatomic,strong)  TKHomeBaseNavigationView *navView;
 @end
 
@@ -42,6 +42,8 @@
     [self.view addSubview:self.navView];
     
     [self.navView.leftButton addTarget:self action:@selector(menuButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+    self.navView.delegate = self;
 }
 
 /*
@@ -53,6 +55,11 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+-(void) setDelegate:(id)object {
+    
+    self.navView.delegate = object;
+}
 
 -(void) setNavTitle:(NSString *)navTitle {
     _navTitle = navTitle;

@@ -10,6 +10,12 @@
 #import "TKHeaderTitleView.h"
 #import "Define.h"
 
+@protocol TKHomeBaseNavigationViewDelegate <NSObject>
+
+-(void) didSelectHeaderTitleAtIndex:(NSInteger)index;
+
+@end
+
 @interface TKHomeBaseNavigationView : UIView
 @property (nonatomic, weak) IBOutlet UIButton *leftButton;
 @property (nonatomic, weak) IBOutlet UIButton *rightButton;
@@ -19,6 +25,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *dropArrow;
 
 @property (nonatomic, assign) NavigationType navType;
+
+@property (nonatomic, assign) id<TKHomeBaseNavigationViewDelegate> delegate;
 
 @property (nonatomic, copy) NSString *title;
 

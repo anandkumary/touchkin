@@ -8,6 +8,7 @@
 
 #import "TKDashboardView.h"
 #import "AppDelegate.h"
+#import "UIImageView+WebCache.h"
 
 @interface TKDashboardView()
 @property (nonatomic, strong) UIImageView *avatar;
@@ -142,6 +143,26 @@
         self.cellularImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"Network%d",delegate.isConnectedTo3G]];
     });
     
+}
+
+-(void) setUrlString:(NSString *)urlString {
+    
+    _urlString = urlString;
+    
+    if(DASHBOARDIMAGETYPE == self.type) {
+        
+        NSURL *url = [NSURL URLWithString:urlString];
+        
+        __weak typeof(UIImageView *) weakSelf = self.avatar;
+        
+        [self.avatar setImageWithURL:url completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+           
+            dispatch_async(dispatch_get_main_queue(), ^{
+                weakSelf.image = image;
+  
+            });
+        }];
+    }
 }
 
 @end

@@ -114,7 +114,7 @@
       
         if([self.delegate respondsToSelector:@selector(selectedCountry:)]){
             
-            NSDictionary *dict = [self.dataRows objectAtIndex:self.selectedRow];
+            NSDictionary *dict = [self.filteredArray objectAtIndex:self.selectedRow];
             [self.delegate selectedCountry:dict[@"dial_code"]];
         }
     }

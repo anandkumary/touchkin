@@ -8,10 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import "Define.h"
+#import "MyCircle.h"
+#import "OthersCircle.h"
 
 @interface TKPageController : UIViewController
 
 @property (assign, nonatomic) NSInteger index;
+
+@property (nonatomic, strong) MyCircle *circle;
+
+@property (nonatomic, strong) OthersCircle *others;
 
 @property (assign, nonatomic) DashboardType boardType;
 

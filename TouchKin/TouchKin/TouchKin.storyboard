@@ -78,7 +78,9 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="bgImage" destination="Xcq-6n-nmB" id="7Wv-Pm-whB"/>
+                        <outlet property="bgImageViewConstriant" destination="exq-Ma-cdV" id="C1r-Je-oGz"/>
                         <outlet property="bottomLabel" destination="Kfi-PJ-EfZ" id="sd9-bW-dfz"/>
+                        <outlet property="bottomLabelConstraint" destination="l4i-vJ-iw5" id="Q3B-C2-Sxg"/>
                         <outlet property="circularView" destination="P1t-Q4-Kmv" id="p3c-0N-SlE"/>
                         <outlet property="dashboardView" destination="QUm-Fl-FnP" id="7nJ-Ap-Gq5"/>
                         <outlet property="topLabel" destination="xsG-KK-zye" id="hbY-Rm-pPG"/>
@@ -817,7 +819,7 @@
                                                         <constraint firstAttribute="width" constant="80" id="XWJ-Ie-HH2"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="evb-0s-rTI">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Me" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="evb-0s-rTI">
                                                     <rect key="frame" x="8" y="146" width="172" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="Lfg-nq-20n"/>
