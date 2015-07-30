@@ -42,6 +42,8 @@
 		445B025C1B5E7F0F004696B3 /* Country.m in Sources */ = {isa = PBXBuildFile; fileRef = 445B025B1B5E7F0F004696B3 /* Country.m */; };
 		445B025E1B5E7F7F004696B3 /* countries.json in Resources */ = {isa = PBXBuildFile; fileRef = 445B025D1B5E7F7F004696B3 /* countries.json */; };
 		445B02641B5E8198004696B3 /* TKCountryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 445B02631B5E8198004696B3 /* TKCountryVC.m */; };
+		44675E901B6A92A9003B0F9F /* TKSplitView.m in Sources */ = {isa = PBXBuildFile; fileRef = 44675E8F1B6A92A9003B0F9F /* TKSplitView.m */; };
+		44675E921B6A92CE003B0F9F /* TKGradientCircularView.m in Sources */ = {isa = PBXBuildFile; fileRef = 44675E911B6A92CE003B0F9F /* TKGradientCircularView.m */; };
 		44724D6F1B65128400B56851 /* RGCardViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 44724D6E1B65128400B56851 /* RGCardViewLayout.m */; };
 		44724D721B6512B100B56851 /* TKKinBookCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 44724D711B6512B100B56851 /* TKKinBookCollectionCell.m */; };
 		447F83D21B67CCD7006B2839 /* TKNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 447F83D11B67CCD7006B2839 /* TKNetworkManager.m */; };
@@ -50,7 +52,6 @@
 		4490136A1B5A4D01007B312C /* TKMyFamilyCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 449013691B5A4D01007B312C /* TKMyFamilyCollectionCell.m */; };
 		4490136D1B5A4D23007B312C /* TKMyFamilyRequestCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4490136C1B5A4D23007B312C /* TKMyFamilyRequestCell.m */; };
 		449013701B5A4F9D007B312C /* TKMyFamilyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4490136F1B5A4F9D007B312C /* TKMyFamilyVC.m */; };
-		44911C7F1B6A7A5B0070E327 /* TKGradientCircularView.m in Sources */ = {isa = PBXBuildFile; fileRef = 44911C7E1B6A7A5B0070E327 /* TKGradientCircularView.m */; };
 		44A58A021B627C98001742D8 /* MyConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 44A58A011B627C98001742D8 /* MyConnection.m */; };
 		44A58A051B627EB9001742D8 /* MyHomeLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 44A58A041B627EB9001742D8 /* MyHomeLocation.m */; };
 		44A58A081B62839D001742D8 /* MyCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 44A58A071B62839D001742D8 /* MyCircle.m */; };
@@ -163,6 +164,9 @@
 		445B025D1B5E7F7F004696B3 /* countries.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = countries.json; sourceTree = "<group>"; };
 		445B02621B5E8198004696B3 /* TKCountryVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKCountryVC.h; sourceTree = "<group>"; };
 		445B02631B5E8198004696B3 /* TKCountryVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKCountryVC.m; sourceTree = "<group>"; };
+		44675E8C1B6A8A98003B0F9F /* TKSplitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKSplitView.h; sourceTree = "<group>"; };
+		44675E8F1B6A92A9003B0F9F /* TKSplitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKSplitView.m; sourceTree = "<group>"; };
+		44675E911B6A92CE003B0F9F /* TKGradientCircularView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKGradientCircularView.m; sourceTree = "<group>"; };
 		44724D6D1B65128400B56851 /* RGCardViewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RGCardViewLayout.h; sourceTree = "<group>"; };
 		44724D6E1B65128400B56851 /* RGCardViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RGCardViewLayout.m; sourceTree = "<group>"; };
 		44724D701B6512B100B56851 /* TKKinBookCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKKinBookCollectionCell.h; sourceTree = "<group>"; };
@@ -181,7 +185,6 @@
 		4490136E1B5A4F9D007B312C /* TKMyFamilyVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKMyFamilyVC.h; sourceTree = "<group>"; };
 		4490136F1B5A4F9D007B312C /* TKMyFamilyVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKMyFamilyVC.m; sourceTree = "<group>"; };
 		44911C7D1B6A7A5B0070E327 /* TKGradientCircularView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKGradientCircularView.h; sourceTree = "<group>"; };
-		44911C7E1B6A7A5B0070E327 /* TKGradientCircularView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKGradientCircularView.m; sourceTree = "<group>"; };
 		44A58A001B627C98001742D8 /* MyConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyConnection.h; sourceTree = "<group>"; };
 		44A58A011B627C98001742D8 /* MyConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyConnection.m; sourceTree = "<group>"; };
 		44A58A031B627EB9001742D8 /* MyHomeLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyHomeLocation.h; sourceTree = "<group>"; };
@@ -348,8 +351,10 @@
 				4441FAA71B5694EB00A7B7F9 /* TKNavigationView.m */,
 				44384B0A1B572A8600C8E35A /* TKCircularView.h */,
 				44384B0B1B572A8600C8E35A /* TKCircularView.m */,
+				44675E8C1B6A8A98003B0F9F /* TKSplitView.h */,
+				44675E8F1B6A92A9003B0F9F /* TKSplitView.m */,
 				44911C7D1B6A7A5B0070E327 /* TKGradientCircularView.h */,
-				44911C7E1B6A7A5B0070E327 /* TKGradientCircularView.m */,
+				44675E911B6A92CE003B0F9F /* TKGradientCircularView.m */,
 				4413826E1B57FAD300DFB0BC /* TKSideMenuView.h */,
 				4413826F1B57FAD300DFB0BC /* TKSideMenuView.m */,
 				44C9DB091B588B3300714340 /* TKHomeBaseNavigationView.h */,
@@ -674,7 +679,6 @@
 				4451755A1B55DD2D00EDEF97 /* main.m in Sources */,
 				4403D4E11B61BF5C006000B8 /* YLImagePickerController.m in Sources */,
 				4490136D1B5A4D23007B312C /* TKMyFamilyRequestCell.m in Sources */,
-				44911C7F1B6A7A5B0070E327 /* TKGradientCircularView.m in Sources */,
 				44C9DB0B1B588B3300714340 /* TKHomeBaseNavigationView.m in Sources */,
 				44A58A2F1B628E6F001742D8 /* NSData+ImageContentType.m in Sources */,
 				44724D721B6512B100B56851 /* TKKinBookCollectionCell.m in Sources */,
@@ -698,8 +702,10 @@
 				44A58A361B628E6F001742D8 /* SDWebImagePrefetcher.m in Sources */,
 				4441FA9D1B568A0300A7B7F9 /* TKIntroVC.m in Sources */,
 				44A9251C1B64D843002D2A11 /* MapViewController.m in Sources */,
+				44675E901B6A92A9003B0F9F /* TKSplitView.m in Sources */,
 				443EA0071B594E2800A685CE /* TKMeViewController.m in Sources */,
 				44A58A2E1B628E6F001742D8 /* MKAnnotationView+WebCache.m in Sources */,
+				44675E921B6A92CE003B0F9F /* TKGradientCircularView.m in Sources */,
 				4414D88C1B6913F100363447 /* TKAddNewVC.m in Sources */,
 				441382701B57FAD300DFB0BC /* TKSideMenuView.m in Sources */,
 				44EA499D1B59D7420027C368 /* Reachability.m in Sources */,

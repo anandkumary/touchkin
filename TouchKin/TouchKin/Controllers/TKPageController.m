@@ -36,18 +36,18 @@
 
     self.dashboardView.type = self.boardType;
     
-    NSDate *today = [NSDate date]; //Get a date object for today's date
-    NSCalendar *c = [NSCalendar currentCalendar];
-    NSRange days = [c rangeOfUnit:NSDayCalendarUnit
-                           inUnit:NSMonthCalendarUnit
-                          forDate:today];
-    
-    
-    NSDateComponents *components = [c components:NSCalendarUnitDay fromDate:today];
-    
-  CGFloat ratio = (CGFloat)components.day / (CGFloat)days.length;
-
-  [self.circularView setProgress:ratio];
+//    NSDate *today = [NSDate date]; //Get a date object for today's date
+//    NSCalendar *c = [NSCalendar currentCalendar];
+//    NSRange days = [c rangeOfUnit:NSDayCalendarUnit
+//                           inUnit:NSMonthCalendarUnit
+//                          forDate:today];
+//    
+//    
+//    NSDateComponents *components = [c components:NSCalendarUnitDay fromDate:today];
+//    
+//  CGFloat ratio = (CGFloat)components.day / (CGFloat)days.length;
+//
+//  [self.circularView setProgress:ratio];
     
    CGFloat height = [UIScreen mainScreen].bounds.size.height;
     

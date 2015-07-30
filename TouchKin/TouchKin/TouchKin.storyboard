@@ -30,22 +30,30 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xcq-6n-nmB">
                                 <rect key="frame" x="93" y="55" width="180" height="180"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P1t-Q4-Kmv" customClass="TKCircularView">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P1t-Q4-Kmv" customClass="TKGradientCircularView">
+                                        <rect key="frame" x="6" y="6" width="168" height="168"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vUK-ys-egY" customClass="TKSplitView">
                                         <rect key="frame" x="6" y="6" width="168" height="168"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QUm-Fl-FnP" customClass="TKDashboardView">
                                         <rect key="frame" x="20" y="20" width="140" height="140"/>
-                                        <color key="backgroundColor" red="0.84705882349999995" green="0.28627450980000002" blue="0.25882352939999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="vUK-ys-egY" secondAttribute="bottom" constant="6" id="0MU-cQ-fci"/>
                                     <constraint firstItem="QUm-Fl-FnP" firstAttribute="top" secondItem="Xcq-6n-nmB" secondAttribute="top" constant="20" id="0WM-ob-mP9"/>
+                                    <constraint firstItem="vUK-ys-egY" firstAttribute="leading" secondItem="Xcq-6n-nmB" secondAttribute="leading" constant="6" id="1CX-gy-5Sm"/>
+                                    <constraint firstItem="vUK-ys-egY" firstAttribute="top" secondItem="Xcq-6n-nmB" secondAttribute="top" constant="6" id="8kX-j6-z4r"/>
                                     <constraint firstAttribute="bottom" secondItem="QUm-Fl-FnP" secondAttribute="bottom" constant="20" id="C4U-L7-qDw"/>
                                     <constraint firstAttribute="width" constant="180" id="Cxx-Vm-zzZ"/>
                                     <constraint firstItem="P1t-Q4-Kmv" firstAttribute="top" secondItem="Xcq-6n-nmB" secondAttribute="top" constant="6" id="Lvf-OJ-cyM"/>
                                     <constraint firstAttribute="trailing" secondItem="P1t-Q4-Kmv" secondAttribute="trailing" constant="6" id="UkO-gP-9Ew"/>
+                                    <constraint firstAttribute="trailing" secondItem="vUK-ys-egY" secondAttribute="trailing" constant="6" id="VA5-v2-Eye"/>
                                     <constraint firstItem="P1t-Q4-Kmv" firstAttribute="leading" secondItem="Xcq-6n-nmB" secondAttribute="leading" constant="6" id="X29-6p-r8l"/>
                                     <constraint firstAttribute="bottom" secondItem="P1t-Q4-Kmv" secondAttribute="bottom" constant="6" id="eEK-Pf-HTw"/>
                                     <constraint firstAttribute="height" constant="180" id="nKZ-HD-Kbo"/>
@@ -81,7 +89,6 @@
                         <outlet property="bgImageViewConstriant" destination="exq-Ma-cdV" id="C1r-Je-oGz"/>
                         <outlet property="bottomLabel" destination="Kfi-PJ-EfZ" id="sd9-bW-dfz"/>
                         <outlet property="bottomLabelConstraint" destination="l4i-vJ-iw5" id="Q3B-C2-Sxg"/>
-                        <outlet property="circularView" destination="P1t-Q4-Kmv" id="p3c-0N-SlE"/>
                         <outlet property="dashboardView" destination="QUm-Fl-FnP" id="7nJ-Ap-Gq5"/>
                         <outlet property="topLabel" destination="xsG-KK-zye" id="hbY-Rm-pPG"/>
                     </connections>
@@ -222,7 +229,11 @@
                         <subviews>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PIB-lI-XxG" customClass="TKGradientCircularView">
                                 <rect key="frame" x="100" y="100" width="150" height="150"/>
-                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="V2T-K8-yce" customClass="TKSplitView">
+                                <rect key="frame" x="100" y="100" width="150" height="150"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
