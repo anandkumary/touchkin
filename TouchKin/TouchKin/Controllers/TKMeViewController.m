@@ -9,8 +9,11 @@
 #import "TKMeViewController.h"
 #import "TKPageController.h"
 #import "TKDataEngine.h"
+#import <MapKit/MapKit.h>
+#import "MapViewController.h"
+#import "MLNetworkModel.h"
 
-@interface TKMeViewController ()<UIPageViewControllerDataSource>
+@interface TKMeViewController ()<UIPageViewControllerDataSource,MKMapViewDelegate>
 @property (weak, nonatomic) IBOutlet UIView *containerView;
 
 @property (strong, nonatomic) UIPageViewController *pageController;
@@ -18,6 +21,9 @@
 @property (nonatomic, strong) NSMutableArray *familyList;
 
 @property (nonatomic, assign) NSInteger selctedIndex;
+
+@property (nonatomic, strong) MKMapView *mapView;
+
 @end
 
 @implementation TKMeViewController
@@ -27,6 +33,9 @@
     // Do any additional setup after loading the view.
     
     self.navTitle = @"Me";
+    
+    self.mapView = [[MKMapView alloc] init];
+    self.mapView.delegate = self;
     
     self.pageController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
     
@@ -44,13 +53,25 @@
     
     [self addMyCircleObserver];
     
+    [self addtapGestureForMap];
+    
     // [self setDelegate:self];
     
 }
 
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void) addtapGestureForMap {
+    
+    UITapGestureRecognizer *tgr = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self action:@selector(handleGesture:)];
+    tgr.numberOfTapsRequired = 1;
+    tgr.numberOfTouchesRequired = 1;
+    [self.mapView addGestureRecognizer:tgr];
 }
 
 -(void) addMyCircleObserver {
@@ -63,6 +84,10 @@
     self.familyList = [[TKDataEngine sharedManager] familyList];
     
     self.selctedIndex = 0;
+    
+     MyCircle *circle = [self.familyList objectAtIndex:0];
+    
+    [self getActivityForId:circle.userId];
     
 //    self.pageController.dataSource = nil;
 //    self.pageController.dataSource = self;
@@ -136,6 +161,10 @@
     TKPageController *childViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"TKPageController"];
     childViewController.index = index;
     childViewController.boardType = index % 3;
+    
+    if(childViewController.boardType == DASHBOARDMAPTYPE){
+        childViewController.mapView = self.mapView;
+    }
     childViewController.view.clipsToBounds = YES;
     
     MyCircle *circle = [self.familyList objectAtIndex:self.selctedIndex];
@@ -176,5 +205,31 @@
 //    // The selected item reflected in the page indicator.
 //    return 0;
 //}
+
+- (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
+{
+    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(userLocation.coordinate, 800, 800);
+    [self.mapView setRegion:[self.mapView regionThatFits:region] animated:YES];
+}
+
+-(void) handleGesture:(UIGestureRecognizer *)gesture {
+   
+    MapViewController *mvc = [self.storyboard instantiateViewControllerWithIdentifier:@"MapViewController"];
+    mvc.location = self.mapView.region.center;
+    
+    [self presentViewController:mvc animated:YES completion:nil];
+}
+
+#pragma mark - Get Activity
+
+-(void) getActivityForId:(NSString *)userId {
+    
+    MLNetworkModel *model = [[MLNetworkModel alloc] init];
+    
+    [model getRequestPath:[NSString stringWithFormat:@"activity/current/%@",userId] withParameter:nil withHandler:^(id responseObject, NSError *error) {
+        
+        NSLog(@"res =%@",responseObject);
+    }];
+}
 
 @end

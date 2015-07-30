@@ -9,9 +9,16 @@
 #import <UIKit/UIKit.h>
 #import "Define.h"
 
+@protocol TKMyFamilyCollectionCellDelegate <NSObject>
+
+-(void) didCellSelectAtIndex:(NSInteger)index;
+
+@end
+
 @interface TKMyFamilyCollectionCell : UITableViewCell
 
 @property (nonatomic, assign) FamilyType familyType;
+@property (nonatomic, assign) id<TKMyFamilyCollectionCellDelegate> delegate;
 
 @property (weak, nonatomic) IBOutlet UICollectionView *myCircleCollectionView;
 

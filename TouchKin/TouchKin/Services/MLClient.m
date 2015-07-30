@@ -52,7 +52,7 @@ static NSString * const USERTOKEN = @"TOKEN";
     request.HTTPMethod = method;
     request.allHTTPHeaderFields = self.defaultHeaders;
     
-    if(![method isEqual:@"GET"]){
+    if(![method isEqual:@"GET"] && param != nil){
         request.HTTPBody = [NSJSONSerialization dataWithJSONObject:param options:0 error:&error];
     }
     

@@ -10,6 +10,8 @@
 #import "Define.h"
 #import "MyCircle.h"
 #import "OthersCircle.h"
+#import "TKDashboardView.h"
+#import <MapKit/MapKit.h>
 
 @interface TKPageController : UIViewController
 
@@ -20,5 +22,9 @@
 @property (nonatomic, strong) OthersCircle *others;
 
 @property (assign, nonatomic) DashboardType boardType;
+
+@property (weak, nonatomic) IBOutlet TKDashboardView *dashboardView;
+
+@property (weak, nonatomic) IBOutlet MKMapView *mapView;
 
 @end

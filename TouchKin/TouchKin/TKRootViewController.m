@@ -9,10 +9,13 @@
 #import "TKRootViewController.h"
 #import "TKIntroVC.h"
 #import "TKDataEngine.h"
+#import "PSLocationManager.h"
+#import "MLNetworkModel.h"
 
 static NSString * const KINTROSCREEN = @"TKIntroVC";
 
-@interface TKRootViewController () {
+@interface TKRootViewController ()<PSLocationManagerDelegate>
+{
     BOOL isLoginShown;
 }
 
@@ -52,9 +55,6 @@ static NSString * const KINTROSCREEN = @"TKIntroVC";
     tabBarItem3.selectedImage = [[UIImage imageNamed:@"message"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
     tabBarItem3.image = [[UIImage imageNamed:@"message"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
 
-    
-    [[TKDataEngine sharedManager] getMyFamilyInfo];
-    
 }
 
 -(void) viewWillLayoutSubviews {
@@ -63,12 +63,6 @@ static NSString * const KINTROSCREEN = @"TKIntroVC";
     
     NSString *mobile = [[TKDataEngine sharedManager] getPhoneNumber];
     NSDate *expDate = [NSDate dateWithTimeIntervalSince1970:(double)[[TKDataEngine sharedManager] getExpDate]];
-    
-//    NSLog(@"exp =%@  ->  date = %@",expDate,[NSDate date]);
-//    
-//    if([expDate compare:[NSDate date]] == NSOrderedDescending){
-//        NSLog(@"is Greater");
-//    }
     
     if( mobile.length == 0 || [expDate compare:[NSDate date]] == NSOrderedAscending){
         
@@ -80,9 +74,26 @@ static NSString * const KINTROSCREEN = @"TKIntroVC";
             });
         }
     }
-    
 }
 
+-(void) viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    NSString *mobile = [[TKDataEngine sharedManager] getPhoneNumber];
+
+    
+    if( mobile.length != 0) {
+        
+        [PSLocationManager sharedLocationManager].delegate = self;
+        [[PSLocationManager sharedLocationManager] prepLocationUpdates];
+        [[PSLocationManager sharedLocationManager] startLocationUpdates];
+        
+        [[TKDataEngine sharedManager] getMyFamilyInfo];
+        [[TKDataEngine sharedManager] getNewConnectionRequest];
+
+    }
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -109,5 +120,91 @@ static NSString * const KINTROSCREEN = @"TKIntroVC";
     // Pass the selected object to the new view controller.
 }
 */
+
+#pragma mark PSLocationManagerDelegate
+
+- (void)locationManager:(PSLocationManager *)locationManager signalStrengthChanged:(PSLocationManagerGPSSignalStrength)signalStrength {
+    NSString *strengthText;
+    if (signalStrength == PSLocationManagerGPSSignalStrengthWeak) {
+        strengthText = NSLocalizedString(@"Weak", @"");
+    } else if (signalStrength == PSLocationManagerGPSSignalStrengthStrong) {
+        strengthText = NSLocalizedString(@"Strong", @"");
+    } else {
+        strengthText = NSLocalizedString(@"...", @"");
+    }
+        
+    NSLog(@"strength = %@",strengthText);
+
+}
+
+- (void)locationManagerSignalConsistentlyWeak:(PSLocationManager *)locationManager {
+    // self.strengthLabel.text = NSLocalizedString(@"Consistently Weak", @"");
+    
+    
+    NSLog(@"distance travelled lat-> %f log -> %f",locationManager.locationManager.location.coordinate.latitude,locationManager.locationManager.location.coordinate.longitude);
+    
+    if(locationManager.locationManager.location.coordinate.longitude != 0){
+        
+        double lat = locationManager.locationManager.location.coordinate.latitude;
+        double log = locationManager.locationManager.location.coordinate.longitude;
+        
+        [self postCoordinateForLat:lat withLongitude:log];
+        [locationManager stopLocationUpdates];
+    }
+    
+    //  NSLog(@"distance = %@",locationManager);
+
+}
+
+- (void)locationManager:(PSLocationManager *)locationManager distanceUpdated:(CLLocationDistance)distance {
+    //  self.distanceLabel.text = [NSString stringWithFormat:@"%.2f %@", distance, NSLocalizedString(@"meters", @"")];
+    
+    NSLog(@"distance travelled = %.2f  -> lat-> %f log -> %f",distance,locationManager.locationManager.location.coordinate.latitude,locationManager.locationManager.location.coordinate.longitude);
+        
+    //[locationManager stopLocationUpdates];
+    
+}
+
+- (void)locationManager:(PSLocationManager *)locationManager error:(NSError *)error {
+    // location services is probably not enabled for the app
+    
+}
+
+
+-(void) postCoordinateForLat:(double)lat withLongitude:(double)log {
+   
+    /*
+     mobile: "+919740495689",
+     mobile_os: "ios",
+     mobile_device_id: "4546464",
+     point: {
+     x: 38.32,
+     y: 32.34
+     }
+     */
+    TKDataEngine *engine = [TKDataEngine sharedManager];
+    
+    NSString *mobile = [engine getPhoneNumber];
+    NSString *deviceID = [engine getDeviceToken];
+    NSString *deviceOS = @"ios";
+    
+    NSDictionary *points = @{@"x":@(lat),@"y":@(log)};
+    
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    
+    [params setObject:mobile forKey:@"mobile"];
+    [params setObject:deviceOS forKey:@"mobile_os"];
+    [params setObject:deviceID forKey:@"mobile_device_id"];
+    [params setObject:points forKey:@"point"];
+    
+    MLNetworkModel *model = [[MLNetworkModel alloc] init];
+    [model postPath:@"location/add" withParameter:params withHandler:^(MLClient *sender, id responseObject, NSError *error) {
+        
+        NSLog(@"resssss= %@",responseObject);
+        
+    }];
+    
+}
+
 
 @end

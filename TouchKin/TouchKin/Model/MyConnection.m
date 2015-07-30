@@ -25,6 +25,11 @@
         if(dict[@"last_name"]){
             self.lname  = ([dict[@"last_name"]isKindOfClass:[NSNull class]]) ? @"" :  dict[@"last_name"];
         }
+        
+        if(dict[@"Nickname"]){
+            self.nickName  = ([dict[@"Nickname"]isKindOfClass:[NSNull class]]) ? @"" :  dict[@"Nickname"];
+        }
+
 
         if(dict[@"email"]){
             self.email  = ([dict[@"email"]isKindOfClass:[NSNull class]]) ? @"" :  dict[@"email"];
@@ -62,6 +67,8 @@
         MyHomeLocation *location = [[MyHomeLocation alloc] init];
         location.longitude = dict[@"x"];
         location.latitude  = dict[@"y"] ;
+        
+        [self.homeList addObject:location];
     }
     
 }

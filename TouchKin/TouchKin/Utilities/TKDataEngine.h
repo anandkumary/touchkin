@@ -26,6 +26,7 @@
 -(void) saveUserInfo:(NSDictionary *)userDict;
 
 -(void) getMyFamilyInfo;
+-(void) getNewConnectionRequest;
 
 + (id)sharedManager;
 

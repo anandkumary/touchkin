@@ -12,7 +12,13 @@
 #define KADegreesToRadians(degrees) ((degrees)/180.0*M_PI)
 #define KARadiansToDegrees(radians) ((radians)*180.0/M_PI)
 
-@implementation TKCircularView
+
+
+@implementation TKCircularView 
+
+@synthesize startDegree = _startDegree;
+@synthesize endDegree = _endDegree;
+@synthesize progress = _progress;
 
 - (instancetype)initWithCoder:(NSCoder *)coder
 {
@@ -62,8 +68,8 @@
     
     
     // Logic
-    self.startDegree        = 0 - 90;
-    self.endDegree          = 10;
+    self.startDegree        = 0;
+    self.endDegree          = 0;
     self.progress           = 0;
     
     
@@ -135,6 +141,24 @@
     return self.endDegree/360;
 }
 
+-(void)setStartDegree:(CGFloat)startDegree
+{
+    _startDegree = startDegree - 90;
+}
+
+-(void)setEndDegree:(CGFloat)endDegree
+{
+    _endDegree = endDegree - 90;
+}
+
+-(void)setProgress:(CGFloat)progress
+{
+    if(self.startDegree != 0){
+        [self setStartDegree:0];
+    }
+    [self setEndDegree:progress*360];
+}
+
 
 #pragma mark - Helpers
 
@@ -172,6 +196,7 @@
     CGPoint circleCenter = CGPointMake(CGRectGetMidX(rect), CGRectGetMidY(rect));
     return CGRectMake(circleCenter.x - circleRadius, circleCenter.y - circleRadius, 2 * circleRadius, 2 * circleRadius);
 }
+
 
 
 @end

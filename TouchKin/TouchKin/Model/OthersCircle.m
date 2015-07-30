@@ -62,6 +62,8 @@
         MyHomeLocation *location = [[MyHomeLocation alloc] init];
         location.longitude = dict[@"x"];
         location.latitude  = dict[@"y"] ;
+        
+        [self.homeList addObject:location];
     }
     
 }

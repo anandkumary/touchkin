@@ -12,6 +12,7 @@
 
 @property (nonatomic, copy) NSString *fname;
 @property (nonatomic, copy) NSString *lname;
+@property (nonatomic, copy) NSString *nickName;
 @property (nonatomic, copy) NSString *userId;
 @property (nonatomic, copy) NSString *email;
 @property (nonatomic, copy) NSString *gender;

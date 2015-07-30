@@ -10,7 +10,11 @@
 #import "AppDelegate.h"
 #import "UIImageView+WebCache.h"
 
-@interface TKDashboardView()
+#define METERS_PER_MILE 1609.344
+
+
+@interface TKDashboardView() <MKMapViewDelegate>
+
 @property (nonatomic, strong) UIImageView *avatar;
 @property (nonatomic, strong) UIImageView *batteryImage;
 @property (nonatomic, strong) UILabel *batteryLbl;
@@ -51,6 +55,9 @@
             break;
         }
         case DASHBOARDMAPTYPE:{
+            
+            [self createMapView];
+
             break;
         }
         case DASHBOARDCELLULARTYPE: {
@@ -79,6 +86,55 @@
         default:
             break;
     }
+}
+
+-(void) setMapView:(MKMapView *)mapView {
+    _mapView = mapView;
+}
+
+-(void) createMapView {
+    
+    self.mapView.frame  = self.bounds;
+    self.mapView.delegate = self;
+    
+    self.mapView.layer.cornerRadius = self.mapView.frame.size.width/2;
+    
+    self.mapView.userTrackingMode=YES;
+
+    
+    if(![self.subviews containsObject:self.mapView]){
+        [self addSubview:self.mapView];
+    }
+    
+}
+
+-(void) updateLocation {
+    
+    if(self.lat.length) {
+        
+        CLLocationCoordinate2D zoomLocation;
+        zoomLocation.latitude = self.log.doubleValue;
+        zoomLocation.longitude = self.lat.doubleValue;
+        
+        [self.mapView setCenterCoordinate:zoomLocation animated:YES];
+        
+        MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(zoomLocation, 0.5*METERS_PER_MILE, 0.5*METERS_PER_MILE);
+        
+        // 3
+        [_mapView setRegion:[self.mapView regionThatFits:viewRegion] animated:YES];
+        
+        MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
+        // Set your annotation to point at your coordinate
+        point.coordinate = zoomLocation;
+        //If you want to clear other pins/annotations this is how to do it
+        for (id annotation in self.mapView.annotations) {
+            [self.mapView removeAnnotation:annotation];
+        }
+        //Drop pin on map
+        [self.mapView addAnnotation:point];
+        
+    }
+
 }
 
 -(void) createAvatar {
@@ -163,6 +219,14 @@
             });
         }];
     }
+}
+
+#pragma mark - MKMapViewDelegate
+
+- (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
+{
+    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(userLocation.coordinate, 800, 800);
+    [self.mapView setRegion:[self.mapView regionThatFits:region] animated:YES];
 }
 
 @end

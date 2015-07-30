@@ -8,15 +8,15 @@
 
 #import "TKPageController.h"
 #import "TKCircularView.h"
-#import "TKDashboardView.h"
 #import "UILabel+Attribute.h"
+#import "MyHomeLocation.h"
 
 @interface TKPageController ()
 @property (weak, nonatomic) IBOutlet UILabel *topLabel;
 @property (weak, nonatomic) IBOutlet UILabel *bottomLabel;
 @property (weak, nonatomic) IBOutlet UIView *bgImage;
 @property (weak, nonatomic) IBOutlet TKCircularView *circularView;
-@property (weak, nonatomic) IBOutlet TKDashboardView *dashboardView;
+
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bgImageViewConstriant;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomLabelConstraint;
 
@@ -32,7 +32,22 @@
     
     self.dashboardView.layer.cornerRadius = self.dashboardView.frame.size.width/2;
     
+    self.dashboardView.mapView = self.mapView;
+
     self.dashboardView.type = self.boardType;
+    
+    NSDate *today = [NSDate date]; //Get a date object for today's date
+    NSCalendar *c = [NSCalendar currentCalendar];
+    NSRange days = [c rangeOfUnit:NSDayCalendarUnit
+                           inUnit:NSMonthCalendarUnit
+                          forDate:today];
+    
+    
+    NSDateComponents *components = [c components:NSCalendarUnitDay fromDate:today];
+    
+  CGFloat ratio = (CGFloat)components.day / (CGFloat)days.length;
+
+  [self.circularView setProgress:ratio];
     
    CGFloat height = [UIScreen mainScreen].bounds.size.height;
     
@@ -95,6 +110,16 @@
     _others = others;
     
      NSString *urlString = [NSString stringWithFormat:@"https://s3-ap-southeast-1.amazonaws.com/touchkin-dev/avatars/%@.jpeg",others.userId];
+    
+    if(others.homeList.count){
+      
+        MyHomeLocation *location = [others.homeList objectAtIndex:0];
+        self.dashboardView.lat = [NSString stringWithFormat:@"%@", location.latitude];
+        self.dashboardView.log = [NSString stringWithFormat:@"%@",location.longitude];
+        
+        [self.dashboardView updateLocation];
+
+    }
     
     self.dashboardView.urlString = urlString;
 

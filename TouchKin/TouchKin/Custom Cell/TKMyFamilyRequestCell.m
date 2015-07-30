@@ -9,5 +9,17 @@
 #import "TKMyFamilyRequestCell.h"
 
 @implementation TKMyFamilyRequestCell
+- (IBAction)cancelButtonAction:(id)sender {
+    
+    if([self.delegate respondsToSelector:@selector(requestDidCancelCell:)]){
+        [self.delegate requestDidCancelCell:self];
+    }
+}
+- (IBAction)acceptButtonAction:(id)sender {
+    
+    if([self.delegate respondsToSelector:@selector(requestDidAcceptCell:)]){
+        [self.delegate requestDidAcceptCell:self];
+    }
+}
 
 @end

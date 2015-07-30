@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+
 IB_DESIGNABLE
 @interface TKCircularView : UIView
 
@@ -18,8 +19,9 @@ IB_DESIGNABLE
 @property (nonatomic, copy) UIColor * trackColor;
 @property (nonatomic, copy) UIColor * progressColor;
 
-@property (nonatomic) CGFloat startDegree;
-@property (nonatomic) CGFloat endDegree;
-@property (nonatomic) CGFloat progress;
+@property (nonatomic, assign) CGFloat startDegree;
+@property (nonatomic, assign) CGFloat endDegree;
+@property (nonatomic, assign) CGFloat progress;
+
 
 @end

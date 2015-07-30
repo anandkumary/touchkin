@@ -60,6 +60,20 @@
     
 }
 
+#pragma mark - UICollectionViewDelegate
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if(MYFAMILYTYPE == self.familyType && self.connectList.count == indexPath.item) {
+        
+        if([self.delegate respondsToSelector:@selector(didCellSelectAtIndex:)]){
+            [self.delegate didCellSelectAtIndex:indexPath.item];
+        }
+        
+    }
+    
+}
+
 -(void) setConnectList:(NSMutableArray *)connectList {
     _connectList = connectList;
     

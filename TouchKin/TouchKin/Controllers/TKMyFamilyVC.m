@@ -13,9 +13,12 @@
 #import "TKDataEngine.h"
 #import "MyCircle.h"
 #import "OthersCircle.h"
+#import "MyConnection.h"
 #import "UIImageView+WebCache.h"
+#import "TKAddNewVC.h"
+#import "MLNetworkModel.h"
 
-@interface TKMyFamilyVC () {
+@interface TKMyFamilyVC () <TKMyFamilyCollectionCellDelegate,TKMyFamilyRequestCellDelegate>{
     NSInteger selectedSection;
     
     NSInteger previousSelected;
@@ -149,7 +152,15 @@
     
     NSInteger totalRows = 0;
     if(selectedSection == section && previousSelected != selectedSection){
+      
         totalRows = 1;
+        
+        MyCircle *circle = [self.familyList objectAtIndex:section];
+        
+        if([circle isKindOfClass:[MyCircle class]]){
+            totalRows = 1 + circle.requestList.count;
+        }
+
     }
     
     return totalRows;
@@ -157,8 +168,27 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if(indexPath.row%2){
+    if(indexPath.row != 0){
         TKMyFamilyRequestCell *cell = [tableView dequeueReusableCellWithIdentifier:@"requestCell"];
+        
+        cell.avatar.layer.cornerRadius = cell.avatar.frame.size.width/2;
+        
+        MyCircle *circle = [self.familyList objectAtIndex:indexPath.section];
+        
+        MyConnection *connect = circle.requestList[indexPath.row - 1];
+        
+        cell.delegate = self;
+        
+        cell.userNameLbl.text = connect.nickName;
+        
+        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://s3-ap-southeast-1.amazonaws.com/touchkin-dev/avatars/%@.jpeg",connect.userId]];
+        
+        [cell.avatar setImageWithURL:url completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+            
+            cell.avatar.image = image;
+        }];
+
+        
         return cell;
     }
     else {
@@ -170,12 +200,15 @@
             
             cell.familyType = MYFAMILYTYPE;
             cell.connectList = circle.myConnectionList;
+            cell.delegate = self;
+            
         }else {
             
             OthersCircle *others = [self.familyList objectAtIndex:indexPath.section];
             
             cell.familyType = OTHERSFAMILYTYPE;
             cell.connectList = others.connectionList;
+            cell.delegate = nil;
         }
         
         return cell;
@@ -201,16 +234,27 @@
         
         [self.tableview beginUpdates];
         
-        [self.tableview deleteRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:0 inSection:previousSelected],nil] withRowAnimation:UITableViewRowAnimationFade];
+        MyCircle *circle = [self.familyList objectAtIndex:selectedSection];
+        
+        if([circle isKindOfClass:[MyCircle class]]){
+            
+            NSMutableArray *indexPathList = [self createNumberOfRow:circle.requestList.count forSection:selectedSection];
+            [self.tableview deleteRowsAtIndexPaths:indexPathList withRowAnimation:UITableViewRowAnimationFade];
+            
+        }
+        else {
+           
+             [self.tableview deleteRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:0 inSection:previousSelected],nil] withRowAnimation:UITableViewRowAnimationFade];
+        }
+
         
         [self.tableview endUpdates];
-        
         
         selectedSection = -1;
         
     }
     
-    if(previousSelected != sender.tag)
+  else if(previousSelected != sender.tag)
         {
         
         selectedSection = sender.tag;
@@ -219,12 +263,160 @@
             
             [self.tableview beginUpdates];
             
-            [self.tableview insertRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:0 inSection:selectedSection],nil] withRowAnimation:UITableViewRowAnimationMiddle];
+            
+            MyCircle *circle = [self.familyList objectAtIndex:selectedSection];
+            
+            if([circle isKindOfClass:[MyCircle class]]){
+                
+                NSMutableArray *indexPathList = [self createNumberOfRow:circle.requestList.count forSection:selectedSection];
+                
+                [self.tableview insertRowsAtIndexPaths:indexPathList withRowAnimation:UITableViewRowAnimationMiddle];
+                
+            }
+            else {
+              
+                  [self.tableview insertRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:0 inSection:selectedSection],nil] withRowAnimation:UITableViewRowAnimationMiddle];
+            }
             
             [self.tableview endUpdates];
         });
        
     }
+    else if (previousSelected == sender.tag){
+        
+        selectedSection = sender.tag;
+        
+        previousSelected = -1;
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, delayOffset * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+            
+            [self.tableview beginUpdates];
+            
+            MyCircle *circle = [self.familyList objectAtIndex:selectedSection];
+            
+            if([circle isKindOfClass:[MyCircle class]]){
+                
+                NSMutableArray *indexPathList = [self createNumberOfRow:circle.requestList.count forSection:selectedSection];
+                
+                [self.tableview insertRowsAtIndexPaths:indexPathList withRowAnimation:UITableViewRowAnimationMiddle];
+                
+            }
+            else {
+                
+                [self.tableview insertRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:0 inSection:selectedSection],nil] withRowAnimation:UITableViewRowAnimationMiddle];
+            }
+            
+            [self.tableview endUpdates];
+        });
+        
+    }
+}
+
+-(NSMutableArray *) createNumberOfRow:(NSInteger) count forSection:(int)section{
+    
+    NSMutableArray *array = nil;
+    
+    for (int i = 0; i <= count; i++) {
+        if(!array){
+            array = [[NSMutableArray alloc] init];
+        }
+        
+        NSIndexPath *path = [NSIndexPath indexPathForRow:i inSection:section];
+        [array addObject:path];
+    }
+    
+    return array;
+}
+
+-(void) didCellSelectAtIndex:(NSInteger)index {
+    
+    TKAddNewVC *addVC = [self.storyboard instantiateViewControllerWithIdentifier:@"TKAddNewVC"];
+    
+    [self addChildViewController:addVC];
+    [self.view addSubview:addVC.view];
+    [addVC didMoveToParentViewController:self];
+    
+    
+}
+
+-(void) requestDidCancelCell:(TKMyFamilyRequestCell *)cell {
+    
+    NSIndexPath *indexPath = [self.tableview indexPathForCell:cell];
+    
+    MyCircle *circle = [self.familyList objectAtIndex:indexPath.section];
+    
+    MyConnection *connect = circle.requestList[indexPath.row - 1];
+    
+    NSDictionary *requestDict = @{@"requestId": connect.userId};
+    
+    MLNetworkModel *model = [[MLNetworkModel alloc] init];
+    
+    [model postRequestPath:[NSString stringWithFormat:@"user/connection-request/%@/reject",connect.userId] withParameter:requestDict withHandler:^(id responseObject, NSError *error) {
+        
+        NSLog(@"response = %@",responseObject);
+        
+        if(error ==  nil) {
+            
+            NSDictionary *dict = responseObject;
+            
+            if([dict[@"status"] integerValue] != 404){
+              
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    
+                    [circle.requestList removeObject:connect];
+                    
+                    [self.tableview reloadData];
+                    
+                });
+            }
+        }
+        
+    }];
+
+    
+}
+-(void) requestDidAcceptCell:(TKMyFamilyRequestCell *)cell {
+    
+    
+    NSIndexPath *indexPath = [self.tableview indexPathForCell:cell];
+    
+    MyCircle *circle = [self.familyList objectAtIndex:indexPath.section];
+    
+    MyConnection *connect = circle.requestList[indexPath.row - 1];
+    
+    NSDictionary *requestDict = @{@"requestId": connect.userId};
+    
+    MLNetworkModel *model = [[MLNetworkModel alloc] init];
+    
+    [model postRequestPath:[NSString stringWithFormat:@"user/connection-request/%@/accept",connect.userId] withParameter:requestDict withHandler:^(id responseObject, NSError *error) {
+        
+        NSLog(@"response = %@",responseObject);
+        
+        if(error ==  nil) {
+            
+            NSDictionary *dict = responseObject;
+            
+            if([dict[@"status"] integerValue] != 404){
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    
+                    [circle.requestList removeObject:connect];
+                    
+                    //TODO : Add Connect as Others
+                    
+                    [self.tableview reloadData];
+                    
+                });
+            }
+            else {
+                
+                
+            }
+        }
+        
+    }];
+    
+
 }
 
 @end

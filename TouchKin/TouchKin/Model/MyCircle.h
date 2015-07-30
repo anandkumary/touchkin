@@ -14,6 +14,7 @@
 @property (nonatomic, copy) NSString *userId;
 @property (nonatomic, assign) BOOL isSelected;
 @property (nonatomic, strong) NSMutableArray *myConnectionList;
+@property (nonatomic, strong) NSMutableArray *requestList;
 
 - (instancetype)initWithArray:(NSArray *)connectionList;
 

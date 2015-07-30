@@ -10,6 +10,7 @@
 #import "MLNetworkModel.h"
 #import "MYCircle.h"
 #import "OthersCircle.h"
+#import "MyConnection.h"
 
 static NSString * const KDEVICETOKEN = @"deviceToken";
 static NSString * const KSESSIONID = @"id";
@@ -136,7 +137,7 @@ static NSString * const KGENDER = @"gender";
     
     [self.model getRequestPath:@"user/family" withParameter:nil withHandler:^(id responseObject, NSError *error) {
         
-        // NSLog(@"res = %@",responseObject);
+         NSLog(@"res = %@",responseObject);
         
         NSDictionary *dict = responseObject;
         
@@ -169,10 +170,36 @@ static NSString * const KGENDER = @"gender";
     
     for (NSDictionary *dict in careRecList) {
         
-        OthersCircle *circle = [[OthersCircle alloc] initWithDictionary:dict];
-        
-        [self.familyList addObject:circle];
+        if([dict[@"care_receiver_status"] isEqualToString:@"pending"]){
+            
+            MyCircle *circle = [self.familyList objectAtIndex:0];
+            
+            if(!circle.requestList){
+                circle.requestList = [[NSMutableArray alloc] init];
+            }
+            
+            MyConnection *connection = [[MyConnection alloc] initWithDictionary:dict];
+            [circle.requestList addObject:connection];
+            
+        }
+        else {
+           
+            OthersCircle *circle = [[OthersCircle alloc] initWithDictionary:dict];
+            [self.familyList addObject:circle];
+
+        }
         
     }
+}
+
+-(void) getNewConnectionRequest {
+    
+    MLNetworkModel *mdl = [[MLNetworkModel alloc] init];
+    
+    [mdl getRequestPath:@"user/connection-requests" withParameter:nil withHandler:^(id responseObject, NSError *error) {
+       
+        NSLog(@"new connection = %@", responseObject);
+    }];
+    
 }
 @end

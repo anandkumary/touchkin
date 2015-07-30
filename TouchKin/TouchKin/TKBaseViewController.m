@@ -12,6 +12,7 @@
 #import "TKMyFamilyVC.h"
 #import "UIImageView+WebCache.h"
 #import "TKDataEngine.h"
+#import "TKProfileVC.h"
 
 @interface TKBaseViewController ()<SideMenuDelegate>
 
@@ -134,6 +135,23 @@
 
                 
             }
+            break;
+        }
+            
+        case 2: {
+            
+            if(![self.childViewControllers.lastObject isKindOfClass:[TKProfileVC class]]) {
+                [self removeAllViewController];
+                
+                TKProfileVC *profilevc = [self.storyboard instantiateViewControllerWithIdentifier:@"TKProfileVC"];
+                
+                [self addChildViewController:profilevc];
+                [self.containerView addSubview:profilevc.view];
+                [profilevc didMoveToParentViewController:self];
+                
+                
+            }
+            
             break;
         }
     

@@ -7,6 +7,7 @@
 //
 
 #import "TKKinBookVC.h"
+#import "TKKinBookCollectionCell.h"
 
 @interface TKKinBookVC ()
 
@@ -33,5 +34,25 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return 1;
+}
+
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+{
+    return  4;
+}
+
+-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    TKKinBookCollectionCell *cell = (TKKinBookCollectionCell  *)[collectionView dequeueReusableCellWithReuseIdentifier:@"kinBookCell" forIndexPath:indexPath];
+    
+    cell.layer.cornerRadius = 15.0;
+    cell.clipsToBounds = YES;
+    return cell;
+}
+
 
 @end
