@@ -49,6 +49,8 @@
 		447F83D21B67CCD7006B2839 /* TKNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 447F83D11B67CCD7006B2839 /* TKNetworkManager.m */; };
 		447F83D51B67D212006B2839 /* TKProfileVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 447F83D41B67D212006B2839 /* TKProfileVC.m */; };
 		448E3B791B6675C500666602 /* PSLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 448E3B781B6675C500666602 /* PSLocationManager.m */; };
+		448FE9D81B6AF38E004397FB /* TKContactVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 448FE9D71B6AF38E004397FB /* TKContactVC.m */; };
+		448FE9DB1B6AF642004397FB /* TKContactCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 448FE9DA1B6AF642004397FB /* TKContactCell.m */; };
 		4490136A1B5A4D01007B312C /* TKMyFamilyCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 449013691B5A4D01007B312C /* TKMyFamilyCollectionCell.m */; };
 		4490136D1B5A4D23007B312C /* TKMyFamilyRequestCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4490136C1B5A4D23007B312C /* TKMyFamilyRequestCell.m */; };
 		449013701B5A4F9D007B312C /* TKMyFamilyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4490136F1B5A4F9D007B312C /* TKMyFamilyVC.m */; };
@@ -177,6 +179,10 @@
 		447F83D41B67D212006B2839 /* TKProfileVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKProfileVC.m; sourceTree = "<group>"; };
 		448E3B771B6675C500666602 /* PSLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSLocationManager.h; sourceTree = "<group>"; };
 		448E3B781B6675C500666602 /* PSLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSLocationManager.m; sourceTree = "<group>"; };
+		448FE9D61B6AF38E004397FB /* TKContactVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKContactVC.h; sourceTree = "<group>"; };
+		448FE9D71B6AF38E004397FB /* TKContactVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKContactVC.m; sourceTree = "<group>"; };
+		448FE9D91B6AF642004397FB /* TKContactCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKContactCell.h; sourceTree = "<group>"; };
+		448FE9DA1B6AF642004397FB /* TKContactCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKContactCell.m; sourceTree = "<group>"; };
 		449013641B5A2CC4007B312C /* Define.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Define.h; sourceTree = "<group>"; };
 		449013681B5A4D01007B312C /* TKMyFamilyCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKMyFamilyCollectionCell.h; sourceTree = "<group>"; };
 		449013691B5A4D01007B312C /* TKMyFamilyCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKMyFamilyCollectionCell.m; sourceTree = "<group>"; };
@@ -298,6 +304,8 @@
 				4490136C1B5A4D23007B312C /* TKMyFamilyRequestCell.m */,
 				44724D701B6512B100B56851 /* TKKinBookCollectionCell.h */,
 				44724D711B6512B100B56851 /* TKKinBookCollectionCell.m */,
+				448FE9D91B6AF642004397FB /* TKContactCell.h */,
+				448FE9DA1B6AF642004397FB /* TKContactCell.m */,
 			);
 			path = "Custom Cell";
 			sourceTree = "<group>";
@@ -470,6 +478,8 @@
 				447F83D41B67D212006B2839 /* TKProfileVC.m */,
 				4414D88A1B6913F100363447 /* TKAddNewVC.h */,
 				4414D88B1B6913F100363447 /* TKAddNewVC.m */,
+				448FE9D61B6AF38E004397FB /* TKContactVC.h */,
+				448FE9D71B6AF38E004397FB /* TKContactVC.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -708,7 +718,9 @@
 				44675E921B6A92CE003B0F9F /* TKGradientCircularView.m in Sources */,
 				4414D88C1B6913F100363447 /* TKAddNewVC.m in Sources */,
 				441382701B57FAD300DFB0BC /* TKSideMenuView.m in Sources */,
+				448FE9DB1B6AF642004397FB /* TKContactCell.m in Sources */,
 				44EA499D1B59D7420027C368 /* Reachability.m in Sources */,
+				448FE9D81B6AF38E004397FB /* TKContactVC.m in Sources */,
 				443EA00D1B595BA600A685CE /* TKPageController.m in Sources */,
 				44A58A321B628E6F001742D8 /* SDWebImageDecoder.m in Sources */,
 				445175811B55DDCE00EDEF97 /* TKLoginVC.m in Sources */,

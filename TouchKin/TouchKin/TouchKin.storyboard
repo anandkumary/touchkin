@@ -557,6 +557,67 @@
             </objects>
             <point key="canvasLocation" x="606.5" y="-286.5"/>
         </scene>
+        <!--ContactVC-->
+        <scene sceneID="8Cl-Th-3ex">
+            <objects>
+                <viewController storyboardIdentifier="TKContactVC" id="PQU-vL-5qd" customClass="TKContactVC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="yXf-bm-TH2"/>
+                        <viewControllerLayoutGuide type="bottom" id="oTz-fw-ynw"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="kUO-vc-lMg">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="60" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="ggM-dX-BdL">
+                                <rect key="frame" x="0.0" y="70" width="375" height="597"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="contactCell" textLabel="RbM-UB-XIr" detailTextLabel="lIF-Vw-OYg" rowHeight="60" style="IBUITableViewCellStyleSubtitle" id="Ms6-rW-pxs" customClass="TKContactCell">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ms6-rW-pxs" id="oQo-Md-MjI">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="RbM-UB-XIr">
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
+                                                    <color key="textColor" red="0.91764705879999997" green="0.41176470590000003" blue="0.1529411765" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lIF-Vw-OYg">
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="PQU-vL-5qd" id="H5F-K9-ZiD"/>
+                                    <outlet property="delegate" destination="PQU-vL-5qd" id="5SB-I3-wYo"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ggM-dX-BdL" firstAttribute="top" secondItem="yXf-bm-TH2" secondAttribute="bottom" constant="50" id="6nI-Th-EuJ"/>
+                            <constraint firstItem="oTz-fw-ynw" firstAttribute="top" secondItem="ggM-dX-BdL" secondAttribute="bottom" id="B3c-Xm-4xE"/>
+                            <constraint firstItem="ggM-dX-BdL" firstAttribute="leading" secondItem="kUO-vc-lMg" secondAttribute="leading" id="dfp-5q-g3N"/>
+                            <constraint firstAttribute="trailing" secondItem="ggM-dX-BdL" secondAttribute="trailing" id="h9n-eh-Dc6"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="contactTable" destination="ggM-dX-BdL" id="Dht-EO-yYf"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zXq-PH-Qof" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1147.5" y="-1609.5"/>
+        </scene>
         <!--Add NewVC-->
         <scene sceneID="vId-g8-eEn">
             <objects>
@@ -618,6 +679,7 @@
                                         </state>
                                         <connections>
                                             <action selector="addContactbutton:" destination="lOY-S1-bWI" eventType="touchUpInside" id="z3J-lV-THf"/>
+                                            <segue destination="PQU-vL-5qd" kind="presentation" id="tY9-SF-E2J"/>
                                         </connections>
                                     </button>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xay-A9-KGH">
