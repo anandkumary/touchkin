@@ -32,6 +32,11 @@
             self.email  = ([dict[@"email"]isKindOfClass:[NSNull class]]) ? @"" :  dict[@"email"];
         }
         
+        if(!self.fname.length && dict[@"Nickname"]){
+            
+            self.fname = dict[@"Nickname"];
+        }
+        
         self.gender = dict[@"gender"];
         self.mobile = dict[@"mobile"];
         self.yob   = [dict[@"yob"] intValue];

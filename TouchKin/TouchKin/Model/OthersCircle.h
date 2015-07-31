@@ -16,11 +16,13 @@
 @property (nonatomic, copy) NSString *email;
 @property (nonatomic, copy) NSString *gender;
 @property (nonatomic, copy) NSString *mobile;
+@property (nonatomic, assign) BOOL isPending;
 @property (nonatomic, assign) int yob;
 @property (nonatomic, assign) BOOL isSelected;
 @property (nonatomic, strong) NSMutableArray *homeList;
 @property (nonatomic, strong) NSMutableArray *connectionList;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dict;
+-(void) getOtherFamilyInfo;
 
 @end

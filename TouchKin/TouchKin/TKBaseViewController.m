@@ -138,22 +138,22 @@
             break;
         }
             
-        case 2: {
-            
-            if(![self.childViewControllers.lastObject isKindOfClass:[TKProfileVC class]]) {
-                [self removeAllViewController];
-                
-                TKProfileVC *profilevc = [self.storyboard instantiateViewControllerWithIdentifier:@"TKProfileVC"];
-                
-                [self addChildViewController:profilevc];
-                [self.containerView addSubview:profilevc.view];
-                [profilevc didMoveToParentViewController:self];
-                
-                
-            }
-            
-            break;
-        }
+//        case 2: {
+//            
+//            if(![self.childViewControllers.lastObject isKindOfClass:[TKProfileVC class]]) {
+//                [self removeAllViewController];
+//                
+//                TKProfileVC *profilevc = [self.storyboard instantiateViewControllerWithIdentifier:@"TKProfileVC"];
+//                
+//                [self addChildViewController:profilevc];
+//                [self.containerView addSubview:profilevc.view];
+//                [profilevc didMoveToParentViewController:self];
+//                
+//                
+//            }
+//            
+//            break;
+//        }
     
         default:
             break;

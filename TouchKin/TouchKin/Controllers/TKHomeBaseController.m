@@ -104,6 +104,8 @@
     
     self.navView.leftButton.titleLabel.textColor = [UIColor lightGrayColor];
     
+    [self.navView.leftButton removeTarget:self action:@selector(menuButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    
     [self.navView.leftButton addTarget:target action:@selector(navleftBarAction:) forControlEvents:UIControlEventTouchUpInside];
 }
 

@@ -14,6 +14,7 @@
 @property (nonatomic, copy) NSString *lname;
 @property (nonatomic, copy) NSString *nickName;
 @property (nonatomic, copy) NSString *userId;
+@property (nonatomic, copy) NSString *requestId;
 @property (nonatomic, copy) NSString *email;
 @property (nonatomic, copy) NSString *gender;
 @property (nonatomic, copy) NSString *mobile;

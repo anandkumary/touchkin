@@ -170,24 +170,12 @@ static NSString * const KGENDER = @"gender";
     
     for (NSDictionary *dict in careRecList) {
         
-        if([dict[@"care_receiver_status"] isEqualToString:@"pending"]){
-            
-            MyCircle *circle = [self.familyList objectAtIndex:0];
-            
-            if(!circle.requestList){
-                circle.requestList = [[NSMutableArray alloc] init];
-            }
-            
-            MyConnection *connection = [[MyConnection alloc] initWithDictionary:dict];
-            [circle.requestList addObject:connection];
-            
-        }
-        else {
-           
             OthersCircle *circle = [[OthersCircle alloc] initWithDictionary:dict];
+            
+            if([dict[@"care_receiver_status"] isEqualToString:@"pending"]){
+                circle.isPending = YES;
+            }
             [self.familyList addObject:circle];
-
-        }
         
     }
 }
@@ -199,6 +187,27 @@ static NSString * const KGENDER = @"gender";
     [mdl getRequestPath:@"user/connection-requests" withParameter:nil withHandler:^(id responseObject, NSError *error) {
        
         NSLog(@"new connection = %@", responseObject);
+        
+        for (NSDictionary *dict in responseObject) {
+            
+            NSLog(@"res =%@",dict);
+            
+        MyCircle *circle = [self.familyList objectAtIndex:0];
+            
+        if(!circle.requestList){
+        circle.requestList = [[NSMutableArray alloc] init];
+        }
+        
+            MyConnection *connection = [[MyConnection alloc] init];
+            connection.requestId = dict[@"id"];
+            connection.nickName = dict[@"care_giver"][@"first_name"];
+            connection.mobile  = dict[@"care_giver"][@"mobile"];
+            connection.userId  = dict[@"care_giver"][@"id"];
+            connection.yob     = [dict[@"care_giver"][@"yob"] intValue];
+            
+            [circle.requestList addObject:connection];
+
+        }
     }];
     
 }

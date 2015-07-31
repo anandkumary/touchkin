@@ -81,7 +81,6 @@ static NSString * const KINTROSCREEN = @"TKIntroVC";
     [super viewDidAppear:animated];
     
     NSString *mobile = [[TKDataEngine sharedManager] getPhoneNumber];
-
     
     if( mobile.length != 0) {
         

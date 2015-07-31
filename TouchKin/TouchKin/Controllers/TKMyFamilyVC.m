@@ -173,6 +173,8 @@
         
         cell.avatar.layer.cornerRadius = cell.avatar.frame.size.width/2;
         
+        cell.avatar.clipsToBounds = YES;
+        
         MyCircle *circle = [self.familyList objectAtIndex:indexPath.section];
         
         MyConnection *connect = circle.requestList[indexPath.row - 1];
@@ -182,7 +184,6 @@
         cell.userNameLbl.text = connect.nickName;
         
         NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://s3-ap-southeast-1.amazonaws.com/touchkin-dev/avatars/%@.jpeg",connect.userId]];
-        
         [cell.avatar setImageWithURL:url completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
             
             cell.avatar.image = image;
@@ -201,6 +202,8 @@
             cell.familyType = MYFAMILYTYPE;
             cell.connectList = circle.myConnectionList;
             cell.delegate = self;
+            cell.accessoryType = UITableViewCellAccessoryNone;
+
             
         }else {
             
@@ -209,6 +212,12 @@
             cell.familyType = OTHERSFAMILYTYPE;
             cell.connectList = others.connectionList;
             cell.delegate = nil;
+            
+            cell.accessoryType = UITableViewCellAccessoryNone;
+
+//            if (others.isPending) {
+//                cell.accessoryType = UITableViewCellAccessoryDetailButton;
+//            }
         }
         
         return cell;
@@ -351,7 +360,7 @@
     
     MLNetworkModel *model = [[MLNetworkModel alloc] init];
     
-    [model postRequestPath:[NSString stringWithFormat:@"user/connection-request/%@/reject",connect.userId] withParameter:requestDict withHandler:^(id responseObject, NSError *error) {
+    [model postRequestPath:[NSString stringWithFormat:@"user/connection-request/%@/reject",connect.requestId] withParameter:requestDict withHandler:^(id responseObject, NSError *error) {
         
         NSLog(@"response = %@",responseObject);
         
@@ -359,7 +368,7 @@
             
             NSDictionary *dict = responseObject;
             
-            if([dict[@"status"] integerValue] != 404){
+            if(dict[@"status"]){
               
                 dispatch_async(dispatch_get_main_queue(), ^{
                     
@@ -377,7 +386,6 @@
 }
 -(void) requestDidAcceptCell:(TKMyFamilyRequestCell *)cell {
     
-    
     NSIndexPath *indexPath = [self.tableview indexPathForCell:cell];
     
     MyCircle *circle = [self.familyList objectAtIndex:indexPath.section];
@@ -388,7 +396,7 @@
     
     MLNetworkModel *model = [[MLNetworkModel alloc] init];
     
-    [model postRequestPath:[NSString stringWithFormat:@"user/connection-request/%@/accept",connect.userId] withParameter:requestDict withHandler:^(id responseObject, NSError *error) {
+    [model postRequestPath:[NSString stringWithFormat:@"user/connection-request/%@/accept",connect.requestId] withParameter:requestDict withHandler:^(id responseObject, NSError *error) {
         
         NSLog(@"response = %@",responseObject);
         
@@ -396,13 +404,11 @@
             
             NSDictionary *dict = responseObject;
             
-            if([dict[@"status"] integerValue] != 404){
+            if([dict[@"status"] isEqualToString:@"closed"] ){
                 
                 dispatch_async(dispatch_get_main_queue(), ^{
                     
                     [circle.requestList removeObject:connect];
-                    
-                    //TODO : Add Connect as Others
                     
                     [self.tableview reloadData];
                     
