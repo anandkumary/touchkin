@@ -44,7 +44,6 @@
     self.countryList = [dataSource countries];
 
     NSArray *filtered = [self.countryList filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"(code CONTAINS[cd] %@)", countryCode]];
-    NSLog(@"country =%@",filtered);
     NSDictionary *dict = [filtered objectAtIndex:0];
     
     [self.stdCodeBtn setTitle:dict[@"dial_code"] forState:UIControlStateNormal];

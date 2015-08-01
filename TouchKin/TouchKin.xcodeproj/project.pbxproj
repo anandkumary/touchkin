@@ -38,6 +38,9 @@
 		445175811B55DDCE00EDEF97 /* TKLoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4451757F1B55DDCE00EDEF97 /* TKLoginVC.m */; };
 		445175861B55E74100EDEF97 /* MLClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 445175851B55E74100EDEF97 /* MLClient.m */; };
 		445175891B55E7D900EDEF97 /* MLNetworkModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 445175881B55E7D900EDEF97 /* MLNetworkModel.m */; };
+		445315471B6BCEE90003C18B /* SendTouchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 445315461B6BCEE90003C18B /* SendTouchViewController.m */; };
+		4453154A1B6BCF150003C18B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 445315491B6BCF150003C18B /* AVFoundation.framework */; };
+		4453154C1B6BCF1D0003C18B /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4453154B1B6BCF1D0003C18B /* ImageIO.framework */; };
 		445B02581B5E7E7A004696B3 /* TKDataEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 445B02571B5E7E7A004696B3 /* TKDataEngine.m */; };
 		445B025C1B5E7F0F004696B3 /* Country.m in Sources */ = {isa = PBXBuildFile; fileRef = 445B025B1B5E7F0F004696B3 /* Country.m */; };
 		445B025E1B5E7F7F004696B3 /* countries.json in Resources */ = {isa = PBXBuildFile; fileRef = 445B025D1B5E7F7F004696B3 /* countries.json */; };
@@ -159,6 +162,10 @@
 		445175851B55E74100EDEF97 /* MLClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLClient.m; sourceTree = "<group>"; };
 		445175871B55E7D900EDEF97 /* MLNetworkModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLNetworkModel.h; sourceTree = "<group>"; };
 		445175881B55E7D900EDEF97 /* MLNetworkModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLNetworkModel.m; sourceTree = "<group>"; };
+		445315461B6BCEE90003C18B /* SendTouchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendTouchViewController.m; sourceTree = "<group>"; };
+		445315481B6BCEF40003C18B /* SendTouchViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SendTouchViewController.h; sourceTree = "<group>"; };
+		445315491B6BCF150003C18B /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		4453154B1B6BCF1D0003C18B /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		445B02561B5E7E7A004696B3 /* TKDataEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKDataEngine.h; sourceTree = "<group>"; };
 		445B02571B5E7E7A004696B3 /* TKDataEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKDataEngine.m; sourceTree = "<group>"; };
 		445B025A1B5E7F0F004696B3 /* Country.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Country.h; sourceTree = "<group>"; };
@@ -259,6 +266,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4453154C1B6BCF1D0003C18B /* ImageIO.framework in Frameworks */,
+				4453154A1B6BCF150003C18B /* AVFoundation.framework in Frameworks */,
 				4414D8951B6919E700363447 /* AddressBook.framework in Frameworks */,
 				44A925191B64C903002D2A11 /* CoreLocation.framework in Frameworks */,
 				44A925171B64C71F002D2A11 /* MapKit.framework in Frameworks */,
@@ -381,6 +390,8 @@
 		4451754B1B55DD2D00EDEF97 = {
 			isa = PBXGroup;
 			children = (
+				4453154B1B6BCF1D0003C18B /* ImageIO.framework */,
+				445315491B6BCF150003C18B /* AVFoundation.framework */,
 				4414D8941B6919E700363447 /* AddressBook.framework */,
 				44A925181B64C903002D2A11 /* CoreLocation.framework */,
 				44A925161B64C71F002D2A11 /* MapKit.framework */,
@@ -468,6 +479,8 @@
 				443EA0061B594E2800A685CE /* TKMeViewController.m */,
 				443EA00B1B595BA600A685CE /* TKPageController.h */,
 				443EA00C1B595BA600A685CE /* TKPageController.m */,
+				445315481B6BCEF40003C18B /* SendTouchViewController.h */,
+				445315461B6BCEE90003C18B /* SendTouchViewController.m */,
 				4490136E1B5A4F9D007B312C /* TKMyFamilyVC.h */,
 				4490136F1B5A4F9D007B312C /* TKMyFamilyVC.m */,
 				445B02621B5E8198004696B3 /* TKCountryVC.h */,
@@ -721,6 +734,7 @@
 				448FE9DB1B6AF642004397FB /* TKContactCell.m in Sources */,
 				44EA499D1B59D7420027C368 /* Reachability.m in Sources */,
 				448FE9D81B6AF38E004397FB /* TKContactVC.m in Sources */,
+				445315471B6BCEE90003C18B /* SendTouchViewController.m in Sources */,
 				443EA00D1B595BA600A685CE /* TKPageController.m in Sources */,
 				44A58A321B628E6F001742D8 /* SDWebImageDecoder.m in Sources */,
 				445175811B55DDCE00EDEF97 /* TKLoginVC.m in Sources */,

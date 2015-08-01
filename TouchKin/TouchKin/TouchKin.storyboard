@@ -208,6 +208,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Me" image="avatar" id="0Pr-1a-x57"/>
                     <connections>
+                        <outlet property="callBtn" destination="udT-X9-ILB" id="wwC-dg-kqd"/>
                         <outlet property="containerView" destination="Ydb-aO-5kZ" id="fDc-bG-lh7"/>
                     </connections>
                 </viewController>
@@ -470,6 +471,25 @@
             </objects>
             <point key="canvasLocation" x="1286.5" y="-294.5"/>
         </scene>
+        <!--Send Touch View Controller-->
+        <scene sceneID="eVh-jM-vqh">
+            <objects>
+                <viewController storyboardIdentifier="SendTouchViewController" id="wNp-py-qKP" customClass="SendTouchViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="rEV-by-Dw2"/>
+                        <viewControllerLayoutGuide type="bottom" id="srj-n9-0Iq"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="2JX-OZ-TEr">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MzG-c9-SUn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1241.5" y="-1141.5"/>
+        </scene>
         <!--Kinbook-->
         <scene sceneID="Szb-jF-3G4">
             <objects>
@@ -616,7 +636,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zXq-PH-Qof" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1147.5" y="-1609.5"/>
+            <point key="canvasLocation" x="-1429.5" y="-1546.5"/>
         </scene>
         <!--Add NewVC-->
         <scene sceneID="vId-g8-eEn">

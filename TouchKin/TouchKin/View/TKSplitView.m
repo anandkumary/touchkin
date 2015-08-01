@@ -34,30 +34,22 @@
     CGContextRef context = UIGraphicsGetCurrentContext();
 
     
-    CGContextSetStrokeColorWithColor(context, [UIColor lightGrayColor].CGColor);
-    CGContextSetLineWidth(context, 10);
+    CGContextSetStrokeColorWithColor(context, [UIColor colorWithRed:(204.0/255.0) green:(203.0/255.0) blue:(203.0/255.0) alpha:1.0].CGColor);
+    CGContextSetLineWidth(context, 12);
     
     CGFloat j= 0.0;
     
     for ( int i = 0; i < 10; i++) {
         
-        CGContextAddArc(context, center.x,center.y, radius, j + startAngle, 0.15 + (j + startAngle), 0);
-        CGContextStrokePath(context);
+        //if(i <= 20)
+        {
         
-        j += 0.208;
+            CGContextAddArc(context, center.x,center.y, radius, j + startAngle, 0.21 + (j + startAngle), 0);
+            CGContextStrokePath(context);
+        }
+       
+        j += 0.2;
     }
-    
-    
-//    CGContextAddArc(context, center.x,center.y, radius, 0.3 + startAngle, (0.3 + startAngle) + 0.2, 0);
-//    CGContextStrokePath(context);
-//    
-//    CGContextAddArc(context, center.x,center.y, radius, 0.6 + startAngle, (0.6 + startAngle) + 0.2, 0);
-//    CGContextStrokePath(context);
-//    
-//    CGContextAddArc(context, center.x,center.y, radius, 0.9 + startAngle, (0.9 + startAngle) + 0.2, 0);
-//    CGContextStrokePath(context);
-
-
     
 }
 

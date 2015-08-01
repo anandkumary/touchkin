@@ -402,7 +402,9 @@
         
         if(error ==  nil) {
             
-            NSDictionary *dict = responseObject;
+            NSArray *array = responseObject;
+            
+            NSDictionary *dict = [array objectAtIndex:0];
             
             if([dict[@"status"] isEqualToString:@"closed"] ){
                 

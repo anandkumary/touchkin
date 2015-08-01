@@ -12,6 +12,7 @@
 #import <MapKit/MapKit.h>
 #import "MapViewController.h"
 #import "MLNetworkModel.h"
+#import "SendTouchViewController.h"
 
 @interface TKMeViewController ()<UIPageViewControllerDataSource,MKMapViewDelegate>
 @property (weak, nonatomic) IBOutlet UIView *containerView;
@@ -23,6 +24,7 @@
 @property (nonatomic, assign) NSInteger selctedIndex;
 
 @property (nonatomic, strong) MKMapView *mapView;
+@property (weak, nonatomic) IBOutlet UIButton *callBtn;
 
 @end
 
@@ -56,6 +58,8 @@
     [self addtapGestureForMap];
     
     // [self setDelegate:self];
+    
+    [self.callBtn addTarget:self action:@selector(callButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     
 }
 
@@ -230,6 +234,18 @@
         
         NSLog(@"res =%@",responseObject);
     }];
+}
+
+-(void) callButtonAction:(id)sender {
+    [self openImagePicker];
+}
+
+-(void) openImagePicker {
+    
+    SendTouchViewController *sendvc = [[SendTouchViewController alloc] init];
+    
+    [self presentViewController:sendvc animated:YES completion:nil];
+    
 }
 
 @end
