@@ -93,6 +93,7 @@
 		44EA499D1B59D7420027C368 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 44EA499C1B59D7420027C368 /* Reachability.m */; };
 		44EA49A41B59F0E50027C368 /* TKMyConnectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 44EA49A21B59F0E50027C368 /* TKMyConnectionCell.m */; };
 		44EA49A51B59F0E50027C368 /* TKMyConnectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44EA49A31B59F0E50027C368 /* TKMyConnectionCell.xib */; };
+		90D9821B1B6CB54100EFB084 /* TKMessagePreviewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 90D9821A1B6CB54100EFB084 /* TKMessagePreviewVC.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -268,6 +269,8 @@
 		44EA49A11B59F0E50027C368 /* TKMyConnectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKMyConnectionCell.h; sourceTree = "<group>"; };
 		44EA49A21B59F0E50027C368 /* TKMyConnectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKMyConnectionCell.m; sourceTree = "<group>"; };
 		44EA49A31B59F0E50027C368 /* TKMyConnectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TKMyConnectionCell.xib; sourceTree = "<group>"; };
+		90D982191B6CB54100EFB084 /* TKMessagePreviewVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKMessagePreviewVC.h; sourceTree = "<group>"; };
+		90D9821A1B6CB54100EFB084 /* TKMessagePreviewVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKMessagePreviewVC.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -508,6 +511,8 @@
 				4414D88B1B6913F100363447 /* TKAddNewVC.m */,
 				448FE9D61B6AF38E004397FB /* TKContactVC.h */,
 				448FE9D71B6AF38E004397FB /* TKContactVC.m */,
+				90D982191B6CB54100EFB084 /* TKMessagePreviewVC.h */,
+				90D9821A1B6CB54100EFB084 /* TKMessagePreviewVC.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -731,6 +736,7 @@
 				4441FAA81B5694EB00A7B7F9 /* TKNavigationView.m in Sources */,
 				445B025C1B5E7F0F004696B3 /* Country.m in Sources */,
 				445175891B55E7D900EDEF97 /* MLNetworkModel.m in Sources */,
+				90D9821B1B6CB54100EFB084 /* TKMessagePreviewVC.m in Sources */,
 				44C9DB101B588E8400714340 /* TKHeaderTitleView.m in Sources */,
 				44A58A311B628E6F001742D8 /* SDWebImageCompat.m in Sources */,
 				44A58A391B628E6F001742D8 /* UIImage+MultiFormat.m in Sources */,
@@ -822,6 +828,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -841,7 +848,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -865,6 +872,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -878,7 +886,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -889,12 +897,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: anand kumar (62WJL7AD7N)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = TouchKin/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6aad2591-7654-4c5c-931f-7e038cd0c273";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -902,12 +910,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: anand kumar (62WJL7AD7N)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = TouchKin/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6aad2591-7654-4c5c-931f-7e038cd0c273";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

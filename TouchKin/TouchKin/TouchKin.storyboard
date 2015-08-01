@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="sIz-HX-5ps">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="sIz-HX-5ps">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
@@ -621,6 +621,47 @@
                 <pinchGestureRecognizer id="R8B-ek-ajZ"/>
             </objects>
             <point key="canvasLocation" x="1241.5" y="-1141.5"/>
+        </scene>
+        <!--Message PreviewVC-->
+        <scene sceneID="vCY-EG-uif">
+            <objects>
+                <viewController storyboardIdentifier="TKMessagePreviewVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="6R5-fU-nt1" customClass="TKMessagePreviewVC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="sbU-5N-noM"/>
+                        <viewControllerLayoutGuide type="bottom" id="rhl-1z-aKr"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ySM-E3-uSs">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AVc-av-BgK">
+                                <rect key="frame" x="279" y="567" width="80" height="80"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="80" id="ReO-Ql-uQi"/>
+                                    <constraint firstAttribute="height" constant="80" id="lAR-bF-9bw"/>
+                                </constraints>
+                                <state key="normal" image="sendatouch">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="send_touch:" destination="6R5-fU-nt1" eventType="touchUpInside" id="rIM-R5-asi"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="AVc-av-BgK" firstAttribute="trailing" secondItem="ySM-E3-uSs" secondAttribute="trailingMargin" id="FLF-gS-kmW"/>
+                            <constraint firstAttribute="bottom" secondItem="AVc-av-BgK" secondAttribute="bottom" constant="20" symbolic="YES" id="H9W-88-V0s"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="VideoplayView" destination="ySM-E3-uSs" id="X2v-pu-noU"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YQK-Db-sEd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1766.5" y="-1193.5"/>
         </scene>
         <!--Kinbook-->
         <scene sceneID="Szb-jF-3G4">
@@ -1710,6 +1751,7 @@
         <image name="radio" width="20" height="20"/>
         <image name="radio_sel" width="20" height="20"/>
         <image name="sendTouch" width="77" height="77"/>
+        <image name="sendatouch" width="50" height="50"/>
         <image name="stop" width="37" height="37"/>
         <image name="swapCam" width="37" height="37"/>
     </resources>

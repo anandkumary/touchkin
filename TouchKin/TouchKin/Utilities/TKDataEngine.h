@@ -7,6 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "MyCircle.h"
+#import "OthersCircle.h"
 
 @interface TKDataEngine : NSObject {
     
