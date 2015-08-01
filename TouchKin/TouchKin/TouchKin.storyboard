@@ -471,10 +471,10 @@
             </objects>
             <point key="canvasLocation" x="1286.5" y="-294.5"/>
         </scene>
-        <!--Send Touch View Controller-->
+        <!--CameraVC-->
         <scene sceneID="eVh-jM-vqh">
             <objects>
-                <viewController storyboardIdentifier="SendTouchViewController" id="wNp-py-qKP" customClass="SendTouchViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TKCameraVC" id="wNp-py-qKP" customClass="TKCameraVC" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="rEV-by-Dw2"/>
                         <viewControllerLayoutGuide type="bottom" id="srj-n9-0Iq"/>
@@ -482,11 +482,79 @@
                     <view key="view" contentMode="scaleToFill" id="2JX-OZ-TEr">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qde-9v-XnA">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="R8B-ek-ajZ" appends="YES" id="QIl-7y-TUv"/>
+                                </connections>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2PQ-N1-rmI">
+                                <rect key="frame" x="162" y="597" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="fxB-IU-ErT"/>
+                                    <constraint firstAttribute="width" constant="50" id="s17-CU-7Sh"/>
+                                </constraints>
+                                <state key="normal" image="camera">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="selected" image="stop"/>
+                                <connections>
+                                    <action selector="startButtonAction:" destination="wNp-py-qKP" eventType="touchUpInside" id="Blh-0P-cXh"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rVT-VD-UnH">
+                                <rect key="frame" x="308" y="34" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="Ep3-Yo-aQB"/>
+                                    <constraint firstAttribute="height" constant="50" id="kgN-EO-kfw"/>
+                                </constraints>
+                                <state key="normal" image="swapCam">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="toggleButtonAction:" destination="wNp-py-qKP" eventType="touchUpInside" id="0EE-60-546"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xCH-Ea-hz5">
+                                <rect key="frame" x="25" y="34" width="60" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="Fgn-4B-XTo"/>
+                                    <constraint firstAttribute="height" constant="36" id="LRB-pP-aTh"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                <state key="normal" title="Cancel">
+                                    <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="cancelButtonAction:" destination="wNp-py-qKP" eventType="touchUpInside" id="cgh-9n-tZu"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="xCH-Ea-hz5" firstAttribute="leading" secondItem="2JX-OZ-TEr" secondAttribute="leading" constant="25" id="39k-5p-5vs"/>
+                            <constraint firstItem="Qde-9v-XnA" firstAttribute="top" secondItem="2JX-OZ-TEr" secondAttribute="top" id="5iS-kB-yr8"/>
+                            <constraint firstItem="Qde-9v-XnA" firstAttribute="leading" secondItem="2JX-OZ-TEr" secondAttribute="leading" id="Eia-rp-Wao"/>
+                            <constraint firstItem="srj-n9-0Iq" firstAttribute="top" secondItem="Qde-9v-XnA" secondAttribute="bottom" id="H0k-AK-Sr0"/>
+                            <constraint firstItem="xCH-Ea-hz5" firstAttribute="top" secondItem="rEV-by-Dw2" secondAttribute="bottom" constant="14" id="Nl6-ro-U3X"/>
+                            <constraint firstItem="srj-n9-0Iq" firstAttribute="top" secondItem="2PQ-N1-rmI" secondAttribute="bottom" constant="20" id="O5a-t2-56X"/>
+                            <constraint firstItem="rVT-VD-UnH" firstAttribute="top" secondItem="rEV-by-Dw2" secondAttribute="bottom" constant="14" id="OIK-mh-9Nj"/>
+                            <constraint firstAttribute="trailing" secondItem="Qde-9v-XnA" secondAttribute="trailing" id="QDb-xC-t3a"/>
+                            <constraint firstItem="2PQ-N1-rmI" firstAttribute="centerX" secondItem="Qde-9v-XnA" secondAttribute="centerX" constant="-0.5" id="VDo-HT-eme"/>
+                            <constraint firstAttribute="trailing" secondItem="rVT-VD-UnH" secondAttribute="trailing" constant="17" id="n8Y-88-VuL"/>
+                        </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="startbtn" destination="2PQ-N1-rmI" id="2Ve-qJ-Kky"/>
+                        <outlet property="togglebtn" destination="rVT-VD-UnH" id="O63-BG-Pi6"/>
+                        <outlet property="videoLayer" destination="Qde-9v-XnA" id="aXV-1L-d2v"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MzG-c9-SUn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <pinchGestureRecognizer id="R8B-ek-ajZ"/>
             </objects>
             <point key="canvasLocation" x="1241.5" y="-1141.5"/>
         </scene>
@@ -1566,6 +1634,7 @@
         <image name="accept" width="39" height="39"/>
         <image name="avatar" width="24" height="24"/>
         <image name="call" width="77" height="77"/>
+        <image name="camera" width="37" height="37"/>
         <image name="cancel" width="39" height="39"/>
         <image name="kinbook" width="24" height="24"/>
         <image name="message" width="32" height="23"/>
@@ -1573,5 +1642,7 @@
         <image name="play" width="77" height="77"/>
         <image name="prev" width="43" height="43"/>
         <image name="sendTouch" width="77" height="77"/>
+        <image name="stop" width="37" height="37"/>
+        <image name="swapCam" width="37" height="37"/>
     </resources>
 </document>

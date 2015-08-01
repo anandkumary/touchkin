@@ -12,7 +12,7 @@
 #import <MapKit/MapKit.h>
 #import "MapViewController.h"
 #import "MLNetworkModel.h"
-#import "SendTouchViewController.h"
+#import "TKCameraVC.h"
 
 @interface TKMeViewController ()<UIPageViewControllerDataSource,MKMapViewDelegate>
 @property (weak, nonatomic) IBOutlet UIView *containerView;
@@ -242,10 +242,9 @@
 
 -(void) openImagePicker {
     
-    SendTouchViewController *sendvc = [[SendTouchViewController alloc] init];
+    TKCameraVC *cam = [self.storyboard instantiateViewControllerWithIdentifier:@"TKCameraVC"];
     
-    [self presentViewController:sendvc animated:YES completion:nil];
-    
+    [self presentViewController:cam animated:YES completion:nil];
 }
 
 @end
