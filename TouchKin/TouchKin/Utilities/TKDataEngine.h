@@ -17,6 +17,7 @@
 @property (nonatomic, copy) NSString *sessionId;
 @property (nonatomic, copy) NSString *phoneNumber;
 @property (nonatomic, strong) NSMutableArray *familyList;
+@property (nonatomic, strong) MyConnection * userInfo;
 
 
 -(NSString *) getDeviceToken;
@@ -29,6 +30,7 @@
 
 -(void) getMyFamilyInfo;
 -(void) getNewConnectionRequest;
+-(void) getuserInfo;
 
 + (id)sharedManager;
 

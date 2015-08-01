@@ -11,10 +11,20 @@
 #import "TKSingleTextFieldCell.h"
 #import "TKDoubleTextfieldCell.h"
 #import "TKGenderCell.h"
+#import "TKDataEngine.h"
+#import "MyConnection.h"
+#import "YLImagePickerController.h"
+#import "TKNetworkManager.h"
 
-@interface TKProfileVC ()<UIScrollViewDelegate>
+@interface TKProfileVC ()<UIScrollViewDelegate,YLImagePickerDelegate> {
+    
+    MyConnection *userInfo;
+}
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 @property (weak, nonatomic) IBOutlet UIImageView *bgImage;
+@property (weak, nonatomic) IBOutlet UIView *avatarBg;
+@property (weak, nonatomic) IBOutlet UIImageView *avatar;
+@property (weak, nonatomic) IBOutlet UIImageView *overlayBg;
 
 @end
 
@@ -32,9 +42,20 @@
 //        
 //    }];
     
+    userInfo = [[TKDataEngine sharedManager] userInfo];
+    
     self.tableview.estimatedRowHeight = 72;
     
     self.tableview.contentInset = UIEdgeInsetsMake(100, 0, 100, 0);
+    
+    self.avatarBg.layer.cornerRadius = self.avatarBg.frame.size.width/2;
+    self.avatar.layer.cornerRadius = self.avatar.frame.size.width/2;
+    
+    self.avatar.backgroundColor = [UIColor redColor];
+    
+    self.avatar.clipsToBounds = YES;
+    
+    self.overlayBg.layer.cornerRadius = self.overlayBg.frame.size.width/2;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -63,11 +84,14 @@
         
         cell.avatar.image = [UIImage imageNamed:@"avatar_android"];
         cell.textField.placeholder = @"Enter your name";
+        cell.textField.text = userInfo.fname;
+
         
         if(indexPath.row == 0){
             cell.avatar.image = [UIImage imageNamed:@"call_profile"];
             cell.textField.placeholder = @"Enter your mobile";
- 
+            
+            cell.textField.text = userInfo.mobile;
         }
         
         return cell;
@@ -75,11 +99,68 @@
     else if (indexPath.row == 2){
         
         TKGenderCell *cell = [tableView dequeueReusableCellWithIdentifier:@"genderCell" forIndexPath:indexPath];
+        
+        cell.heBtn.selected = NO;
+        cell.sheBtn.selected = NO;
+        
+        if([userInfo.gender isEqualToString:@"male"]){
+            cell.heBtn.selected = YES;
+            cell.sheBtn.selected = NO;
+        }
+        else if ([userInfo.gender isEqualToString:@"female"] ) {
+         
+            cell.heBtn.selected = NO;
+            cell.sheBtn.selected = YES;
+        }
+        
         return cell;
     }
     else {
+        
         TKDoubleTextfieldCell *cell = [tableView dequeueReusableCellWithIdentifier:@"doubleTextFieldCell" forIndexPath:indexPath];
         return cell;
     }
 }
+
+- (IBAction)editAvatarButtonAction:(id)sender {
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        YLImagePickerController *imagePicker = [[YLImagePickerController alloc] init];
+        imagePicker.delegate = self;
+        
+        imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+        
+        UINavigationController *nav =  [[UINavigationController alloc] initWithRootViewController:imagePicker];
+        
+        [nav setNavigationBarHidden:YES];
+        
+        [self presentViewController:nav animated:YES completion:nil];
+        
+    });
+    
+}
+
+- (void)YLImagePickerControllerDidCancel:(YLImagePickerController *)picker {
+    
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    
+}
+
+- (void)YLImagePickerController:(YLImagePickerController *)picker didFinishPickingImage:(UIImage *)image  {
+    
+    self.avatar.image = image;
+    
+    [self uploadImage];
+    
+    [picker dismissViewControllerAnimated:YES completion:nil];
+
+}
+
+-(void)uploadImage {
+    
+ NSDictionary *dict = @{@"avatar": UIImagePNGRepresentation(self.avatar.image)};
+    
+    [TKNetworkManager uploadImage:dict];
+}
+
 @end

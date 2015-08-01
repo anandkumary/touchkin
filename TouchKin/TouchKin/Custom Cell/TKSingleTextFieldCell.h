@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol TKSingleTextFieldCellDelegate <NSObject>
+
+
+
+@end
+
 @interface TKSingleTextFieldCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *avatar;
 @property (weak, nonatomic) IBOutlet UITextField *textField;
