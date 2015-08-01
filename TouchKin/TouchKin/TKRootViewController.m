@@ -90,6 +90,7 @@ static NSString * const KINTROSCREEN = @"TKIntroVC";
         
         [[TKDataEngine sharedManager] getMyFamilyInfo];
         [[TKDataEngine sharedManager] getNewConnectionRequest];
+        [[TKDataEngine sharedManager] getuserInfo];
 
     }
 }

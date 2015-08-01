@@ -209,6 +209,20 @@ static NSString * const KGENDER = @"gender";
 
         }
     }];
+}
+
+-(void)getuserInfo {
     
+    // /user/profile
+    MLNetworkModel *model = [[MLNetworkModel alloc] init];
+    
+    [model getPath:@"user/profile" withParameter:nil withHandler:^(MLClient *sender, id responseObject, NSError *error) {
+        
+        NSLog(@"userInfo = %@",responseObject);
+        
+        NSDictionary *dict = responseObject;
+        
+        self.userInfo = [[MyConnection alloc] initWithDictionary:dict];
+    }];
 }
 @end

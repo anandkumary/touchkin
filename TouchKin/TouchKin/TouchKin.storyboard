@@ -277,10 +277,51 @@
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E5d-9M-Ucv">
                                                     <rect key="frame" x="157" y="-39" width="80" height="80"/>
-                                                    <color key="backgroundColor" red="0.21629419050000001" green="0.59576977440000001" blue="0.93340743000000004" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <subviews>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1ZP-HV-YzL">
+                                                            <rect key="frame" x="5" y="5" width="70" height="70"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="70" id="fn6-sZ-upT"/>
+                                                                <constraint firstAttribute="height" constant="70" id="jUK-PS-txy"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RZT-Za-xdg">
+                                                            <rect key="frame" x="5" y="5" width="70" height="70"/>
+                                                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.41000000000000003" colorSpace="calibratedRGB"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="70" id="UM4-em-xWI"/>
+                                                                <constraint firstAttribute="width" constant="70" id="fc1-xi-pcf"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fIX-bx-5Xx">
+                                                            <rect key="frame" x="24" y="23" width="60" height="60"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="60" id="hwQ-n7-m1o"/>
+                                                                <constraint firstAttribute="width" constant="60" id="qGh-i4-Wv1"/>
+                                                            </constraints>
+                                                            <inset key="imageEdgeInsets" minX="7" minY="0.0" maxX="0.0" maxY="-9"/>
+                                                            <state key="normal" image="edit">
+                                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                            </state>
+                                                            <connections>
+                                                                <action selector="editAvatarButtonAction:" destination="oew-FD-T0J" eventType="touchUpInside" id="AWb-1M-yHe"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
+                                                    <color key="backgroundColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
+                                                        <constraint firstAttribute="trailing" secondItem="RZT-Za-xdg" secondAttribute="trailing" constant="5" id="14f-2w-8mJ"/>
+                                                        <constraint firstAttribute="bottom" secondItem="1ZP-HV-YzL" secondAttribute="bottom" constant="5" id="4XK-Nh-z0u"/>
+                                                        <constraint firstItem="1ZP-HV-YzL" firstAttribute="leading" secondItem="E5d-9M-Ucv" secondAttribute="leading" constant="5" id="648-xp-hE4"/>
                                                         <constraint firstAttribute="height" constant="80" id="A1V-hF-ESq"/>
+                                                        <constraint firstAttribute="trailing" secondItem="fIX-bx-5Xx" secondAttribute="trailing" constant="-4" id="M13-WD-0v9"/>
+                                                        <constraint firstItem="RZT-Za-xdg" firstAttribute="leading" secondItem="E5d-9M-Ucv" secondAttribute="leading" constant="5" id="Mg2-Do-RTL"/>
+                                                        <constraint firstItem="RZT-Za-xdg" firstAttribute="top" secondItem="E5d-9M-Ucv" secondAttribute="top" constant="5" id="fNu-QQ-PlN"/>
+                                                        <constraint firstItem="1ZP-HV-YzL" firstAttribute="top" secondItem="E5d-9M-Ucv" secondAttribute="top" constant="5" id="j9K-xZ-CNa"/>
+                                                        <constraint firstAttribute="trailing" secondItem="1ZP-HV-YzL" secondAttribute="trailing" constant="5" id="mTs-dr-lhu"/>
+                                                        <constraint firstAttribute="bottom" secondItem="RZT-Za-xdg" secondAttribute="bottom" constant="5" id="pau-HG-NDy"/>
                                                         <constraint firstAttribute="width" constant="80" id="w1e-rP-eza"/>
+                                                        <constraint firstAttribute="bottom" secondItem="fIX-bx-5Xx" secondAttribute="bottom" constant="-3" id="wjf-Mx-SI1"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
@@ -527,7 +568,10 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="avatar" destination="1ZP-HV-YzL" id="LE9-rP-mS4"/>
+                        <outlet property="avatarBg" destination="E5d-9M-Ucv" id="zZT-Lh-36h"/>
                         <outlet property="bgImage" destination="nKp-hO-9FH" id="lKf-FV-Um1"/>
+                        <outlet property="overlayBg" destination="RZT-Za-xdg" id="21X-Rz-Vdq"/>
                         <outlet property="tableview" destination="zeE-Mk-isW" id="h9c-5U-ZPE"/>
                     </connections>
                 </viewController>
@@ -1701,6 +1745,7 @@
         <image name="call" width="77" height="77"/>
         <image name="camera" width="37" height="37"/>
         <image name="cancel" width="39" height="39"/>
+        <image name="edit" width="22" height="22"/>
         <image name="groupAvatar" width="24" height="22"/>
         <image name="kinbook" width="24" height="24"/>
         <image name="message" width="32" height="23"/>
