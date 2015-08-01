@@ -31,6 +31,9 @@
 		4441FAA81B5694EB00A7B7F9 /* TKNavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4441FAA71B5694EB00A7B7F9 /* TKNavigationView.m */; };
 		4441FAAB1B56AB3300A7B7F9 /* TKRegisterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4441FAAA1B56AB3300A7B7F9 /* TKRegisterVC.m */; };
 		444585311B6C8EE30023868A /* TKCameraVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 444585301B6C8EE30023868A /* TKCameraVC.m */; };
+		444585341B6C91AF0023868A /* TKSingleTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 444585331B6C91AF0023868A /* TKSingleTextFieldCell.m */; };
+		444585371B6C91C90023868A /* TKGenderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 444585361B6C91C90023868A /* TKGenderCell.m */; };
+		4445853A1B6C91E60023868A /* TKDoubleTextfieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 444585391B6C91E60023868A /* TKDoubleTextfieldCell.m */; };
 		4451755A1B55DD2D00EDEF97 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 445175591B55DD2D00EDEF97 /* main.m */; };
 		4451755D1B55DD2D00EDEF97 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4451755C1B55DD2D00EDEF97 /* AppDelegate.m */; };
 		445175651B55DD2D00EDEF97 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 445175641B55DD2D00EDEF97 /* Images.xcassets */; };
@@ -148,6 +151,12 @@
 		4441FAAA1B56AB3300A7B7F9 /* TKRegisterVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKRegisterVC.m; sourceTree = "<group>"; };
 		4445852F1B6C8EE30023868A /* TKCameraVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKCameraVC.h; sourceTree = "<group>"; };
 		444585301B6C8EE30023868A /* TKCameraVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKCameraVC.m; sourceTree = "<group>"; };
+		444585321B6C91AF0023868A /* TKSingleTextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKSingleTextFieldCell.h; sourceTree = "<group>"; };
+		444585331B6C91AF0023868A /* TKSingleTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKSingleTextFieldCell.m; sourceTree = "<group>"; };
+		444585351B6C91C90023868A /* TKGenderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKGenderCell.h; sourceTree = "<group>"; };
+		444585361B6C91C90023868A /* TKGenderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKGenderCell.m; sourceTree = "<group>"; };
+		444585381B6C91E60023868A /* TKDoubleTextfieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKDoubleTextfieldCell.h; sourceTree = "<group>"; };
+		444585391B6C91E60023868A /* TKDoubleTextfieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKDoubleTextfieldCell.m; sourceTree = "<group>"; };
 		445175541B55DD2D00EDEF97 /* TouchKin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TouchKin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		445175581B55DD2D00EDEF97 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		445175591B55DD2D00EDEF97 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -315,6 +324,12 @@
 				44724D711B6512B100B56851 /* TKKinBookCollectionCell.m */,
 				448FE9D91B6AF642004397FB /* TKContactCell.h */,
 				448FE9DA1B6AF642004397FB /* TKContactCell.m */,
+				444585321B6C91AF0023868A /* TKSingleTextFieldCell.h */,
+				444585331B6C91AF0023868A /* TKSingleTextFieldCell.m */,
+				444585381B6C91E60023868A /* TKDoubleTextfieldCell.h */,
+				444585391B6C91E60023868A /* TKDoubleTextfieldCell.m */,
+				444585351B6C91C90023868A /* TKGenderCell.h */,
+				444585361B6C91C90023868A /* TKGenderCell.m */,
 			);
 			path = "Custom Cell";
 			sourceTree = "<group>";
@@ -688,12 +703,14 @@
 			files = (
 				445B02581B5E7E7A004696B3 /* TKDataEngine.m in Sources */,
 				447F83D51B67D212006B2839 /* TKProfileVC.m in Sources */,
+				4445853A1B6C91E60023868A /* TKDoubleTextfieldCell.m in Sources */,
 				448E3B791B6675C500666602 /* PSLocationManager.m in Sources */,
 				4414D8931B6919D600363447 /* YMLPhoneContactPerson.m in Sources */,
 				4451755D1B55DD2D00EDEF97 /* AppDelegate.m in Sources */,
 				4403D4E01B61BF5C006000B8 /* YLImageEditorVC.m in Sources */,
 				44A58A021B627C98001742D8 /* MyConnection.m in Sources */,
 				44C9DB131B5892A200714340 /* TKKinBookVC.m in Sources */,
+				444585341B6C91AF0023868A /* TKSingleTextFieldCell.m in Sources */,
 				44A58A3D1B628E6F001742D8 /* UIWebView+WebCache.m in Sources */,
 				44A58A381B628E6F001742D8 /* UIImage+GIF.m in Sources */,
 				4414D8921B6919D600363447 /* PhoneContact.m in Sources */,
@@ -738,6 +755,7 @@
 				443EA00D1B595BA600A685CE /* TKPageController.m in Sources */,
 				44A58A321B628E6F001742D8 /* SDWebImageDecoder.m in Sources */,
 				445175811B55DDCE00EDEF97 /* TKLoginVC.m in Sources */,
+				444585371B6C91C90023868A /* TKGenderCell.m in Sources */,
 				44A58A3B1B628E6F001742D8 /* UIImageView+HighlightedWebCache.m in Sources */,
 				449013701B5A4F9D007B312C /* TKMyFamilyVC.m in Sources */,
 				442A943F1B5FDACE00C07A4F /* TKPassCodeView.m in Sources */,

@@ -8,6 +8,9 @@
 
 #import "TKProfileVC.h"
 #import "MLNetworkModel.h"
+#import "TKSingleTextFieldCell.h"
+#import "TKDoubleTextfieldCell.h"
+#import "TKGenderCell.h"
 
 @interface TKProfileVC ()<UIScrollViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
@@ -29,6 +32,7 @@
 //        
 //    }];
     
+    self.tableview.estimatedRowHeight = 72;
     
     self.tableview.contentInset = UIEdgeInsetsMake(100, 0, 100, 0);
 }
@@ -41,16 +45,41 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     
-    // CGRect frame =
 }
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+
+#pragma mark - UITableViewDataSource
+
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
+    return 4;
 }
-*/
 
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if(indexPath.row <= 1){
+        TKSingleTextFieldCell *cell = [tableView dequeueReusableCellWithIdentifier:@"singleTextFieldCell" forIndexPath:indexPath];
+        
+        cell.avatar.image = [UIImage imageNamed:@"avatar_android"];
+        cell.textField.placeholder = @"Enter your name";
+        
+        if(indexPath.row == 0){
+            cell.avatar.image = [UIImage imageNamed:@"call_profile"];
+            cell.textField.placeholder = @"Enter your mobile";
+ 
+        }
+        
+        return cell;
+    }
+    else if (indexPath.row == 2){
+        
+        TKGenderCell *cell = [tableView dequeueReusableCellWithIdentifier:@"genderCell" forIndexPath:indexPath];
+        return cell;
+    }
+    else {
+        TKDoubleTextfieldCell *cell = [tableView dequeueReusableCellWithIdentifier:@"doubleTextFieldCell" forIndexPath:indexPath];
+        return cell;
+    }
+}
 @end
