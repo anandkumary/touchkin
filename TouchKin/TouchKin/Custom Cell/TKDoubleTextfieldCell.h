@@ -7,7 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+@class TKDoubleTextfieldCell;
+
+@protocol TKDoubleTextfieldCellDelegate <NSObject>
+
+-(void) doubleTextFieldCelldidBeginEditing:(TKDoubleTextfieldCell *)cell;
+-(void) doubleTextFieldCell:(TKDoubleTextfieldCell *)cell didEndEditText:(NSString *)string;
+
+@end
 
 @interface TKDoubleTextfieldCell : UITableViewCell
+
+@property (nonatomic, assign) id<TKDoubleTextfieldCellDelegate> delegate;
+
+-(void) settextValue:(NSString *)string;
 
 @end

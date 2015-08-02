@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="sIz-HX-5ps">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="sIz-HX-5ps">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
@@ -265,7 +265,7 @@
                                     <constraint firstAttribute="height" constant="519" id="T1r-vC-qeV"/>
                                 </constraints>
                             </imageView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="72" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="zeE-Mk-isW">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="72" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="zeE-Mk-isW">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="8b1-te-zI8">
@@ -338,6 +338,29 @@
                                         <constraint firstAttribute="trailing" secondItem="Aeb-FC-0hF" secondAttribute="trailing" id="mSa-yW-0B6"/>
                                         <constraint firstAttribute="bottom" secondItem="Aeb-FC-0hF" secondAttribute="bottom" id="odk-XJ-hrj"/>
                                         <constraint firstItem="Aeb-FC-0hF" firstAttribute="leading" secondItem="8b1-te-zI8" secondAttribute="leading" id="y7b-Cp-2nX"/>
+                                    </constraints>
+                                </view>
+                                <view key="tableFooterView" contentMode="scaleToFill" id="aWZ-oH-a1d">
+                                    <rect key="frame" x="0.0" y="390" width="375" height="63"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vVx-Ia-sVo">
+                                            <rect key="frame" x="37" y="8" width="300" height="47"/>
+                                            <color key="backgroundColor" red="0.96455439809999999" green="0.2122328543" blue="0.1644467654" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="47" id="JUi-mu-1vM"/>
+                                                <constraint firstAttribute="width" constant="300" id="RaJ-LI-Hpn"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
+                                            <state key="normal" title="Save">
+                                                <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            </state>
+                                        </button>
+                                    </subviews>
+                                    <color key="backgroundColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="centerY" secondItem="vVx-Ia-sVo" secondAttribute="centerY" id="ZvY-7K-Fal"/>
+                                        <constraint firstAttribute="centerX" secondItem="vVx-Ia-sVo" secondAttribute="centerX" constant="0.5" id="yrw-G0-beE"/>
                                     </constraints>
                                 </view>
                                 <prototypes>
@@ -498,7 +521,7 @@
                                                         <constraint firstAttribute="width" constant="112" id="hdE-w6-i23"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                 </textField>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NMt-W6-5kf">
                                                     <rect key="frame" x="14" y="71" width="362" height="1"/>
@@ -527,6 +550,9 @@
                                                         <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="yobButtonAction:" destination="ozU-zo-4C8" eventType="touchUpInside" id="f74-9U-Iz1"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -547,6 +573,10 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <connections>
+                                            <outlet property="ageTextField" destination="uF6-05-d6A" id="7Vn-Jf-fKB"/>
+                                            <outlet property="yobBtn" destination="8pi-dH-MkF" id="VHn-B1-e8J"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -562,6 +592,7 @@
                             <constraint firstItem="JII-co-5Kx" firstAttribute="top" secondItem="zeE-Mk-isW" secondAttribute="bottom" id="dKq-cO-lvA"/>
                             <constraint firstAttribute="trailing" secondItem="nKp-hO-9FH" secondAttribute="trailing" id="mlH-zA-tCt"/>
                             <constraint firstItem="zeE-Mk-isW" firstAttribute="top" secondItem="6uQ-6f-J3Z" secondAttribute="top" id="pdT-1w-oEP"/>
+                            <constraint firstItem="JII-co-5Kx" firstAttribute="top" secondItem="nKp-hO-9FH" secondAttribute="bottom" id="sc3-cj-0er"/>
                             <constraint firstAttribute="trailing" secondItem="zeE-Mk-isW" secondAttribute="trailing" id="ySG-Z4-GzO"/>
                             <constraint firstItem="nKp-hO-9FH" firstAttribute="top" secondItem="6uQ-6f-J3Z" secondAttribute="top" constant="148" id="zwF-Qr-XFW"/>
                         </constraints>
@@ -571,7 +602,9 @@
                         <outlet property="avatar" destination="1ZP-HV-YzL" id="LE9-rP-mS4"/>
                         <outlet property="avatarBg" destination="E5d-9M-Ucv" id="zZT-Lh-36h"/>
                         <outlet property="bgImage" destination="nKp-hO-9FH" id="lKf-FV-Um1"/>
+                        <outlet property="bgTopConstraint" destination="zwF-Qr-XFW" id="FvT-te-0xD"/>
                         <outlet property="overlayBg" destination="RZT-Za-xdg" id="21X-Rz-Vdq"/>
+                        <outlet property="savebtn" destination="vVx-Ia-sVo" id="tqn-P3-pIn"/>
                         <outlet property="tableview" destination="zeE-Mk-isW" id="h9c-5U-ZPE"/>
                     </connections>
                 </viewController>

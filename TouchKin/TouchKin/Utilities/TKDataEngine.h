@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "MyCircle.h"
 #import "OthersCircle.h"
+#import "MyConnection.h"
 
 @interface TKDataEngine : NSObject {
     

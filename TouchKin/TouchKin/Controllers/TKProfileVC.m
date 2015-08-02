@@ -16,7 +16,7 @@
 #import "YLImagePickerController.h"
 #import "TKNetworkManager.h"
 
-@interface TKProfileVC ()<UIScrollViewDelegate,YLImagePickerDelegate> {
+@interface TKProfileVC ()<UIScrollViewDelegate,YLImagePickerDelegate,TKSingleTextFieldCellDelegate,TKGenderCellDelegate,TKDoubleTextfieldCellDelegate> {
     
     MyConnection *userInfo;
 }
@@ -25,6 +25,8 @@
 @property (weak, nonatomic) IBOutlet UIView *avatarBg;
 @property (weak, nonatomic) IBOutlet UIImageView *avatar;
 @property (weak, nonatomic) IBOutlet UIImageView *overlayBg;
+@property (weak, nonatomic) IBOutlet UIButton *savebtn;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bgTopConstraint;
 
 @end
 
@@ -46,7 +48,7 @@
     
     self.tableview.estimatedRowHeight = 72;
     
-    self.tableview.contentInset = UIEdgeInsetsMake(100, 0, 100, 0);
+    self.tableview.contentInset = UIEdgeInsetsMake(100, 0, 180, 0);
     
     self.avatarBg.layer.cornerRadius = self.avatarBg.frame.size.width/2;
     self.avatar.layer.cornerRadius = self.avatar.frame.size.width/2;
@@ -56,6 +58,10 @@
     self.avatar.clipsToBounds = YES;
     
     self.overlayBg.layer.cornerRadius = self.overlayBg.frame.size.width/2;
+    
+    self.savebtn.layer.cornerRadius = 6.0f;
+    
+    [self.savebtn addTarget:self action:@selector(savebuttonAction:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -66,6 +72,11 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     
+    // NSLog(@"scroll = %f",scrollView.contentOffset.y);
+    
+    self.bgTopConstraint.constant = (-1 * (scrollView.contentOffset.y)) + 48;
+    
+    [self.view layoutIfNeeded];
 }
 
 
@@ -81,17 +92,20 @@
     
     if(indexPath.row <= 1){
         TKSingleTextFieldCell *cell = [tableView dequeueReusableCellWithIdentifier:@"singleTextFieldCell" forIndexPath:indexPath];
-        
+        cell.delegate = self;
         cell.avatar.image = [UIImage imageNamed:@"avatar_android"];
         cell.textField.placeholder = @"Enter your name";
-        cell.textField.text = userInfo.fname;
+        cell.textField.keyboardType = UIKeyboardTypeDefault;
+        [cell setTextValue:userInfo.fname];
+        cell.textField.enabled = YES;
 
-        
+
         if(indexPath.row == 0){
             cell.avatar.image = [UIImage imageNamed:@"call_profile"];
             cell.textField.placeholder = @"Enter your mobile";
-            
-            cell.textField.text = userInfo.mobile;
+            cell.textField.keyboardType = UIKeyboardTypePhonePad;
+            [cell setTextValue:userInfo.mobile];
+            cell.textField.enabled = NO;
         }
         
         return cell;
@@ -99,6 +113,8 @@
     else if (indexPath.row == 2){
         
         TKGenderCell *cell = [tableView dequeueReusableCellWithIdentifier:@"genderCell" forIndexPath:indexPath];
+        
+        cell.delegate = self;
         
         cell.heBtn.selected = NO;
         cell.sheBtn.selected = NO;
@@ -118,6 +134,8 @@
     else {
         
         TKDoubleTextfieldCell *cell = [tableView dequeueReusableCellWithIdentifier:@"doubleTextFieldCell" forIndexPath:indexPath];
+        cell.delegate = self;
+        [cell settextValue:@"23"];
         return cell;
     }
 }
@@ -161,6 +179,44 @@
  NSDictionary *dict = @{@"avatar": UIImagePNGRepresentation(self.avatar.image)};
     
     [TKNetworkManager uploadImage:dict];
+}
+
+-(void)savebuttonAction:(id)sender {
+    
+}
+
+-(void) singleTextFieldCell:(TKSingleTextFieldCell *)cell didEndEditingWithString:(NSString *)string {
+    
+    NSIndexPath *indexpath = [self.tableview indexPathForCell:cell];
+    
+    if(indexpath.row == 0){
+        userInfo.mobile = string;
+    }else {
+        userInfo.fname = string;
+    }
+
+}
+
+-(void) singleTextFieldCelldidBeginEditing:(TKSingleTextFieldCell *)cell {
+    
+    NSIndexPath *indexpath = [self.tableview indexPathForCell:cell];
+    
+    [self.tableview scrollToRowAtIndexPath:indexpath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+}
+
+-(void) didSelectedGenderType:(BOOL) genderType {
+    
+    userInfo.gender = (genderType == YES) ? @"male" : @"female";
+}
+
+-(void) doubleTextFieldCelldidBeginEditing:(TKDoubleTextfieldCell *)cell {
+    
+    NSIndexPath *indexpath = [self.tableview indexPathForCell:cell];
+    [self.tableview scrollToRowAtIndexPath:indexpath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+}
+
+-(void) doubleTextFieldCell:(TKDoubleTextfieldCell *)cell didEndEditText:(NSString *)string {
+    
 }
 
 @end

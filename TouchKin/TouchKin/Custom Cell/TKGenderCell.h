@@ -8,7 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol TKGenderCellDelegate <NSObject>
+
+-(void) didSelectedGenderType:(BOOL) genderType;
+
+@end
+
 @interface TKGenderCell : UITableViewCell
+
+@property (nonatomic, assign) id<TKGenderCellDelegate> delegate;
 @property (weak, nonatomic) IBOutlet UIButton *sheBtn;
 @property (weak, nonatomic) IBOutlet UIButton *heBtn;
 
