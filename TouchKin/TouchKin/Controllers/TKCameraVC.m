@@ -436,7 +436,6 @@ didFinishRecordingToOutputFileAtURL:(NSURL *)outputFileURL
         
         [MovieFileOutput stopRecording];
     }
-
     
 }
 

@@ -15,10 +15,12 @@
 #import "MyConnection.h"
 #import "YLImagePickerController.h"
 #import "TKNetworkManager.h"
+#import "TKUtility.h"
 
 @interface TKProfileVC ()<UIScrollViewDelegate,YLImagePickerDelegate,TKSingleTextFieldCellDelegate,TKGenderCellDelegate,TKDoubleTextfieldCellDelegate> {
     
     MyConnection *userInfo;
+    MLNetworkModel *model;
 }
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 @property (weak, nonatomic) IBOutlet UIImageView *bgImage;
@@ -27,6 +29,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *overlayBg;
 @property (weak, nonatomic) IBOutlet UIButton *savebtn;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bgTopConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableBottomConstraint;
 
 @end
 
@@ -36,19 +39,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    //@{@"first_name": UserName.text,@"gender":gender,@"yob": yearTextfield};
-    
-//    MLNetworkModel *model = [[MLNetworkModel alloc] init];
-//    
-//    [model postPath:@"user/complete-profile" withParameter:nil withHandler:^(MLClient *sender, id responseObject, NSError *error) {
-//        
-//    }];
-    
     userInfo = [[TKDataEngine sharedManager] userInfo];
     
     self.tableview.estimatedRowHeight = 72;
     
-    self.tableview.contentInset = UIEdgeInsetsMake(100, 0, 180, 0);
+    self.tableview.contentInset = UIEdgeInsetsMake(100, 0, 0, 0);
     
     self.avatarBg.layer.cornerRadius = self.avatarBg.frame.size.width/2;
     self.avatar.layer.cornerRadius = self.avatar.frame.size.width/2;
@@ -62,6 +57,20 @@
     self.savebtn.layer.cornerRadius = 6.0f;
     
     [self.savebtn addTarget:self action:@selector(savebuttonAction:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+-(void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -135,7 +144,7 @@
         
         TKDoubleTextfieldCell *cell = [tableView dequeueReusableCellWithIdentifier:@"doubleTextFieldCell" forIndexPath:indexPath];
         cell.delegate = self;
-        [cell settextValue:@"23"];
+        [cell settextValue:userInfo.age];
         return cell;
     }
 }
@@ -183,6 +192,15 @@
 
 -(void)savebuttonAction:(id)sender {
     
+    NSDictionary *dict = @{@"first_name": userInfo.fname,@"gender":userInfo.gender ,@"yob": @(userInfo.yob)};
+    
+    model = [[MLNetworkModel alloc] init];
+    [model postPath:@"user/complete-profile" withParameter:dict withHandler:^(MLClient *sender, id responseObject, NSError *error) {
+        
+        NSLog(@"res = %@",responseObject);
+    }];
+
+    
 }
 
 -(void) singleTextFieldCell:(TKSingleTextFieldCell *)cell didEndEditingWithString:(NSString *)string {
@@ -201,10 +219,13 @@
     
     NSIndexPath *indexpath = [self.tableview indexPathForCell:cell];
     
-    [self.tableview scrollToRowAtIndexPath:indexpath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    [self scrollTableviewTopToIndex:indexpath];
 }
 
--(void) didSelectedGenderType:(BOOL) genderType {
+-(void) genderCell:(TKGenderCell *)cell didSelectedGenderType:(BOOL)genderType {
+    
+    NSIndexPath *indexpath = [self.tableview indexPathForCell:cell];
+    [self scrollTableviewTopToIndex:indexpath];
     
     userInfo.gender = (genderType == YES) ? @"male" : @"female";
 }
@@ -212,12 +233,46 @@
 -(void) doubleTextFieldCelldidBeginEditing:(TKDoubleTextfieldCell *)cell {
     
     NSIndexPath *indexpath = [self.tableview indexPathForCell:cell];
-    [self.tableview scrollToRowAtIndexPath:indexpath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    [self scrollTableviewTopToIndex:indexpath];
 }
 
 -(void) doubleTextFieldCell:(TKDoubleTextfieldCell *)cell didEndEditText:(NSString *)string {
     
     userInfo.age = string;
+    
+    NSInteger year = [TKUtility getCurrentYear];
+    
+    userInfo.yob = (int)year - userInfo.age.intValue;
+    
+    [cell setYobValue:[NSString stringWithFormat:@"%d",(int)year - userInfo.age.intValue]];
+}
+
+
+- (void)keyboardWillShow:(NSNotification *)aNotification
+{
+    
+    NSDictionary* keyboardInfo = [aNotification userInfo];
+
+    CGRect keyboardFrameEnd = [[keyboardInfo valueForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    
+    self.tableBottomConstraint.constant = keyboardFrameEnd.size.height;
+    [self.view layoutIfNeeded];
+
+   
+}
+
+- (void)keyboardWillHide:(NSNotification *)notification
+{
+    self.tableBottomConstraint.constant = 0;
+    [self.view layoutIfNeeded];
+}
+
+-(void) scrollTableviewTopToIndex:(NSIndexPath *)indexpath {
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        [self.tableview scrollToRowAtIndexPath:indexpath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    });
 }
 
 @end

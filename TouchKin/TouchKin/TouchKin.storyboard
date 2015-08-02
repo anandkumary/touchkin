@@ -364,7 +364,7 @@
                                     </constraints>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="singleTextFieldCell" rowHeight="72" id="sbw-tB-WS2" customClass="TKSingleTextFieldCell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="singleTextFieldCell" rowHeight="72" id="sbw-tB-WS2" customClass="TKSingleTextFieldCell">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sbw-tB-WS2" id="4Iz-Eu-UuH">
@@ -410,7 +410,7 @@
                                             <outlet property="textField" destination="0jo-qK-y4X" id="uei-qg-YWK"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="genderCell" rowHeight="72" id="3sG-A3-5pL" customClass="TKGenderCell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="genderCell" rowHeight="72" id="3sG-A3-5pL" customClass="TKGenderCell">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3sG-A3-5pL" id="1qS-57-wls">
@@ -501,7 +501,7 @@
                                             <outlet property="sheBtn" destination="QbD-k6-Y2b" id="On2-aN-T3q"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="doubleTextFieldCell" rowHeight="72" id="ozU-zo-4C8" customClass="TKDoubleTextfieldCell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="doubleTextFieldCell" rowHeight="72" id="ozU-zo-4C8" customClass="TKDoubleTextfieldCell">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ozU-zo-4C8" id="vxM-nq-6VO">
@@ -605,6 +605,7 @@
                         <outlet property="bgTopConstraint" destination="zwF-Qr-XFW" id="FvT-te-0xD"/>
                         <outlet property="overlayBg" destination="RZT-Za-xdg" id="21X-Rz-Vdq"/>
                         <outlet property="savebtn" destination="vVx-Ia-sVo" id="tqn-P3-pIn"/>
+                        <outlet property="tableBottomConstraint" destination="dKq-cO-lvA" id="Uhp-wW-wGG"/>
                         <outlet property="tableview" destination="zeE-Mk-isW" id="h9c-5U-ZPE"/>
                     </connections>
                 </viewController>

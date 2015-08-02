@@ -7,6 +7,7 @@
 //
 
 #import "TKDoubleTextfieldCell.h"
+#import "TKUtility.h"
 
 @interface TKDoubleTextfieldCell ()<UITextFieldDelegate>
 
@@ -33,6 +34,13 @@
     
     self.ageTextField.text = string;
     self.ageTextField.delegate = self;
+    
+    NSInteger year = [TKUtility getCurrentYear];
+    
+    NSString *yob = [NSString stringWithFormat:@"%d",year - string.intValue];
+    
+    [self.yobBtn setTitle:yob forState:UIControlStateNormal];
+
 }
 
 -(void) textFieldDidBeginEditing:(UITextField *)textField {
@@ -47,6 +55,10 @@
     if([self.delegate respondsToSelector:@selector(doubleTextFieldCell:didEndEditText:)]){
         [self.delegate doubleTextFieldCell:self didEndEditText:textField.text];
     }
+}
+
+-(void) setYobValue:(NSString *)yob {
+    [self.yobBtn setTitle:yob forState:UIControlStateNormal];
 }
 
 @end

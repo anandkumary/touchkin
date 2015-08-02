@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+@class TKGenderCell;
 
 @protocol TKGenderCellDelegate <NSObject>
 
--(void) didSelectedGenderType:(BOOL) genderType;
+-(void) genderCell:(TKGenderCell *)cell didSelectedGenderType:(BOOL) genderType ;
 
 @end
 

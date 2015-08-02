@@ -24,17 +24,18 @@
     self.heBtn.selected = YES;
     self.sheBtn.selected = NO;
     
-    if([self.delegate respondsToSelector:@selector(didSelectedGenderType:)]){
-        [self.delegate didSelectedGenderType:YES];
+    if([self.delegate respondsToSelector:@selector(genderCell:didSelectedGenderType:)]){
+        [self.delegate genderCell:self didSelectedGenderType:YES];
     }
+
 }
 - (IBAction)sheButtonAction:(id)sender {
     
     self.heBtn.selected = NO;
     self.sheBtn.selected = YES;
     
-    if([self.delegate respondsToSelector:@selector(didSelectedGenderType:)]){
-        [self.delegate didSelectedGenderType:NO];
+    if([self.delegate respondsToSelector:@selector(genderCell:didSelectedGenderType:)]){
+        [self.delegate genderCell:self didSelectedGenderType:NO];
     }
 }
 

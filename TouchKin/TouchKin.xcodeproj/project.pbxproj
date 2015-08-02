@@ -50,6 +50,7 @@
 		445B02641B5E8198004696B3 /* TKCountryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 445B02631B5E8198004696B3 /* TKCountryVC.m */; };
 		44675E901B6A92A9003B0F9F /* TKSplitView.m in Sources */ = {isa = PBXBuildFile; fileRef = 44675E8F1B6A92A9003B0F9F /* TKSplitView.m */; };
 		44675E921B6A92CE003B0F9F /* TKGradientCircularView.m in Sources */ = {isa = PBXBuildFile; fileRef = 44675E911B6A92CE003B0F9F /* TKGradientCircularView.m */; };
+		44717B9F1B6E633100713841 /* TKUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 44717B9E1B6E633100713841 /* TKUtility.m */; };
 		44724D6F1B65128400B56851 /* RGCardViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 44724D6E1B65128400B56851 /* RGCardViewLayout.m */; };
 		44724D721B6512B100B56851 /* TKKinBookCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 44724D711B6512B100B56851 /* TKKinBookCollectionCell.m */; };
 		447F83D21B67CCD7006B2839 /* TKNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 447F83D11B67CCD7006B2839 /* TKNetworkManager.m */; };
@@ -186,6 +187,8 @@
 		44675E8C1B6A8A98003B0F9F /* TKSplitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKSplitView.h; sourceTree = "<group>"; };
 		44675E8F1B6A92A9003B0F9F /* TKSplitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKSplitView.m; sourceTree = "<group>"; };
 		44675E911B6A92CE003B0F9F /* TKGradientCircularView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKGradientCircularView.m; sourceTree = "<group>"; };
+		44717B9D1B6E633100713841 /* TKUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKUtility.h; sourceTree = "<group>"; };
+		44717B9E1B6E633100713841 /* TKUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKUtility.m; sourceTree = "<group>"; };
 		44724D6D1B65128400B56851 /* RGCardViewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RGCardViewLayout.h; sourceTree = "<group>"; };
 		44724D6E1B65128400B56851 /* RGCardViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RGCardViewLayout.m; sourceTree = "<group>"; };
 		44724D701B6512B100B56851 /* TKKinBookCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKKinBookCollectionCell.h; sourceTree = "<group>"; };
@@ -374,6 +377,8 @@
 				44091E621B5C8A83008BB282 /* UILabel+Attribute.m */,
 				445B02561B5E7E7A004696B3 /* TKDataEngine.h */,
 				445B02571B5E7E7A004696B3 /* TKDataEngine.m */,
+				44717B9D1B6E633100713841 /* TKUtility.h */,
+				44717B9E1B6E633100713841 /* TKUtility.m */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -718,6 +723,7 @@
 				444585341B6C91AF0023868A /* TKSingleTextFieldCell.m in Sources */,
 				44A58A3D1B628E6F001742D8 /* UIWebView+WebCache.m in Sources */,
 				44A58A381B628E6F001742D8 /* UIImage+GIF.m in Sources */,
+				44717B9F1B6E633100713841 /* TKUtility.m in Sources */,
 				4414D8921B6919D600363447 /* PhoneContact.m in Sources */,
 				445175861B55E74100EDEF97 /* MLClient.m in Sources */,
 				44A58A341B628E6F001742D8 /* SDWebImageDownloaderOperation.m in Sources */,

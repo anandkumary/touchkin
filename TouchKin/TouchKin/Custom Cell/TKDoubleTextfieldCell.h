@@ -21,5 +21,6 @@
 @property (nonatomic, assign) id<TKDoubleTextfieldCellDelegate> delegate;
 
 -(void) settextValue:(NSString *)string;
+-(void) setYobValue:(NSString *)yob;
 
 @end

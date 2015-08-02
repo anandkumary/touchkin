@@ -8,6 +8,7 @@
 
 #import "MyConnection.h"
 #import "MyHomeLocation.h"
+#import "TKUtility.h"
 
 @implementation MyConnection
 
@@ -40,6 +41,13 @@
         
         if(dict[@"yob"]){
             self.yob  = ([dict[@"yob"]isKindOfClass:[NSNull class]]) ? 0 :  [dict[@"yob"] intValue];
+        }
+        
+        if(self.yob != 0){
+           
+            NSInteger year = [TKUtility getCurrentYear];
+            
+            self.age = [NSString stringWithFormat:@"%d", year - self.yob];
         }
 
         
