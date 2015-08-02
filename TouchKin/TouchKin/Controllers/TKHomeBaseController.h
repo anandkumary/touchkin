@@ -17,6 +17,8 @@
 -(void) setDelegate:(id)object;
 
 -(void) reloadGroupData;
+-(void) reloadOthersData;
+-(id) fetchObjectForIndex:(NSInteger)index;
 
 -(void) addLeftSideImage:(UIImage *)image forTarget:(id)target;
 -(void) addLeftSideTitle:(NSString *)title forTarget:(id)target;

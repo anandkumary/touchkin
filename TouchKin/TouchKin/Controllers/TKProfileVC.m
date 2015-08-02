@@ -217,6 +217,7 @@
 
 -(void) doubleTextFieldCell:(TKDoubleTextfieldCell *)cell didEndEditText:(NSString *)string {
     
+    userInfo.age = string;
 }
 
 @end

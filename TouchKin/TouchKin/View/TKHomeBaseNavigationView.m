@@ -113,7 +113,7 @@
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.groupList.count + 1;
+    return self.groupList.count +  ((NAVIGATIONTYPECAMERA == self.navType) ? 0 : 1);
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -152,12 +152,12 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    if(self.groupList.count != indexPath.item) {
+    if(self.groupList.count != indexPath.item ) {
         
         OthersCircle *others = [self.groupList objectAtIndex:indexPath.item];
         
-        self.title = (indexPath.row == 0) ? @"Me" : others.fname;
-      
+        self.title = (indexPath.row == 0) ? @"My Family" : others.fname;
+        
         if([self.delegate respondsToSelector:@selector(didSelectHeaderTitleAtIndex:)]){
             [self.delegate didSelectHeaderTitleAtIndex:indexPath.item];
         }
@@ -167,8 +167,12 @@
         //Add new care taker
     }
     
-    
-    [self animateCollectionViewUp];
+    if(NAVIGATIONTYPECAMERA != self.navType){
+        [self animateCollectionViewUp];
+    }
+    else {
+       self.title = @"My Family";
+    }
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {

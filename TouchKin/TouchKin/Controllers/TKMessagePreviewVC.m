@@ -20,8 +20,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self reloadGroupData];
-
+    [self reloadOthersData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -46,11 +45,7 @@
 
 -(void) didSelectHeaderTitleAtIndex:(NSInteger)index {
     
-    self.familyList = [[TKDataEngine sharedManager] familyList];
-    
-    if(index > 0){
-        
-        OthersCircle *circle = [self.familyList objectAtIndex:index];
+        OthersCircle *circle = [self fetchObjectForIndex:index];
         
         if(!sharedWithArray){
             sharedWithArray = [[NSMutableArray alloc] init];
@@ -61,14 +56,6 @@
         }else{
             [sharedWithArray addObject:circle.userId];
         }
-
-
-
-    }
-    
-
-    
-    
-    
 }
+    
 @end

@@ -126,4 +126,18 @@
     
     self.navView.groupList = [[TKDataEngine sharedManager] familyList];
 }
+
+-(void) reloadOthersData {
+    
+    NSMutableArray *array = [[NSMutableArray alloc] initWithArray:[[TKDataEngine sharedManager] familyList]];
+    
+    [array removeObjectAtIndex:0];
+    
+     self.navView.groupList = array;
+}
+
+-(id) fetchObjectForIndex:(NSInteger)index {
+    
+    return self.navView.groupList[index];
+}
 @end

@@ -15,7 +15,8 @@ typedef NS_ENUM(NSInteger, DashboardType) {
 
 typedef NS_ENUM(NSInteger, NavigationType) {
     NAVIGATIONTYPEMORE,
-    NAVIGATIONTYPENORMAL
+    NAVIGATIONTYPENORMAL,
+    NAVIGATIONTYPECAMERA
 };
 
 typedef NS_ENUM(NSInteger, FamilyType) {
