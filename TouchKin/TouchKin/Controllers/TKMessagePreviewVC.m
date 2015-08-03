@@ -8,11 +8,17 @@
 
 #import "TKMessagePreviewVC.h"
 #import "TKDataEngine.h"
-#import "TKMeViewController.h"
+#import "TKNetworkManager.h"
+#import <AVFoundation/AVFoundation.h>
+
 @interface TKMessagePreviewVC ()
 @property (nonatomic) NSMutableArray *familyList;
 @property (strong, nonatomic) IBOutlet UIView *VideoplayView;
 @property (strong,nonatomic) NSMutableArray *sharedWithArray;
+@property (retain,nonatomic) AVPlayer *player;
+@property (retain,nonatomic) AVPlayerLayer *avlayer;
+@property (weak, nonatomic) IBOutlet UIButton *sendBtn;
+
 @end
 
 @implementation TKMessagePreviewVC
@@ -20,7 +26,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    self.type = NAVIGATIONTYPECAMERA;
+    
+    [self addVideoPlayer];
+
     [self reloadOthersData];
+    
+    [self.view bringSubviewToFront:self.sendBtn];
+    
+    [self addLeftSideTitle:@"Cancel" forTarget:self];
+    
+    [self hideRightBarButton];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -28,18 +45,47 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+-(void) navleftBarAction :(id) sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
-*/
+
+-(void) addVideoPlayer {
+    
+    self.player = [AVPlayer playerWithURL:self.videoURL];
+    
+    self.avlayer = [AVPlayerLayer playerLayerWithPlayer:self.player];
+    
+    self.player.actionAtItemEnd = AVPlayerActionAtItemEndNone;
+    
+    self.avlayer.frame = CGRectMake(0, 0, self.view.frame.size.width,self.VideoplayView.frame.size.height);
+    
+    [self.VideoplayView.layer addSublayer:self.avlayer];
+    
+    [self.player play];
+    
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(playerItemDidReachEnd:)
+                                                 name:AVPlayerItemDidPlayToEndTimeNotification
+                                               object:[self.player currentItem]];
+}
+
+
+- (void)playerItemDidReachEnd:(NSNotification *)notification {
+    
+    AVPlayerItem *p = [notification object];
+    [p seekToTime:kCMTimeZero];
+    [self.player pause];
+    
+}
+
 - (IBAction)send_touch:(id)sender {
     
-    NSLog(@"Pressed");
+    NSString *userId = [sharedWithArray componentsJoinedByString:@","];
+    
+    NSLog(@"%@",userId);
+    
+    [TKNetworkManager uploadVideoFor:self.videoURL withUserID:userId];
     
 }
 

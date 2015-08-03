@@ -735,6 +735,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="VideoplayView" destination="ySM-E3-uSs" id="X2v-pu-noU"/>
+                        <outlet property="sendBtn" destination="AVc-av-BgK" id="TJg-i3-Ms6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YQK-Db-sEd" userLabel="First Responder" sceneMemberID="firstResponder"/>

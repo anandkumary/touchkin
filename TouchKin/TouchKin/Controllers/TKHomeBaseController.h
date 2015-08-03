@@ -20,6 +20,8 @@
 -(void) reloadOthersData;
 -(id) fetchObjectForIndex:(NSInteger)index;
 
+-(void) hideRightBarButton;
+
 -(void) addLeftSideImage:(UIImage *)image forTarget:(id)target;
 -(void) addLeftSideTitle:(NSString *)title forTarget:(id)target;
 -(void) addRightSideImage:(UIImage *)image forTarget:(id)target;

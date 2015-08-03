@@ -28,6 +28,8 @@
 */
 -(void) setNavType:(NavigationType)navType {
     
+    _navType = navType;
+    
     if(NAVIGATIONTYPENORMAL == navType){
         [self.titleView setIsTapEnabled:NO];
         self.dropArrow.hidden = YES;

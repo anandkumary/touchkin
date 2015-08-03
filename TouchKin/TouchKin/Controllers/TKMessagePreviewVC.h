@@ -11,4 +11,6 @@
 
 @interface TKMessagePreviewVC : TKHomeBaseController
 
+@property (strong) NSURL *videoURL;
+
 @end

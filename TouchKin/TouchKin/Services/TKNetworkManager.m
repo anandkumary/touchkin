@@ -9,6 +9,8 @@
 #import "TKNetworkManager.h"
 
 #define TouchKinServer [NSURL URLWithString:@"http://54.69.183.186:1340/user/"]
+#define TouchKinVideoServer [NSURL URLWithString:@"http://54.69.183.186:1340/kinbook/message/"]
+
 
 
 @implementation TKNetworkManager
@@ -84,6 +86,81 @@
     [model postPath:@"user/add-care-receiver" withParameter:dict withHandler:^(MLClient *sender, id responseObject, NSError *error) {
         NSLog(@"resp = %@",responseObject);
     }];
+}
+
+
++ (void) uploadVideoFor:(NSURL *)videoUrl withUserID:(NSString *)userList {
+    NSLog(@"POSTING");
+    // Generate the postdata:
+    
+    NSData *webData = [NSData dataWithContentsOfURL:videoUrl];
+    
+    // Generate the post header:
+    NSString *stringBoundary = @"0xKhTmLbOuNdArY---This_Is_ThE_BoUnDaRyy---pqo";
+    NSMutableData *postData = [NSMutableData data];
+    
+    NSString *sessionToken = [[TKDataEngine sharedManager] getSessionToken];
+
+    
+    //Add the fields
+    
+    [postData appendData: [[NSString stringWithFormat:@"--%@\r\n", stringBoundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    [postData appendData:[@"Content-Disposition: form-data; name=\"message\"\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+    [postData appendData:[@"Hi" dataUsingEncoding:NSUTF8StringEncoding]];
+    [postData appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    [postData appendData: [[NSString stringWithFormat:@"--%@\r\n", stringBoundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    [postData appendData:[@"Content-Disposition: form-data; name=\"shared_with\"\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+    [postData appendData:[userList dataUsingEncoding:NSUTF8StringEncoding]];
+    [postData appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    // Add the media:
+    [postData appendData: [[NSString stringWithFormat:@"--%@\r\n", stringBoundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    [postData appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"media\"; filename=\"%@\"\r\n", @"media.MP4"] dataUsingEncoding:NSUTF8StringEncoding]];
+    [postData appendData:[@"Content-Type: video/mp4\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+    [postData appendData:[@"Content-Transfer-Encoding: binary\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+    [postData appendData: webData];
+    [postData appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    // Add the closing boundry:
+    [postData appendData: [[NSString stringWithFormat:@"--%@\r\n", stringBoundary] dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES]];
+    
+    NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[postData length]];
+    NSString *headerBoundary = [NSString stringWithFormat:@"multipart/form-data; boundary=%@",stringBoundary];
+    
+    // Setup the request:
+    
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@add",TouchKinVideoServer]];
+    NSMutableURLRequest *uploadRequest = [[NSMutableURLRequest alloc] initWithURL:url cachePolicy: NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:30];
+    [uploadRequest setHTTPMethod:@"POST"];
+    [uploadRequest setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    [uploadRequest setValue:headerBoundary forHTTPHeaderField:@"Content-Type"];
+    [uploadRequest setValue:[NSString stringWithFormat:@"Bearer %@",sessionToken] forHTTPHeaderField:@"Authorization"];
+    [uploadRequest setHTTPBody:postData];
+    
+    // Execute the reqest:
+    // [NSURLConnection connectionWithRequest:uploadRequest delegate:self];
+    
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+    [NSURLConnection sendAsynchronousRequest:uploadRequest queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
+     {
+     if ([data length] > 0 && error == nil){
+         NSString* response = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+         NSLog(@"%@", response);
+         NSString *result =[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+         NSLog(@"%@", result);
+         
+         //[self.view makeToast:@"Successfully uploaded" duration:0.3 position:CSToastPositionCenter];
+         
+         //[self removeuserBlock:self];
+         
+     }else if (error != nil){
+         NSLog(@"%@", error);
+         
+         
+     }
+     }];
+    
 }
 
 @end

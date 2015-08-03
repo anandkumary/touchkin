@@ -8,6 +8,8 @@
 
 #import "TKCameraVC.h"
 #import <AVFoundation/AVFoundation.h>
+#import "TKMessagePreviewVC.h"
+
 @interface TKCameraVC ()<AVCaptureFileOutputRecordingDelegate>
 {
     BOOL WeAreRecording;
@@ -350,18 +352,23 @@ didFinishRecordingToOutputFileAtURL:(NSURL *)outputFileURL
 -(void) createOutPutPlayButton
 {
 
-    UIButton *playButton = [[UIButton alloc] initWithFrame:CGRectMake(150, 300, 50, 50)];
+    UIButton *playButton = [[UIButton alloc] initWithFrame:CGRectMake(80, 300, 50, 50)];
     [playButton setBackgroundColor:[UIColor redColor]];
     [playButton setTitle:@"Replay" forState:UIControlStateNormal];
     [playButton addTarget:self action:@selector(playOutputVideoAction) forControlEvents:UIControlEventTouchUpInside];
     [self.outPutPreviewLayer addSubview:playButton];
-
-    UIButton *DoneButton = [[UIButton alloc] initWithFrame:CGRectMake(150, 360, 50, 50)];
+    
+    UIButton *DoneButton = [[UIButton alloc] initWithFrame:CGRectMake(150, 300, 50, 50)];
     [DoneButton setBackgroundColor:[UIColor redColor]];
     [DoneButton setTitle:@"Done" forState:UIControlStateNormal];
-    [DoneButton addTarget:self action:@selector(recreateCamera) forControlEvents:UIControlEventTouchUpInside];
+    [DoneButton addTarget:self action:@selector(doneCamera) forControlEvents:UIControlEventTouchUpInside];
     [self.outPutPreviewLayer addSubview:DoneButton];
-
+    
+    UIButton *retakeButton = [[UIButton alloc] initWithFrame:CGRectMake(250, 300, 50, 50)];
+    [retakeButton setBackgroundColor:[UIColor redColor]];
+    [retakeButton setTitle:@"reTake" forState:UIControlStateNormal];
+    [retakeButton addTarget:self action:@selector(recreateCamera) forControlEvents:UIControlEventTouchUpInside];
+    [self.outPutPreviewLayer addSubview:retakeButton];
 }
 
 -(void)playOutputVideoAction
@@ -375,6 +382,18 @@ didFinishRecordingToOutputFileAtURL:(NSURL *)outputFileURL
     [self.player pause];
     [self createOutPutPlayButton];
 
+}
+
+-(void)doneCamera {
+    
+    TKMessagePreviewVC *messageVc = [self.storyboard instantiateViewControllerWithIdentifier:@"TKMessagePreviewVC"];
+    
+    messageVc.videoURL = self.videoURL;
+    
+    [self addChildViewController:messageVc];
+    [self.view addSubview:messageVc.view];
+    [messageVc didMoveToParentViewController:self];
+    
 }
 
 

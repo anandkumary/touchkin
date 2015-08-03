@@ -79,6 +79,11 @@
     [baseVC openMenu];
 }
 
+-(void) hideRightBarButton {
+    
+    self.navView.rightButton.hidden = YES;
+}
+
 -(void) addLeftSideImage:(UIImage *)image forTarget:(id)target {
    
     [self.navView.leftButton setImage:image forState:UIControlStateNormal];
@@ -134,6 +139,9 @@
     [array removeObjectAtIndex:0];
     
      self.navView.groupList = array;
+    
+    [self.view bringSubviewToFront:self.navView];
+
 }
 
 -(id) fetchObjectForIndex:(NSInteger)index {
