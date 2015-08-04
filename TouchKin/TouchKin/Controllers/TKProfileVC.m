@@ -39,6 +39,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    self.navTitle = @"My Profile";
+    self.type = NAVIGATIONTYPENORMAL;
+    
     userInfo = [[TKDataEngine sharedManager] userInfo];
     
     self.tableview.estimatedRowHeight = 72;
@@ -57,6 +60,19 @@
     self.savebtn.layer.cornerRadius = 6.0f;
     
     [self.savebtn addTarget:self action:@selector(savebuttonAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    if(self.profileType == LOGINPROFILE){
+        
+        [self addLeftSideTitle:@"Skip" forTarget:self];
+        // [self addRightSideTitle:@"Done" forTarget:self];
+    }
+    //  else
+        {
+        [self hideRightBarButton];
+    }
+    
+
 }
 
 -(void) viewWillAppear:(BOOL)animated {
@@ -76,6 +92,14 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)navleftBarAction:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(void) navRightBarAction:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 

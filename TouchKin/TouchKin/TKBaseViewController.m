@@ -44,6 +44,12 @@
     [self.sideMenu layoutIfNeeded];
     
     [self.view layoutIfNeeded];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(avatarTap:)];
+    [tap setNumberOfTapsRequired:1];
+    [self.sideMenu.avatar addGestureRecognizer:tap];
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -187,5 +193,21 @@
         [vc.view removeFromSuperview];
         [vc removeFromParentViewController];
     }
+}
+- (void)avatarTap:(id)sender {
+    
+    if(![self.childViewControllers.lastObject isKindOfClass:[TKProfileVC class]]) {
+        [self removeAllViewController];
+        
+        TKProfileVC *profilevc = [self.storyboard instantiateViewControllerWithIdentifier:@"TKProfileVC"];
+        
+        [self addChildViewController:profilevc];
+        [self.containerView addSubview:profilevc.view];
+        [profilevc didMoveToParentViewController:self];
+        
+    }
+    
+    [self closeMenu];
+
 }
 @end

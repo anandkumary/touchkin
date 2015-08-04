@@ -1659,7 +1659,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="188" height="196"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Goz-IW-UC4">
+                                                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Goz-IW-UC4">
                                                     <rect key="frame" x="54" y="58" width="80" height="80"/>
                                                     <color key="backgroundColor" red="0.83337329029999996" green="0.29662743809999997" blue="0.2475964752" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
