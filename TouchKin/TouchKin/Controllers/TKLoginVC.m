@@ -24,6 +24,7 @@
 
 @property (strong, nonatomic) NSArray *countryList;
 
+@property (weak, nonatomic) IBOutlet UIButton *nextBtn;
 
 @end
 
@@ -49,6 +50,7 @@
     
     [self.stdCodeBtn setTitle:dict[@"dial_code"] forState:UIControlStateNormal];
 
+    [self.nextBtn setEnabled:NO];
 
 }
 
@@ -78,7 +80,7 @@
     
     if(textField.text.length >= 10){
       textField.text = [textField.text substringToIndex:MAXLENGTH];
-        [self performLogin];
+        [self.nextBtn setEnabled:YES];
         [textField resignFirstResponder];
     }
 }
@@ -95,8 +97,10 @@
 }
 - (IBAction)forwardButtonAction:(id)sender {
     //[self.navigationView animateTop:^(BOOL onComplete) {
-        [self performSegueWithIdentifier:@"register" sender:nil];
+    //[self performSegueWithIdentifier:@"register" sender:nil];
     // }];
+    
+    [self performLogin];
     
 }
 
@@ -143,7 +147,9 @@
                          [self dismissViewControllerAnimated:YES completion:nil];
                      }
                      else{
-                         [self  forwardButtonAction:nil];
+                         
+                         [self performSegueWithIdentifier:@"register" sender:nil];
+                         //  [self  forwardButtonAction:nil];
                      }
                      
                  });
@@ -168,7 +174,9 @@
                 
                 TKDataEngine *engine =  [TKDataEngine sharedManager];
                 [engine setPhoneNumber:phone];
-                [self  forwardButtonAction:nil];
+                
+                 [self performSegueWithIdentifier:@"register" sender:nil];
+                //  [self  forwardButtonAction:nil];
                 
             });
             

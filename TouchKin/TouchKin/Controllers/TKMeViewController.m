@@ -13,6 +13,7 @@
 #import "MapViewController.h"
 #import "MLNetworkModel.h"
 #import "TKCameraVC.h"
+#import "TKAlertView.h"
 
 @interface TKMeViewController ()<UIPageViewControllerDataSource,MKMapViewDelegate>
 @property (weak, nonatomic) IBOutlet UIView *containerView;
@@ -25,6 +26,7 @@
 
 @property (nonatomic, strong) MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UIButton *callBtn;
+@property (weak, nonatomic) IBOutlet UIButton *sendTouchBtn;
 
 @end
 
@@ -243,6 +245,14 @@
 
 -(void) callButtonAction:(id)sender {
     [self openImagePicker];
+}
+- (IBAction)sendTouchBtnAction:(id)sender {
+    
+    [TKAlertView showAlertWithText:@"Alert view shown" forView:self.view];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [TKAlertView hideAlertForView:self.view];
+    });
 }
 
 -(void) openImagePicker {

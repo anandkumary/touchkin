@@ -31,6 +31,8 @@
     self.passcodeview.delegate = self;
     
     [self.resendBtn setTitle:[[TKDataEngine sharedManager] getPhoneNumber] forState:UIControlStateNormal];
+    
+    [self.resendBtn addTarget:self action:@selector(resendBtnAction:) forControlEvents:UIControlStateNormal];
 }
 
 -(void)viewWillLayoutSubviews {
@@ -41,6 +43,20 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)resendBtnAction:(UIButton *)sender {
+    
+    NSDictionary *dict = @{@"mobile":sender.titleLabel.text};
+    
+    MLNetworkModel *model = [[MLNetworkModel alloc] init];
+    
+    [model postRequestPath:@"signup" withParameter:dict withHandler:^(id responseObject, NSError *error) {
+        
+        if(error == nil){
+            
+        }
+    }];
 }
 
 /*

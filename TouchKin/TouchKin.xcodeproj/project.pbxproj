@@ -59,6 +59,7 @@
 		447F83D21B67CCD7006B2839 /* TKNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 447F83D11B67CCD7006B2839 /* TKNetworkManager.m */; };
 		447F83D51B67D212006B2839 /* TKProfileVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 447F83D41B67D212006B2839 /* TKProfileVC.m */; };
 		448E3B791B6675C500666602 /* PSLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 448E3B781B6675C500666602 /* PSLocationManager.m */; };
+		448F5F8C1B71CA5E003629EC /* TKAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 448F5F8B1B71CA5E003629EC /* TKAlertView.m */; };
 		448FE9D81B6AF38E004397FB /* TKContactVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 448FE9D71B6AF38E004397FB /* TKContactVC.m */; };
 		448FE9DB1B6AF642004397FB /* TKContactCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 448FE9DA1B6AF642004397FB /* TKContactCell.m */; };
 		4490136A1B5A4D01007B312C /* TKMyFamilyCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 449013691B5A4D01007B312C /* TKMyFamilyCollectionCell.m */; };
@@ -207,6 +208,8 @@
 		447F83D41B67D212006B2839 /* TKProfileVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKProfileVC.m; sourceTree = "<group>"; };
 		448E3B771B6675C500666602 /* PSLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSLocationManager.h; sourceTree = "<group>"; };
 		448E3B781B6675C500666602 /* PSLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSLocationManager.m; sourceTree = "<group>"; };
+		448F5F8A1B71CA5E003629EC /* TKAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKAlertView.h; sourceTree = "<group>"; };
+		448F5F8B1B71CA5E003629EC /* TKAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKAlertView.m; sourceTree = "<group>"; };
 		448FE9D61B6AF38E004397FB /* TKContactVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKContactVC.h; sourceTree = "<group>"; };
 		448FE9D71B6AF38E004397FB /* TKContactVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKContactVC.m; sourceTree = "<group>"; };
 		448FE9D91B6AF642004397FB /* TKContactCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKContactCell.h; sourceTree = "<group>"; };
@@ -415,6 +418,8 @@
 				443EA0151B596AB400A685CE /* TKDashboardView.m */,
 				442A943D1B5FDACE00C07A4F /* TKPassCodeView.h */,
 				442A943E1B5FDACE00C07A4F /* TKPassCodeView.m */,
+				448F5F8A1B71CA5E003629EC /* TKAlertView.h */,
+				448F5F8B1B71CA5E003629EC /* TKAlertView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -747,6 +752,7 @@
 				44A58A381B628E6F001742D8 /* UIImage+GIF.m in Sources */,
 				44717B9F1B6E633100713841 /* TKUtility.m in Sources */,
 				4414D8921B6919D600363447 /* PhoneContact.m in Sources */,
+				448F5F8C1B71CA5E003629EC /* TKAlertView.m in Sources */,
 				445175861B55E74100EDEF97 /* MLClient.m in Sources */,
 				44A58A341B628E6F001742D8 /* SDWebImageDownloaderOperation.m in Sources */,
 				4451755A1B55DD2D00EDEF97 /* main.m in Sources */,

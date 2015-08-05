@@ -177,6 +177,9 @@
                                     <color key="titleColor" red="0.51372549020000002" green="0.51764705879999995" blue="0.5450980392" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="sendTouchBtnAction:" destination="DA6-ZT-g03" eventType="touchUpInside" id="M2l-w3-RfI"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="udT-X9-ILB">
                                 <rect key="frame" x="223" y="496" width="77" height="100"/>
@@ -210,6 +213,7 @@
                     <connections>
                         <outlet property="callBtn" destination="udT-X9-ILB" id="wwC-dg-kqd"/>
                         <outlet property="containerView" destination="Ydb-aO-5kZ" id="fDc-bG-lh7"/>
+                        <outlet property="sendTouchBtn" destination="taT-qF-1w2" id="uhM-n5-gb5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9wQ-Mh-gSi" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1291,6 +1295,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="navigationView" destination="QvR-2G-lXE" id="k7s-2F-WO4"/>
+                        <outlet property="nextBtn" destination="4aC-WL-LyB" id="jhC-Ck-JQr"/>
                         <outlet property="phoneNumberTextField" destination="uWL-P3-8Pf" id="xTh-d7-V6I"/>
                         <outlet property="stdCodeBtn" destination="mpe-Ez-5kr" id="E8o-eg-rYt"/>
                         <segue destination="nbP-Pe-RE7" kind="show" identifier="register" id="fLy-cJ-y8x"/>
