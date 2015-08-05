@@ -1033,7 +1033,7 @@
                                             <constraint firstAttribute="height" constant="40" id="xhW-tX-fRY"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
                                         <connections>
                                             <outlet property="delegate" destination="lOY-S1-bWI" id="DpM-sS-5Pa"/>
                                         </connections>
