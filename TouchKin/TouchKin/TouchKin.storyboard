@@ -585,7 +585,7 @@
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" red="0.0" green="0.73725490199999999" blue="0.83137254900000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.92941176469999998" green="0.92941176469999998" blue="0.92941176469999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="nKp-hO-9FH" firstAttribute="leading" secondItem="6uQ-6f-J3Z" secondAttribute="leading" id="6Tb-sp-evC"/>
                             <constraint firstItem="zeE-Mk-isW" firstAttribute="leading" secondItem="6uQ-6f-J3Z" secondAttribute="leading" id="Nnv-Kb-GYG"/>
@@ -777,7 +777,39 @@
                                                 </imageView>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bYg-yi-7cO">
                                                     <rect key="frame" x="0.0" y="367" width="269" height="64"/>
+                                                    <subviews>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Nc-wo-gN6">
+                                                            <rect key="frame" x="159" y="7" width="50" height="50"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="50" id="3kH-RN-QP3"/>
+                                                                <constraint firstAttribute="width" constant="50" id="Pyz-he-sWj"/>
+                                                            </constraints>
+                                                            <state key="normal" image="delete">
+                                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                            </state>
+                                                        </button>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2gt-Tk-fiD">
+                                                            <rect key="frame" x="60" y="7" width="50" height="50"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="50" id="7Cn-2P-9Gw"/>
+                                                                <constraint firstAttribute="height" constant="50" id="dI0-4n-PcJ"/>
+                                                            </constraints>
+                                                            <state key="normal" image="like">
+                                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                            </state>
+                                                            <state key="selected" image="like_sel"/>
+                                                        </button>
+                                                    </subviews>
                                                     <color key="backgroundColor" red="0.92941176470588238" green="0.92941176470588238" blue="0.92941176470588238" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstItem="5Nc-wo-gN6" firstAttribute="leading" secondItem="2gt-Tk-fiD" secondAttribute="trailing" priority="750" constant="49" id="2QU-ms-at6"/>
+                                                        <constraint firstAttribute="bottom" secondItem="5Nc-wo-gN6" secondAttribute="bottom" constant="7" id="9Dd-V2-wJE"/>
+                                                        <constraint firstItem="5Nc-wo-gN6" firstAttribute="top" secondItem="bYg-yi-7cO" secondAttribute="top" constant="7" id="Cbs-Vj-Wv1"/>
+                                                        <constraint firstItem="2gt-Tk-fiD" firstAttribute="leading" secondItem="bYg-yi-7cO" secondAttribute="leading" constant="60" id="Ezj-OT-2Ja"/>
+                                                        <constraint firstItem="2gt-Tk-fiD" firstAttribute="top" secondItem="bYg-yi-7cO" secondAttribute="top" constant="7" id="Z2u-yO-vca"/>
+                                                        <constraint firstAttribute="bottom" secondItem="2gt-Tk-fiD" secondAttribute="bottom" constant="7" id="dWz-Sq-9lW"/>
+                                                        <constraint firstAttribute="trailing" secondItem="5Nc-wo-gN6" secondAttribute="trailing" constant="60" id="hvI-f4-utn"/>
+                                                    </constraints>
                                                 </view>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GGd-Qj-hw0">
                                                     <rect key="frame" x="96" y="147" width="77" height="77"/>
@@ -789,6 +821,9 @@
                                                     <state key="normal" image="play">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="playButtonAction:" destination="Le6-Hr-13P" eventType="touchUpInside" id="h2b-73-jVf"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -806,6 +841,9 @@
                                             <constraint firstItem="bYg-yi-7cO" firstAttribute="top" secondItem="xz4-hA-CTE" secondAttribute="bottom" constant="-3" id="t2F-UJ-Adk"/>
                                             <constraint firstAttribute="bottomMargin" secondItem="xz4-hA-CTE" secondAttribute="bottom" constant="54" id="u6N-2Z-hbz"/>
                                         </constraints>
+                                        <connections>
+                                            <outlet property="thumbnail" destination="xz4-hA-CTE" id="SdV-Vn-Kx3"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                                 <connections>
@@ -824,6 +862,9 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Kinbook" image="kinbook" id="BMS-di-0rk"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="collectionView" destination="A1d-VJ-k2W" id="bg0-iO-UNi"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yyg-pC-BGc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1821,9 +1862,12 @@
         <image name="call" width="77" height="77"/>
         <image name="camera" width="37" height="37"/>
         <image name="cancel" width="39" height="39"/>
+        <image name="delete" width="54" height="54"/>
         <image name="edit" width="22" height="22"/>
         <image name="groupAvatar" width="24" height="22"/>
         <image name="kinbook" width="24" height="24"/>
+        <image name="like" width="54" height="54"/>
+        <image name="like_sel" width="54" height="54"/>
         <image name="message" width="32" height="23"/>
         <image name="next" width="43" height="43"/>
         <image name="play" width="77" height="77"/>

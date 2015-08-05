@@ -20,6 +20,8 @@
 		4414D8951B6919E700363447 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4414D8941B6919E700363447 /* AddressBook.framework */; };
 		442A943C1B5FD92B00C07A4F /* TKPassCodeField.m in Sources */ = {isa = PBXBuildFile; fileRef = 442A943B1B5FD92B00C07A4F /* TKPassCodeField.m */; };
 		442A943F1B5FDACE00C07A4F /* TKPassCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 442A943E1B5FDACE00C07A4F /* TKPassCodeView.m */; };
+		442C3AD21B70E72300DB9293 /* kinBook.m in Sources */ = {isa = PBXBuildFile; fileRef = 442C3AD11B70E72300DB9293 /* kinBook.m */; };
+		442C3AD41B70F84D00DB9293 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 442C3AD31B70F84D00DB9293 /* MediaPlayer.framework */; };
 		44384B0C1B572A8600C8E35A /* TKCircularView.m in Sources */ = {isa = PBXBuildFile; fileRef = 44384B0B1B572A8600C8E35A /* TKCircularView.m */; };
 		443EA0071B594E2800A685CE /* TKMeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 443EA0061B594E2800A685CE /* TKMeViewController.m */; };
 		443EA00D1B595BA600A685CE /* TKPageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 443EA00C1B595BA600A685CE /* TKPageController.m */; };
@@ -44,6 +46,7 @@
 		445175891B55E7D900EDEF97 /* MLNetworkModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 445175881B55E7D900EDEF97 /* MLNetworkModel.m */; };
 		4453154A1B6BCF150003C18B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 445315491B6BCF150003C18B /* AVFoundation.framework */; };
 		4453154C1B6BCF1D0003C18B /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4453154B1B6BCF1D0003C18B /* ImageIO.framework */; };
+		44592D1D1B718EDE009585C5 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 44592D1C1B718EDE009585C5 /* MBProgressHUD.m */; };
 		445B02581B5E7E7A004696B3 /* TKDataEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 445B02571B5E7E7A004696B3 /* TKDataEngine.m */; };
 		445B025C1B5E7F0F004696B3 /* Country.m in Sources */ = {isa = PBXBuildFile; fileRef = 445B025B1B5E7F0F004696B3 /* Country.m */; };
 		445B025E1B5E7F7F004696B3 /* countries.json in Resources */ = {isa = PBXBuildFile; fileRef = 445B025D1B5E7F7F004696B3 /* countries.json */; };
@@ -132,6 +135,9 @@
 		442A943B1B5FD92B00C07A4F /* TKPassCodeField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKPassCodeField.m; sourceTree = "<group>"; };
 		442A943D1B5FDACE00C07A4F /* TKPassCodeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKPassCodeView.h; sourceTree = "<group>"; };
 		442A943E1B5FDACE00C07A4F /* TKPassCodeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKPassCodeView.m; sourceTree = "<group>"; };
+		442C3AD01B70E72300DB9293 /* kinBook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = kinBook.h; sourceTree = "<group>"; };
+		442C3AD11B70E72300DB9293 /* kinBook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = kinBook.m; sourceTree = "<group>"; };
+		442C3AD31B70F84D00DB9293 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		44384B0A1B572A8600C8E35A /* TKCircularView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKCircularView.h; sourceTree = "<group>"; };
 		44384B0B1B572A8600C8E35A /* TKCircularView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKCircularView.m; sourceTree = "<group>"; };
 		443EA0051B594E2800A685CE /* TKMeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKMeViewController.h; sourceTree = "<group>"; };
@@ -177,6 +183,8 @@
 		445175881B55E7D900EDEF97 /* MLNetworkModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLNetworkModel.m; sourceTree = "<group>"; };
 		445315491B6BCF150003C18B /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		4453154B1B6BCF1D0003C18B /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		44592D1B1B718EDE009585C5 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		44592D1C1B718EDE009585C5 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		445B02561B5E7E7A004696B3 /* TKDataEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKDataEngine.h; sourceTree = "<group>"; };
 		445B02571B5E7E7A004696B3 /* TKDataEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKDataEngine.m; sourceTree = "<group>"; };
 		445B025A1B5E7F0F004696B3 /* Country.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Country.h; sourceTree = "<group>"; };
@@ -281,6 +289,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				442C3AD41B70F84D00DB9293 /* MediaPlayer.framework in Frameworks */,
 				4453154C1B6BCF1D0003C18B /* ImageIO.framework in Frameworks */,
 				4453154A1B6BCF150003C18B /* AVFoundation.framework in Frameworks */,
 				4414D8951B6919E700363447 /* AddressBook.framework in Frameworks */,
@@ -413,6 +422,7 @@
 		4451754B1B55DD2D00EDEF97 = {
 			isa = PBXGroup;
 			children = (
+				442C3AD31B70F84D00DB9293 /* MediaPlayer.framework */,
 				4453154B1B6BCF1D0003C18B /* ImageIO.framework */,
 				445315491B6BCF150003C18B /* AVFoundation.framework */,
 				4414D8941B6919E700363447 /* AddressBook.framework */,
@@ -439,6 +449,7 @@
 		445175561B55DD2D00EDEF97 /* TouchKin */ = {
 			isa = PBXGroup;
 			children = (
+				44592D1A1B718EDE009585C5 /* MBProgressHUD */,
 				4403D4DB1B61BF5C006000B8 /* MLImagePicker */,
 				445B02591B5E7EFA004696B3 /* Model */,
 				441382741B58040C00DFB0BC /* Custom Cell */,
@@ -535,6 +546,15 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
+		44592D1A1B718EDE009585C5 /* MBProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				44592D1B1B718EDE009585C5 /* MBProgressHUD.h */,
+				44592D1C1B718EDE009585C5 /* MBProgressHUD.m */,
+			);
+			path = MBProgressHUD;
+			sourceTree = "<group>";
+		};
 		445B02591B5E7EFA004696B3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -548,6 +568,8 @@
 				44A58A011B627C98001742D8 /* MyConnection.m */,
 				44A58A031B627EB9001742D8 /* MyHomeLocation.h */,
 				44A58A041B627EB9001742D8 /* MyHomeLocation.m */,
+				442C3AD01B70E72300DB9293 /* kinBook.h */,
+				442C3AD11B70E72300DB9293 /* kinBook.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -772,11 +794,13 @@
 				449013701B5A4F9D007B312C /* TKMyFamilyVC.m in Sources */,
 				442A943F1B5FDACE00C07A4F /* TKPassCodeView.m in Sources */,
 				44A58A371B628E6F001742D8 /* UIButton+WebCache.m in Sources */,
+				442C3AD21B70E72300DB9293 /* kinBook.m in Sources */,
 				44EA49A41B59F0E50027C368 /* TKMyConnectionCell.m in Sources */,
 				44A58A3C1B628E6F001742D8 /* UIImageView+WebCache.m in Sources */,
 				445B02641B5E8198004696B3 /* TKCountryVC.m in Sources */,
 				44A58A331B628E6F001742D8 /* SDWebImageDownloader.m in Sources */,
 				4441FAAB1B56AB3300A7B7F9 /* TKRegisterVC.m in Sources */,
+				44592D1D1B718EDE009585C5 /* MBProgressHUD.m in Sources */,
 				441382731B57FC2F00DFB0BC /* TKBaseViewController.m in Sources */,
 				44384B0C1B572A8600C8E35A /* TKCircularView.m in Sources */,
 				44A58A0B1B628900001742D8 /* OthersCircle.m in Sources */,

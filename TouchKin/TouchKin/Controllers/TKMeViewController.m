@@ -93,6 +93,8 @@
     
     [self getActivityForId:circle.userId];
     
+    [[TKDataEngine sharedManager] setCurrentUserId:circle.userId];
+    
 //    self.pageController.dataSource = nil;
 //    self.pageController.dataSource = self;
     
@@ -188,9 +190,12 @@
     
 }
 
--(void) didSelectHeaderTitleAtIndex:(NSInteger)index {
+
+-(void) didSelectHeaderTitleAtIndex:(NSInteger)index withUserId:(NSString *)userId {
     
     self.selctedIndex = index;
+    
+    [[TKDataEngine sharedManager] setCurrentUserId:userId];
     
     self.pageController.dataSource = nil;
     self.pageController.dataSource = self;

@@ -16,6 +16,8 @@
 #import "YLImagePickerController.h"
 #import "TKNetworkManager.h"
 #import "TKUtility.h"
+#import "UIImageView+WebCache.h"
+#import "MBProgressHUD.h"
 
 @interface TKProfileVC ()<UIScrollViewDelegate,YLImagePickerDelegate,TKSingleTextFieldCellDelegate,TKGenderCellDelegate,TKDoubleTextfieldCellDelegate> {
     
@@ -43,6 +45,35 @@
     self.type = NAVIGATIONTYPENORMAL;
     
     userInfo = [[TKDataEngine sharedManager] userInfo];
+    
+    if(!userInfo){
+        userInfo = [[MyConnection alloc] init];
+        
+        userInfo.mobile = [[TKDataEngine sharedManager] getPhoneNumber];
+        userInfo.userId = [[TKDataEngine sharedManager]getUserId];
+        
+    }
+    
+    NSString *urlString= [NSString stringWithFormat:@"https://s3-ap-southeast-1.amazonaws.com/touchkin-dev/avatars/%@.jpeg",userInfo.userId];
+    
+    NSURL * url = [NSURL URLWithString:urlString];
+    UIImage *image = [[SDImageCache sharedImageCache] imageFromDiskCacheForKey:urlString];
+    
+    if(!image){
+     
+        
+        [self.avatar setImageWithURL:url placeholderImage:nil options:SDWebImageHighPriority completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+            
+            self.avatar.image = image;
+        }];
+
+    }
+    
+    else {
+        self.avatar.image = image;
+  
+    }
+
     
     self.tableview.estimatedRowHeight = 72;
     
@@ -216,12 +247,23 @@
 
 -(void)savebuttonAction:(id)sender {
     
+    [[MBProgressHUD showHUDAddedTo:self.view animated:YES] setLabelText:@"Saving..."];
+    
     NSDictionary *dict = @{@"first_name": userInfo.fname,@"gender":userInfo.gender ,@"yob": @(userInfo.yob)};
     
     model = [[MLNetworkModel alloc] init];
     [model postPath:@"user/complete-profile" withParameter:dict withHandler:^(MLClient *sender, id responseObject, NSError *error) {
         
+        dispatch_async(dispatch_get_main_queue(), ^{
+           
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            [[TKDataEngine sharedManager] setUserInfo:userInfo];
+
+        });
+        
+        
         NSLog(@"res = %@",responseObject);
+        
     }];
 
     

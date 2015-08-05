@@ -12,6 +12,7 @@
 #import "TKDataEngine.h"
 #import "MLNetworkModel.h"
 #import "TKPassCodeView.h"
+#import "TKProfileVC.h"
 
 @interface TKRegisterVC ()<TKPassCodeViewDelegate>
 
@@ -67,12 +68,31 @@
         [engine setPhoneNumber:responseObject[@"mobile"]];
         [engine setSessionId:responseObject[@"id"]];
         
-        [engine getMyFamilyInfo];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"LoginSuccess" object:nil];
+
         
-        dispatch_async(dispatch_get_main_queue(), ^{
+        if(responseObject[@"first_name"]){
             
-            [self dismissViewControllerAnimated:YES completion:nil];
-        });
+            [engine getMyFamilyInfo];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                [self dismissViewControllerAnimated:YES completion:nil];
+            });
+        }
+        else {
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                TKProfileVC *profile = [self.storyboard instantiateViewControllerWithIdentifier:@"TKProfileVC"];
+                
+                profile.profileType = LOGINPROFILE;
+                
+                [self.navigationController pushViewController:profile animated:YES];
+            });
+    }
+        
+
 
        
         NSLog(@"resss =%@",responseObject);

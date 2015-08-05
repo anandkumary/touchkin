@@ -35,6 +35,11 @@
         self.dropArrow.hidden = YES;
     }
     
+    if(NAVIGATIONTYPECAMERA == navType){
+        self.titleView.hidden = NO;
+        [self animateCollectionViewDown];
+    }
+    
 }
 
 -(void) setTitle:(NSString *)title {
@@ -160,8 +165,8 @@
         
         self.title = (indexPath.row == 0) ? @"My Family" : others.fname;
         
-        if([self.delegate respondsToSelector:@selector(didSelectHeaderTitleAtIndex:)]){
-            [self.delegate didSelectHeaderTitleAtIndex:indexPath.item];
+        if([self.delegate respondsToSelector:@selector(didSelectHeaderTitleAtIndex:withUserId:)]){
+            [self.delegate didSelectHeaderTitleAtIndex:indexPath.item withUserId:others.userId];
         }
 
     }

@@ -12,6 +12,7 @@
 #import "TKCountryVC.h"
 #import "MLNetworkModel.h"
 #import "TKDataEngine.h"
+#import "TKProfileVC.h"
 
 #define MAXLENGTH 10
 
@@ -130,18 +131,36 @@
             [engine setPhoneNumber:responseObject[@"mobile"]];
             [engine setSessionId:responseObject[@"id"]];
             
-            [engine getMyFamilyInfo];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"LoginSuccess" object:nil];
             
-             dispatch_async(dispatch_get_main_queue(), ^{
+             if(responseObject[@"first_name"]){
                  
-                 if(responseObject[@"mobile_verified"]){
-                    [self dismissViewControllerAnimated:YES completion:nil];
-                 }
-                 else{
-                     [self  forwardButtonAction:nil];
-                 }
-                
-             });
+                 [engine getMyFamilyInfo];
+
+                 dispatch_async(dispatch_get_main_queue(), ^{
+                     
+                     if(responseObject[@"mobile_verified"]){
+                         [self dismissViewControllerAnimated:YES completion:nil];
+                     }
+                     else{
+                         [self  forwardButtonAction:nil];
+                     }
+                     
+                 });
+             }
+             else {
+                 
+                 dispatch_async(dispatch_get_main_queue(), ^{
+                     
+                     TKProfileVC *profile = [self.storyboard instantiateViewControllerWithIdentifier:@"TKProfileVC"];
+                     
+                     profile.profileType = LOGINPROFILE;
+                     
+                     [self.navigationController pushViewController:profile animated:YES];
+                 });
+             }
+            
+          
         }
         else {
             
