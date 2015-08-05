@@ -26,6 +26,7 @@
 }
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 @property (nonatomic, strong) NSMutableArray *familyList;
+- (IBAction)CareForSomeoneAction:(id)sender;
 
 @end
 
@@ -443,4 +444,14 @@
 
 }
 
+- (IBAction)CareForSomeoneAction:(id)sender {
+    
+    TKAddNewVC *addVC = [self.storyboard instantiateViewControllerWithIdentifier:@"TKAddNewVC"];
+    
+    [self addChildViewController:addVC];
+    [self.view addSubview:addVC.view];
+    [addVC didMoveToParentViewController:self];
+
+    
+}
 @end
