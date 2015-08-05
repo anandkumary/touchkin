@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Define.h"
+#import "TKHomeBaseController.h"
 
-@interface TKProfileVC : UIViewController
+@interface TKProfileVC : TKHomeBaseController
 
+@property (nonatomic, assign) ProfileType profileType;
 @end

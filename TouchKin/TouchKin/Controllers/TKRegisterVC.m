@@ -12,11 +12,13 @@
 #import "TKDataEngine.h"
 #import "MLNetworkModel.h"
 #import "TKPassCodeView.h"
+#import "TKProfileVC.h"
 
 @interface TKRegisterVC ()<TKPassCodeViewDelegate>
 
 @property (weak, nonatomic) IBOutlet TKNavigationView *navigationView;
 @property (weak, nonatomic) IBOutlet TKPassCodeView *passcodeview;
+@property (weak, nonatomic) IBOutlet UIButton *resendBtn;
 
 @end
 
@@ -27,6 +29,10 @@
     // Do any additional setup after loading the view.
     self.navigationView.title = @"Verify OTP";
     self.passcodeview.delegate = self;
+    
+    [self.resendBtn setTitle:[[TKDataEngine sharedManager] getPhoneNumber] forState:UIControlStateNormal];
+    
+    [self.resendBtn addTarget:self action:@selector(resendBtnAction:) forControlEvents:UIControlStateNormal];
 }
 
 -(void)viewWillLayoutSubviews {
@@ -37,6 +43,20 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)resendBtnAction:(UIButton *)sender {
+    
+    NSDictionary *dict = @{@"mobile":sender.titleLabel.text};
+    
+    MLNetworkModel *model = [[MLNetworkModel alloc] init];
+    
+    [model postRequestPath:@"signup" withParameter:dict withHandler:^(id responseObject, NSError *error) {
+        
+        if(error == nil){
+            
+        }
+    }];
 }
 
 /*
@@ -67,12 +87,31 @@
         [engine setPhoneNumber:responseObject[@"mobile"]];
         [engine setSessionId:responseObject[@"id"]];
         
-        [engine getMyFamilyInfo];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"LoginSuccess" object:nil];
+
         
-        dispatch_async(dispatch_get_main_queue(), ^{
+        if(responseObject[@"first_name"]){
             
-            [self dismissViewControllerAnimated:YES completion:nil];
-        });
+            [engine getMyFamilyInfo];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                [self dismissViewControllerAnimated:YES completion:nil];
+            });
+        }
+        else {
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                TKProfileVC *profile = [self.storyboard instantiateViewControllerWithIdentifier:@"TKProfileVC"];
+                
+                profile.profileType = LOGINPROFILE;
+                
+                [self.navigationController pushViewController:profile animated:YES];
+            });
+    }
+        
+
 
        
         NSLog(@"resss =%@",responseObject);

@@ -23,3 +23,8 @@ typedef NS_ENUM(NSInteger, FamilyType) {
     MYFAMILYTYPE,
     OTHERSFAMILYTYPE
 };
+
+typedef NS_ENUM(NSInteger, ProfileType) {
+    DASHBOARDPROFILE,
+    LOGINPROFILE
+};

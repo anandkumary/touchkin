@@ -12,7 +12,7 @@
 
 @protocol TKHomeBaseNavigationViewDelegate <NSObject>
 
--(void) didSelectHeaderTitleAtIndex:(NSInteger)index;
+-(void) didSelectHeaderTitleAtIndex:(NSInteger)index withUserId:(NSString *)userId;
 
 @end
 

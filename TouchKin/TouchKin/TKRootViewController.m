@@ -11,6 +11,7 @@
 #import "TKDataEngine.h"
 #import "PSLocationManager.h"
 #import "MLNetworkModel.h"
+#import "MBProgressHUD.h"
 
 static NSString * const KINTROSCREEN = @"TKIntroVC";
 
@@ -54,6 +55,16 @@ static NSString * const KINTROSCREEN = @"TKIntroVC";
     
     tabBarItem3.selectedImage = [[UIImage imageNamed:@"message"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
     tabBarItem3.image = [[UIImage imageNamed:@"message"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fetchUserProfile) name:@"ApplicationOnLoad" object:nil];
+    
+    //LoginSuccess
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fetchUserProfile) name:@"LoginSuccess" object:nil];
+    
+    //MyFamilyCircle
+    
+     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(stopLoader) name:@"MyFamilyCircle" object:nil];
 
 }
 
@@ -84,20 +95,39 @@ static NSString * const KINTROSCREEN = @"TKIntroVC";
     
     if( mobile.length != 0) {
         
-        [PSLocationManager sharedLocationManager].delegate = self;
-        [[PSLocationManager sharedLocationManager] prepLocationUpdates];
-        [[PSLocationManager sharedLocationManager] startLocationUpdates];
-        
-        [[TKDataEngine sharedManager] getMyFamilyInfo];
-        [[TKDataEngine sharedManager] getNewConnectionRequest];
-        [[TKDataEngine sharedManager] getuserInfo];
-
     }
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+-(void)fetchUserProfile {
+    
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [hud setLabelText:@"Loading..."];
+    
+    [PSLocationManager sharedLocationManager].delegate = self;
+    [[PSLocationManager sharedLocationManager] prepLocationUpdates];
+    [[PSLocationManager sharedLocationManager] startLocationUpdates];
+    
+    [[TKDataEngine sharedManager] getMyFamilyInfo];
+    [[TKDataEngine sharedManager] getNewConnectionRequest];
+    [[TKDataEngine sharedManager] getuserInfo];
+    
+}
+
+-(void)stopLoader {
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    });
 }
 
 -(void) showLogin {

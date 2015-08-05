@@ -8,8 +8,17 @@
 
 #import "TKKinBookVC.h"
 #import "TKKinBookCollectionCell.h"
+#import "MLNetworkModel.h"
+#import "TKDataEngine.h"
+#import "kinBook.h"
+#import "UIImageView+WebCache.h"
+#import <MediaPlayer/MediaPlayer.h>
 
-@interface TKKinBookVC ()
+
+@interface TKKinBookVC ()<TKKinBookCollectionCellDelegate>
+
+@property (nonatomic, strong) NSMutableArray *kinbookList;
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
 @end
 
@@ -18,11 +27,51 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    self.type = NAVIGATIONTYPENORMAL;
+    
+    [self hideRightBarButton];
+}
+
+-(void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    NSString *userId = [[TKDataEngine sharedManager] currentUserId];
+    MLNetworkModel *model = [[MLNetworkModel alloc] init];
+    
+    [model getRequestPath:@"/kinbook/messages" withParameter:nil withHandler:^(id responseObject, NSError *error) {
+        
+        NSLog(@"res = %@", responseObject);
+        self.kinbookList = nil;
+
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self parseDictionary:responseObject];
+
+        });
+        
+    }];
+    
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void) parseDictionary:(NSArray *)kinList {
+    
+    for (NSDictionary *dict in kinList) {
+        
+        if(!self.kinbookList){
+            self.kinbookList = [[NSMutableArray alloc] init];
+        }
+        
+        kinBook *kin = [[kinBook alloc] initWithDict:dict];
+        
+        [self.kinbookList addObject:kin];
+    }
+    
+    [self.collectionView reloadData];
 }
 
 /*
@@ -42,7 +91,7 @@
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return  4;
+    return  self.kinbookList.count;
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -51,8 +100,45 @@
     
     cell.layer.cornerRadius = 15.0;
     cell.clipsToBounds = YES;
+    cell.delegate = self;
+    
+    kinBook *kin = [self.kinbookList objectAtIndex:indexPath.section];
+    
+    UIImage *image = [[SDImageCache sharedImageCache] imageFromDiskCacheForKey:kin.thumbnail];
+    
+    cell.thumbnail.image = nil;
+    
+     if(!image)
+        {
+        
+        [cell.thumbnail setImageWithURL:[NSURL URLWithString:kin.thumbnail] placeholderImage:nil options:SDWebImageHighPriority completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+            
+            cell.thumbnail.image = image;
+        }];
+    }
+    else {
+        cell.thumbnail.image = image;
+    }
     return cell;
 }
 
+-(void) didPlayButtonSelected:(TKKinBookCollectionCell *)cell {
+    
+    NSIndexPath *path = [self.collectionView indexPathForCell:cell];
+    
+    kinBook *kin = [self.kinbookList objectAtIndex:path.section];
+    
+    NSURL *movieURL = [NSURL URLWithString:kin.iPhoneMedia];
+  MPMoviePlayerViewController * movieController = [[MPMoviePlayerViewController alloc] initWithContentURL:movieURL];
+    [movieController.moviePlayer setMovieSourceType:MPMovieSourceTypeFile];
+    
+    [self presentMoviePlayerViewControllerAnimated:movieController];
+   
+    [movieController.moviePlayer play];
+}
+
+/*
+
+ */
 
 @end

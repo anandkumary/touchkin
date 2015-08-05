@@ -20,6 +20,8 @@
 @property (nonatomic, strong) NSMutableArray *familyList;
 @property (nonatomic, strong) MyConnection * userInfo;
 
+@property (nonatomic, copy) NSString *currentUserId;
+
 
 -(NSString *) getDeviceToken;
 -(NSString *) getUserId;

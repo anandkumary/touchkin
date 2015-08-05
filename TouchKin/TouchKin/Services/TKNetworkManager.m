@@ -7,6 +7,7 @@
 //
 
 #import "TKNetworkManager.h"
+#import "AppDelegate.h"
 
 #define TouchKinServer [NSURL URLWithString:@"http://54.69.183.186:1340/user/"]
 #define TouchKinVideoServer [NSURL URLWithString:@"http://54.69.183.186:1340/kinbook/message/"]
@@ -57,11 +58,18 @@
     [uploadRequest setValue:[NSString stringWithFormat:@"Bearer %@",sessionToken] forHTTPHeaderField:@"Authorization"];
     [uploadRequest setHTTPBody:postData];
     
+    UIApplication* app = [UIApplication sharedApplication];
+    app.networkActivityIndicatorVisible = YES;
+
+    
     // Execute the reqest:
     [NSURLConnection connectionWithRequest:uploadRequest delegate:self];
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
     [NSURLConnection sendAsynchronousRequest:uploadRequest queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
      {
+     
+     app.networkActivityIndicatorVisible = NO;
+
      if ([data length] > 0 && error == nil){
          
          NSString* response = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
@@ -140,10 +148,15 @@
     
     // Execute the reqest:
     // [NSURLConnection connectionWithRequest:uploadRequest delegate:self];
+    UIApplication* app = [UIApplication sharedApplication];
+    app.networkActivityIndicatorVisible = YES;
     
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
     [NSURLConnection sendAsynchronousRequest:uploadRequest queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
      {
+     
+     app.networkActivityIndicatorVisible = NO;
+
      if ([data length] > 0 && error == nil){
          NSString* response = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
          NSLog(@"%@", response);

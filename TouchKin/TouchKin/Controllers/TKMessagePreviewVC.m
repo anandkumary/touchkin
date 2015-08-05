@@ -82,10 +82,10 @@
 - (IBAction)send_touch:(id)sender {
     
     NSString *userId = [sharedWithArray componentsJoinedByString:@","];
-    
-    NSLog(@"%@",userId);
-    
+        
     [TKNetworkManager uploadVideoFor:self.videoURL withUserID:userId];
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
     
 }
 

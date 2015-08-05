@@ -15,6 +15,8 @@
 
 @interface TKHomeBaseNavigationView()<TKHeaderTitleDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
 
+@property (nonatomic, strong) NSMutableArray *selectedId;
+
 @end
 
 @implementation TKHomeBaseNavigationView
@@ -33,6 +35,13 @@
     if(NAVIGATIONTYPENORMAL == navType){
         [self.titleView setIsTapEnabled:NO];
         self.dropArrow.hidden = YES;
+    }
+    
+    if(NAVIGATIONTYPECAMERA == navType){
+        
+        [self.titleView setIsTapEnabled:NO];
+        self.dropArrow.hidden = YES;
+        [self animateCollectionViewDown];
     }
     
 }
@@ -89,6 +98,9 @@
         
         [self layoutIfNeeded];
 
+    }completion:^(BOOL finished) {
+        self.selectedId = nil;
+        [self.collectionView reloadData];
     }];
     
 }
@@ -140,6 +152,14 @@
             userId = circle.userId;
         }
         
+        if([self.selectedId containsObject:userId]){
+            cell.avatar.layer.borderColor = [UIColor navigationColor].CGColor;
+            cell.avatar.layer.borderWidth = 1.0;
+        }
+        else {
+            cell.avatar.layer.borderWidth = 0.0;
+        }
+        
         NSURL  *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://s3-ap-southeast-1.amazonaws.com/touchkin-dev/avatars/%@.jpeg",userId]];
         
         [cell.avatar setImageWithURL:url completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
@@ -158,10 +178,29 @@
         
         OthersCircle *others = [self.groupList objectAtIndex:indexPath.item];
         
+        if(!self.selectedId){
+            self.selectedId = [[NSMutableArray alloc] init];
+        }
+        
+        TKMyConnectionCell *cell = (TKMyConnectionCell *)[collectionView cellForItemAtIndexPath:indexPath];
+        
+        if(![self.selectedId containsObject:others.userId]){
+            [self.selectedId addObject:others.userId];
+            
+            cell.avatar.layer.borderColor = [UIColor navigationColor].CGColor;
+            cell.avatar.layer.borderWidth = 1.0;
+
+        }
+        else {
+            [self.selectedId removeObject:others.userId];
+            cell.avatar.layer.borderWidth = 0.0;
+
+        }
+        
         self.title = (indexPath.row == 0) ? @"My Family" : others.fname;
         
-        if([self.delegate respondsToSelector:@selector(didSelectHeaderTitleAtIndex:)]){
-            [self.delegate didSelectHeaderTitleAtIndex:indexPath.item];
+        if([self.delegate respondsToSelector:@selector(didSelectHeaderTitleAtIndex:withUserId:)]){
+            [self.delegate didSelectHeaderTitleAtIndex:indexPath.item withUserId:others.userId];
         }
 
     }
