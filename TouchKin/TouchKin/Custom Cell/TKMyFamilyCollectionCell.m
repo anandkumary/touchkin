@@ -36,6 +36,8 @@
     
     TKMyConnectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"collectionImageCell" forIndexPath:indexPath];
     
+    [cell.avatar setImage:[UIImage imageNamed:@"placeholder"]];
+    
     [cell.avatar.layer setCornerRadius:cell.avatar.frame.size.width/2];
     [cell.avatar setBackgroundColor:[UIColor redColor]];
     [cell.avatar setClipsToBounds:YES];

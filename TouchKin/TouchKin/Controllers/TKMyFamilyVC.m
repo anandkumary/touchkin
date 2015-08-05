@@ -107,6 +107,8 @@
     
     __weak typeof(UIImageView *) weakSelf = img;
     
+    [img setImage:[UIImage imageNamed:@"placeholder"]];
+    
     UIImage *image = [[SDImageCache sharedImageCache] imageFromDiskCacheForKey:url.absoluteString];
     
     if(!image){
@@ -187,6 +189,8 @@
     
     if(indexPath.row != 0){
         TKMyFamilyRequestCell *cell = [tableView dequeueReusableCellWithIdentifier:@"requestCell"];
+        
+        [cell.avatar setImage:[UIImage imageNamed:@"placeholder"]];
         
         cell.avatar.layer.cornerRadius = cell.avatar.frame.size.width/2;
         

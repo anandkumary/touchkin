@@ -172,7 +172,7 @@
 
         
         if([self.selectedId containsObject:userId]){
-            cell.avatar.layer.borderColor = [UIColor navigationColor].CGColor;
+            cell.avatar.layer.borderColor = [UIColor colorWithRed:(249.0/255.0) green:(133.0/255.0) blue:(74.0/255.0) alpha:1.0].CGColor;
             cell.checkMark.hidden = NO;
         }
         else {
@@ -207,7 +207,7 @@
         if(![self.selectedId containsObject:others.userId]){
             [self.selectedId addObject:others.userId];
             
-            cell.avatar.layer.borderColor = [UIColor navigationColor].CGColor;
+            cell.avatar.layer.borderColor = [UIColor colorWithRed:(249.0/255.0) green:(133.0/255.0) blue:(74.0/255.0) alpha:1.0].CGColor;
             cell.checkMark.hidden = NO;
 
         }

@@ -139,9 +139,31 @@
 
 -(void) kinBookDidSelectDelete:(TKKinBookCollectionCell *)cell {
     
+    NSIndexPath *path = [self.collectionView indexPathForCell:cell];
+    
+    kinBook *kin = [self.kinbookList objectAtIndex:path.section];
+
+    NSDictionary *dict = @{@"message_id" : kin.kinId};
+    
+    MLNetworkModel *model = [[MLNetworkModel alloc] init];
+    
+    [model postRequestPath:@"kinbook/message/delete" withParameter:dict withHandler:^(id responseObject, NSError *error) {
+        
+        if(error == nil){
+            [self.kinbookList removeObject:kin];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.collectionView reloadData];
+            });
+        }
+    }];
+    
+    
 }
 
 -(void) kinBookDidSelectSendTouch:(TKKinBookCollectionCell *)cell {
+    
+    
     
 }
 
