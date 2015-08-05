@@ -35,8 +35,9 @@
     
     self.navView = [[[NSBundle mainBundle] loadNibNamed:@"TKHomeBaseNavigationView" owner:self options:nil] objectAtIndex:0];
     
-    self.navView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 70);
+    self.navView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width,70);
     [self.navView updateConstraints];
+    [self.navView setBackgroundColor:[UIColor clearColor]];
     [self.navView layoutIfNeeded];
     
     [self.view addSubview:self.navView];
@@ -147,5 +148,26 @@
 -(id) fetchObjectForIndex:(NSInteger)index {
     
     return self.navView.groupList[index];
+}
+
+-(void) homeBaseDidUserTappedOutside:(TKHomeBaseNavigationView *)view {
+    
+    CGRect frame = self.navView.frame;
+    frame.size.height = 70;
+    self.navView.frame = frame;
+    
+}
+
+-(void) homeBaseDidOpen:(TKHomeBaseNavigationView *)view {
+    
+    CGRect frame = self.navView.frame;
+    frame.size.height = [UIScreen mainScreen].bounds.size.height;
+    self.navView.frame = frame;
+}
+-(void) homeBaseDidClose:(TKHomeBaseNavigationView *)view {
+    
+    CGRect frame = self.navView.frame;
+    frame.size.height = 70;
+    self.navView.frame = frame;
 }
 @end

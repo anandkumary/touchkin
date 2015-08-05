@@ -10,9 +10,14 @@
 #import "TKHeaderTitleView.h"
 #import "Define.h"
 
+@class TKHomeBaseNavigationView;
+
 @protocol TKHomeBaseNavigationViewDelegate <NSObject>
 
 -(void) didSelectHeaderTitleAtIndex:(NSInteger)index withUserId:(NSString *)userId;
+-(void) homeBaseDidUserTappedOutside:(TKHomeBaseNavigationView *)view;
+-(void) homeBaseDidOpen:(TKHomeBaseNavigationView *)view;
+-(void) homeBaseDidClose:(TKHomeBaseNavigationView *)view;
 
 @end
 

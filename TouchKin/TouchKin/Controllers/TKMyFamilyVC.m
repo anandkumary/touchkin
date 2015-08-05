@@ -87,10 +87,13 @@
     
     MyCircle *circle = [self.familyList objectAtIndex:index];
     
+    BOOL isPending = NO;
+    
     if(![circle isKindOfClass:[MyCircle class]]){
         OthersCircle *others = [self.familyList objectAtIndex:index];
         [lbl setText:others.fname];
         url = [NSURL URLWithString:[NSString stringWithFormat:@"https://s3-ap-southeast-1.amazonaws.com/touchkin-dev/avatars/%@.jpeg",others.userId]];
+        isPending = others.isPending;
     }
     else{
        [lbl setText:circle.userName];
@@ -103,17 +106,23 @@
     [view addSubview:lbl];
     
     __weak typeof(UIImageView *) weakSelf = img;
-
-    [img setImageWithURL:url completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [weakSelf setImage:image];
-
-        });
-        
-    }];
     
+    UIImage *image = [[SDImageCache sharedImageCache] imageFromDiskCacheForKey:url.absoluteString];
     
+    if(!image){
+        [img setImageWithURL:url completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [weakSelf setImage:image];
+                
+            });
+            
+        }];
+    }
+    else {
+        [img setImage:image];
+    }
+
     UIButton *headerButton = [[UIButton alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width - 50, 90/2 - 40/2, 40, 40)];
     [headerButton setBackgroundColor:[UIColor clearColor]];
     [headerButton setTag:index];
@@ -123,6 +132,13 @@
     if(selectedSection == index && previousSelected != selectedSection){
         
         [headerButton setImage:[UIImage imageNamed:@"up_arrow"] forState:UIControlStateNormal];
+    }
+    
+    [headerButton setUserInteractionEnabled:YES];
+
+    if(isPending){
+        [headerButton setImage:[UIImage imageNamed:@"info"] forState:UIControlStateNormal];
+        [headerButton setUserInteractionEnabled:NO];
     }
     
     [view addSubview:headerButton];

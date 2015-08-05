@@ -81,7 +81,13 @@
         
         [self layoutIfNeeded];
 
-    }];
+    }completion:^(BOOL finished) {
+    
+        if([self.delegate respondsToSelector:@selector(homeBaseDidOpen:)]){
+            [self.delegate homeBaseDidOpen:self];
+        }
+        
+    } ];
     
 }
 
@@ -101,6 +107,10 @@
     }completion:^(BOOL finished) {
         self.selectedId = nil;
         [self.collectionView reloadData];
+        
+        if([self.delegate respondsToSelector:@selector(homeBaseDidClose:)]){
+            [self.delegate homeBaseDidClose:self];
+        }
     }];
     
 }
@@ -134,7 +144,13 @@
     
     TKMyConnectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"myConnection" forIndexPath:indexPath];
     
+    cell.avatar.backgroundColor = [UIColor clearColor];
+    
+    cell.avatar.image = [UIImage imageNamed:@"add_avatar"];
+    
     cell.avatar.layer.cornerRadius = cell.avatar.frame.size.width/2;
+    cell.avatar.layer.borderColor  = [UIColor lightGrayColor].CGColor;
+    cell.avatar.layer.borderWidth  = 2.0;
     
     if(self.groupList.count != indexPath.item){
        
@@ -152,12 +168,16 @@
             userId = circle.userId;
         }
         
+        cell.checkMark.hidden = YES;
+
+        
         if([self.selectedId containsObject:userId]){
             cell.avatar.layer.borderColor = [UIColor navigationColor].CGColor;
-            cell.avatar.layer.borderWidth = 1.0;
+            cell.checkMark.hidden = NO;
         }
         else {
-            cell.avatar.layer.borderWidth = 0.0;
+            
+            cell.avatar.layer.borderColor = [UIColor lightGrayColor].CGColor;
         }
         
         NSURL  *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://s3-ap-southeast-1.amazonaws.com/touchkin-dev/avatars/%@.jpeg",userId]];
@@ -188,12 +208,13 @@
             [self.selectedId addObject:others.userId];
             
             cell.avatar.layer.borderColor = [UIColor navigationColor].CGColor;
-            cell.avatar.layer.borderWidth = 1.0;
+            cell.checkMark.hidden = NO;
 
         }
         else {
             [self.selectedId removeObject:others.userId];
-            cell.avatar.layer.borderWidth = 0.0;
+            cell.checkMark.hidden = YES;
+            cell.avatar.layer.borderColor = [UIColor lightGrayColor].CGColor;
 
         }
         
@@ -225,5 +246,13 @@
     return CGSizeMake(60, 60);
 }
 
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    
+    [self animateCollectionViewUp];
+   
+    if([self.delegate respondsToSelector:@selector(homeBaseDidUserTappedOutside:)]){
+        [self.delegate homeBaseDidUserTappedOutside:self];
+    }
+}
 
 @end

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <objects>
@@ -21,21 +20,32 @@
                             <constraint firstAttribute="width" constant="60" id="RBw-rx-pCW"/>
                         </constraints>
                     </imageView>
+                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="check_select" translatesAutoresizingMaskIntoConstraints="NO" id="2Oq-hB-knq">
+                        <rect key="frame" x="37" y="37" width="15" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="15" id="jVl-G0-emX"/>
+                            <constraint firstAttribute="height" constant="15" id="zxe-b3-x79"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <constraints>
                 <constraint firstItem="NMS-SB-hXx" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="ECT-Dm-bP3"/>
+                <constraint firstAttribute="bottom" secondItem="2Oq-hB-knq" secondAttribute="bottom" constant="8" id="Gsh-Qo-I3c"/>
                 <constraint firstItem="NMS-SB-hXx" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="MuM-ml-YLq"/>
                 <constraint firstAttribute="trailing" secondItem="NMS-SB-hXx" secondAttribute="trailing" id="PPz-zg-AZO"/>
                 <constraint firstAttribute="bottom" secondItem="NMS-SB-hXx" secondAttribute="bottom" id="SNN-wI-PZs"/>
+                <constraint firstAttribute="trailing" secondItem="2Oq-hB-knq" secondAttribute="trailing" constant="8" id="q30-aJ-tP0"/>
             </constraints>
             <connections>
                 <outlet property="avatar" destination="NMS-SB-hXx" id="qNq-Ca-cZf"/>
+                <outlet property="checkMark" destination="2Oq-hB-knq" id="5Q3-GT-AEe"/>
             </connections>
         </collectionViewCell>
     </objects>
     <resources>
         <image name="add_avatar" width="61" height="61"/>
+        <image name="check_select" width="14" height="14"/>
     </resources>
 </document>

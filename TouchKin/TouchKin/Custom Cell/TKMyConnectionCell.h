@@ -10,5 +10,6 @@
 
 @interface TKMyConnectionCell : UICollectionViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *avatar;
+@property (weak, nonatomic) IBOutlet UIImageView *checkMark;
 
 @end

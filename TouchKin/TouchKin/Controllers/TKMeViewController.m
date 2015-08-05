@@ -24,6 +24,8 @@
 
 @property (nonatomic, assign) NSInteger selctedIndex;
 
+@property (nonatomic, assign) BOOL isSelectedUserPending;
+
 @property (nonatomic, strong) MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UIButton *callBtn;
 @property (weak, nonatomic) IBOutlet UIButton *sendTouchBtn;
@@ -62,6 +64,8 @@
     // [self setDelegate:self];
     
     [self.callBtn addTarget:self action:@selector(callButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+    self.isSelectedUserPending = NO;
     
 }
 
@@ -156,7 +160,7 @@
     NSUInteger index = [(TKPageController *)viewController index];
     index++;
     
-    if (index == 3 || self.selctedIndex == 0) {
+    if (index == 3 || self.selctedIndex == 0 || self.isSelectedUserPending) {
         return nil;
     }
     
@@ -179,6 +183,7 @@
     if(![circle isKindOfClass:[MyCircle class]]){
         
         childViewController.others = (OthersCircle *)circle;
+        self.isSelectedUserPending = childViewController.others.isPending;
     }
     else {
         childViewController.circle = circle;
