@@ -12,6 +12,9 @@
 @protocol TKKinBookCollectionCellDelegate <NSObject>
 
 -(void) didPlayButtonSelected:(TKKinBookCollectionCell*)cell;
+-(void) kinBookDidSelectSendTouch:(TKKinBookCollectionCell *)cell;
+-(void) kinBookDidSelectDelete:(TKKinBookCollectionCell *)cell;
+
 
 @end
 

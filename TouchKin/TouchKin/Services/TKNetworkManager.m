@@ -91,8 +91,14 @@
     
     MLNetworkModel *model = [[MLNetworkModel alloc] init];
     
+    UIApplication* app = [UIApplication sharedApplication];
+    app.networkActivityIndicatorVisible = YES;
+
+    
     [model postPath:@"user/add-care-receiver" withParameter:dict withHandler:^(MLClient *sender, id responseObject, NSError *error) {
         NSLog(@"resp = %@",responseObject);
+        app.networkActivityIndicatorVisible = NO;
+
     }];
 }
 
