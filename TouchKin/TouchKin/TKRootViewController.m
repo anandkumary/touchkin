@@ -56,7 +56,7 @@ static NSString * const KINTROSCREEN = @"TKIntroVC";
     tabBarItem3.selectedImage = [[UIImage imageNamed:@"message"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
     tabBarItem3.image = [[UIImage imageNamed:@"message"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fetchUserProfile) name:@"ApplicationOnLoad" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fetchOnApplicationLoad) name:@"ApplicationOnLoad" object:nil];
     
     //LoginSuccess
     
@@ -108,10 +108,16 @@ static NSString * const KINTROSCREEN = @"TKIntroVC";
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
--(void)fetchUserProfile {
+-(void) fetchOnApplicationLoad {
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [hud setLabelText:@"Loading..."];
+    
+    [self fetchUserProfile];
+}
+
+-(void)fetchUserProfile {
+    
     
     [PSLocationManager sharedLocationManager].delegate = self;
     [[PSLocationManager sharedLocationManager] prepLocationUpdates];

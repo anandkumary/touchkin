@@ -173,7 +173,8 @@
         
         MyCircle *circle = [self.familyList objectAtIndex:section];
         
-        if([circle isKindOfClass:[MyCircle class]]){
+        if([circle isKindOfClass:[MyCircle class]])
+            {
             totalRows = 1 + circle.requestList.count;
         }
 
@@ -227,7 +228,7 @@
             
             cell.familyType = OTHERSFAMILYTYPE;
             cell.connectList = others.connectionList;
-            cell.delegate = nil;
+            cell.delegate = self;
             
             cell.accessoryType = UITableViewCellAccessoryNone;
 

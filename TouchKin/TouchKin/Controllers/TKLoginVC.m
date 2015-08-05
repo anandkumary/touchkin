@@ -139,8 +139,6 @@
             
              if(responseObject[@"first_name"]){
                  
-                 [engine getMyFamilyInfo];
-
                  dispatch_async(dispatch_get_main_queue(), ^{
                      
                      if(responseObject[@"mobile_verified"]){

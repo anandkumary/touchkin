@@ -27,7 +27,7 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     
-    return self.connectList.count + ((MYFAMILYTYPE == self.familyType) ? 1 : 0);
+    return self.connectList.count + ((MYFAMILYTYPE == self.familyType) ? 1 : 1);
 }
 
 // The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
@@ -40,7 +40,7 @@
     [cell.avatar setBackgroundColor:[UIColor redColor]];
     [cell.avatar setClipsToBounds:YES];
     
-    if(self.connectList.count == indexPath.item && MYFAMILYTYPE == self.familyType){
+    if(self.connectList.count == indexPath.item){
         
         cell.avatar.image = [UIImage imageNamed:@"add_avatar"];
         
@@ -64,7 +64,7 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    if(MYFAMILYTYPE == self.familyType && self.connectList.count == indexPath.item) {
+    if(self.connectList.count == indexPath.item) {
         
         if([self.delegate respondsToSelector:@selector(didCellSelectAtIndex:)]){
             [self.delegate didCellSelectAtIndex:indexPath.item];

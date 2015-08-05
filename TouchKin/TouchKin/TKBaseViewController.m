@@ -69,19 +69,21 @@
 
 -(void)openMenu {
     
-    self.leftSideConstraint.constant = 0;
-    [self.sideMenu updateConstraintsIfNeeded];
-    self.sideMenu.bgImage.backgroundColor = [UIColor clearColor];
-    
-    [self updateUserProfilePic];
-    
-    [UIView animateWithDuration:0.5 animations:^{
-        [self.view layoutIfNeeded];
-    }completion:^(BOOL finished) {
+    dispatch_async(dispatch_get_main_queue(), ^{
         
-    self.sideMenu.bgImage.backgroundColor = [UIColor colorWithRed:(171.0/255.0) green:(171.0/255.0) blue:(171.0/255.0) alpha:0.5];
-    }];
-
+        self.leftSideConstraint.constant = 0;
+        [self.sideMenu updateConstraintsIfNeeded];
+        self.sideMenu.bgImage.backgroundColor = [UIColor clearColor];
+        
+        [self updateUserProfilePic];
+        
+        [UIView animateWithDuration:0.5 animations:^{
+            [self.view layoutIfNeeded];
+        }completion:^(BOOL finished) {
+            
+            self.sideMenu.bgImage.backgroundColor = [UIColor colorWithRed:(171.0/255.0) green:(171.0/255.0) blue:(171.0/255.0) alpha:0.5];
+        }];
+    });
 }
 
 -(void) updateUserProfilePic {
@@ -116,6 +118,8 @@
 
 -(void)sideMenu:(TKSideMenuView *)menu didSlecetAtIndex:(NSInteger)index {
     
+    dispatch_async(dispatch_get_main_queue(), ^{
+       
     switch (index) {
         case 0:{
             if(![self.childViewControllers containsObject:self.rootVC]){
@@ -168,6 +172,9 @@
     }
     
     [self closeMenu];
+        
+    });
+
 }
 
 -(void)removeAllViewController {

@@ -92,7 +92,7 @@
         
         if(responseObject[@"first_name"]){
             
-            [engine getMyFamilyInfo];
+            // [engine getMyFamilyInfo];
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 

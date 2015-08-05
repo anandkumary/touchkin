@@ -81,6 +81,8 @@
         NSDictionary *dict =  responseObject;
         
         [self parseCareGiverFor:dict[@"care_givers"]];
+        //TODO need to add care_receivers also?
+        
     }];
 }
 
