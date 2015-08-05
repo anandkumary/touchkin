@@ -91,22 +91,24 @@
 
 -(void)updateMyCircle:(NSNotification *)notify {
     
-    self.familyList = [[TKDataEngine sharedManager] familyList];
-    
-    self.selctedIndex = 0;
-    
-     MyCircle *circle = [self.familyList objectAtIndex:0];
-    
-    [self getActivityForId:circle.userId];
-    
-    [[TKDataEngine sharedManager] setCurrentUserId:circle.userId];
-    
-//    self.pageController.dataSource = nil;
-//    self.pageController.dataSource = self;
-    
-    [self addDefaultpages];
-    
-    [self reloadGroupData];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        self.familyList = [[TKDataEngine sharedManager] familyList];
+        
+        self.selctedIndex = 0;
+        
+        self.navTitle = @"My Family";
+        
+        MyCircle *circle = [self.familyList objectAtIndex:0];
+        
+        [self getActivityForId:circle.userId];
+        
+        [[TKDataEngine sharedManager] setCurrentUserId:circle.userId];
+        
+        [self addDefaultpages];
+        
+        [self reloadGroupData];
+    });
 }
 
 -(void) addDefaultpages {

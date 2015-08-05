@@ -53,6 +53,10 @@
     
     [self setUpTokenRegistration:application];
     
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self fetchUserInfo];
+    });
+        
     return YES;
 }
 
@@ -110,6 +114,15 @@
     return (self.internetStatus != NotReachable) ? YES : NO;
 }
 
+- (void) fetchUserInfo {
+    
+    NSString *session = [[TKDataEngine sharedManager] getSessionToken];
+    
+    if(session.length){
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"ApplicationOnLoad" object:nil];
+    }
+}
+
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
@@ -122,16 +135,14 @@
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    
+    [self fetchUserInfo];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     
-    NSString *session = [[TKDataEngine sharedManager] getSessionToken];
     
-    if(session.length){
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"ApplicationOnLoad" object:nil];
-    }
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {

@@ -362,7 +362,6 @@
     [self.view addSubview:addVC.view];
     [addVC didMoveToParentViewController:self];
     
-    
 }
 
 -(void) requestDidCancelCell:(TKMyFamilyRequestCell *)cell {
