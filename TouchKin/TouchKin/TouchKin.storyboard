@@ -171,9 +171,9 @@
                                     <constraint firstAttribute="width" constant="77" id="idg-cc-PvB"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
-                                <inset key="titleEdgeInsets" minX="-64" minY="88" maxX="0.0" maxY="0.0"/>
+                                <inset key="titleEdgeInsets" minX="-55" minY="88" maxX="0.0" maxY="0.0"/>
                                 <inset key="imageEdgeInsets" minX="8" minY="0.0" maxX="0.0" maxY="4"/>
-                                <state key="normal" title="Send a Touch" image="videobtn-1">
+                                <state key="normal" title="Send a Touch" image="videobtn">
                                     <color key="titleColor" red="0.51372549020000002" green="0.51764705879999995" blue="0.5450980392" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -188,9 +188,9 @@
                                     <constraint firstAttribute="height" constant="100" id="yAZ-mF-30S"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
-                                <inset key="titleEdgeInsets" minX="-63" minY="87" maxX="0.0" maxY="0.0"/>
+                                <inset key="titleEdgeInsets" minX="-58" minY="87" maxX="0.0" maxY="0.0"/>
                                 <inset key="imageEdgeInsets" minX="9" minY="0.0" maxX="0.0" maxY="4"/>
-                                <state key="normal" title="Call" image="callbtn-1">
+                                <state key="normal" title="Call" image="callbtn">
                                     <color key="titleColor" red="0.51372549020000002" green="0.51764705879999995" blue="0.5450980392" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -211,7 +211,6 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Me" image="avatar" id="0Pr-1a-x57"/>
                     <connections>
-                        <outlet property="CaptureBtn" destination="taT-qF-1w2" id="8kx-iW-t6r"/>
                         <outlet property="callBtn" destination="udT-X9-ILB" id="wwC-dg-kqd"/>
                         <outlet property="containerView" destination="Ydb-aO-5kZ" id="fDc-bG-lh7"/>
                         <outlet property="sendTouchBtn" destination="taT-qF-1w2" id="uhM-n5-gb5"/>
@@ -1883,10 +1882,11 @@
         <image name="accept" width="39" height="39"/>
         <image name="avatar" width="24" height="24"/>
         <image name="avatar_android" width="22" height="22"/>
-        <image name="callbtn-1" width="60" height="60"/>
+        <image name="callbtn" width="53" height="53"/>
         <image name="camera" width="48" height="48"/>
         <image name="cancel" width="39" height="39"/>
         <image name="cross" width="30" height="30"/>
+        <image name="delete" width="54" height="54"/>
         <image name="edit" width="22" height="22"/>
         <image name="goBack" width="48" height="48"/>
         <image name="groupAvatar" width="24" height="22"/>
@@ -1900,8 +1900,8 @@
         <image name="radio" width="20" height="20"/>
         <image name="radio_sel" width="20" height="20"/>
         <image name="sendatouch" width="50" height="50"/>
-        <image name="stop" width="48" height="48"/>
-        <image name="swapCam" width="48" height="48"/>
-        <image name="videobtn-1" width="60" height="60"/>
+        <image name="stop" width="37" height="37"/>
+        <image name="swapCam" width="37" height="37"/>
+        <image name="videobtn" width="53" height="53"/>
     </resources>
 </document>

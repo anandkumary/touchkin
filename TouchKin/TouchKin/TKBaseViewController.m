@@ -162,23 +162,6 @@
             break;
         }
             
-        case 3: {
-            
-            if(![self.childViewControllers.lastObject isKindOfClass:[TKMessagePreviewVC class]]) {
-                [self removeAllViewController];
-                
-                TKMessagePreviewVC *profilevc = [self.storyboard instantiateViewControllerWithIdentifier:@"TKMessagePreviewVC"];
-                
-                [self addChildViewController:profilevc];
-                [self.containerView addSubview:profilevc.view];
-                [profilevc didMoveToParentViewController:self];
-                
-                
-            }
-
-            
-            break;
-        }
     
         default:
             break;

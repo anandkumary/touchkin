@@ -313,8 +313,8 @@ didFinishRecordingToOutputFileAtURL:(NSURL *)outputFileURL
 
         }
         
-        [self.player play];
-
+       // [self.player play];
+        [self createOutPutPlayButton];
         
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(playerItemDidReachEnd:)
@@ -352,20 +352,19 @@ didFinishRecordingToOutputFileAtURL:(NSURL *)outputFileURL
 -(void) createOutPutPlayButton
 {
 
-    UIButton *playButton = [[UIButton alloc] initWithFrame:CGRectMake(80, 300, 50, 50)];
-    [playButton setBackgroundColor:[UIColor redColor]];
-    [playButton setTitle:@"Replay" forState:UIControlStateNormal];
-    [playButton addTarget:self action:@selector(playOutputVideoAction) forControlEvents:UIControlEventTouchUpInside];
-    [self.outPutPreviewLayer addSubview:playButton];
-    
-    UIButton *DoneButton = [[UIButton alloc] initWithFrame:CGRectMake(150, 300, 50, 50)];
-    [DoneButton setBackgroundColor:[UIColor redColor]];
+    UIButton *DoneButton = [[UIButton alloc] initWithFrame:CGRectMake(130, 350, 70, 25)];
     [DoneButton setTitle:@"Done" forState:UIControlStateNormal];
     [DoneButton addTarget:self action:@selector(doneCamera) forControlEvents:UIControlEventTouchUpInside];
     [self.outPutPreviewLayer addSubview:DoneButton];
+
+    
+    UIButton *playButton = [[UIButton alloc] initWithFrame:CGRectMake(20, 350, 70, 25)];
+    [playButton setTitle:@"Play" forState:UIControlStateNormal];
+    [playButton addTarget:self action:@selector(playOutputVideoAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.outPutPreviewLayer addSubview:playButton];
+    
     
     UIButton *retakeButton = [[UIButton alloc] initWithFrame:CGRectMake(250, 300, 50, 50)];
-    [retakeButton setBackgroundColor:[UIColor redColor]];
     [retakeButton setTitle:@"reTake" forState:UIControlStateNormal];
     [retakeButton addTarget:self action:@selector(recreateCamera) forControlEvents:UIControlEventTouchUpInside];
     [self.outPutPreviewLayer addSubview:retakeButton];
@@ -380,7 +379,7 @@ didFinishRecordingToOutputFileAtURL:(NSURL *)outputFileURL
     AVPlayerItem *p = [notification object];
     [p seekToTime:kCMTimeZero];
     [self.player pause];
-    [self createOutPutPlayButton];
+   
 
 }
 
