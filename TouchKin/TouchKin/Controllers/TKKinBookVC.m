@@ -137,8 +137,12 @@
     [movieController.moviePlayer play];
 }
 
-/*
+-(void) kinBookDidSelectDelete:(TKKinBookCollectionCell *)cell {
+    
+}
 
- */
+-(void) kinBookDidSelectSendTouch:(TKKinBookCollectionCell *)cell {
+    
+}
 
 @end

@@ -15,5 +15,17 @@
         [self.delegate didPlayButtonSelected:self];
     }
 }
+- (IBAction)sendTouchButtonAction:(id)sender {
+    
+    if([self.delegate respondsToSelector:@selector(kinBookDidSelectSendTouch:)]){
+        [self.delegate kinBookDidSelectSendTouch:self];
+    }
+}
+- (IBAction)deleteButtonAction:(id)sender {
+    
+    if([self.delegate respondsToSelector:@selector(kinBookDidSelectDelete:)]){
+        [self.delegate kinBookDidSelectDelete:self];
+    }
+}
 
 @end
