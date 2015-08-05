@@ -28,6 +28,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    self.type = NAVIGATIONTYPENORMAL;
+    
     [self hideRightBarButton];
 }
 
@@ -126,13 +128,13 @@
     
     kinBook *kin = [self.kinbookList objectAtIndex:path.section];
     
-    NSURL *movieURL = [NSURL URLWithString:kin.hdMedia];
+    NSURL *movieURL = [NSURL URLWithString:kin.iPhoneMedia];
   MPMoviePlayerViewController * movieController = [[MPMoviePlayerViewController alloc] initWithContentURL:movieURL];
     [movieController.moviePlayer setMovieSourceType:MPMovieSourceTypeFile];
     
     [self presentMoviePlayerViewControllerAnimated:movieController];
    
-    //[movieController.moviePlayer play];
+    [movieController.moviePlayer play];
 }
 
 /*

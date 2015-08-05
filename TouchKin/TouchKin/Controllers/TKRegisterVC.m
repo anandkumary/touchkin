@@ -18,6 +18,7 @@
 
 @property (weak, nonatomic) IBOutlet TKNavigationView *navigationView;
 @property (weak, nonatomic) IBOutlet TKPassCodeView *passcodeview;
+@property (weak, nonatomic) IBOutlet UIButton *resendBtn;
 
 @end
 
@@ -28,6 +29,8 @@
     // Do any additional setup after loading the view.
     self.navigationView.title = @"Verify OTP";
     self.passcodeview.delegate = self;
+    
+    [self.resendBtn setTitle:[[TKDataEngine sharedManager] getPhoneNumber] forState:UIControlStateNormal];
 }
 
 -(void)viewWillLayoutSubviews {

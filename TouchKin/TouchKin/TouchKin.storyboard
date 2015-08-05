@@ -1371,30 +1371,34 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P0O-yK-c6A">
-                                <rect key="frame" x="20" y="205" width="334" height="21"/>
+                                <rect key="frame" x="72" y="204" width="106" height="21"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="U9z-zp-UT8"/>
+                                    <constraint firstAttribute="height" constant="21" id="J3O-Zx-2RS"/>
+                                    <constraint firstAttribute="width" constant="106" id="Lyc-yo-yBH"/>
                                 </constraints>
                                 <attributedString key="attributedText">
-                                    <fragment content="Resend OTP to ">
+                                    <fragment content="Resend OTP to">
                                         <attributes>
                                             <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <font key="NSFont" size="15" name="HelveticaNeue-Light"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
                                         </attributes>
                                     </fragment>
-                                    <fragment content="+919900150043">
-                                        <attributes>
-                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="15" name="HelveticaNeue-LightItalic"/>
-                                            <font key="NSOriginalFont" size="15" name="HelveticaNeue-LightItalic"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                            <integer key="NSUnderline" value="1"/>
-                                        </attributes>
-                                    </fragment>
                                 </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YyV-sg-bBc">
+                                <rect key="frame" x="179" y="200" width="144" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="THJ-VG-hf2"/>
+                                    <constraint firstAttribute="width" constant="144" id="Vyl-Ks-x4W"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="16"/>
+                                <state key="normal" title="+919900150043">
+                                    <color key="titleColor" red="0.96455439809999999" green="0.2122328543" blue="0.1644467654" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -1403,14 +1407,14 @@
                             <constraint firstAttribute="trailing" secondItem="P0P-qL-rd5" secondAttribute="trailing" id="BGx-pH-Mlm"/>
                             <constraint firstAttribute="trailingMargin" secondItem="fFP-gJ-pcz" secondAttribute="trailing" constant="-16" id="Ej7-We-d6F"/>
                             <constraint firstItem="P0P-qL-rd5" firstAttribute="top" secondItem="I4Q-iC-8KO" secondAttribute="topMargin" id="Fd6-Ph-XhG"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="P0O-yK-c6A" secondAttribute="trailing" constant="5" id="L8f-sl-VtQ"/>
+                            <constraint firstAttribute="centerX" secondItem="P0O-yK-c6A" secondAttribute="centerX" constant="62.5" id="L4w-JH-i3f"/>
                             <constraint firstItem="fFP-gJ-pcz" firstAttribute="leading" secondItem="I4Q-iC-8KO" secondAttribute="leadingMargin" constant="-16" id="Wsp-9z-TW2"/>
                             <constraint firstItem="fFP-gJ-pcz" firstAttribute="top" secondItem="P0P-qL-rd5" secondAttribute="bottom" constant="14" id="aRy-dl-nsv"/>
-                            <constraint firstItem="P0O-yK-c6A" firstAttribute="leading" secondItem="I4Q-iC-8KO" secondAttribute="leadingMargin" constant="4" id="ctO-g0-2L1"/>
-                            <constraint firstAttribute="centerX" secondItem="P0O-yK-c6A" secondAttribute="centerX" constant="0.5" id="iFD-We-Bl8"/>
+                            <constraint firstItem="YyV-sg-bBc" firstAttribute="top" secondItem="fFP-gJ-pcz" secondAttribute="bottom" constant="-2" id="hXh-ph-gcB"/>
                             <constraint firstItem="ahq-SD-Vyb" firstAttribute="leading" secondItem="I4Q-iC-8KO" secondAttribute="leadingMargin" constant="10" id="jfb-3W-bFs"/>
+                            <constraint firstItem="YyV-sg-bBc" firstAttribute="leading" secondItem="P0O-yK-c6A" secondAttribute="trailing" constant="1" id="oGo-rk-K1X"/>
+                            <constraint firstItem="P0O-yK-c6A" firstAttribute="top" secondItem="fFP-gJ-pcz" secondAttribute="bottom" constant="2" id="qdC-pK-4wb"/>
                             <constraint firstItem="6HN-Ph-CiT" firstAttribute="top" secondItem="yGJ-0U-p9J" secondAttribute="bottom" constant="33" id="stH-ig-7sy"/>
-                            <constraint firstItem="P0O-yK-c6A" firstAttribute="top" secondItem="fFP-gJ-pcz" secondAttribute="bottom" constant="3" id="waX-tS-gva"/>
                             <constraint firstAttribute="trailingMargin" secondItem="yGJ-0U-p9J" secondAttribute="trailing" constant="10" id="zsm-5o-c8e"/>
                         </constraints>
                     </view>
@@ -1418,6 +1422,7 @@
                     <connections>
                         <outlet property="navigationView" destination="P0P-qL-rd5" id="iJK-22-9ih"/>
                         <outlet property="passcodeview" destination="fFP-gJ-pcz" id="77G-1J-HKW"/>
+                        <outlet property="resendBtn" destination="YyV-sg-bBc" id="XUo-0m-sj4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3gE-Xj-Drj" userLabel="First Responder" sceneMemberID="firstResponder"/>
