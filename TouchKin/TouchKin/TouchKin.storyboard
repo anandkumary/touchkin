@@ -111,13 +111,13 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="bY7-D5-UD6">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qn0-e9-USz">
-                                <rect key="frame" x="313" y="49" width="46" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qn0-e9-USz">
+                                <rect key="frame" x="306" y="42" width="48" height="48"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="46" id="fXK-f5-mqK"/>
-                                    <constraint firstAttribute="height" constant="30" id="pBk-59-VWu"/>
+                                    <constraint firstAttribute="width" constant="48" id="fXK-f5-mqK"/>
+                                    <constraint firstAttribute="height" constant="48" id="pBk-59-VWu"/>
                                 </constraints>
-                                <state key="normal" title="Button">
+                                <state key="normal" image="goBack">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -131,8 +131,8 @@
                             <constraint firstAttribute="trailing" secondItem="bY7-D5-UD6" secondAttribute="trailing" id="M8O-ch-eoZ"/>
                             <constraint firstItem="bY7-D5-UD6" firstAttribute="top" secondItem="IrY-ey-d6z" secondAttribute="top" id="MMH-pW-xho"/>
                             <constraint firstItem="bY7-D5-UD6" firstAttribute="leading" secondItem="IrY-ey-d6z" secondAttribute="leading" id="New-Ag-qTR"/>
-                            <constraint firstItem="Qn0-e9-USz" firstAttribute="top" secondItem="NOD-t6-O2P" secondAttribute="bottom" constant="29" id="WYg-4r-FBb"/>
-                            <constraint firstAttribute="trailing" secondItem="Qn0-e9-USz" secondAttribute="trailing" constant="16" id="h5f-UK-byw"/>
+                            <constraint firstItem="Qn0-e9-USz" firstAttribute="top" secondItem="NOD-t6-O2P" secondAttribute="bottom" constant="22" id="WYg-4r-FBb"/>
+                            <constraint firstAttribute="trailing" secondItem="Qn0-e9-USz" secondAttribute="trailing" constant="21" id="h5f-UK-byw"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>

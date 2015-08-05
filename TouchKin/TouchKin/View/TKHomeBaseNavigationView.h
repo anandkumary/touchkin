@@ -19,6 +19,8 @@
 -(void) homeBaseDidOpen:(TKHomeBaseNavigationView *)view;
 -(void) homeBaseDidClose:(TKHomeBaseNavigationView *)view;
 
+-(void) homeBaseDidTapCareForSomeone:(TKHomeBaseNavigationView *)view;
+
 @end
 
 @interface TKHomeBaseNavigationView : UIView

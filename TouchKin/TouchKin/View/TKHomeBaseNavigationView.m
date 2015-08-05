@@ -227,6 +227,10 @@
     }
     else {
         //Add new care taker
+        if([self.delegate respondsToSelector:@selector(homeBaseDidTapCareForSomeone:)]){
+            [self.delegate homeBaseDidTapCareForSomeone:self];
+        }
+
     }
     
     if(NAVIGATIONTYPECAMERA != self.navType){

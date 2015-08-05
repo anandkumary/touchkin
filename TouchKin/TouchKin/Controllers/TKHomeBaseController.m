@@ -11,6 +11,7 @@
 #import "TKBaseViewController.h"
 #import "AppDelegate.h"
 #import "TKDataEngine.h"
+#import "TKAddNewVC.h"
 
 @interface TKHomeBaseController ()<TKHomeBaseNavigationViewDelegate>
 @property (nonatomic,strong)  TKHomeBaseNavigationView *navView;
@@ -169,5 +170,14 @@
     CGRect frame = self.navView.frame;
     frame.size.height = 70;
     self.navView.frame = frame;
+}
+
+- (void) homeBaseDidTapCareForSomeone:(TKHomeBaseNavigationView *)view {
+    
+    TKAddNewVC *addVC = [self.storyboard instantiateViewControllerWithIdentifier:@"TKAddNewVC"];
+    
+    [self addChildViewController:addVC];
+    [self.view addSubview:addVC.view];
+    [addVC didMoveToParentViewController:self];
 }
 @end
