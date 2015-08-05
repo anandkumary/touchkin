@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="sIz-HX-5ps">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="sIz-HX-5ps">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -1533,7 +1533,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="90" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="Xp9-ZZ-93l">
-                                <rect key="frame" x="0.0" y="70" width="375" height="597"/>
+                                <rect key="frame" x="0.0" y="70" width="375" height="525"/>
                                 <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="requestCell" rowHeight="90" id="QTu-rK-KHC" customClass="TKMyFamilyRequestCell">
@@ -1673,13 +1673,53 @@
                                     <outlet property="delegate" destination="SPz-Ch-Axz" id="nRj-FI-LNM"/>
                                 </connections>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HCm-3Q-de2">
+                                <rect key="frame" x="0.0" y="595" width="375" height="72"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Care For Someone" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ylt-mU-Wzf">
+                                        <rect key="frame" x="8" y="8" width="223" height="56"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="223" id="Q5L-Zh-p7M"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6zt-nf-7CN">
+                                        <rect key="frame" x="299" y="6" width="60" height="60"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="60" id="3lY-Z4-Suq"/>
+                                            <constraint firstAttribute="width" constant="60" id="QqI-pH-l7a"/>
+                                        </constraints>
+                                        <state key="normal" image="btn">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="CareForSomeoneAction:" destination="SPz-Ch-Axz" eventType="touchUpInside" id="pMr-kI-K93"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.87760418653488159" green="0.87760418653488159" blue="0.87760418653488159" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="ylt-mU-Wzf" firstAttribute="top" secondItem="HCm-3Q-de2" secondAttribute="topMargin" id="9wM-Oc-Nhd"/>
+                                    <constraint firstAttribute="trailing" secondItem="6zt-nf-7CN" secondAttribute="trailing" constant="16" id="ICq-su-dT7"/>
+                                    <constraint firstItem="6zt-nf-7CN" firstAttribute="centerY" secondItem="HCm-3Q-de2" secondAttribute="centerY" id="g9f-Jp-g8v"/>
+                                    <constraint firstAttribute="height" constant="72" id="mVS-tB-lw1"/>
+                                    <constraint firstItem="ylt-mU-Wzf" firstAttribute="centerY" secondItem="6zt-nf-7CN" secondAttribute="centerY" id="myZ-PA-jnD"/>
+                                    <constraint firstItem="6zt-nf-7CN" firstAttribute="top" secondItem="HCm-3Q-de2" secondAttribute="top" constant="6" id="reR-X7-p8a"/>
+                                    <constraint firstItem="ylt-mU-Wzf" firstAttribute="leading" secondItem="HCm-3Q-de2" secondAttribute="leadingMargin" id="xM0-Ml-z7I"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="KSU-5g-yqX" firstAttribute="top" secondItem="Xp9-ZZ-93l" secondAttribute="bottom" id="BPk-9m-9Gn"/>
+                            <constraint firstAttribute="trailing" secondItem="HCm-3Q-de2" secondAttribute="trailing" id="2k0-A7-ykX"/>
+                            <constraint firstItem="KSU-5g-yqX" firstAttribute="top" secondItem="Xp9-ZZ-93l" secondAttribute="bottom" constant="72" id="BPk-9m-9Gn"/>
+                            <constraint firstAttribute="bottom" secondItem="HCm-3Q-de2" secondAttribute="bottom" id="J9b-EK-Cp4"/>
                             <constraint firstItem="Xp9-ZZ-93l" firstAttribute="leading" secondItem="cFn-XJ-icI" secondAttribute="leading" id="Ofe-pw-Hju"/>
                             <constraint firstItem="Xp9-ZZ-93l" firstAttribute="top" secondItem="nYJ-G1-iFH" secondAttribute="bottom" constant="50" id="hOc-BK-DUI"/>
                             <constraint firstAttribute="trailing" secondItem="Xp9-ZZ-93l" secondAttribute="trailing" id="uFj-Ag-8GV"/>
+                            <constraint firstItem="HCm-3Q-de2" firstAttribute="leading" secondItem="cFn-XJ-icI" secondAttribute="leading" id="ux4-lp-B7r"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
@@ -1886,6 +1926,7 @@
         <image name="accept" width="39" height="39"/>
         <image name="avatar" width="24" height="24"/>
         <image name="avatar_android" width="22" height="22"/>
+        <image name="btn" width="58" height="58"/>
         <image name="callbtn" width="53" height="53"/>
         <image name="camera" width="48" height="48"/>
         <image name="cancel" width="39" height="39"/>
