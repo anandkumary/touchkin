@@ -9,6 +9,7 @@
 #import "TKKinBookCollectionCell.h"
 
 @implementation TKKinBookCollectionCell
+
 - (IBAction)playButtonAction:(id)sender {
     
     if([self.delegate respondsToSelector:@selector(didPlayButtonSelected:)]){

@@ -8,13 +8,17 @@
 
 #import "TKAddNewVC.h"
 #import "TKNetworkManager.h"
+#import "Country.h"
+#import "TKCountryVC.h"
 
-@interface TKAddNewVC ()
+@interface TKAddNewVC ()<TKCountryDelegate>
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *topConstraint;
 @property (weak, nonatomic) IBOutlet UITextField *userNametxt;
 @property (weak, nonatomic) IBOutlet UITextField *mobileNumbertxt;
+@property (weak, nonatomic) IBOutlet UIButton *stdCodeBtn;
 
 @property (nonatomic, assign) CGFloat spaceConstriant;
+@property (strong, nonatomic) NSArray *countryList;
 
 @end
 
@@ -25,6 +29,20 @@
     // Do any additional setup after loading the view.
     
     self.spaceConstriant = self.topConstraint.constant;
+    
+    NSLocale *currentLocale = [NSLocale currentLocale];  // get the current locale.
+    NSString *countryCode = [currentLocale objectForKey:NSLocaleCountryCode];
+    
+    Country *dataSource = [[Country alloc] init];
+    self.countryList = [dataSource countries];
+    
+    NSArray *filtered = [self.countryList filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"(code CONTAINS[cd] %@)", countryCode]];
+    NSDictionary *dict = [filtered objectAtIndex:0];
+    
+    [self.stdCodeBtn setTitle:dict[@"dial_code"] forState:UIControlStateNormal];
+    
+
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -46,7 +64,9 @@
 }
 - (IBAction)AddButtonAction:(id)sender {
     
-    [TKNetworkManager sendRequestForUser:self.userNametxt.text withMobileNumber:self.mobileNumbertxt.text];
+    NSString *str = [NSString stringWithFormat:@"%@%@",self.stdCodeBtn.titleLabel.text,self.mobileNumbertxt.text];
+    
+    [TKNetworkManager sendRequestForUser:self.userNametxt.text withMobileNumber:str];
     
     [UIView animateWithDuration:0.4 animations:^{
         self.topConstraint.constant = self.spaceConstriant;
@@ -69,10 +89,28 @@
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
     
     [UIView animateWithDuration:0.4 animations:^{
-        self.topConstraint.constant = -80;
+        self.topConstraint.constant = -180;
         
         [self.view layoutIfNeeded];
     }];
+    
+}
+
+
+-(IBAction)countryCodeButtonAction:(id)sender {
+    
+    TKCountryVC *countryVC = [self.storyboard instantiateViewControllerWithIdentifier:@"TKCountryVC"];
+    
+    countryVC.delegate = self;
+    
+    [self presentViewController:countryVC animated:YES completion:nil];
+}
+
+
+-(void)selectedCountry:(NSString *)stdCode {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.stdCodeBtn setTitle:stdCode forState:UIControlStateNormal];
+    });
     
 }
 

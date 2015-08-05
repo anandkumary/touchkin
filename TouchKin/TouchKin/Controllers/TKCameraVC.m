@@ -352,20 +352,20 @@ didFinishRecordingToOutputFileAtURL:(NSURL *)outputFileURL
 -(void) createOutPutPlayButton
 {
 
-    UIButton *DoneButton = [[UIButton alloc] initWithFrame:CGRectMake(130, 350, 70, 25)];
+    UIButton *DoneButton = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width/2 -  70/2, self.view.frame.size.height/2 + 150 , 70, 25)];
     [DoneButton setTitle:@"Done" forState:UIControlStateNormal];
     [DoneButton addTarget:self action:@selector(doneCamera) forControlEvents:UIControlEventTouchUpInside];
     [self.outPutPreviewLayer addSubview:DoneButton];
 
     
-    UIButton *playButton = [[UIButton alloc] initWithFrame:CGRectMake(20, 350, 70, 25)];
+    UIButton *playButton = [[UIButton alloc] initWithFrame:CGRectMake(DoneButton.frame.origin.x - 100, DoneButton.frame.origin.y, 70, 25)];
     [playButton setTitle:@"Play" forState:UIControlStateNormal];
     [playButton addTarget:self action:@selector(playOutputVideoAction) forControlEvents:UIControlEventTouchUpInside];
     [self.outPutPreviewLayer addSubview:playButton];
     
     
-    UIButton *retakeButton = [[UIButton alloc] initWithFrame:CGRectMake(250, 300, 50, 50)];
-    [retakeButton setTitle:@"reTake" forState:UIControlStateNormal];
+    UIButton *retakeButton = [[UIButton alloc] initWithFrame:CGRectMake(DoneButton.frame.origin.x + 100, DoneButton.frame.origin.y, 70, 25)];
+    [retakeButton setTitle:@"ReTake" forState:UIControlStateNormal];
     [retakeButton addTarget:self action:@selector(recreateCamera) forControlEvents:UIControlEventTouchUpInside];
     [self.outPutPreviewLayer addSubview:retakeButton];
 }
