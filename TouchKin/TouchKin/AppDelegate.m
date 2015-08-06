@@ -11,6 +11,8 @@
 #import "Reachability.h"
 #import <CoreTelephony/CTTelephonyNetworkInfo.h>
 #import <CoreTelephony/CTCarrier.h>
+#import "Reachability.h"
+
 
 @interface AppDelegate ()
 @property(nonatomic, assign) NetworkStatus internetStatus;
@@ -49,7 +51,7 @@
     [self.wifiReachability startNotifier];
     [self updateInterfaceWithReachability:self.wifiReachability];
     
-    [self updateCarrierInfo];
+  //  [self updateCarrierInfo];
     
     [self setUpTokenRegistration:application];
     
