@@ -81,7 +81,13 @@
     img.layer.borderColor   = [UIColor colorWithRed:(207.0/255.0) green:(207.0/255.0) blue:(207.0/255.0) alpha:1.0].CGColor;
     img.layer.borderWidth  = 2.0;
     [view addSubview:img];
-    
+    UILabel *lbl_image = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 70, 70)];
+    [lbl_image setBackgroundColor:[UIColor clearColor]];
+    lbl_image.layer.cornerRadius = img.frame.size.width/2;
+    lbl_image.layer.borderColor   = [UIColor colorWithRed:(207.0/255.0) green:(207.0/255.0) blue:(207.0/255.0) alpha:1.0].CGColor;
+    lbl_image.layer.borderWidth  = 2.0;
+    lbl_image.clipsToBounds = YES;
+
     img.clipsToBounds = YES;
     
     NSURL *url = nil;
@@ -111,6 +117,7 @@
     [view addSubview:lbl];
     
     __weak typeof(UIImageView *) weakSelf = img;
+    __weak typeof(UILabel *) weakLabel = lbl_image;
     
     
     UIImage *image = [[SDImageCache sharedImageCache] imageFromDiskCacheForKey:url.absoluteString];
@@ -120,9 +127,17 @@
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (image ==nil) {
-                    
+                    weakLabel.hidden = NO;
+                    [weakLabel setText:[NSString stringWithFormat:@"%@",[lbl.text substringToIndex:1]]];
+                    [weakLabel setFont:[UIFont systemFontOfSize:33]];
+                    [weakLabel setTextColor:[UIColor whiteColor]];
+                    [weakLabel setBackgroundColor:[UIColor randomColor]];
+                    weakLabel.textAlignment = NSTextAlignmentCenter;
+                    [view addSubview:lbl_image];
+
                 }else {
-                    
+                    lbl_image.hidden = YES;
+
                 [weakSelf setImage:image];
                 }
             });
