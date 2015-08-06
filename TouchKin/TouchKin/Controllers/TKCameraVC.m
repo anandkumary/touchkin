@@ -87,7 +87,9 @@
     NSLog(@"Adding audio input");
     AVCaptureDevice *audioCaptureDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeAudio];
     NSError *error = nil;
+    
     AVCaptureDeviceInput *audioInput = [AVCaptureDeviceInput deviceInputWithDevice:audioCaptureDevice error:&error];
+    
     if (audioInput)
     {
         [CaptureSession addInput:audioInput];
@@ -101,6 +103,7 @@
     [self setPreviewLayer:[[AVCaptureVideoPreviewLayer alloc] initWithSession:CaptureSession] ];
     
     [[self PreviewLayer] setVideoGravity:AVLayerVideoGravityResizeAspectFill];
+    
     
     //ADD MOVIE FILE OUTPUT
     
@@ -152,6 +155,9 @@
     
     //----- START THE CAPTURE SESSION RUNNING -----
     [CaptureSession startRunning];
+    
+    [self CameraToggle];
+
     
 }
 

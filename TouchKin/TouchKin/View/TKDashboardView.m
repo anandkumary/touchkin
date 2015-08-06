@@ -211,13 +211,13 @@
         
         __weak typeof(UIImageView *) weakSelf = self.avatar;
         
-        [self.avatar setImageWithURL:url completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
-           
+        [self.avatar sd_setImageWithURL:url placeholderImage:nil options:SDWebImageRefreshCached completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 weakSelf.image = image;
-  
             });
+
         }];
+        
     }
 }
 

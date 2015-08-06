@@ -107,14 +107,15 @@
     UIImage *image = [[SDImageCache sharedImageCache] imageFromDiskCacheForKey:kin.thumbnail];
     
     cell.thumbnail.image = nil;
+    cell.thumbnail.contentMode = UIViewContentModeScaleAspectFill;
     
      if(!image)
         {
-        
-        [cell.thumbnail setImageWithURL:[NSURL URLWithString:kin.thumbnail] placeholderImage:nil options:SDWebImageHighPriority completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
-            
+        [cell.thumbnail sd_setImageWithURL:[NSURL URLWithString:kin.thumbnail] placeholderImage:nil options:SDWebImageRefreshCached completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             cell.thumbnail.image = image;
+
         }];
+        
     }
     else {
         cell.thumbnail.image = image;

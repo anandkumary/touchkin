@@ -92,7 +92,7 @@
     
     NSURL *url = nil;
    
-    UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(88, 90/3 - 20/2, 180, 20)];
+    UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(88, 90/2 - 25/2 , 180, 20)];
     [lbl setText:@"Anand Kumar"];
     UILabel *subTitle_label = [[UILabel alloc] initWithFrame:CGRectMake(90, 58  , 180, 20)];
     [subTitle_label setFont:[UIFont systemFontOfSize:11]];
@@ -129,35 +129,27 @@
     __weak typeof(UIImageView *) weakSelf = img;
     __weak typeof(UILabel *) weakLabel = lbl_image;
     
-    
-    UIImage *image = [[SDImageCache sharedImageCache] imageFromDiskCacheForKey:url.absoluteString];
-    
-    if(!image){
-        [img setImageWithURL:url completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                if (image ==nil) {
-                    weakLabel.hidden = NO;
-                    [weakLabel setText:[NSString stringWithFormat:@"%@",[lbl.text substringToIndex:1]]];
-                    [weakLabel setFont:[UIFont systemFontOfSize:33]];
-                    [weakLabel setTextColor:[UIColor whiteColor]];
-                    [weakLabel setBackgroundColor:[UIColor randomColor]];
-                    weakLabel.textAlignment = NSTextAlignmentCenter;
-                    [view addSubview:lbl_image];
-
-                }else {
-                    lbl_image.hidden = YES;
-
+    [img sd_setImageWithURL:url placeholderImage:nil options:SDWebImageRefreshCached completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (image ==nil) {
+                weakLabel.hidden = NO;
+                [weakLabel setText:[NSString stringWithFormat:@"%@",[lbl.text substringToIndex:1]]];
+                [weakLabel setFont:[UIFont systemFontOfSize:33]];
+                [weakLabel setTextColor:[UIColor whiteColor]];
+                [weakLabel setBackgroundColor:[UIColor randomColor]];
+                weakLabel.textAlignment = NSTextAlignmentCenter;
+                [view addSubview:lbl_image];
+                
+            }else {
+                lbl_image.hidden = YES;
+                
                 [weakSelf setImage:image];
-                }
-            });
-            
-        }];
-    }
-    else {
-        [img setImage:image];
-    }
-
+            }
+        });
+        
+    }];
+    
     UIButton *headerButton = [[UIButton alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width - 50, 90/2 - 40/2, 40, 40)];
     [headerButton setBackgroundColor:[UIColor clearColor]];
     [headerButton setTag:index];
@@ -259,16 +251,17 @@
     [cell.lbl_imageView_requestCell setText:[cell.userNameLbl.text substringToIndex:1]];
         
         NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://s3-ap-southeast-1.amazonaws.com/touchkin-dev/avatars/%@.jpeg",connect.userId]];
-        [cell.avatar setImageWithURL:url completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+        
+        [cell.avatar sd_setImageWithURL:url placeholderImage:nil options:SDWebImageRefreshCached completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             
             if (image ==nil) {
                 
                 cell.lbl_imageView_requestCell.hidden = NO;
-
+                
             }else{
-            cell.avatar.image = image;
+                cell.avatar.image = image;
                 cell.lbl_imageView_requestCell.hidden = YES;
-
+                
             }
         }];
 

@@ -152,6 +152,7 @@
     cell.avatar.layer.borderColor  = [UIColor lightGrayColor].CGColor;
     cell.avatar.layer.borderWidth  = 2.0;
     cell.avatar.clipsToBounds = YES;
+    
     cell.lbl_imageName.layer.cornerRadius = cell.lbl_imageName.frame.size.width/2;
     cell.lbl_imageName.layer.borderColor  = [UIColor lightGrayColor].CGColor;
     cell.lbl_imageName.layer.borderWidth = 2.0;
@@ -177,10 +178,6 @@
             userId = circle.userId;
             userName =circle.userName;
             [cell.userNameLabel setText:userName];
-
-        }else{
-            
-            [cell.userNameLabel setText:@"Add Kin"];
 
         }
         [cell.lbl_imageName setBackgroundColor:[UIColor randomColor]];
@@ -213,6 +210,9 @@
                 cell.lbl_imageName.hidden = YES;
             }
         }];
+    }
+    else {
+          [cell.userNameLabel setText:@"Add Kin"];
     }
     
     return cell;
