@@ -95,7 +95,6 @@
     UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(88, 90/3 - 20/2, 180, 20)];
     [lbl setText:@"Anand Kumar"];
     UILabel *subTitle_label = [[UILabel alloc] initWithFrame:CGRectMake(90, 58  , 180, 20)];
-    [subTitle_label setText:@"Request"];
     [subTitle_label setFont:[UIFont systemFontOfSize:11]];
     MyCircle *circle = [self.familyList objectAtIndex:index];
     
@@ -104,19 +103,26 @@
     if(![circle isKindOfClass:[MyCircle class]]){
         OthersCircle *others = [self.familyList objectAtIndex:index];
         [lbl setText:others.fname];
+        [subTitle_label setText:[NSString stringWithFormat:@"Add Kin for %@ ",lbl.text]];
         
+        [view addSubview:subTitle_label];
+
         url = [NSURL URLWithString:[NSString stringWithFormat:@"https://s3-ap-southeast-1.amazonaws.com/touchkin-dev/avatars/%@.jpeg",others.userId]];
         isPending = others.isPending;
     }
     else{
         
-       [lbl setText:circle.userName];
+        [lbl setText:circle.userName];
+        
+        [subTitle_label setText:[NSString stringWithFormat:@"%@ have 2 Kins",lbl.text]];
+        
+        [view addSubview:subTitle_label];
+        
          url = [NSURL URLWithString:[NSString stringWithFormat:@"https://s3-ap-southeast-1.amazonaws.com/touchkin-dev/avatars/%@.jpeg",circle.userId]];
     }
 
     [lbl setTextColor:[UIColor colorWithRed:(70.0/255.0) green:(69.0/255.0) blue:(69.0/255.0) alpha:1.0]];
     [subTitle_label setTextColor:[UIColor colorWithRed:(70.0/255.0) green:(69.0/255.0) blue:(69.0/255.0) alpha:1.0]];
-    [view addSubview:subTitle_label];
 
     [view addSubview:lbl];
     
@@ -155,27 +161,41 @@
     UIButton *headerButton = [[UIButton alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width - 50, 90/2 - 40/2, 40, 40)];
     [headerButton setBackgroundColor:[UIColor clearColor]];
     [headerButton setTag:index];
+    [headerButton addTarget:self action:@selector(headerButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+
     [headerButton setImage:[UIImage imageNamed:@"downArrow"] forState:UIControlStateNormal];
-    
+
     if(selectedSection == index && previousSelected != selectedSection){
         
-        [headerButton addTarget:self action:@selector(headerButtonAction:) forControlEvents:UIControlEventTouchUpInside];
 
         [headerButton setImage:[UIImage imageNamed:@"up_arrow"] forState:UIControlStateNormal];
+
+
     }
     
     [headerButton setUserInteractionEnabled:YES];
+    UIButton *headerButton1 = [[UIButton alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width - 60, 15, 60, 60)];
 
     if(isPending){
         
-        [headerButton setImage:[UIImage imageNamed:@"info"] forState:UIControlStateNormal];
-        //[headerButton setUserInteractionEnabled:NO];
-        [headerButton addTarget:self action:@selector(headerButtonPendingAction) forControlEvents:UIControlEventTouchUpInside];
+        [headerButton1 setBackgroundColor:[UIColor clearColor]];
+        [headerButton1 addTarget:self action:@selector(headerButtonPendingAction) forControlEvents:UIControlEventTouchUpInside];
+        
+        [headerButton1 setTag:index];
+    
+        [headerButton1 setImage:[UIImage imageNamed:@"info"] forState:UIControlStateNormal];
+        [headerButton setHidden:YES];
+        [view addSubview:headerButton1];
+
+        [subTitle_label setText:[NSString stringWithFormat:@"Add Kin for %@ ",lbl.text]];
+        
+        [view addSubview:subTitle_label];
+
 
     }
     
     [view addSubview:headerButton];
-    
+
     return view;
 }
 
@@ -498,7 +518,6 @@
     [self.view addSubview:addVC.view];
     [addVC didMoveToParentViewController:self];
 
-    
 }
 
 
