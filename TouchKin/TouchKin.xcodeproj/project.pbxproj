@@ -98,6 +98,7 @@
 		44EA499D1B59D7420027C368 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 44EA499C1B59D7420027C368 /* Reachability.m */; };
 		44EA49A41B59F0E50027C368 /* TKMyConnectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 44EA49A21B59F0E50027C368 /* TKMyConnectionCell.m */; };
 		44EA49A51B59F0E50027C368 /* TKMyConnectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44EA49A31B59F0E50027C368 /* TKMyConnectionCell.xib */; };
+		900E34001B73647C006A8FCF /* reuseLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 900E33FF1B73647C006A8FCF /* reuseLabel.m */; };
 		90D9821B1B6CB54100EFB084 /* TKMessagePreviewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 90D9821A1B6CB54100EFB084 /* TKMessagePreviewVC.m */; };
 /* End PBXBuildFile section */
 
@@ -283,6 +284,8 @@
 		44EA49A11B59F0E50027C368 /* TKMyConnectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKMyConnectionCell.h; sourceTree = "<group>"; };
 		44EA49A21B59F0E50027C368 /* TKMyConnectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKMyConnectionCell.m; sourceTree = "<group>"; };
 		44EA49A31B59F0E50027C368 /* TKMyConnectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TKMyConnectionCell.xib; sourceTree = "<group>"; };
+		900E33FE1B73647C006A8FCF /* reuseLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = reuseLabel.h; sourceTree = "<group>"; };
+		900E33FF1B73647C006A8FCF /* reuseLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = reuseLabel.m; sourceTree = "<group>"; };
 		90D982191B6CB54100EFB084 /* TKMessagePreviewVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKMessagePreviewVC.h; sourceTree = "<group>"; };
 		90D9821A1B6CB54100EFB084 /* TKMessagePreviewVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKMessagePreviewVC.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -387,6 +390,8 @@
 				449013641B5A2CC4007B312C /* Define.h */,
 				44091E611B5C8A83008BB282 /* UILabel+Attribute.h */,
 				44091E621B5C8A83008BB282 /* UILabel+Attribute.m */,
+				900E33FE1B73647C006A8FCF /* reuseLabel.h */,
+				900E33FF1B73647C006A8FCF /* reuseLabel.m */,
 				445B02561B5E7E7A004696B3 /* TKDataEngine.h */,
 				445B02571B5E7E7A004696B3 /* TKDataEngine.m */,
 				44717B9D1B6E633100713841 /* TKUtility.h */,
@@ -774,6 +779,7 @@
 				44C9DB101B588E8400714340 /* TKHeaderTitleView.m in Sources */,
 				44A58A311B628E6F001742D8 /* SDWebImageCompat.m in Sources */,
 				44A58A391B628E6F001742D8 /* UIImage+MultiFormat.m in Sources */,
+				900E34001B73647C006A8FCF /* reuseLabel.m in Sources */,
 				44091E631B5C8A83008BB282 /* UILabel+Attribute.m in Sources */,
 				44A58A081B62839D001742D8 /* MyCircle.m in Sources */,
 				44A58A3A1B628E6F001742D8 /* UIImage+WebP.m in Sources */,

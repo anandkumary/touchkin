@@ -18,6 +18,9 @@
 #import "TKAddNewVC.h"
 #import "MLNetworkModel.h"
 
+#import "UIColor+Navigation.h"
+
+
 @interface TKMyFamilyVC () <TKMyFamilyCollectionCellDelegate,TKMyFamilyRequestCellDelegate>{
     NSInteger selectedSection;
     
@@ -26,6 +29,7 @@
 }
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 @property (nonatomic, strong) NSMutableArray *familyList;
+
 - (IBAction)CareForSomeoneAction:(id)sender;
 
 @end
@@ -72,7 +76,7 @@
     [view setBackgroundColor:[UIColor colorWithRed:(235.0/255.0) green:(235.0/255.0) blue:(235.0/255.0) alpha:1.0]];
     
     UIImageView *img = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 70, 70)];
-    [img setBackgroundColor:[UIColor redColor]];
+    [img setBackgroundColor:[UIColor clearColor]];
     img.layer.cornerRadius = img.frame.size.width/2;
     img.layer.borderColor   = [UIColor colorWithRed:(207.0/255.0) green:(207.0/255.0) blue:(207.0/255.0) alpha:1.0].CGColor;
     img.layer.borderWidth  = 2.0;
@@ -81,7 +85,6 @@
     img.clipsToBounds = YES;
     
     NSURL *url = nil;
-    
    
     UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(85, 90/2 - 20/2, 180, 20)];
     [lbl setText:@"Anand Kumar"];
@@ -93,6 +96,7 @@
     if(![circle isKindOfClass:[MyCircle class]]){
         OthersCircle *others = [self.familyList objectAtIndex:index];
         [lbl setText:others.fname];
+        
         url = [NSURL URLWithString:[NSString stringWithFormat:@"https://s3-ap-southeast-1.amazonaws.com/touchkin-dev/avatars/%@.jpeg",others.userId]];
         isPending = others.isPending;
     }
@@ -108,7 +112,6 @@
     
     __weak typeof(UIImageView *) weakSelf = img;
     
-    [img setImage:[UIImage imageNamed:@"placeholder"]];
     
     UIImage *image = [[SDImageCache sharedImageCache] imageFromDiskCacheForKey:url.absoluteString];
     
@@ -116,8 +119,12 @@
         [img setImageWithURL:url completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
             
             dispatch_async(dispatch_get_main_queue(), ^{
+                if (image ==nil) {
+                    
+                }else {
+                    
                 [weakSelf setImage:image];
-                
+                }
             });
             
         }];
@@ -189,13 +196,15 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if(indexPath.row != 0){
-        TKMyFamilyRequestCell *cell = [tableView dequeueReusableCellWithIdentifier:@"requestCell"];
         
-        [cell.avatar setImage:[UIImage imageNamed:@"placeholder"]];
+    TKMyFamilyRequestCell *cell = [tableView dequeueReusableCellWithIdentifier:@"requestCell"];
         
         cell.avatar.layer.cornerRadius = cell.avatar.frame.size.width/2;
         
         cell.avatar.clipsToBounds = YES;
+        cell.lbl_imageView_requestCell.layer.cornerRadius = cell.lbl_imageView_requestCell.frame.size.width/2;
+        
+        cell.lbl_imageView_requestCell.clipsToBounds = YES;
         
         MyCircle *circle = [self.familyList objectAtIndex:indexPath.section];
         
@@ -204,17 +213,26 @@
         cell.delegate = self;
         
         cell.userNameLbl.text = connect.nickName;
+    [cell.lbl_imageView_requestCell setText:[cell.userNameLbl.text substringToIndex:1]];
         
         NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://s3-ap-southeast-1.amazonaws.com/touchkin-dev/avatars/%@.jpeg",connect.userId]];
         [cell.avatar setImageWithURL:url completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
             
+            if (image ==nil) {
+                
+                cell.lbl_imageView_requestCell.hidden = NO;
+
+            }else{
             cell.avatar.image = image;
+                cell.lbl_imageView_requestCell.hidden = YES;
+
+            }
         }];
 
-        
         return cell;
     }
     else {
+        
         TKMyFamilyCollectionCell *cell = [tableView dequeueReusableCellWithIdentifier:@"collectionCell"];
         
         MyCircle *circle = [self.familyList objectAtIndex:indexPath.section];
@@ -226,7 +244,6 @@
             cell.delegate = self;
             cell.accessoryType = UITableViewCellAccessoryNone;
 
-            
         }else {
             
             OthersCircle *others = [self.familyList objectAtIndex:indexPath.section];
@@ -307,6 +324,7 @@
             else {
               
                   [self.tableview insertRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:0 inSection:selectedSection],nil] withRowAnimation:UITableViewRowAnimationMiddle];
+                
             }
             
             [self.tableview endUpdates];
@@ -405,6 +423,7 @@
 
     
 }
+
 -(void) requestDidAcceptCell:(TKMyFamilyRequestCell *)cell {
     
     NSIndexPath *indexPath = [self.tableview indexPathForCell:cell];
@@ -458,4 +477,6 @@
 
     
 }
+
+
 @end

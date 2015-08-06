@@ -59,11 +59,13 @@
     // Pass the selected object to the new view controller.
 }
 */
-- (IBAction)addContactbutton:(id)sender {
+- (IBAction)addContactbutton:(id)sender
+{
+    
     
 }
-- (IBAction)AddButtonAction:(id)sender {
-    
+- (IBAction)AddButtonAction:(id)sender
+{
     NSString *str = [NSString stringWithFormat:@"%@%@",self.stdCodeBtn.titleLabel.text,self.mobileNumbertxt.text];
     
     [TKNetworkManager sendRequestForUser:self.userNametxt.text withMobileNumber:str];
@@ -89,9 +91,10 @@
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
     
     [UIView animateWithDuration:0.4 animations:^{
-        self.topConstraint.constant = -180;
         
+        self.topConstraint.constant = -80;
         [self.view layoutIfNeeded];
+        
     }];
     
 }
@@ -104,10 +107,12 @@
     countryVC.delegate = self;
     
     [self presentViewController:countryVC animated:YES completion:nil];
+    
 }
 
 
 -(void)selectedCountry:(NSString *)stdCode {
+    
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.stdCodeBtn setTitle:stdCode forState:UIControlStateNormal];
     });

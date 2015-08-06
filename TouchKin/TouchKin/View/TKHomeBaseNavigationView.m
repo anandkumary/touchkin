@@ -12,11 +12,11 @@
 #import "UIImageView+WebCache.h"
 #import "MyCircle.h"
 #import "OthersCircle.h"
+#import "reuseLabel.h"
 
 @interface TKHomeBaseNavigationView()<TKHeaderTitleDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic, strong) NSMutableArray *selectedId;
-
 @end
 
 @implementation TKHomeBaseNavigationView
@@ -28,6 +28,8 @@
     // Drawing code
 }
 */
+
+
 -(void) setNavType:(NavigationType)navType {
     
     _navType = navType;
@@ -99,7 +101,7 @@
     [UIView animateWithDuration:0.4 animations:^{
         
         CGRect frame = self.frame;
-        frame.size.height = 70;
+        frame.size.height = 90;
         self.frame = frame;
         
         [self layoutIfNeeded];
@@ -145,29 +147,45 @@
     TKMyConnectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"myConnection" forIndexPath:indexPath];
     
     cell.avatar.backgroundColor = [UIColor clearColor];
-    
     cell.avatar.image = [UIImage imageNamed:@"add_avatar"];
-    
     cell.avatar.layer.cornerRadius = cell.avatar.frame.size.width/2;
     cell.avatar.layer.borderColor  = [UIColor lightGrayColor].CGColor;
     cell.avatar.layer.borderWidth  = 2.0;
-    
+    cell.avatar.clipsToBounds = YES;
+    cell.lbl_imageName.layer.cornerRadius = cell.lbl_imageName.frame.size.width/2;
+    cell.lbl_imageName.layer.borderColor  = [UIColor lightGrayColor].CGColor;
+    cell.lbl_imageName.layer.borderWidth = 2.0;
+    cell.lbl_imageName.clipsToBounds = YES;
+
     if(self.groupList.count != indexPath.item){
        
         MyCircle *circle = [self.groupList objectAtIndex:indexPath.item];
         OthersCircle *others = nil;
         
         NSString *userId = nil;
-        
+        NSString *userName = nil;
+
         if(![circle isKindOfClass:[MyCircle class]]){
             
             others = (OthersCircle *)circle;
             userId = others.userId;
+            userName =others.fname;
+            [cell.userNameLabel setText:userName];
+
         }
-        else{
+        else if([circle isKindOfClass:[MyCircle class]]){
             userId = circle.userId;
+            userName =circle.userName;
+            [cell.userNameLabel setText:userName];
+
+        }else{
+            
+            [cell.userNameLabel setText:@"Add Kin"];
+
         }
-        
+        [cell.lbl_imageName setBackgroundColor:[UIColor randomColor]];
+        [cell.lbl_imageName setText:[userName substringToIndex:1]];
+        cell.userNameLabel.adjustsFontSizeToFitWidth = YES;
         cell.checkMark.hidden = YES;
 
         
@@ -178,13 +196,22 @@
         else {
             
             cell.avatar.layer.borderColor = [UIColor lightGrayColor].CGColor;
+            
         }
         
         NSURL  *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://s3-ap-southeast-1.amazonaws.com/touchkin-dev/avatars/%@.jpeg",userId]];
         
+        
         [cell.avatar setImageWithURL:url completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
-            
-            cell.avatar.image = image;
+           
+            if (image == nil) {
+                
+                cell.lbl_imageName.hidden = NO;
+                
+            }else{
+                cell.avatar.image = image;
+                cell.lbl_imageName.hidden = YES;
+            }
         }];
     }
     
@@ -247,7 +274,7 @@
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake(60, 60);
+    return CGSizeMake(60, 82);
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {

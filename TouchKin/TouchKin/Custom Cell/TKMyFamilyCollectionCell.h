@@ -22,5 +22,7 @@
 
 @property (weak, nonatomic) IBOutlet UICollectionView *myCircleCollectionView;
 
+
+
 @property (nonatomic, strong) NSMutableArray *connectList;
 @end
