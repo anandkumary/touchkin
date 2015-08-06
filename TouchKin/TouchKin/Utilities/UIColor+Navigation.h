@@ -11,5 +11,6 @@
 @interface UIColor (Navigation)
 
 +(UIColor *) navigationColor;
++(UIColor *) randomColor;
 
 @end

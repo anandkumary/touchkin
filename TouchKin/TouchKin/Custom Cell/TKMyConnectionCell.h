@@ -11,5 +11,11 @@
 @interface TKMyConnectionCell : UICollectionViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *avatar;
 @property (weak, nonatomic) IBOutlet UIImageView *checkMark;
+@property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *lbl_imageName;
+@property (weak, nonatomic) IBOutlet UILabel *userName_CollectionCell;
+
+
+@property (weak, nonatomic) IBOutlet UILabel *image_CollectionCell;
 
 @end

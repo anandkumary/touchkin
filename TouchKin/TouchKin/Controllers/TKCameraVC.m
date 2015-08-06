@@ -23,7 +23,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *togglebtn;
 
 //Using output video
-@property (nonatomic, strong) UIView *outPutPreviewLayer;
 
 @property (strong) NSURL *videoURL;
 @property (retain,nonatomic) AVCaptureVideoPreviewLayer *PreviewLayer;
@@ -303,18 +302,18 @@ didFinishRecordingToOutputFileAtURL:(NSURL *)outputFileURL
         
         self.avlayer.frame = CGRectMake(0, 0, self.view.frame.size.width,self.videoLayer.frame.size.height);
         
-        if(!self.outPutPreviewLayer){
-            self.outPutPreviewLayer =[[UIView alloc] initWithFrame:self.view.bounds];
-            
-            self.outPutPreviewLayer.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.7];
-            
-            [self.view addSubview:self.outPutPreviewLayer];
-            [self.outPutPreviewLayer.layer addSublayer:self.avlayer];
-
-        }
+//        if(!self.outPutPreviewLayer){
+//            self.outPutPreviewLayer =[[UIView alloc] initWithFrame:self.view.bounds];
+//            
+//            self.outPutPreviewLayer.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.7];
+//            
+//            [self.view addSubview:self.outPutPreviewLayer];
+//            [self.outPutPreviewLayer.layer addSublayer:self.avlayer];
+//
+//        }
         
        // [self.player play];
-        [self createOutPutPlayButton];
+        [self doneCamera];
         
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(playerItemDidReachEnd:)
@@ -349,39 +348,6 @@ didFinishRecordingToOutputFileAtURL:(NSURL *)outputFileURL
 }
 
 
--(void) createOutPutPlayButton
-{
-
-    UIButton *DoneButton = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width/2 -  70/2, self.view.frame.size.height/2 + 150 , 70, 25)];
-    [DoneButton setTitle:@"Done" forState:UIControlStateNormal];
-    [DoneButton addTarget:self action:@selector(doneCamera) forControlEvents:UIControlEventTouchUpInside];
-    [self.outPutPreviewLayer addSubview:DoneButton];
-
-    
-    UIButton *playButton = [[UIButton alloc] initWithFrame:CGRectMake(DoneButton.frame.origin.x - 100, DoneButton.frame.origin.y, 70, 25)];
-    [playButton setTitle:@"Play" forState:UIControlStateNormal];
-    [playButton addTarget:self action:@selector(playOutputVideoAction) forControlEvents:UIControlEventTouchUpInside];
-    [self.outPutPreviewLayer addSubview:playButton];
-    
-    
-    UIButton *retakeButton = [[UIButton alloc] initWithFrame:CGRectMake(DoneButton.frame.origin.x + 100, DoneButton.frame.origin.y, 70, 25)];
-    [retakeButton setTitle:@"ReTake" forState:UIControlStateNormal];
-    [retakeButton addTarget:self action:@selector(recreateCamera) forControlEvents:UIControlEventTouchUpInside];
-    [self.outPutPreviewLayer addSubview:retakeButton];
-}
-
--(void)playOutputVideoAction
-{
-    [self.player play];
-}
-
-- (void)playerItemDidReachEnd:(NSNotification *)notification {
-    AVPlayerItem *p = [notification object];
-    [p seekToTime:kCMTimeZero];
-    [self.player pause];
-   
-
-}
 
 -(void)doneCamera {
     
@@ -393,18 +359,6 @@ didFinishRecordingToOutputFileAtURL:(NSURL *)outputFileURL
     [self.view addSubview:messageVc.view];
     [messageVc didMoveToParentViewController:self];
     
-}
-
-
--(void)recreateCamera
-{
-    [self.outPutPreviewLayer removeFromSuperview];
-    self.outPutPreviewLayer = nil;
-    
-    self.startbtn.selected = NO;
-    WeAreRecording = NO;
-    
-    [CaptureSession startRunning];
 }
 
 - (IBAction)cancelButtonAction:(id)sender {

@@ -21,6 +21,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *userNameLbl;
 @property (weak, nonatomic) IBOutlet UIImageView *avatar;
 
+@property (weak, nonatomic) IBOutlet UILabel *lbl_imageView_requestCell;
+
 @property (nonatomic, assign) id<TKMyFamilyRequestCellDelegate> delegate;
 
 @end

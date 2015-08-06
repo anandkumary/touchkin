@@ -12,4 +12,6 @@
 
 -(void) setText:(NSString *)text highlightText:(NSString *)highLightText withColor:(UIColor *)color;
 
+
+
 @end
