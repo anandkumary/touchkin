@@ -11,8 +11,13 @@
 typedef void (^MLResponseHandlerBlock)(id responseObject , NSError *error);
 
 
-@interface MLNetworkModel : MLClient
+@interface MLNetworkModel : MLClient {
+    
+}
 
+@property (nonatomic, assign) BOOL addNoToken;
+
+- (instancetype)initWithNoToken:(BOOL)noTokenAdded;
 - (instancetype)initWithBaseUrl:(NSString *)urlString;
 
 -(void) initializeDefaultHeader;

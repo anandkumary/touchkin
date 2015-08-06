@@ -31,13 +31,23 @@ static NSString *const KDomainUrl = @"http://54.69.183.186:1340/";
     return self;
 }
 
+- (instancetype)initWithNoToken:(BOOL)noTokenAdded
+{
+    self = [super initWithBaseUrl:KDomainUrl];
+    if (self) {
+        self.addNoToken = noTokenAdded;
+        [self initializeDefaultHeader];
+    }
+    return self;
+}
+
 -(void) initializeDefaultHeader {
     
     [self.defaultHeaders setObject:@"application/json" forKey:@"Accept"];
     [self.defaultHeaders setObject:@"application/json" forKey:@"content-type"];
     
     NSString *ssToken= [[TKDataEngine sharedManager] getSessionToken];
-    if(ssToken.length){
+    if(ssToken.length && !self.addNoToken){
         
         NSString *sessionToken = [NSString stringWithFormat:@"Bearer %@",ssToken];
         [self.defaultHeaders setObject:sessionToken forKey:@"Authorization"];

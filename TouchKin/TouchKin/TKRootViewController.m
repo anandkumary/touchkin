@@ -12,6 +12,7 @@
 #import "PSLocationManager.h"
 #import "MLNetworkModel.h"
 #import "MBProgressHUD.h"
+#import "AppDelegate.h"
 
 static NSString * const KINTROSCREEN = @"TKIntroVC";
 
@@ -65,6 +66,9 @@ static NSString * const KINTROSCREEN = @"TKIntroVC";
     //MyFamilyCircle
     
      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(stopLoader) name:@"MyFamilyCircle" object:nil];
+   
+    //Network Updates
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:@"kReachabilityChangedNotification" object:nil];
 
 }
 
@@ -126,6 +130,43 @@ static NSString * const KINTROSCREEN = @"TKIntroVC";
     [[TKDataEngine sharedManager] getMyFamilyInfo];
     [[TKDataEngine sharedManager] getNewConnectionRequest];
     [[TKDataEngine sharedManager] getuserInfo];
+    
+   // [self updateUserStatus];
+    
+}
+
+- (void)reachabilityChanged:(NSNotification * )notification {
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self updateUserStatus];
+    });
+}
+
+- (void) updateUserStatus {
+    
+    
+    NSString *deviceToken = [[TKDataEngine sharedManager] getDeviceToken];
+    NSString *phone  = [[TKDataEngine sharedManager] getPhoneNumber];
+    NSString *deviceOS = @"ios";
+    
+    NSInteger batteryLevel = (NSInteger)([UIDevice currentDevice].batteryLevel * 100);
+    if(batteryLevel == -1){
+        batteryLevel = 100;
+    }
+
+    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    
+    NSDictionary *connectivitystatus = @{@"battery" : @(batteryLevel),@"wifi_strength":@((int)delegate.isConnectedToWifi),@"3g": @((int)delegate.isConnectedTo3G)};
+    
+    NSDictionary *dict = @{@"mobile": phone,@"mobile_os": deviceOS,@"mobile_device_id": deviceToken,@"type": @"connectivity",@"data":connectivitystatus};
+    
+    MLNetworkModel *model = [[MLNetworkModel alloc] initWithNoToken:YES];
+    
+    [model postRequestPath:@"activity/add" withParameter:dict withHandler:^(id responseObject, NSError *error) {
+        
+        NSLog(@"res connectivity = %@",responseObject);
+    
+    }];
     
 }
 
@@ -209,15 +250,6 @@ static NSString * const KINTROSCREEN = @"TKIntroVC";
 
 -(void) postCoordinateForLat:(double)lat withLongitude:(double)log {
    
-    /*
-     mobile: "+919740495689",
-     mobile_os: "ios",
-     mobile_device_id: "4546464",
-     point: {
-     x: 38.32,
-     y: 32.34
-     }
-     */
     TKDataEngine *engine = [TKDataEngine sharedManager];
     
     NSString *mobile = [engine getPhoneNumber];
