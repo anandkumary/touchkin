@@ -92,9 +92,11 @@
     
     NSURL *url = nil;
    
-    UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(85, 90/2 - 20/2, 180, 20)];
+    UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(88, 90/3 - 20/2, 180, 20)];
     [lbl setText:@"Anand Kumar"];
-    
+    UILabel *subTitle_label = [[UILabel alloc] initWithFrame:CGRectMake(90, 58  , 180, 20)];
+    [subTitle_label setText:@"Request"];
+    [subTitle_label setFont:[UIFont systemFontOfSize:11]];
     MyCircle *circle = [self.familyList objectAtIndex:index];
     
     BOOL isPending = NO;
@@ -107,13 +109,15 @@
         isPending = others.isPending;
     }
     else{
-       [lbl setText:circle.userName];
         
+       [lbl setText:circle.userName];
          url = [NSURL URLWithString:[NSString stringWithFormat:@"https://s3-ap-southeast-1.amazonaws.com/touchkin-dev/avatars/%@.jpeg",circle.userId]];
     }
 
     [lbl setTextColor:[UIColor colorWithRed:(70.0/255.0) green:(69.0/255.0) blue:(69.0/255.0) alpha:1.0]];
-    
+    [subTitle_label setTextColor:[UIColor colorWithRed:(70.0/255.0) green:(69.0/255.0) blue:(69.0/255.0) alpha:1.0]];
+    [view addSubview:subTitle_label];
+
     [view addSubview:lbl];
     
     __weak typeof(UIImageView *) weakSelf = img;
@@ -151,19 +155,23 @@
     UIButton *headerButton = [[UIButton alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width - 50, 90/2 - 40/2, 40, 40)];
     [headerButton setBackgroundColor:[UIColor clearColor]];
     [headerButton setTag:index];
-    [headerButton addTarget:self action:@selector(headerButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [headerButton setImage:[UIImage imageNamed:@"downArrow"] forState:UIControlStateNormal];
     
     if(selectedSection == index && previousSelected != selectedSection){
         
+        [headerButton addTarget:self action:@selector(headerButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+
         [headerButton setImage:[UIImage imageNamed:@"up_arrow"] forState:UIControlStateNormal];
     }
     
     [headerButton setUserInteractionEnabled:YES];
 
     if(isPending){
+        
         [headerButton setImage:[UIImage imageNamed:@"info"] forState:UIControlStateNormal];
-        [headerButton setUserInteractionEnabled:NO];
+        //[headerButton setUserInteractionEnabled:NO];
+        [headerButton addTarget:self action:@selector(headerButtonPendingAction) forControlEvents:UIControlEventTouchUpInside];
+
     }
     
     [view addSubview:headerButton];
@@ -493,5 +501,15 @@
     
 }
 
+
+-(void)headerButtonPendingAction
+{
+    //TODO Add name of the Particular request Person.
+    
+    
+    UIAlertView *Alert = [[UIAlertView alloc] initWithTitle:@"Request Pending" message:@"A message has been sent to " delegate:self cancelButtonTitle:@"Withdraw request" otherButtonTitles:@"Resend Request", nil];
+    [Alert show];
+ 
+}
 
 @end
