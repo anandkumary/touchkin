@@ -162,7 +162,17 @@
     
     NSUInteger index = [(TKPageController *)viewController index];
     index++;
-    
+    if(self.selctedIndex == 0){
+        MyCircle *circle = [self.familyList objectAtIndex:self.selctedIndex];
+
+        if(index == circle.myConnectionList.count + 1){
+            return nil;
+        }
+        
+        return [self viewControllerAtIndex:index];
+
+    }
+        
     if (index == 3 || self.selctedIndex == 0 || self.isSelectedUserPending) {
         return nil;
     }
@@ -175,7 +185,10 @@
     
     TKPageController *childViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"TKPageController"];
     childViewController.index = index;
-    childViewController.boardType = index % 3;
+    
+    if(self.selctedIndex != 0){
+        childViewController.boardType = index % 3;
+    }
     
     if(childViewController.boardType == DASHBOARDMAPTYPE){
         childViewController.mapView = self.mapView;
@@ -189,7 +202,12 @@
         self.isSelectedUserPending = childViewController.others.isPending;
     }
     else {
-        childViewController.circle = circle;
+        if(index == 0){
+            childViewController.circle = circle;
+        }
+        else {
+            childViewController.connection = [circle.myConnectionList objectAtIndex:index - 1];
+        }
     }
     
     CGRect frame = childViewController.view.frame;

@@ -95,6 +95,13 @@
     // Pass the selected object to the new view controller.
 }
 */
+-(void) setConnection:(MyConnection *)connection {
+    _connection = connection;
+    
+    NSString *urlString = [NSString stringWithFormat:@"https://s3-ap-southeast-1.amazonaws.com/touchkin-dev/avatars/%@.jpeg",connection.userId];
+    self.dashboardView.urlString = urlString;
+    
+}
 
 -(void) setCircle:(MyCircle *)circle {
     _circle = circle;
