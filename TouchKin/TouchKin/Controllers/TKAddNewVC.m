@@ -125,7 +125,15 @@
 
     
 }
+-(void)textFieldDidEndEditing:(UITextField *)textField{
+    [UIView animateWithDuration:0.4 animations:^{
+        
+        self.topConstraint.constant = self.spaceConstriant;
+        [self.view layoutIfNeeded];
+        
+    }];
 
+}
 
 -(IBAction)countryCodeButtonAction:(id)sender {
     
