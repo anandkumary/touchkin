@@ -196,6 +196,9 @@
 
 - (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forRemoteNotification:(NSDictionary *)userInfo completionHandler:(void(^)())completionHandler
 {
+    
+    NSLog(@"notification = %@",userInfo);
+    
     //handle the actions
     if ([identifier isEqualToString:@"declineAction"]){
         

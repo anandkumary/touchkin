@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "UserActivity.h"
 
 @interface OthersCircle : NSObject
 
@@ -17,10 +18,12 @@
 @property (nonatomic, copy) NSString *gender;
 @property (nonatomic, copy) NSString *mobile;
 @property (nonatomic, assign) BOOL isPending;
+@property (nonatomic, copy) NSString * updateTime;
 @property (nonatomic, assign) int yob;
 @property (nonatomic, assign) BOOL isSelected;
 @property (nonatomic, strong) NSMutableArray *homeList;
 @property (nonatomic, strong) NSMutableArray *connectionList;
+@property (nonatomic, strong) UserActivity *userStatus;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dict;
 -(void) getOtherFamilyInfo;

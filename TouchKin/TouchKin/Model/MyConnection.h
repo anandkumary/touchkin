@@ -18,6 +18,7 @@
 @property (nonatomic, copy) NSString *email;
 @property (nonatomic, copy) NSString *gender;
 @property (nonatomic, copy) NSString *mobile;
+@property (nonatomic, copy) NSString * updateTime;
 @property (nonatomic, copy) NSString *age;
 @property (nonatomic, assign) int yob;
 @property (nonatomic, strong) NSMutableArray *homeList;

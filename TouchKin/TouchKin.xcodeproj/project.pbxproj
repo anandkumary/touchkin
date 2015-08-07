@@ -93,6 +93,7 @@
 		44D7023D1B73C2A500BF21FD /* UIImageView+HighlightedWebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 44D7022B1B73C2A500BF21FD /* UIImageView+HighlightedWebCache.m */; };
 		44D7023E1B73C2A500BF21FD /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 44D7022D1B73C2A500BF21FD /* UIImageView+WebCache.m */; };
 		44D7023F1B73C2A500BF21FD /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 44D7022F1B73C2A500BF21FD /* UIView+WebCacheOperation.m */; };
+		44E58E061B74B77A00937BCD /* UserActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E58E051B74B77A00937BCD /* UserActivity.m */; };
 		44EA49981B59D5FE0027C368 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44EA49971B59D5FE0027C368 /* SystemConfiguration.framework */; };
 		44EA499A1B59D6C70027C368 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44EA49991B59D6C70027C368 /* Foundation.framework */; };
 		44EA499D1B59D7420027C368 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 44EA499C1B59D7420027C368 /* Reachability.m */; };
@@ -277,6 +278,8 @@
 		44D7022D1B73C2A500BF21FD /* UIImageView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+WebCache.m"; sourceTree = "<group>"; };
 		44D7022E1B73C2A500BF21FD /* UIView+WebCacheOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WebCacheOperation.h"; sourceTree = "<group>"; };
 		44D7022F1B73C2A500BF21FD /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
+		44E58E041B74B77A00937BCD /* UserActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserActivity.h; sourceTree = "<group>"; };
+		44E58E051B74B77A00937BCD /* UserActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserActivity.m; sourceTree = "<group>"; };
 		44EA49971B59D5FE0027C368 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		44EA49991B59D6C70027C368 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		44EA499B1B59D7420027C368 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
@@ -574,6 +577,8 @@
 				44A58A071B62839D001742D8 /* MyCircle.m */,
 				44A58A091B628900001742D8 /* OthersCircle.h */,
 				44A58A0A1B628900001742D8 /* OthersCircle.m */,
+				44E58E041B74B77A00937BCD /* UserActivity.h */,
+				44E58E051B74B77A00937BCD /* UserActivity.m */,
 				44A58A001B627C98001742D8 /* MyConnection.h */,
 				44A58A011B627C98001742D8 /* MyConnection.m */,
 				44A58A031B627EB9001742D8 /* MyHomeLocation.h */,
@@ -788,6 +793,7 @@
 				44675E901B6A92A9003B0F9F /* TKSplitView.m in Sources */,
 				443EA0071B594E2800A685CE /* TKMeViewController.m in Sources */,
 				44675E921B6A92CE003B0F9F /* TKGradientCircularView.m in Sources */,
+				44E58E061B74B77A00937BCD /* UserActivity.m in Sources */,
 				4414D88C1B6913F100363447 /* TKAddNewVC.m in Sources */,
 				441382701B57FAD300DFB0BC /* TKSideMenuView.m in Sources */,
 				448FE9DB1B6AF642004397FB /* TKContactCell.m in Sources */,

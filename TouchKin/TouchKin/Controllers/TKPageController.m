@@ -10,6 +10,8 @@
 #import "TKCircularView.h"
 #import "UILabel+Attribute.h"
 #import "MyHomeLocation.h"
+#import "TKDataEngine.h"
+#import "UserActivity.h"
 
 @interface TKPageController ()
 @property (weak, nonatomic) IBOutlet UILabel *topLabel;
@@ -101,6 +103,13 @@
     NSString *urlString = [NSString stringWithFormat:@"https://s3-ap-southeast-1.amazonaws.com/touchkin-dev/avatars/%@.jpeg",connection.userId];
     self.dashboardView.urlString = urlString;
     
+    NSString *dateString = [[TKDataEngine sharedManager] getTimeFromCurrentDate];
+    
+    [self.topLabel setText:[NSString stringWithFormat:@"Its %@ for %@ in India",dateString,connection.fname] highlightText:dateString withColor:nil];
+    
+    [self.bottomLabel setText:([connection.gender isEqualToString:@"male"] ? @"Send him a touch now?" : @"Send her a touch now")];
+
+    
 }
 
 -(void) setCircle:(MyCircle *)circle {
@@ -127,6 +136,50 @@
         [self.dashboardView updateLocation];
 
     }
+    
+    switch (self.boardType) {
+        case DASHBOARDIMAGETYPE: {
+          
+            NSString *lastTime = [[TKDataEngine sharedManager] lastUpdateTimeFromDateString:others.updateTime];
+            
+            [self.bottomLabel setText:[NSString stringWithFormat:@"Last touch was %@ ago",lastTime] highlightText:lastTime withColor:nil];
+            break;
+        }
+        case DASHBOARDMAPTYPE: {
+            
+            [self.bottomLabel setText:@"Working on it"];
+            break;
+        }
+        case DASHBOARDCELLULARTYPE:{
+            
+            UserActivity *useractivity = others.userStatus;
+            
+           
+            
+            self.dashboardView.g3Level = useractivity.threeGStrength;
+            self.dashboardView.wifilevel = useractivity.wifiStrength;
+            self.dashboardView.batteryLevel = useractivity.batteryLevel;
+            
+            NSString *lastTime = [[TKDataEngine sharedManager] lastUpdateTimeFromDateString:useractivity.updatedTime];
+            
+            NSString * connectedStatus = @"not Connected";
+            
+            if ([lastTime rangeOfString:@"hour"].location == NSNotFound) {
+                connectedStatus = @"Connected";
+            }
+            
+             [self.topLabel setText:[NSString stringWithFormat:@"%@ is %@",others.fname,connectedStatus] highlightText:connectedStatus withColor:nil];
+            
+            [self.bottomLabel setText:[NSString stringWithFormat:@"Last update on %@ ago", lastTime] highlightText:lastTime withColor:nil];
+
+            break;
+        }
+            
+        default:
+            break;
+    }
+    
+   
     
     self.dashboardView.urlString = urlString;
 

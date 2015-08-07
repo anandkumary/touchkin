@@ -26,7 +26,7 @@ static NSString * const KLNAME = @"last_name";
 static NSString * const KGENDER = @"gender";
 
 @interface TKDataEngine ()
-
+@property (nonatomic, strong) NSDateFormatter *dateFormatter;
 @property (nonatomic, strong) MLNetworkModel *model;
 @end
 
@@ -44,6 +44,9 @@ static NSString * const KGENDER = @"gender";
 - (id)init {
     if (self = [super init]) {
        
+        self.dateFormatter = [[NSDateFormatter alloc] init];
+        [_dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSSZ"];
+
     }
     return self;
 }
@@ -224,5 +227,65 @@ static NSString * const KGENDER = @"gender";
         
         self.userInfo = [[MyConnection alloc] initWithDictionary:dict];
     }];
+}
+
+- (NSString *) getTimeFromCurrentDateString:(NSString *)dateString {
+    
+    NSDate *date = [self.dateFormatter dateFromString:dateString];
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"hh:mm a"];
+    
+    NSString *convertString = [formatter stringFromDate:date];
+    
+    formatter = nil;
+    
+    return convertString;
+    
+}
+
+- (NSString *) getTimeFromCurrentDate {
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"hh:mm a"];
+    
+    NSString *convertString = [formatter stringFromDate:[NSDate date]];
+    
+    formatter = nil;
+    
+    return convertString;
+
+}
+
+- (NSString *) lastUpdateTimeFromDateString:(NSString *)dateString {
+    
+    NSDate *date = [self.dateFormatter dateFromString:dateString];
+    
+    NSTimeInterval secs = [[NSDate date] timeIntervalSinceDate:date];
+
+    return [self stringFromTimeInterval:secs];
+}
+
+- (NSString *)stringFromTimeInterval:(NSTimeInterval)interval {
+    NSInteger ti = (NSInteger)interval;
+   // NSInteger seconds = ti % 60;
+    NSInteger minutes = (ti / 60) % 60;
+    NSInteger hours = (ti / 3600);
+    
+    NSString *convertString = @"";
+    
+    if(hours > 0){
+        convertString = [NSString stringWithFormat:@"%02ld %@",(long)hours,((hours >1)? @"hours" : @"hour")];
+        
+    }
+//    if(hours > 0 && minutes > 0){
+//        
+//        convertString = [NSString stringWithFormat:@"%02ld:%02ld mins ago",(long)hours,(long)minutes];
+//
+//    }
+    else {
+        convertString = [NSString stringWithFormat:@"%02ld %@",(long)minutes,((minutes > 10) ? @"mins" : @"min")];
+    }
+    return convertString;
 }
 @end

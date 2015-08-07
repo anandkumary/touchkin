@@ -31,10 +31,16 @@
 
 -(void) saveUserInfo:(NSDictionary *)userDict;
 
+
 -(void) getMyFamilyInfo;
 -(void) getNewConnectionRequest;
 -(void) getuserInfo;
 
 + (id)sharedManager;
+
+
+- (NSString *) getTimeFromCurrentDate;
+- (NSString *) getTimeFromCurrentDateString:(NSString *)dateString;
+- (NSString *) lastUpdateTimeFromDateString:(NSString *)dateString ;
 
 @end

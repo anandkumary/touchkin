@@ -168,6 +168,26 @@
     
 }
 
+-(void) setBatteryLevel:(NSInteger)batteryLevel {
+    _batteryLevel = batteryLevel;
+    
+    int batterrLevel = (int)batteryLevel;
+    
+    if(batterrLevel == -1){
+        batterrLevel = 100;
+    }
+    
+    int batteryIconNumber = (batterrLevel/20);
+    
+    self.batteryImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"battery%d",batteryIconNumber]];
+    
+    self.batteryLbl.text = [NSString stringWithFormat:@"%d%%",batterrLevel];
+    
+    [self updateNetworkReachibilty];
+
+    
+}
+
 -(void) createCellularNetwork {
     
     if(!self.cellularImage){
@@ -192,11 +212,11 @@
     
     dispatch_async(dispatch_get_main_queue(), ^{
        
-        AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+        //AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
         
-        self.wifiImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"wifi%d",delegate.isConnectedToWifi]];
+        self.wifiImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"wifi%d",((self.wifilevel > 0) ? 1 : 0)]];
         
-        self.cellularImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"Network%d",delegate.isConnectedTo3G]];
+        self.cellularImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"Network%d",((self.g3Level > 0) ? 1 : 0)]];
     });
     
 }

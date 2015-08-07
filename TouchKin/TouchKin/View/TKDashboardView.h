@@ -21,6 +21,10 @@
 @property (nonatomic, copy) NSString * lat;
 @property (nonatomic, copy) NSString * log;
 
+@property (nonatomic, assign) NSInteger batteryLevel;
+@property (nonatomic, assign) NSInteger wifilevel;
+@property (nonatomic, assign) NSInteger g3Level;
+
 -(void) updateLocation;
 
 @end

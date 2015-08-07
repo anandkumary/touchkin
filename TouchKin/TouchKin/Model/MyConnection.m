@@ -49,6 +49,8 @@
             
             self.age = [NSString stringWithFormat:@"%d", year - self.yob];
         }
+        
+        self.updateTime = dict[@"updatedAt"];
 
         
         if(dict[@"places"]){

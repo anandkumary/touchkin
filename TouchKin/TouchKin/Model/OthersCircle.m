@@ -40,6 +40,7 @@
         self.gender = dict[@"gender"];
         self.mobile = dict[@"mobile"];
         self.yob   = [dict[@"yob"] intValue];
+        self.updateTime = dict[@"updatedAt"];
         
         if(dict[@"places"]){
             
@@ -47,6 +48,7 @@
         }
         
         [self getOtherFamilyInfo];
+        [self getCurrentUserStatus];
         
     }
     return self;
@@ -84,6 +86,22 @@
         //TODO need to add care_receivers also?
         
     }];
+}
+
+
+-(void) getCurrentUserStatus {
+    
+    MLNetworkModel *model = [[MLNetworkModel alloc] init];
+    [model getRequestPath:[NSString stringWithFormat:@"connectivity/current/%@",self.userId] withParameter:nil withHandler:^(id responseObject, NSError *error) {
+        
+        if (error == nil) {
+            NSDictionary *dict = (NSDictionary *)responseObject;
+            
+            self.userStatus = [[UserActivity alloc] initWithDictionary:dict];
+        }
+        
+    }];
+    
 }
 
 
