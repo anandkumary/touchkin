@@ -142,8 +142,16 @@
         
         [lbl setText:circle.userName];
         
-      //  [subTitle_label setText:[NSString stringWithFormat:@"Your circle have 2 Kins",lbl.text]];
-        [subTitle_label setText:@"Your circle has 2 kin"];
+        if (circle.requestList.count > 0 & circle.myConnectionList.count > 0){
+            
+             [subTitle_label setText:[NSString stringWithFormat:@"Your circle has %d kin & %d request",(int)circle.myConnectionList.count,(int)circle.requestList.count]];
+        }
+        else if(circle.myConnectionList.count > 1){
+          [subTitle_label setText:[NSString stringWithFormat:@"Your circle has %d kin",circle.myConnectionList.count]];
+        }
+        else {
+            [subTitle_label setText: @"Invite someone to care for you."];
+        }
 
         [view addSubview:subTitle_label];
         
