@@ -54,8 +54,10 @@
     MyConnection *connect = [self.connectList objectAtIndex:indexPath.item];
     cell.image_CollectionCell.text = [NSString stringWithFormat:@"%@",[connect.fname substringToIndex:1]];
     cell.image_CollectionCell.backgroundColor = [UIColor randomColor];
+    //[cell.userName_CollectionCell sizeToFit];
     cell.userName_CollectionCell.text =[NSString stringWithFormat:@"%@",connect.fname];
     cell.userName_CollectionCell.adjustsFontSizeToFitWidth = YES;
+   
 
 //    if(){
 //        cell.userName_CollectionCell.text = @"Add Kin";

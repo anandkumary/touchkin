@@ -1109,6 +1109,7 @@
                     <connections>
                         <outlet property="mobileNumbertxt" destination="Kh7-Ms-iTF" id="ECW-4K-RQu"/>
                         <outlet property="stdCodeBtn" destination="akJ-Wu-Fgj" id="RBR-qi-2cm"/>
+                        <outlet property="topConstraint" destination="f82-3l-Vfm" id="wh0-oZ-pwb"/>
                         <outlet property="userNametxt" destination="xay-A9-KGH" id="pIH-nS-3Th"/>
                     </connections>
                 </viewController>
@@ -1651,7 +1652,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="tic-S4-aci">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="119"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="131"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="TLN-sn-mjQ">
                                                         <size key="itemSize" width="60" height="82"/>
@@ -1716,7 +1717,7 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailingMargin" secondItem="tic-S4-aci" secondAttribute="trailing" constant="-8" id="I3a-ff-XUq"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="tic-S4-aci" secondAttribute="bottom" constant="-8" id="SNT-D5-kWK"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="tic-S4-aci" secondAttribute="bottom" constant="-20" id="SNT-D5-kWK"/>
                                                 <constraint firstItem="tic-S4-aci" firstAttribute="leading" secondItem="fD9-28-XMW" secondAttribute="leadingMargin" constant="-8" id="cFb-Ng-GEP"/>
                                                 <constraint firstItem="tic-S4-aci" firstAttribute="top" secondItem="fD9-28-XMW" secondAttribute="topMargin" constant="-8" id="dmR-lW-UQh"/>
                                             </constraints>

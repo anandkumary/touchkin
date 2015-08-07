@@ -29,13 +29,14 @@
 }
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 @property (nonatomic, strong) NSMutableArray *familyList;
-
+@property (nonatomic,strong) UIRefreshControl *refreshControl;
+@property (nonatomic,strong) NSMutableDictionary *PendingCount;
 - (IBAction)CareForSomeoneAction:(id)sender;
 
 @end
 
 @implementation TKMyFamilyVC
-
+@synthesize refreshControl;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -49,16 +50,36 @@
     
     self.type = NAVIGATIONTYPENORMAL;
     self.title = @"My Family";
-    
+    self.PendingCount = [[NSMutableDictionary alloc]init];
     self.familyList = [[NSMutableArray alloc] initWithArray: [[TKDataEngine sharedManager] familyList]];
     
+    [self hideRightBarButton];
     //NSLog(@"family = %@",[[TKDataEngine sharedManager] familyList]);
+    
+    refreshControl = [[UIRefreshControl alloc]init];
+    [self.tableview addSubview:refreshControl];
+    [refreshControl addTarget:self action:@selector(refreshTable) forControlEvents:UIControlEventValueChanged];
+
     
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void) refreshTable{
+    
+    self.familyList = [[NSMutableArray alloc] initWithArray: [[TKDataEngine sharedManager] familyList]];
+
+    [self performSelector:@selector(endRefresh) withObject:self afterDelay:5.0];
+    
+}
+
+-(void)endRefresh{
+    [self.refreshControl endRefreshing];
+    [self.tableview reloadData];
+
 }
 
 /*
@@ -78,24 +99,31 @@
     UIImageView *img = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 70, 70)];
     [img setBackgroundColor:[UIColor clearColor]];
     img.layer.cornerRadius = img.frame.size.width/2;
-    img.layer.borderColor   = [UIColor colorWithRed:(207.0/255.0) green:(207.0/255.0) blue:(207.0/255.0) alpha:1.0].CGColor;
-    img.layer.borderWidth  = 2.0;
+    //img.layer.borderColor   = [UIColor colorWithRed:(207.0/255.0) green:(207.0/255.0) blue:(207.0/255.0) alpha:1.0].CGColor;
+    //img.layer.borderWidth  = 2.0;
     [view addSubview:img];
     UILabel *lbl_image = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 70, 70)];
     [lbl_image setBackgroundColor:[UIColor clearColor]];
     lbl_image.layer.cornerRadius = img.frame.size.width/2;
-    lbl_image.layer.borderColor   = [UIColor colorWithRed:(207.0/255.0) green:(207.0/255.0) blue:(207.0/255.0) alpha:1.0].CGColor;
-    lbl_image.layer.borderWidth  = 2.0;
+    //lbl_image.layer.borderColor   = [UIColor colorWithRed:(207.0/255.0) green:(207.0/255.0) blue:(207.0/255.0) alpha:1.0].CGColor;
+    //lbl_image.layer.borderWidth  = 2.0;
     lbl_image.clipsToBounds = YES;
 
     img.clipsToBounds = YES;
     
     NSURL *url = nil;
    
-    UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(88, 90/2 - 25/2 , 180, 20)];
+    UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(88, 18, 180, 25)];
     [lbl setText:@"Anand Kumar"];
-    UILabel *subTitle_label = [[UILabel alloc] initWithFrame:CGRectMake(90, 58  , 180, 20)];
-    [subTitle_label setFont:[UIFont systemFontOfSize:11]];
+    [lbl setFont:[UIFont systemFontOfSize:20]];
+    lbl.lineBreakMode = NSLineBreakByWordWrapping;
+
+    UILabel *subTitle_label = [[UILabel alloc] initWithFrame:CGRectMake(90, 40, 180, 40)];
+    [subTitle_label setFont:[UIFont systemFontOfSize:14]];
+    [subTitle_label setTextColor:[UIColor colorWithRed:(70.0/255.0) green:(69.0/255.0) blue:(69.0/255.0) alpha:0.8]];
+    subTitle_label.lineBreakMode = NSLineBreakByWordWrapping;
+    subTitle_label.numberOfLines = 2.0;
+   
     MyCircle *circle = [self.familyList objectAtIndex:index];
     
     BOOL isPending = NO;
@@ -104,7 +132,7 @@
         OthersCircle *others = [self.familyList objectAtIndex:index];
         [lbl setText:others.fname];
         [subTitle_label setText:[NSString stringWithFormat:@"Add Kin for %@ ",lbl.text]];
-        
+       
         [view addSubview:subTitle_label];
 
         url = [NSURL URLWithString:[NSString stringWithFormat:@"https://s3-ap-southeast-1.amazonaws.com/touchkin-dev/avatars/%@.jpeg",others.userId]];
@@ -114,15 +142,15 @@
         
         [lbl setText:circle.userName];
         
-        [subTitle_label setText:[NSString stringWithFormat:@"%@ have 2 Kins",lbl.text]];
-        
+      //  [subTitle_label setText:[NSString stringWithFormat:@"Your circle have 2 Kins",lbl.text]];
+        [subTitle_label setText:@"Your circle has 2 kin"];
+
         [view addSubview:subTitle_label];
         
          url = [NSURL URLWithString:[NSString stringWithFormat:@"https://s3-ap-southeast-1.amazonaws.com/touchkin-dev/avatars/%@.jpeg",circle.userId]];
     }
 
-    [lbl setTextColor:[UIColor colorWithRed:(70.0/255.0) green:(69.0/255.0) blue:(69.0/255.0) alpha:1.0]];
-    [subTitle_label setTextColor:[UIColor colorWithRed:(70.0/255.0) green:(69.0/255.0) blue:(69.0/255.0) alpha:1.0]];
+    [lbl setTextColor:[UIColor blackColor]];
 
     [view addSubview:lbl];
     
@@ -139,6 +167,7 @@
                 [weakLabel setTextColor:[UIColor whiteColor]];
                 [weakLabel setBackgroundColor:[UIColor randomColor]];
                 weakLabel.textAlignment = NSTextAlignmentCenter;
+
                 [view addSubview:lbl_image];
                 
             }else {
@@ -158,11 +187,7 @@
     [headerButton setImage:[UIImage imageNamed:@"downArrow"] forState:UIControlStateNormal];
 
     if(selectedSection == index && previousSelected != selectedSection){
-        
-
         [headerButton setImage:[UIImage imageNamed:@"up_arrow"] forState:UIControlStateNormal];
-
-
     }
     
     [headerButton setUserInteractionEnabled:YES];
@@ -171,15 +196,25 @@
     if(isPending){
         
         [headerButton1 setBackgroundColor:[UIColor clearColor]];
-        [headerButton1 addTarget:self action:@selector(headerButtonPendingAction) forControlEvents:UIControlEventTouchUpInside];
+        [headerButton1 addTarget:self action:@selector(headerButtonPendingAction:) forControlEvents:UIControlEventTouchUpInside];
         
         [headerButton1 setTag:index];
-    
+        //[_PendingCount setObject:@"QWERTY" forKey:@"3"];
+        if (![_PendingCount objectForKey:[NSString stringWithFormat:@"%ld",(long)index]]) {
+            [_PendingCount setObject:lbl.text forKey:[NSString stringWithFormat:@"%ld",(long)index]];
+            //NSLog(@"Pending:%@",_PendingCount);
+
+        }else{
+            //[_PendingCount removeObjectForKey:[NSString stringWithFormat:@"%ld",(long)index]];
+            [_PendingCount setObject:lbl.text forKey:[NSString stringWithFormat:@"%ld",(long)index]];
+        }
+        NSLog(@"Pending:%@",_PendingCount);
+
         [headerButton1 setImage:[UIImage imageNamed:@"info"] forState:UIControlStateNormal];
         [headerButton setHidden:YES];
         [view addSubview:headerButton1];
 
-        [subTitle_label setText:[NSString stringWithFormat:@"Add Kin for %@ ",lbl.text]];
+        [subTitle_label setText:[NSString stringWithFormat:@"%@ not yet accept your Request",lbl.text]];
         
         [view addSubview:subTitle_label];
 
@@ -503,23 +538,24 @@
 
 }
 
-- (IBAction)CareForSomeoneAction:(id)sender {
-    
+- (IBAction)CareForSomeoneAction:(id)sender
+{
     TKAddNewVC *addVC = [self.storyboard instantiateViewControllerWithIdentifier:@"TKAddNewVC"];
     
     [self addChildViewController:addVC];
     [self.view addSubview:addVC.view];
     [addVC didMoveToParentViewController:self];
-
 }
 
 
--(void)headerButtonPendingAction
+-(void)headerButtonPendingAction:(UIButton *)sender
 {
-    //TODO Add name of the Particular request Person.
+
+    UIButton *temp = sender;
+    NSLog(@"%ld",(long)temp.tag);
+    NSString *str=  [NSString stringWithFormat:@"A message has been sent to %@",[self.PendingCount objectForKey:[NSString stringWithFormat:@"%ld",(long)temp.tag]]];
     
-    
-    UIAlertView *Alert = [[UIAlertView alloc] initWithTitle:@"Request Pending" message:@"A message has been sent to " delegate:self cancelButtonTitle:@"Withdraw request" otherButtonTitles:@"Resend Request", nil];
+    UIAlertView *Alert = [[UIAlertView alloc] initWithTitle:@"Request Pending" message:str delegate:self cancelButtonTitle:@"Withdraw request" otherButtonTitles:@"Resend Request", nil];
     [Alert show];
  
 }

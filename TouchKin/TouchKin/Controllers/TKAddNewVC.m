@@ -11,7 +11,7 @@
 #import "Country.h"
 #import "TKCountryVC.h"
 
-@interface TKAddNewVC ()<TKCountryDelegate>
+@interface TKAddNewVC ()<TKCountryDelegate,UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *topConstraint;
 @property (weak, nonatomic) IBOutlet UITextField *userNametxt;
 @property (weak, nonatomic) IBOutlet UITextField *mobileNumbertxt;
@@ -41,7 +41,7 @@
     
     [self.stdCodeBtn setTitle:dict[@"dial_code"] forState:UIControlStateNormal];
     
-
+  //  [self.userNametxt addTarget:self action:@selector(selector) forControlEvents:(UIControlEvents)]
     
 }
 
@@ -90,12 +90,39 @@
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
     
-    [UIView animateWithDuration:0.4 animations:^{
+    CGFloat height = [UIScreen mainScreen].bounds.size.height;
+    
+    if(height == 480.00){
         
-        self.topConstraint.constant = -80;
-        [self.view layoutIfNeeded];
+        [UIView animateWithDuration:0.4 animations:^{
+            
+            self.topConstraint.constant = +150;
+            [self.view layoutIfNeeded];
+            
+        }];
+
         
-    }];
+    }else if (height == 568.00){
+        [UIView animateWithDuration:0.4 animations:^{
+            
+            self.topConstraint.constant = +90;
+            [self.view layoutIfNeeded];
+            
+        }];
+        
+        
+    }
+    else if (height >= 667.00){
+        
+        [UIView animateWithDuration:0.4 animations:^{
+            
+            self.topConstraint.constant = +50;
+            [self.view layoutIfNeeded];
+            
+        }];
+
+    }
+
     
 }
 
@@ -116,6 +143,14 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.stdCodeBtn setTitle:stdCode forState:UIControlStateNormal];
     });
+    
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField{
+    
+    [self.userNametxt resignFirstResponder];
+    [self.mobileNumbertxt resignFirstResponder];
+    return YES;
     
 }
 
