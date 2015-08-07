@@ -22,6 +22,7 @@
 
 
 @interface TKMyFamilyVC () <TKMyFamilyCollectionCellDelegate,TKMyFamilyRequestCellDelegate>{
+    
     NSInteger selectedSection;
     
     NSInteger previousSelected;
@@ -131,11 +132,20 @@
     if(![circle isKindOfClass:[MyCircle class]]){
         OthersCircle *others = [self.familyList objectAtIndex:index];
         [lbl setText:others.fname];
-        [subTitle_label setText:[NSString stringWithFormat:@"Add Kin for %@ ",lbl.text]];
+      //  [subTitle_label setText:[NSString stringWithFormat:@"Add Kin for %@ ",lbl.text]];
        
+        if ( others.connectionList.count > 0){
+            
+            [subTitle_label setText:[NSString stringWithFormat:@"Your circle has %d kin",(int)others.connectionList.count]];
+        }
+        else if(others.connectionList.count == 0) {
+            [subTitle_label setText:[NSString stringWithFormat:@"Invite someone to care for %@",lbl.text]];
+        }
+
         [view addSubview:subTitle_label];
 
         url = [NSURL URLWithString:[NSString stringWithFormat:@"https://s3-ap-southeast-1.amazonaws.com/touchkin-dev/avatars/%@.jpeg",others.userId]];
+        
         isPending = others.isPending;
     }
     else{
@@ -207,23 +217,16 @@
         [headerButton1 addTarget:self action:@selector(headerButtonPendingAction:) forControlEvents:UIControlEventTouchUpInside];
         
         [headerButton1 setTag:index];
-        //[_PendingCount setObject:@"QWERTY" forKey:@"3"];
         if (![_PendingCount objectForKey:[NSString stringWithFormat:@"%ld",(long)index]]) {
             [_PendingCount setObject:lbl.text forKey:[NSString stringWithFormat:@"%ld",(long)index]];
-            //NSLog(@"Pending:%@",_PendingCount);
-
         }else{
-            //[_PendingCount removeObjectForKey:[NSString stringWithFormat:@"%ld",(long)index]];
             [_PendingCount setObject:lbl.text forKey:[NSString stringWithFormat:@"%ld",(long)index]];
         }
         NSLog(@"Pending:%@",_PendingCount);
-
         [headerButton1 setImage:[UIImage imageNamed:@"info"] forState:UIControlStateNormal];
         [headerButton setHidden:YES];
         [view addSubview:headerButton1];
-
-        [subTitle_label setText:[NSString stringWithFormat:@"%@ not yet accept your Request",lbl.text]];
-        
+        [subTitle_label setText:[NSString stringWithFormat:@"Waiting for %@ to accept your request",lbl.text]];
         [view addSubview:subTitle_label];
 
 
@@ -253,23 +256,17 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
     NSInteger totalRows = 0;
     if(selectedSection == section && previousSelected != selectedSection){
-      
-        totalRows = 1;
-        
+        totalRows += 1;
         MyCircle *circle = [self.familyList objectAtIndex:section];
-        
         if([circle isKindOfClass:[MyCircle class]])
             {
             totalRows = 1 + circle.requestList.count;
         }
-
     }
     
     return totalRows;
-    
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -278,10 +275,9 @@
     TKMyFamilyRequestCell *cell = [tableView dequeueReusableCellWithIdentifier:@"requestCell"];
         
         cell.avatar.layer.cornerRadius = cell.avatar.frame.size.width/2;
-        
         cell.avatar.clipsToBounds = YES;
-        cell.lbl_imageView_requestCell.layer.cornerRadius = cell.lbl_imageView_requestCell.frame.size.width/2;
         
+        cell.lbl_imageView_requestCell.layer.cornerRadius = cell.lbl_imageView_requestCell.frame.size.width/2;
         cell.lbl_imageView_requestCell.clipsToBounds = YES;
         
         MyCircle *circle = [self.familyList objectAtIndex:indexPath.section];
@@ -291,7 +287,7 @@
         cell.delegate = self;
         
         cell.userNameLbl.text = connect.nickName;
-    [cell.lbl_imageView_requestCell setText:[cell.userNameLbl.text substringToIndex:1]];
+        [cell.lbl_imageView_requestCell setText:[cell.userNameLbl.text substringToIndex:1]];
         
         NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://s3-ap-southeast-1.amazonaws.com/touchkin-dev/avatars/%@.jpeg",connect.userId]];
         
@@ -385,26 +381,23 @@
         {
         
         selectedSection = sender.tag;
-        
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, delayOffset * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
             
             [self.tableview beginUpdates];
-            
             
             MyCircle *circle = [self.familyList objectAtIndex:selectedSection];
             
             if([circle isKindOfClass:[MyCircle class]]){
                 
-                NSMutableArray *indexPathList = [self createNumberOfRow:circle.requestList.count forSection:selectedSection];
                 
+                NSMutableArray *indexPathList = [self createNumberOfRow:circle.requestList.count forSection:selectedSection];
                 [self.tableview insertRowsAtIndexPaths:indexPathList withRowAnimation:UITableViewRowAnimationMiddle];
                 
             }
             else {
               
                   [self.tableview insertRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:0 inSection:selectedSection],nil] withRowAnimation:UITableViewRowAnimationMiddle];
-                
-            }
+                }
             
             [self.tableview endUpdates];
         });
@@ -413,30 +406,23 @@
     else if (previousSelected == sender.tag){
         
         selectedSection = sender.tag;
-        
         previousSelected = -1;
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, delayOffset * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
             
-            [self.tableview beginUpdates];
+        [self.tableview beginUpdates];
             
             MyCircle *circle = [self.familyList objectAtIndex:selectedSection];
             
             if([circle isKindOfClass:[MyCircle class]]){
-                
                 NSMutableArray *indexPathList = [self createNumberOfRow:circle.requestList.count forSection:selectedSection];
-                
                 [self.tableview insertRowsAtIndexPaths:indexPathList withRowAnimation:UITableViewRowAnimationMiddle];
-                
             }
             else {
-                
                 [self.tableview insertRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:0 inSection:selectedSection],nil] withRowAnimation:UITableViewRowAnimationMiddle];
             }
-            
             [self.tableview endUpdates];
         });
-        
     }
 }
 
