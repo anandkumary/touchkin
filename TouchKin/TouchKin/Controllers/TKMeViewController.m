@@ -165,7 +165,7 @@
     if(self.selctedIndex == 0){
         MyCircle *circle = [self.familyList objectAtIndex:self.selctedIndex];
 
-        if(index == circle.myConnectionList.count + 1){
+        if(index == circle.myConnectionList.count){
             return nil;
         }
         
@@ -202,12 +202,8 @@
         self.isSelectedUserPending = childViewController.others.isPending;
     }
     else {
-        if(index == 0){
-            childViewController.circle = circle;
-        }
-        else {
-            childViewController.connection = [circle.myConnectionList objectAtIndex:index - 1];
-        }
+        
+        childViewController.connection = [circle.myConnectionList objectAtIndex:index];
     }
     
     CGRect frame = childViewController.view.frame;
