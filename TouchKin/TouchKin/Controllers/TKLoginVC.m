@@ -13,6 +13,7 @@
 #import "MLNetworkModel.h"
 #import "TKDataEngine.h"
 #import "TKProfileVC.h"
+#import "MBProgressHUD.h"
 
 #define MAXLENGTH 10
 
@@ -113,6 +114,8 @@
 
 -(void) performLogin {
     
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
     NSString *phone = [NSString stringWithFormat:@"%@%@",self.stdCodeBtn.titleLabel.text,self.phoneNumberTextField.text];
     
    phone = [phone stringByReplacingOccurrencesOfString:@" " withString:@""];
@@ -126,7 +129,9 @@
     
     [model postRequestPath:@"user/signup" withParameter:dict withHandler:^(id responseObject, NSError *error) {
         
-        NSLog(@"res %@",responseObject);
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        
+        //NSLog(@"res %@",responseObject);
         if(![responseObject objectForKey:@"message"]){
             
             TKDataEngine *engine =  [TKDataEngine sharedManager];

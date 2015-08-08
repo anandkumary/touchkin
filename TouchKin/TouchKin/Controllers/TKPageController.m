@@ -51,6 +51,8 @@
 //
 //  [self.circularView setProgress:ratio];
     
+    
+    
    CGFloat height = [UIScreen mainScreen].bounds.size.height;
     
     if(height == 480){
@@ -81,6 +83,16 @@
     
     [self.topLabel setText:@"Its 7:30 am for Eric in New York" highlightText:@"7:30 am" withColor:nil];
     
+}
+
+-(void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.gradientCircle startAnimating];
+        
+    });
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -127,6 +139,8 @@
     
      NSString *urlString = [NSString stringWithFormat:@"https://s3-ap-southeast-1.amazonaws.com/touchkin-dev/avatars/%@.jpeg",others.userId];
     
+    self.splitView.splitlist = others.userStatus.activityStatus;
+    
     if(others.homeList.count){
       
         MyHomeLocation *location = [others.homeList objectAtIndex:0];
@@ -143,6 +157,27 @@
             NSString *lastTime = [[TKDataEngine sharedManager] lastUpdateTimeFromDateString:others.updateTime];
             
             [self.bottomLabel setText:[NSString stringWithFormat:@"Last touch was %@ ago",lastTime] highlightText:lastTime withColor:nil];
+            
+            NSDictionary *dict = others.userStatus.activityStatus;
+            
+            NSArray *allkeys = [dict.allKeys sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+            
+            NSString *msg  = @"";
+            
+            if([dict[allkeys.lastObject] isKindOfClass:[NSNull class]]){
+                
+                msg = @"little low";
+            }
+            else {
+                NSString *value = dict[allkeys.lastObject];
+                
+               msg = (value.intValue > 1) ? @"ok" : @"little low";
+            }
+            
+            NSString *name = [NSString stringWithFormat:@"%@ is %@ today",others.fname,msg];
+
+            [self.topLabel setText:name highlightText:msg withColor:nil];
+            
             break;
         }
         case DASHBOARDMAPTYPE: {
@@ -153,8 +188,6 @@
         case DASHBOARDCELLULARTYPE:{
             
             UserActivity *useractivity = others.userStatus;
-            
-           
             
             self.dashboardView.g3Level = useractivity.threeGStrength;
             self.dashboardView.wifilevel = useractivity.wifiStrength;
@@ -178,8 +211,6 @@
         default:
             break;
     }
-    
-   
     
     self.dashboardView.urlString = urlString;
 

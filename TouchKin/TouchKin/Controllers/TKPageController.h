@@ -12,6 +12,8 @@
 #import "OthersCircle.h"
 #import "MyConnection.h"
 #import "TKDashboardView.h"
+#import "TKGradientCircularView.h"
+#import "TKSplitView.h"
 #import <MapKit/MapKit.h>
 
 @interface TKPageController : UIViewController
@@ -27,6 +29,8 @@
 @property (assign, nonatomic) DashboardType boardType;
 
 @property (weak, nonatomic) IBOutlet TKDashboardView *dashboardView;
+@property (weak, nonatomic) IBOutlet TKGradientCircularView *gradientCircle;
+@property (weak, nonatomic) IBOutlet TKSplitView *splitView;
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 

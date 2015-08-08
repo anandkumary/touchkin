@@ -10,4 +10,5 @@
 IB_DESIGNABLE
 @interface TKGradientCircularView : UIView
 
+-(void) startAnimating;
 @end

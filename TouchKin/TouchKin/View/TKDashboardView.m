@@ -101,6 +101,7 @@
     
     self.mapView.userTrackingMode=YES;
 
+    self.mapView.scrollEnabled = NO;
     
     if(![self.subviews containsObject:self.mapView]){
         [self addSubview:self.mapView];

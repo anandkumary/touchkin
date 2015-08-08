@@ -196,6 +196,8 @@
         [self.locationManager startUpdatingLocation];
         [self.locationManager startUpdatingHeading];
         
+        [self.locationManager requestWhenInUseAuthorization];
+        
         [self checkSustainedSignalStrength];
         
         return YES;
