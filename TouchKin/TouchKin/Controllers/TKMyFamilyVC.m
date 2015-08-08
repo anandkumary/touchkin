@@ -92,28 +92,28 @@
     // Pass the selected object to the new view controller.
 }
 */
+
 -(UIView *)createHeaderViewForIndex:(NSInteger)index {
     
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 90)];
     [view setBackgroundColor:[UIColor colorWithRed:(235.0/255.0) green:(235.0/255.0) blue:(235.0/255.0) alpha:1.0]];
-    
+    [self addtapGestureForView:view];
     UIImageView *img = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 70, 70)];
     [img setBackgroundColor:[UIColor clearColor]];
     img.layer.cornerRadius = img.frame.size.width/2;
     //img.layer.borderColor   = [UIColor colorWithRed:(207.0/255.0) green:(207.0/255.0) blue:(207.0/255.0) alpha:1.0].CGColor;
     //img.layer.borderWidth  = 2.0;
     [view addSubview:img];
+    
     UILabel *lbl_image = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 70, 70)];
     [lbl_image setBackgroundColor:[UIColor clearColor]];
     lbl_image.layer.cornerRadius = img.frame.size.width/2;
     //lbl_image.layer.borderColor   = [UIColor colorWithRed:(207.0/255.0) green:(207.0/255.0) blue:(207.0/255.0) alpha:1.0].CGColor;
     //lbl_image.layer.borderWidth  = 2.0;
     lbl_image.clipsToBounds = YES;
-
     img.clipsToBounds = YES;
     
     NSURL *url = nil;
-   
     UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(88, 18, 180, 25)];
     [lbl setText:@"Anand Kumar"];
     [lbl setFont:[UIFont systemFontOfSize:20]];
@@ -124,7 +124,7 @@
     [subTitle_label setTextColor:[UIColor colorWithRed:(70.0/255.0) green:(69.0/255.0) blue:(69.0/255.0) alpha:0.8]];
     subTitle_label.lineBreakMode = NSLineBreakByWordWrapping;
     subTitle_label.numberOfLines = 2.0;
-   
+    
     MyCircle *circle = [self.familyList objectAtIndex:index];
     
     BOOL isPending = NO;
@@ -135,17 +135,14 @@
       //  [subTitle_label setText:[NSString stringWithFormat:@"Add Kin for %@ ",lbl.text]];
        
         if (others.connectionList.count > 0){
-            
-            [subTitle_label setText:[NSString stringWithFormat:@"%@ circle has %d kin",lbl.text,(int)others.connectionList.count]];
+            [subTitle_label setText:[NSString stringWithFormat:@"%@'s circle has %d kin",lbl.text,(int)others.connectionList.count]];
         }
-        else if(others.connectionList.count == 0) {
+        else if(others.connectionList.count == 0){
             [subTitle_label setText:[NSString stringWithFormat:@"Invite someone to care for %@",lbl.text]];
         }
 
         [view addSubview:subTitle_label];
-
         url = [NSURL URLWithString:[NSString stringWithFormat:@"https://s3-ap-southeast-1.amazonaws.com/touchkin-dev/avatars/%@.jpeg",others.userId]];
-        
         isPending = others.isPending;
     }
     else{
@@ -237,6 +234,34 @@
     return view;
 }
 
+
+-(void) addtapGestureForView:(UIView *)View
+{
+    
+    
+    UITapGestureRecognizer *singleFingerTap = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                      action:@selector(handleDoubleTapGesture:)];
+    
+    [View addGestureRecognizer:singleFingerTap];
+    
+    
+}
+
+
+-(void)handleDoubleTapGesture:(UITapGestureRecognizer *)tapGestureRecognizer{
+    
+    UIButton *button = [[UIButton alloc]init];
+    button.tag = tapGestureRecognizer.view.tag;
+    
+    if([self.PendingCount objectForKey:[NSString stringWithFormat:@"%ld",(long)tapGestureRecognizer.view.tag]]){
+        
+        [self headerButtonPendingAction:button];
+        
+    }else{
+        [self headerButtonAction:button];
+    }
+}
+
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 90;
@@ -257,6 +282,8 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     NSInteger totalRows = 0;
+    [[NSUserDefaults standardUserDefaults] setInteger:section forKey:@"countCare_giver"];
+
     if(selectedSection == section && previousSelected != selectedSection){
         totalRows += 1;
         MyCircle *circle = [self.familyList objectAtIndex:section];
@@ -272,20 +299,17 @@
     
     if(indexPath.row != 0){
         
-    TKMyFamilyRequestCell *cell = [tableView dequeueReusableCellWithIdentifier:@"requestCell"];
+        TKMyFamilyRequestCell *cell = [tableView dequeueReusableCellWithIdentifier:@"requestCell"];
         
         cell.avatar.layer.cornerRadius = cell.avatar.frame.size.width/2;
         cell.avatar.clipsToBounds = YES;
-        
         cell.lbl_imageView_requestCell.layer.cornerRadius = cell.lbl_imageView_requestCell.frame.size.width/2;
         cell.lbl_imageView_requestCell.clipsToBounds = YES;
         
         MyCircle *circle = [self.familyList objectAtIndex:indexPath.section];
-        
         MyConnection *connect = circle.requestList[indexPath.row - 1];
         
         cell.delegate = self;
-        
         cell.userNameLbl.text = connect.nickName;
         [cell.lbl_imageView_requestCell setText:[cell.userNameLbl.text substringToIndex:1]];
         
@@ -294,13 +318,10 @@
         [cell.avatar sd_setImageWithURL:url placeholderImage:nil options:SDWebImageRefreshCached completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             
             if (image ==nil) {
-                
                 cell.lbl_imageView_requestCell.hidden = NO;
-                
             }else{
                 cell.avatar.image = image;
                 cell.lbl_imageView_requestCell.hidden = YES;
-                
             }
         }];
 
@@ -322,18 +343,15 @@
         }else {
             
             OthersCircle *others = [self.familyList objectAtIndex:indexPath.section];
-            
             cell.familyType = OTHERSFAMILYTYPE;
             cell.connectList = others.connectionList;
             cell.delegate = self;
-            
             cell.accessoryType = UITableViewCellAccessoryNone;
 
 //            if (others.isPending) {
 //                cell.accessoryType = UITableViewCellAccessoryDetailButton;
 //            }
         }
-        
         return cell;
     }
     
@@ -344,10 +362,11 @@
     [UIView animateWithDuration:0.4 animations:^{
         
         sender.transform = CGAffineTransformRotate(sender.transform, M_PI);
-
+    
     }];
     
     NSInteger delayOffset = 0;
+    NSLog(@"%ld",(long)sender.tag);
     
     if(selectedSection != -1){
         
@@ -360,29 +379,24 @@
         MyCircle *circle = [self.familyList objectAtIndex:selectedSection];
         
         if([circle isKindOfClass:[MyCircle class]]){
-            
             NSMutableArray *indexPathList = [self createNumberOfRow:circle.requestList.count forSection:selectedSection];
             [self.tableview deleteRowsAtIndexPaths:indexPathList withRowAnimation:UITableViewRowAnimationFade];
-            
         }
         else {
-           
              [self.tableview deleteRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:0 inSection:previousSelected],nil] withRowAnimation:UITableViewRowAnimationFade];
         }
-
-        
         [self.tableview endUpdates];
-        
         selectedSection = -1;
-        
     }
     else if(previousSelected != sender.tag)
         {
         
         selectedSection = sender.tag;
+            
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, delayOffset * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
             
             [self.tableview beginUpdates];
+            
             MyCircle *circle = [self.familyList objectAtIndex:selectedSection];
         
             if([circle isKindOfClass:[MyCircle class]]){
@@ -394,6 +408,7 @@
                 }
             
             [self.tableview endUpdates];
+
         });
     }
     else if (previousSelected == sender.tag){
@@ -415,6 +430,7 @@
                 [self.tableview insertRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:0 inSection:selectedSection],nil] withRowAnimation:UITableViewRowAnimationMiddle];
             }
             [self.tableview endUpdates];
+            
         });
     }
 }
