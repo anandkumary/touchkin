@@ -134,9 +134,9 @@
         [lbl setText:others.fname];
       //  [subTitle_label setText:[NSString stringWithFormat:@"Add Kin for %@ ",lbl.text]];
        
-        if ( others.connectionList.count > 0){
+        if (others.connectionList.count > 0){
             
-            [subTitle_label setText:[NSString stringWithFormat:@"Your circle has %d kin",(int)others.connectionList.count]];
+            [subTitle_label setText:[NSString stringWithFormat:@"%@ circle has %d kin",lbl.text,(int)others.connectionList.count]];
         }
         else if(others.connectionList.count == 0) {
             [subTitle_label setText:[NSString stringWithFormat:@"Invite someone to care for %@",lbl.text]];
@@ -157,7 +157,7 @@
              [subTitle_label setText:[NSString stringWithFormat:@"Your circle has %d kin & %d request",(int)circle.myConnectionList.count,(int)circle.requestList.count]];
         }
         else if(circle.myConnectionList.count > 1){
-          [subTitle_label setText:[NSString stringWithFormat:@"Your circle has %d kin",circle.myConnectionList.count]];
+          [subTitle_label setText:[NSString stringWithFormat:@"Your circle has %lu kin",(unsigned long)circle.myConnectionList.count]];
         }
         else {
             [subTitle_label setText: @"Invite someone to care for you."];
@@ -376,32 +376,25 @@
         selectedSection = -1;
         
     }
-    
-  else if(previousSelected != sender.tag)
+    else if(previousSelected != sender.tag)
         {
         
         selectedSection = sender.tag;
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, delayOffset * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
             
             [self.tableview beginUpdates];
-            
             MyCircle *circle = [self.familyList objectAtIndex:selectedSection];
-            
+        
             if([circle isKindOfClass:[MyCircle class]]){
-                
-                
                 NSMutableArray *indexPathList = [self createNumberOfRow:circle.requestList.count forSection:selectedSection];
                 [self.tableview insertRowsAtIndexPaths:indexPathList withRowAnimation:UITableViewRowAnimationMiddle];
-                
             }
             else {
-              
                   [self.tableview insertRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:0 inSection:selectedSection],nil] withRowAnimation:UITableViewRowAnimationMiddle];
                 }
             
             [self.tableview endUpdates];
         });
-       
     }
     else if (previousSelected == sender.tag){
         
@@ -485,8 +478,6 @@
         }
         
     }];
-
-    
 }
 
 -(void) requestDidAcceptCell:(TKMyFamilyRequestCell *)cell {
