@@ -14,6 +14,8 @@
 #import "MLNetworkModel.h"
 #import "TKCameraVC.h"
 #import "TKAlertView.h"
+#import "UILabel+Attribute.h"
+
 #import <AudioToolbox/AudioServices.h>
 
 @interface TKMeViewController ()<UIPageViewControllerDataSource,MKMapViewDelegate>
@@ -24,6 +26,7 @@
 @property (nonatomic, strong) NSMutableArray *familyList;
 
 @property (nonatomic, assign) NSInteger selctedIndex;
+@property (nonatomic, assign) NSInteger childIndex;
 
 @property (nonatomic, assign) BOOL isSelectedUserPending;
 
@@ -143,7 +146,6 @@
 }
 */
 
-
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController {
     
     NSUInteger index = [(TKPageController *)viewController index];
@@ -158,12 +160,14 @@
     
 }
 
+
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController {
     
     NSUInteger index = [(TKPageController *)viewController index];
     index++;
     if(self.selctedIndex == 0){
         MyCircle *circle = [self.familyList objectAtIndex:self.selctedIndex];
+        
 
         if(index == circle.myConnectionList.count){
             return nil;
@@ -185,6 +189,8 @@
     
     TKPageController *childViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"TKPageController"];
     childViewController.index = index;
+    
+    self.childIndex = index;
     
     if(self.selctedIndex != 0){
         childViewController.boardType = index % 3;
@@ -263,26 +269,89 @@
     
     [model getRequestPath:[NSString stringWithFormat:@"activity/current/%@",userId] withParameter:nil withHandler:^(id responseObject, NSError *error) {
         
-        NSLog(@"res =%@",responseObject);
         circle.lastTouch = [[UserLastUpdate alloc] initWithDict:responseObject[@"last_touch"]];
         circle.userStatus = responseObject[@"current_month_activity"];
     }];
 }
 
 -(void) callButtonAction:(id)sender {
-    [TKAlertView showAlertWithText:@"Alert view shown" forView:self.view];
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [TKAlertView hideAlertForView:self.view];
+    TKPageController *pageContr = self.pageController.viewControllers[0];
+
+    NSString *mobile = @"";
+    if(self.selctedIndex == 0){
+        MyConnection *connect = pageContr.connection;
+        mobile = connect.mobile;
+    }
+    else {
+        OthersCircle *others = pageContr.others;
+        mobile = others.mobile;
+    }
+
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        //telprompt alert user to call
+        NSString *phoneNumber = [@"tel://" stringByAppendingString:mobile];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:phoneNumber]];
     });
 
-}
-- (IBAction)sendTouchBtnAction:(id)sender {
     
-    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+//    [TKAlertView showAlertWithText:@"Alert view shown" forView:self.view];
+//    
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        [TKAlertView hideAlertForView:self.view];
+//    });
 
-    [self openImagePicker];
+}
+- (IBAction)sendTouchBtnAction:(UIButton *)sender {
     
+    if(!sender.selected){
+        
+        sender.selected = YES;
+        
+        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+        
+        MLNetworkModel *model = [[MLNetworkModel alloc] init];
+        
+        TKPageController *pageContr = self.pageController.viewControllers[0];
+        
+        [pageContr.topLabel setText:@"Sending a touch..."];
+        [pageContr.bottomLabel setText:@"Share a moment with video?"];
+        
+        NSString *mobile = @"";
+        if(self.selctedIndex == 0){
+            MyConnection *connect = pageContr.connection;
+            mobile = connect.userId;
+        }
+        else {
+            OthersCircle *others = pageContr.others;
+            mobile = others.userId;
+        }
+        
+        NSDictionary *dict = @{@"receivingUserId" : mobile};
+        
+        [model postRequestPath:@"touch/add" withParameter:dict
+                   withHandler:^(id responseObject, NSError *error) {
+                       
+                   }];
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)( 5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            sender.selected = NO;
+            [sender setTitle:@"send a video" forState:UIControlStateNormal];
+            [pageContr updateMyConnectionData];
+
+        });
+        
+    }
+    else {
+        
+        [sender setTitle:@"send a Touch" forState:UIControlStateNormal];
+
+        [self openImagePicker];
+
+    }
 
 }
 

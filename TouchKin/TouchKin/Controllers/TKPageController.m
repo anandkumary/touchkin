@@ -17,8 +17,7 @@
 
 @interface TKPageController ()
 
-@property (weak, nonatomic) IBOutlet UILabel *topLabel;
-@property (weak, nonatomic) IBOutlet UILabel *bottomLabel;
+
 @property (weak, nonatomic) IBOutlet UIView *bgImage;
 @property (weak, nonatomic) IBOutlet TKCircularView *circularView;
 
@@ -92,18 +91,23 @@
     self.gradientCircle.hidden = YES;
     self.splitView.hidden = YES;
     
-    NSString *urlString = [NSString stringWithFormat:@"https://s3-ap-southeast-1.amazonaws.com/touchkin-dev/avatars/%@.jpeg",connection.userId];
-    self.dashboardView.urlString = urlString;
-    
-    NSString *dateString = [[TKDataEngine sharedManager] getTimeFromCurrentDate];
-    
-    [self.topLabel setText:[NSString stringWithFormat:@"Its %@ for %@ in India",dateString,connection.fname] highlightText:dateString withColor:nil];
-    
-    [self.bottomLabel setText:([connection.gender isEqualToString:@"male"] ? @"Send him a touch now?" : @"Send her a touch now")];
+    [self updateMyConnectionData];
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
        // self.splitView.splitlist = status;
     });
+}
+
+-(void) updateMyConnectionData{
+    
+    NSString *urlString = [NSString stringWithFormat:@"https://s3-ap-southeast-1.amazonaws.com/touchkin-dev/avatars/%@.jpeg",_connection.userId];
+    self.dashboardView.urlString = urlString;
+    
+    NSString *dateString = [[TKDataEngine sharedManager] getTimeFromCurrentDate];
+    
+    [self.topLabel setText:[NSString stringWithFormat:@"Its %@ for %@ in India",dateString,_connection.fname] highlightText:dateString withColor:nil];
+    
+    [self.bottomLabel setText:([_connection.gender isEqualToString:@"male"] ? @"Send him a touch now?" : @"Send her a touch now")];
 }
 
 -(void) setCircle:(MyCircle *)circle {
@@ -133,12 +137,12 @@
     
     if([dict[allkeys.lastObject] isKindOfClass:[NSNull class]]){
         
-        msg = @"little low";
+        msg = @"a little low";
     }
     else {
         NSString *value = dict[allkeys.lastObject];
         
-        msg = (value.intValue > 1) ? @"ok" : @"little low";
+        msg = (value.intValue > 1) ? @"ok" : @"a little low";
     }
     
     NSString *name = [NSString stringWithFormat:@"%@ is %@ today",self.others.fname,msg];
@@ -193,7 +197,11 @@
         }
         case DASHBOARDMAPTYPE: {
             
-            [self.bottomLabel setText:@"Working on it"];
+            NSString *lastHours = [[TKDataEngine sharedManager] lastUpdateTimeFromDateString:_others.updateTime];
+            [self.topLabel setText:[NSString stringWithFormat:@"%@ is at work",others.fname]];
+            
+            [self.bottomLabel setText:[NSString stringWithFormat:@"%@ left home %@ ago",others.fname,lastHours] highlightText:lastHours withColor:nil];
+            
             break;
         }
         case DASHBOARDCELLULARTYPE:{

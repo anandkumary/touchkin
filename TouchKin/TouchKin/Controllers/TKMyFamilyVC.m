@@ -136,7 +136,8 @@
        
         if ( others.connectionList.count > 0){
             
-            [subTitle_label setText:[NSString stringWithFormat:@"Your circle has %d kin",(int)others.connectionList.count]];
+            [subTitle_label setText:[NSString stringWithFormat:@"%@'s circle has %d kin",lbl.text,(int)others.connectionList.count]];
+            
         }
         else if(others.connectionList.count == 0) {
             [subTitle_label setText:[NSString stringWithFormat:@"Invite someone to care for %@",lbl.text]];

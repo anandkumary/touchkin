@@ -99,6 +99,7 @@
             self.locationManager.headingFilter = kHeadingFilter;
         }
         
+        
         self.locationHistory = [NSMutableArray arrayWithCapacity:kNumLocationHistoriesToKeep];
         self.speedHistory = [NSMutableArray arrayWithCapacity:kNumSpeedHistoriesToAverage];
         [self resetLocationUpdates];

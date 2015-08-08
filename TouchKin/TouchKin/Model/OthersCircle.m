@@ -18,6 +18,8 @@
     self = [super init];
     if (self) {
         
+        NSLog(@" others dict = %@",dict);
+        
         self.userId = dict[@"id"];
         
         if(dict[@"first_name"]){

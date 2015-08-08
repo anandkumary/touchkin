@@ -141,9 +141,7 @@ static NSString * const KGENDER = @"gender";
     [self.model getRequestPath:@"user/family" withParameter:nil withHandler:^(id responseObject, NSError *error) {
                 
         NSDictionary *dict = responseObject;
-        
-        NSLog(@"dict = %@",responseObject);
-        
+                
         [self parseCareGiverFor:dict[@"care_givers"]];
         [self parseCareReciverFor:dict[@"care_receivers"]];
         

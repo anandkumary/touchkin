@@ -99,6 +99,8 @@
     self.mapView.layer.cornerRadius = self.mapView.frame.size.width/2;
     
     self.mapView.userTrackingMode=YES;
+    
+    self.mapView.showsUserLocation = NO;
 
     self.mapView.scrollEnabled = NO;
     

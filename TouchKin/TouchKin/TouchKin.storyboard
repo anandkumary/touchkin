@@ -174,10 +174,11 @@
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                                 <inset key="titleEdgeInsets" minX="-55" minY="88" maxX="0.0" maxY="0.0"/>
                                 <inset key="imageEdgeInsets" minX="8" minY="0.0" maxX="0.0" maxY="4"/>
-                                <state key="normal" title="Send a Touch" image="videobtn">
+                                <state key="normal" title="Send a Touch" image="heartBtn">
                                     <color key="titleColor" red="0.51372549020000002" green="0.51764705879999995" blue="0.5450980392" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <state key="selected" image="videobtn"/>
                                 <connections>
                                     <action selector="sendTouchBtnAction:" destination="DA6-ZT-g03" eventType="touchUpInside" id="M2l-w3-RfI"/>
                                 </connections>
@@ -1996,6 +1997,7 @@
         <image name="edit" width="22" height="22"/>
         <image name="goBack" width="48" height="48"/>
         <image name="groupAvatar" width="24" height="22"/>
+        <image name="heartBtn" width="53" height="53"/>
         <image name="kinbook" width="24" height="24"/>
         <image name="like" width="54" height="54"/>
         <image name="like_sel" width="54" height="54"/>

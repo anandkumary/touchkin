@@ -31,10 +31,12 @@
 @property (weak, nonatomic) IBOutlet TKDashboardView *dashboardView;
 @property (weak, nonatomic) IBOutlet TKGradientCircularView *gradientCircle;
 @property (weak, nonatomic) IBOutlet TKSplitView *splitView;
+@property (weak, nonatomic) IBOutlet UILabel *topLabel;
+@property (weak, nonatomic) IBOutlet UILabel *bottomLabel;
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 
 -(void) setConnection:(MyConnection *)connection withUserStatus:(NSDictionary *)status;
-
+-(void) updateMyConnectionData;
 
 @end
