@@ -11,6 +11,8 @@
 @interface TKGradientCircularView()
 
 @property (nonatomic,assign) CGFloat ratio;
+@property (nonatomic, assign) CGFloat updatedRatio;
+
 @end
 
 @implementation TKGradientCircularView
@@ -31,7 +33,7 @@
         NSDateComponents *components = [c components:NSCalendarUnitDay fromDate:today];
         
         self.ratio = (CGFloat)components.day / (CGFloat)days.length;
-
+        self.updatedRatio = 0;
         
     }
     return self;
@@ -60,13 +62,13 @@
     
     CGContextRef context = UIGraphicsGetCurrentContext();
 
-    CGContextSetStrokeColorWithColor(context, [UIColor colorWithRed:(204.0/255.0) green:(203.0/255.0) blue:(203.0/255.0) alpha:1.0].CGColor);
+    CGContextSetStrokeColorWithColor(context, [UIColor colorWithRed:(205.0/255.0) green:(204.0/255.0) blue:(204.0/255.0) alpha:1.0].CGColor);
     CGContextSetLineWidth(context, 16);
     CGContextAddArc(context, center.x,center.y, radius, startAngle,endAngle + 10, 0);
     CGContextStrokePath(context);
     
     
-    CGFloat progressRatio = self.ratio;
+    CGFloat progressRatio = self.updatedRatio; //self.ratio;
         
     UIBezierPath *processPath = [UIBezierPath bezierPath];
     processPath.lineCapStyle = kCGLineCapRound;
@@ -93,13 +95,31 @@
         UIColor *progressColor=[UIColor colorWithRed:rval green:gval blue:bval alpha:1.0];
         [progressColor set];
         
-        [processPath addArcWithCenter:center radius:radius startAngle:tmpStartAngle endAngle:endAngle clockwise:YES];
+        CGPoint centerPoint = center;
+        centerPoint.x += 1;
+        
+        [processPath addArcWithCenter:centerPoint radius:radius startAngle:tmpStartAngle endAngle:endAngle clockwise:YES];
         [processPath stroke];
         [processPath removeAllPoints];
         
         tmpStartAngle=endAngle;
     }
 
+}
+
+-(void) startAnimating {
+    
+    if(self.ratio >= self.updatedRatio){
+        
+        [UIView animateWithDuration:0.1 delay:0.0 options:0 animations:^{
+            self.updatedRatio += 0.009;
+            [self setNeedsDisplay];
+            
+        } completion:^(BOOL finished) {
+            [self startAnimating];
+        }];
+        
+    }
 }
 
 

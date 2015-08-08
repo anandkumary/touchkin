@@ -18,7 +18,7 @@
 @property (nonatomic, assign) NSInteger wifiStrength;
 @property (nonatomic, assign) NSInteger threeGStrength;
 
-@property (nonatomic, strong) NSMutableArray *activityStatus;
+@property (nonatomic, strong) NSDictionary *activityStatus;
 
 
 - (instancetype)initWithDictionary:(NSDictionary *)dict;

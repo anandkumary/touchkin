@@ -12,8 +12,11 @@
 #import "MyHomeLocation.h"
 #import "TKDataEngine.h"
 #import "UserActivity.h"
+#import <AudioToolbox/AudioServices.h>
+
 
 @interface TKPageController ()
+
 @property (weak, nonatomic) IBOutlet UILabel *topLabel;
 @property (weak, nonatomic) IBOutlet UILabel *bottomLabel;
 @property (weak, nonatomic) IBOutlet UIView *bgImage;
@@ -37,19 +40,6 @@
     self.dashboardView.mapView = self.mapView;
 
     self.dashboardView.type = self.boardType;
-    
-//    NSDate *today = [NSDate date]; //Get a date object for today's date
-//    NSCalendar *c = [NSCalendar currentCalendar];
-//    NSRange days = [c rangeOfUnit:NSDayCalendarUnit
-//                           inUnit:NSMonthCalendarUnit
-//                          forDate:today];
-//    
-//    
-//    NSDateComponents *components = [c components:NSCalendarUnitDay fromDate:today];
-//    
-//  CGFloat ratio = (CGFloat)components.day / (CGFloat)days.length;
-//
-//  [self.circularView setProgress:ratio];
     
    CGFloat height = [UIScreen mainScreen].bounds.size.height;
     
@@ -77,10 +67,18 @@
         
     }
     
-    // self.topLabel.text = @"Its 7:30 am for Eric in New York";
+  //  [self.topLabel setText:@"Its 7:30 am for Eric in New York" highlightText:@"7:30 am" withColor:nil];
     
-    [self.topLabel setText:@"Its 7:30 am for Eric in New York" highlightText:@"7:30 am" withColor:nil];
+}
+
+-(void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.gradientCircle startAnimating];
+        
+    });
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -88,17 +86,11 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
--(void) setConnection:(MyConnection *)connection {
+-(void) setConnection:(MyConnection *)connection withUserStatus:(NSDictionary *)status {
     _connection = connection;
+    
+    self.gradientCircle.hidden = YES;
+    self.splitView.hidden = YES;
     
     NSString *urlString = [NSString stringWithFormat:@"https://s3-ap-southeast-1.amazonaws.com/touchkin-dev/avatars/%@.jpeg",connection.userId];
     self.dashboardView.urlString = urlString;
@@ -108,8 +100,10 @@
     [self.topLabel setText:[NSString stringWithFormat:@"Its %@ for %@ in India",dateString,connection.fname] highlightText:dateString withColor:nil];
     
     [self.bottomLabel setText:([connection.gender isEqualToString:@"male"] ? @"Send him a touch now?" : @"Send her a touch now")];
-
     
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+       // self.splitView.splitlist = status;
+    });
 }
 
 -(void) setCircle:(MyCircle *)circle {
@@ -119,7 +113,39 @@
     
     self.dashboardView.urlString = urlString;
     
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        self.splitView.splitlist = circle.userStatus;
+    });
     
+}
+
+-(void) addTextForImageDashboard {
+    
+    NSString *lastTime = [[TKDataEngine sharedManager] lastUpdateTimeFromDateString:_others.updateTime];
+    
+    [self.bottomLabel setText:[NSString stringWithFormat:@"Last touch was %@ ago",lastTime] highlightText:lastTime withColor:nil];
+    
+    NSDictionary *dict = _others.userStatus.activityStatus;
+    
+    NSArray *allkeys = [dict.allKeys sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+    
+    NSString *msg  = @"";
+    
+    if([dict[allkeys.lastObject] isKindOfClass:[NSNull class]]){
+        
+        msg = @"little low";
+    }
+    else {
+        NSString *value = dict[allkeys.lastObject];
+        
+        msg = (value.intValue > 1) ? @"ok" : @"little low";
+    }
+    
+    NSString *name = [NSString stringWithFormat:@"%@ is %@ today",self.others.fname,msg];
+    
+    [self.topLabel setText:name highlightText:msg withColor:nil];
+    
+
 }
 
 -(void) setOthers:(OthersCircle *)others {
@@ -127,22 +153,42 @@
     
      NSString *urlString = [NSString stringWithFormat:@"https://s3-ap-southeast-1.amazonaws.com/touchkin-dev/avatars/%@.jpeg",others.userId];
     
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        self.splitView.splitlist = others.userStatus.activityStatus;
+    });
+    
     if(others.homeList.count){
       
         MyHomeLocation *location = [others.homeList objectAtIndex:0];
         self.dashboardView.lat = [NSString stringWithFormat:@"%@", location.latitude];
         self.dashboardView.log = [NSString stringWithFormat:@"%@",location.longitude];
-        
         [self.dashboardView updateLocation];
 
     }
     
     switch (self.boardType) {
         case DASHBOARDIMAGETYPE: {
-          
-            NSString *lastTime = [[TKDataEngine sharedManager] lastUpdateTimeFromDateString:others.updateTime];
             
-            [self.bottomLabel setText:[NSString stringWithFormat:@"Last touch was %@ ago",lastTime] highlightText:lastTime withColor:nil];
+            [self addTextForImageDashboard];
+            
+            if(others.didReceiveTouch){
+                
+                NSString *message = @"is thinking you";
+                [self.topLabel setText:[NSString stringWithFormat:@"%@ %@",others.fname,message] highlightText:message withColor:nil];
+                
+                [self.bottomLabel setText:[NSString stringWithFormat:@"Tap above for a touch from %@",([others.gender isEqualToString:@"male"] ? @"him" : @"her")]];
+                
+                UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] init];
+                tapGesture.numberOfTapsRequired = 1;
+                
+                [tapGesture addTarget:self action:@selector(imageRippleEffect:)];
+                
+                [self.dashboardView.avatar addGestureRecognizer:tapGesture];
+                
+                self.dashboardView.avatar.userInteractionEnabled = YES;
+            }
+
+            
             break;
         }
         case DASHBOARDMAPTYPE: {
@@ -153,8 +199,6 @@
         case DASHBOARDCELLULARTYPE:{
             
             UserActivity *useractivity = others.userStatus;
-            
-           
             
             self.dashboardView.g3Level = useractivity.threeGStrength;
             self.dashboardView.wifilevel = useractivity.wifiStrength;
@@ -179,9 +223,31 @@
             break;
     }
     
-   
-    
     self.dashboardView.urlString = urlString;
 
+}
+
+-(void)imageRippleEffect:(UIGestureRecognizer *)gesture {
+    
+    CATransition *animation=[CATransition animation];
+    [animation setDelegate:self];
+    [animation setDuration:1.5];
+    [animation setTimingFunction:UIViewAnimationCurveEaseInOut];
+    [animation setType:@"rippleEffect"];
+    
+    [animation setFillMode:kCAFillModeRemoved];
+    animation.endProgress=0.99;
+    [animation setRemovedOnCompletion:NO];
+    [self.dashboardView.avatar.layer addAnimation:animation forKey:nil];
+    
+    [self addTextForImageDashboard];
+    
+    UIGestureRecognizer *gest = self.dashboardView.avatar.gestureRecognizers[0];
+    
+    [self.dashboardView.avatar removeGestureRecognizer:gest];
+    self.dashboardView.avatar.userInteractionEnabled = NO;
+    
+    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+    
 }
 @end

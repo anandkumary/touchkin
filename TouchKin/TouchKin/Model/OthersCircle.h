@@ -24,6 +24,7 @@
 @property (nonatomic, strong) NSMutableArray *homeList;
 @property (nonatomic, strong) NSMutableArray *connectionList;
 @property (nonatomic, strong) UserActivity *userStatus;
+@property (nonatomic, assign) BOOL didReceiveTouch;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dict;
 -(void) getOtherFamilyInfo;

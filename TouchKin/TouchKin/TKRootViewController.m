@@ -244,7 +244,7 @@ static NSString * const KINTROSCREEN = @"TKIntroVC";
     
     NSLog(@"distance travelled = %.2f  -> lat-> %f log -> %f",distance,locationManager.locationManager.location.coordinate.latitude,locationManager.locationManager.location.coordinate.longitude);
         
-    //[locationManager stopLocationUpdates];
+    [locationManager stopLocationUpdates];
     
 }
 

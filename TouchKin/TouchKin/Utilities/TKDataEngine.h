@@ -43,4 +43,5 @@
 - (NSString *) getTimeFromCurrentDateString:(NSString *)dateString;
 - (NSString *) lastUpdateTimeFromDateString:(NSString *)dateString ;
 
+- (void) receivedTouchForuserID:(NSString *)userId withType:(NSString *)type;
 @end

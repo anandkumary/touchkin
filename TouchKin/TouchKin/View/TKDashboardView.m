@@ -15,7 +15,6 @@
 
 @interface TKDashboardView() <MKMapViewDelegate>
 
-@property (nonatomic, strong) UIImageView *avatar;
 @property (nonatomic, strong) UIImageView *batteryImage;
 @property (nonatomic, strong) UILabel *batteryLbl;
 
@@ -101,6 +100,7 @@
     
     self.mapView.userTrackingMode=YES;
 
+    self.mapView.scrollEnabled = NO;
     
     if(![self.subviews containsObject:self.mapView]){
         [self addSubview:self.mapView];

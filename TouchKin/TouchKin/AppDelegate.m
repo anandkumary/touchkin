@@ -194,6 +194,13 @@
 }
 
 
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+ 
+    NSLog(@"notification = %@",userInfo);
+    [[TKDataEngine sharedManager] receivedTouchForuserID:userInfo[@"id"] withType:userInfo[@"type"]];
+
+}
+
 - (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forRemoteNotification:(NSDictionary *)userInfo completionHandler:(void(^)())completionHandler
 {
     

@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-IB_DESIGNABLE
+//IB_DESIGNABLE
 @interface TKSplitView : UIView
 
+@property (nonatomic, strong) NSDictionary *splitlist;
 @end

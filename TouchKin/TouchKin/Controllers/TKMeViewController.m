@@ -102,7 +102,7 @@
         
         MyCircle *circle = [self.familyList objectAtIndex:0];
         
-        [self getActivityForId:circle.userId];
+        [self getActivityForId:circle.userId forObject:circle];
         
         [[TKDataEngine sharedManager] setCurrentUserId:circle.userId];
         
@@ -203,7 +203,9 @@
     }
     else {
         
-        childViewController.connection = [circle.myConnectionList objectAtIndex:index];
+        [childViewController setConnection:[circle.myConnectionList objectAtIndex:index] withUserStatus:circle.userStatus];
+        
+      //  childViewController.connection = [circle.myConnectionList objectAtIndex:index];
     }
     
     CGRect frame = childViewController.view.frame;
@@ -255,13 +257,15 @@
 
 #pragma mark - Get Activity
 
--(void) getActivityForId:(NSString *)userId {
+-(void) getActivityForId:(NSString *)userId forObject:(MyCircle *)circle {
     
     MLNetworkModel *model = [[MLNetworkModel alloc] init];
     
     [model getRequestPath:[NSString stringWithFormat:@"activity/current/%@",userId] withParameter:nil withHandler:^(id responseObject, NSError *error) {
         
         NSLog(@"res =%@",responseObject);
+        circle.lastTouch = [[UserLastUpdate alloc] initWithDict:responseObject[@"last_touch"]];
+        circle.userStatus = responseObject[@"current_month_activity"];
     }];
 }
 

@@ -89,6 +89,8 @@
                         <outlet property="bottomLabel" destination="Kfi-PJ-EfZ" id="sd9-bW-dfz"/>
                         <outlet property="bottomLabelConstraint" destination="l4i-vJ-iw5" id="Q3B-C2-Sxg"/>
                         <outlet property="dashboardView" destination="QUm-Fl-FnP" id="7nJ-Ap-Gq5"/>
+                        <outlet property="gradientCircle" destination="P1t-Q4-Kmv" id="EM5-b3-dFZ"/>
+                        <outlet property="splitView" destination="vUK-ys-egY" id="gXm-eO-T76"/>
                         <outlet property="topLabel" destination="xsG-KK-zye" id="hbY-Rm-pPG"/>
                     </connections>
                 </viewController>
@@ -1298,7 +1300,7 @@
                                     <action selector="forwardButtonAction:" destination="3fz-je-g2A" eventType="touchUpInside" id="6ok-2y-Wep"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Already have OTP" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7al-Ic-Ikh">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap here to receive OTP" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7al-Ic-Ikh">
                                 <rect key="frame" x="131" y="604" width="167" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="ao5-qf-66i"/>
