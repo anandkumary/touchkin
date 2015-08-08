@@ -17,6 +17,7 @@
 @property (nonatomic, copy) NSString *urlString;
 
 @property (nonatomic, weak) IBOutlet MKMapView *mapView;
+@property (nonatomic, strong) UIImageView *avatar;
 
 @property (nonatomic, copy) NSString * lat;
 @property (nonatomic, copy) NSString * log;
@@ -26,5 +27,6 @@
 @property (nonatomic, assign) NSInteger g3Level;
 
 -(void) updateLocation;
+
 
 @end

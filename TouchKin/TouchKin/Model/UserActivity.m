@@ -25,9 +25,7 @@ static NSString * const USERACTIVITDATA         = @"data";
 {
     self = [super init];
     if (self) {
-        
-        NSLog(@"status  = \n %@",dict);
-        
+                
         NSDictionary *dict1  = dict[USERACTIVITLASTUPDATES];
         
         self.userId = dict1[USERACTIVITYUSER];

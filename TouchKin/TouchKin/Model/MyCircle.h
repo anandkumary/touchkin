@@ -7,6 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "UserActivity.h"
+#import "UserLastUpdate.h"
 
 @interface MyCircle : NSObject
 
@@ -16,6 +18,11 @@
 @property (nonatomic, strong) NSMutableArray *myConnectionList;
 @property (nonatomic, strong) NSMutableArray *requestList;
 
+@property (nonatomic, strong) NSDictionary *userStatus;
+@property (nonatomic, strong) UserLastUpdate *lastTouch;
+
 - (instancetype)initWithArray:(NSArray *)connectionList;
+
+- (void) updateUserStatus:(NSDictionary *)userStat;
 
 @end

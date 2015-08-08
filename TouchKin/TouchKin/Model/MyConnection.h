@@ -22,6 +22,8 @@
 @property (nonatomic, copy) NSString *age;
 @property (nonatomic, assign) int yob;
 @property (nonatomic, strong) NSMutableArray *homeList;
+@property (nonatomic, assign) BOOL didReceiveTouch;
+
 //@property (nonatomic, strong) NSMutableArray *connectionList;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dict;

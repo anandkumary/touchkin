@@ -44,6 +44,7 @@
 		445175811B55DDCE00EDEF97 /* TKLoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4451757F1B55DDCE00EDEF97 /* TKLoginVC.m */; };
 		445175861B55E74100EDEF97 /* MLClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 445175851B55E74100EDEF97 /* MLClient.m */; };
 		445175891B55E7D900EDEF97 /* MLNetworkModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 445175881B55E7D900EDEF97 /* MLNetworkModel.m */; };
+		4452BB101B75CCA400585B52 /* UserLastUpdate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4452BB0F1B75CCA400585B52 /* UserLastUpdate.m */; };
 		4453154A1B6BCF150003C18B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 445315491B6BCF150003C18B /* AVFoundation.framework */; };
 		4453154C1B6BCF1D0003C18B /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4453154B1B6BCF1D0003C18B /* ImageIO.framework */; };
 		44592D1D1B718EDE009585C5 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 44592D1C1B718EDE009585C5 /* MBProgressHUD.m */; };
@@ -184,6 +185,8 @@
 		445175851B55E74100EDEF97 /* MLClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLClient.m; sourceTree = "<group>"; };
 		445175871B55E7D900EDEF97 /* MLNetworkModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLNetworkModel.h; sourceTree = "<group>"; };
 		445175881B55E7D900EDEF97 /* MLNetworkModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLNetworkModel.m; sourceTree = "<group>"; };
+		4452BB0E1B75CCA400585B52 /* UserLastUpdate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserLastUpdate.h; sourceTree = "<group>"; };
+		4452BB0F1B75CCA400585B52 /* UserLastUpdate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserLastUpdate.m; sourceTree = "<group>"; };
 		445315491B6BCF150003C18B /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		4453154B1B6BCF1D0003C18B /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		44592D1B1B718EDE009585C5 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
@@ -579,6 +582,8 @@
 				44A58A0A1B628900001742D8 /* OthersCircle.m */,
 				44E58E041B74B77A00937BCD /* UserActivity.h */,
 				44E58E051B74B77A00937BCD /* UserActivity.m */,
+				4452BB0E1B75CCA400585B52 /* UserLastUpdate.h */,
+				4452BB0F1B75CCA400585B52 /* UserLastUpdate.m */,
 				44A58A001B627C98001742D8 /* MyConnection.h */,
 				44A58A011B627C98001742D8 /* MyConnection.m */,
 				44A58A031B627EB9001742D8 /* MyHomeLocation.h */,
@@ -749,6 +754,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				445B02581B5E7E7A004696B3 /* TKDataEngine.m in Sources */,
+				4452BB101B75CCA400585B52 /* UserLastUpdate.m in Sources */,
 				447F83D51B67D212006B2839 /* TKProfileVC.m in Sources */,
 				4445853A1B6C91E60023868A /* TKDoubleTextfieldCell.m in Sources */,
 				448E3B791B6675C500666602 /* PSLocationManager.m in Sources */,

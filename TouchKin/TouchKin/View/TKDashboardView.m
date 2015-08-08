@@ -15,7 +15,6 @@
 
 @interface TKDashboardView() <MKMapViewDelegate>
 
-@property (nonatomic, strong) UIImageView *avatar;
 @property (nonatomic, strong) UIImageView *batteryImage;
 @property (nonatomic, strong) UILabel *batteryLbl;
 

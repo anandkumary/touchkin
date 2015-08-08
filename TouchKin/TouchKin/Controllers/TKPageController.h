@@ -34,4 +34,7 @@
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 
+-(void) setConnection:(MyConnection *)connection withUserStatus:(NSDictionary *)status;
+
+
 @end

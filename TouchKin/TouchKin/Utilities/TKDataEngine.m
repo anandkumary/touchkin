@@ -139,10 +139,10 @@ static NSString * const KGENDER = @"gender";
     self.familyList = nil;
     
     [self.model getRequestPath:@"user/family" withParameter:nil withHandler:^(id responseObject, NSError *error) {
-        
-         NSLog(@"res = %@",responseObject);
-        
+                
         NSDictionary *dict = responseObject;
+        
+        NSLog(@"dict = %@",responseObject);
         
         [self parseCareGiverFor:dict[@"care_givers"]];
         [self parseCareReciverFor:dict[@"care_receivers"]];
@@ -288,4 +288,17 @@ static NSString * const KGENDER = @"gender";
     }
     return convertString;
 }
+
+- (void) receivedTouchForuserID:(NSString *)userId withType:(NSString *)type {
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"userId CONTAINS[cd] %@",userId];
+    
+    NSArray *array = [self.familyList filteredArrayUsingPredicate:predicate];
+        
+    if(array.count){
+        [array setValue:@(YES) forKey:@"didReceiveTouch"];
+    }
+    
+}
+
 @end
