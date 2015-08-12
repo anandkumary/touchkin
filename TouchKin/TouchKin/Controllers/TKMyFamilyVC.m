@@ -48,20 +48,18 @@
     previousSelected= -1;
     
     self.tableview.backgroundColor = [UIColor whiteColor];
-    
     self.type = NAVIGATIONTYPENORMAL;
     self.title = @"My Family";
     self.PendingCount = [[NSMutableDictionary alloc]init];
     self.familyList = [[NSMutableArray alloc] initWithArray: [[TKDataEngine sharedManager] familyList]];
     
     [self hideRightBarButton];
+    
     //NSLog(@"family = %@",[[TKDataEngine sharedManager] familyList]);
     
     refreshControl = [[UIRefreshControl alloc]init];
     [self.tableview addSubview:refreshControl];
     [refreshControl addTarget:self action:@selector(refreshTable) forControlEvents:UIControlEventValueChanged];
-
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -70,17 +68,13 @@
 }
 
 -(void) refreshTable{
-    
     self.familyList = [[NSMutableArray alloc] initWithArray: [[TKDataEngine sharedManager] familyList]];
-
     [self performSelector:@selector(endRefresh) withObject:self afterDelay:5.0];
-    
 }
 
 -(void)endRefresh{
     [self.refreshControl endRefreshing];
     [self.tableview reloadData];
-
 }
 
 /*
@@ -92,11 +86,12 @@
     // Pass the selected object to the new view controller.
 }
 */
+
 -(UIView *)createHeaderViewForIndex:(NSInteger)index {
     
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 90)];
     [view setBackgroundColor:[UIColor colorWithRed:(235.0/255.0) green:(235.0/255.0) blue:(235.0/255.0) alpha:1.0]];
-    
+    [self addtapGestureForView:view];
     UIImageView *img = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 70, 70)];
     [img setBackgroundColor:[UIColor clearColor]];
     img.layer.cornerRadius = img.frame.size.width/2;
@@ -109,11 +104,9 @@
     //lbl_image.layer.borderColor   = [UIColor colorWithRed:(207.0/255.0) green:(207.0/255.0) blue:(207.0/255.0) alpha:1.0].CGColor;
     //lbl_image.layer.borderWidth  = 2.0;
     lbl_image.clipsToBounds = YES;
-
     img.clipsToBounds = YES;
     
     NSURL *url = nil;
-   
     UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(88, 18, 180, 25)];
     [lbl setText:@"Anand Kumar"];
     [lbl setFont:[UIFont systemFontOfSize:20]];
@@ -158,7 +151,7 @@
              [subTitle_label setText:[NSString stringWithFormat:@"Your circle has %d kin & %d request",(int)circle.myConnectionList.count,(int)circle.requestList.count]];
         }
         else if(circle.myConnectionList.count > 1){
-          [subTitle_label setText:[NSString stringWithFormat:@"Your circle has %d kin",circle.myConnectionList.count]];
+          [subTitle_label setText:[NSString stringWithFormat:@"Your circle has %lu kin",(unsigned long)circle.myConnectionList.count]];
         }
         else {
             [subTitle_label setText: @"Invite someone to care for you."];
@@ -210,23 +203,16 @@
     }
     
     [headerButton setUserInteractionEnabled:YES];
-    UIButton *headerButton1 = [[UIButton alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width - 60, 15, 60, 60)];
 
     if(isPending){
         
-        [headerButton1 setBackgroundColor:[UIColor clearColor]];
-        [headerButton1 addTarget:self action:@selector(headerButtonPendingAction:) forControlEvents:UIControlEventTouchUpInside];
-        
-        [headerButton1 setTag:index];
         if (![_PendingCount objectForKey:[NSString stringWithFormat:@"%ld",(long)index]]) {
             [_PendingCount setObject:lbl.text forKey:[NSString stringWithFormat:@"%ld",(long)index]];
         }else{
             [_PendingCount setObject:lbl.text forKey:[NSString stringWithFormat:@"%ld",(long)index]];
         }
         NSLog(@"Pending:%@",_PendingCount);
-        [headerButton1 setImage:[UIImage imageNamed:@"info"] forState:UIControlStateNormal];
-        [headerButton setHidden:YES];
-        [view addSubview:headerButton1];
+        [headerButton setImage:[UIImage imageNamed:@"info"] forState:UIControlStateNormal];
         [subTitle_label setText:[NSString stringWithFormat:@"Waiting for %@ to accept your request",lbl.text]];
         [view addSubview:subTitle_label];
 
@@ -237,6 +223,32 @@
 
     return view;
 }
+
+-(void) addtapGestureForView:(UIView *)View
+{
+    
+    
+    UITapGestureRecognizer *singleFingerTap = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                      action:@selector(handleDoubleTapGesture:)];
+    
+    [View addGestureRecognizer:singleFingerTap];
+    
+    
+}
+
+
+-(void)handleDoubleTapGesture:(UITapGestureRecognizer *)tapGestureRecognizer{
+    
+    UIView *bview;
+    bview = tapGestureRecognizer.view;
+    for (UIView *but in bview.subviews) {
+        if ([but isKindOfClass:[UIButton class]]) {
+            UIButton *button =(UIButton *)but ;
+                [self headerButtonAction:button];
+        }
+    }
+}
+
 
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -342,6 +354,10 @@
 
 -(void) headerButtonAction:(UIButton *) sender {
     
+    if([self.PendingCount objectForKey:[NSString stringWithFormat:@"%ld",(long)sender.tag]]){
+        [self headerButtonPendingAction:sender];
+    }else{
+        
     [UIView animateWithDuration:0.4 animations:^{
         
         sender.transform = CGAffineTransformRotate(sender.transform, M_PI);
@@ -349,8 +365,8 @@
     }];
     
     NSInteger delayOffset = 0;
-    
-    if(selectedSection != -1){
+        
+ if(selectedSection != -1){
         
         delayOffset = 0.5;
         
@@ -371,44 +387,15 @@
              [self.tableview deleteRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:0 inSection:previousSelected],nil] withRowAnimation:UITableViewRowAnimationFade];
         }
 
-        
         [self.tableview endUpdates];
         
         selectedSection = -1;
         
-    }
+ }else if (previousSelected == sender.tag){
     
-  else if(previousSelected != sender.tag)
-        {
-        
-        selectedSection = sender.tag;
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, delayOffset * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-            
-            [self.tableview beginUpdates];
-            
-            MyCircle *circle = [self.familyList objectAtIndex:selectedSection];
-            
-            if([circle isKindOfClass:[MyCircle class]]){
-                
-                
-                NSMutableArray *indexPathList = [self createNumberOfRow:circle.requestList.count forSection:selectedSection];
-                [self.tableview insertRowsAtIndexPaths:indexPathList withRowAnimation:UITableViewRowAnimationMiddle];
-                
-            }
-            else {
-              
-                  [self.tableview insertRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:0 inSection:selectedSection],nil] withRowAnimation:UITableViewRowAnimationMiddle];
-                }
-            
-            [self.tableview endUpdates];
-        });
-       
-    }
-    else if (previousSelected == sender.tag){
-        
         selectedSection = sender.tag;
         previousSelected = -1;
-        
+     
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, delayOffset * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
             
         [self.tableview beginUpdates];
@@ -424,6 +411,33 @@
             }
             [self.tableview endUpdates];
         });
+ }else if(previousSelected != sender.tag)
+ {
+     
+     selectedSection = sender.tag;
+     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, delayOffset * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+         
+         [self.tableview beginUpdates];
+         
+         MyCircle *circle = [self.familyList objectAtIndex:selectedSection];
+         
+         if([circle isKindOfClass:[MyCircle class]]){
+             
+             
+             NSMutableArray *indexPathList = [self createNumberOfRow:circle.requestList.count forSection:selectedSection];
+             [self.tableview insertRowsAtIndexPaths:indexPathList withRowAnimation:UITableViewRowAnimationMiddle];
+             
+         }
+         else {
+             
+             [self.tableview insertRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:0 inSection:selectedSection],nil] withRowAnimation:UITableViewRowAnimationMiddle];
+         }
+         
+         [self.tableview endUpdates];
+         
+     });
+     
+ }
     }
 }
 
