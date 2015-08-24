@@ -29,6 +29,8 @@
     
     self.type = NAVIGATIONTYPECAMERA;
     
+    self.navTitle = @"Share Video";
+    
     [self addVideoPlayer];
 
     [self reloadOthersData];

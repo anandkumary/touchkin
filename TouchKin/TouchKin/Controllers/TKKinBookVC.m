@@ -29,7 +29,8 @@
     // Do any additional setup after loading the view.
     
     self.type = NAVIGATIONTYPENORMAL;
-    
+    self.navTitle = @"KinBook";
+
     [self hideRightBarButton];
 }
 
