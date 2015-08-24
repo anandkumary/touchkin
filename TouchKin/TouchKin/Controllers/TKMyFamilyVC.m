@@ -42,7 +42,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.tableview.estimatedRowHeight = 90;
+    //self.tableview.estimatedRowHeight = 90;
     
     selectedSection = -1;
     previousSelected= -1;
@@ -61,6 +61,7 @@
     [self.tableview addSubview:refreshControl];
     [refreshControl addTarget:self action:@selector(refreshTable) forControlEvents:UIControlEventValueChanged];
 
+    [self addMyCircleObserver];
     
 }
 
@@ -71,16 +72,44 @@
 
 -(void) refreshTable{
     
-    self.familyList = [[NSMutableArray alloc] initWithArray: [[TKDataEngine sharedManager] familyList]];
+    [[TKDataEngine sharedManager] getMyFamilyInfo];
+    
+   // self.familyList = [[NSMutableArray alloc] initWithArray: [[TKDataEngine sharedManager] familyList]];
 
-    [self performSelector:@selector(endRefresh) withObject:self afterDelay:5.0];
+  //  [self performSelector:@selector(endRefresh) withObject:self afterDelay:5.0];
     
 }
 
--(void)endRefresh{
-    [self.refreshControl endRefreshing];
-    [self.tableview reloadData];
+-(void) addMyCircleObserver {
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateMyCircle:) name:@"MyFamilyCircle" object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateMyCircleError:) name:@"MyFamilyCircleError" object:nil];
+}
 
+-(void)updateMyCircle:(NSNotification *)notification {
+    
+    self.familyList = [[NSMutableArray alloc] initWithArray: [[TKDataEngine sharedManager] familyList]];
+    
+    [self endRefresh];
+
+}
+
+-(void)updateMyCircleError:(NSNotification *)notification {
+    [self endRefresh];
+}
+
+-(void)endRefresh{
+    
+    selectedSection = -1;
+    previousSelected= -1;
+    
+    [self.refreshControl endRefreshing];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.tableview reloadData];
+
+    });
 }
 
 /*
@@ -92,22 +121,28 @@
     // Pass the selected object to the new view controller.
 }
 */
--(UIView *)createHeaderViewForIndex:(NSInteger)index {
+-(UIView *)createHeaderViewForIndex:(NSInteger)index forView:(UIView *)view{
     
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 90)];
-    [view setBackgroundColor:[UIColor colorWithRed:(235.0/255.0) green:(235.0/255.0) blue:(235.0/255.0) alpha:1.0]];
+    if(!view){
+        
+        UIView *view1 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 90)];
+        [view1 setBackgroundColor:[UIColor colorWithRed:(235.0/255.0) green:(235.0/255.0) blue:(235.0/255.0) alpha:1.0]];
+        
+        view =view1;
+    }
+    
+    
+    
     
     UIImageView *img = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 70, 70)];
     [img setBackgroundColor:[UIColor clearColor]];
     img.layer.cornerRadius = img.frame.size.width/2;
-    //img.layer.borderColor   = [UIColor colorWithRed:(207.0/255.0) green:(207.0/255.0) blue:(207.0/255.0) alpha:1.0].CGColor;
-    //img.layer.borderWidth  = 2.0;
     [view addSubview:img];
+    
+    
     UILabel *lbl_image = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 70, 70)];
     [lbl_image setBackgroundColor:[UIColor clearColor]];
     lbl_image.layer.cornerRadius = img.frame.size.width/2;
-    //lbl_image.layer.borderColor   = [UIColor colorWithRed:(207.0/255.0) green:(207.0/255.0) blue:(207.0/255.0) alpha:1.0].CGColor;
-    //lbl_image.layer.borderWidth  = 2.0;
     lbl_image.clipsToBounds = YES;
 
     img.clipsToBounds = YES;
@@ -176,7 +211,7 @@
     __weak typeof(UIImageView *) weakSelf = img;
     __weak typeof(UILabel *) weakLabel = lbl_image;
     
-    [img sd_setImageWithURL:url placeholderImage:nil options:SDWebImageRefreshCached completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    [img sd_setImageWithURL:url placeholderImage:nil options:SDWebImageRetryFailed completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         
         dispatch_async(dispatch_get_main_queue(), ^{
             if (image ==nil) {
@@ -201,6 +236,7 @@
     UIButton *headerButton = [[UIButton alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width - 50, 90/2 - 40/2, 40, 40)];
     [headerButton setBackgroundColor:[UIColor clearColor]];
     [headerButton setTag:index];
+    [headerButton setUserActivity:NO];
     [headerButton addTarget:self action:@selector(headerButtonAction:) forControlEvents:UIControlEventTouchUpInside];
 
     [headerButton setImage:[UIImage imageNamed:@"downArrow"] forState:UIControlStateNormal];
@@ -210,32 +246,66 @@
     }
     
     [headerButton setUserInteractionEnabled:YES];
-    UIButton *headerButton1 = [[UIButton alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width - 60, 15, 60, 60)];
+    
+   
 
     if(isPending){
+         UIButton *headerButton1 = [[UIButton alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width - 60, 15, 60, 60)];
         
         [headerButton1 setBackgroundColor:[UIColor clearColor]];
         [headerButton1 addTarget:self action:@selector(headerButtonPendingAction:) forControlEvents:UIControlEventTouchUpInside];
         
-        [headerButton1 setTag:index];
+        [headerButton1 setTag:index + 10000];
         if (![_PendingCount objectForKey:[NSString stringWithFormat:@"%ld",(long)index]]) {
             [_PendingCount setObject:lbl.text forKey:[NSString stringWithFormat:@"%ld",(long)index]];
         }else{
             [_PendingCount setObject:lbl.text forKey:[NSString stringWithFormat:@"%ld",(long)index]];
         }
-        NSLog(@"Pending:%@",_PendingCount);
+
         [headerButton1 setImage:[UIImage imageNamed:@"info"] forState:UIControlStateNormal];
         [headerButton setHidden:YES];
         [view addSubview:headerButton1];
+        
         [subTitle_label setText:[NSString stringWithFormat:@"Waiting for %@ to accept your request",lbl.text]];
         [view addSubview:subTitle_label];
-
 
     }
     
     [view addSubview:headerButton];
+    
+    [self createTapGestureForView:view];
 
     return view;
+}
+
+-(void) createTapGestureForView:(UIView *)view {
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didSelectHeaderAtIndex:)];
+    tap.numberOfTapsRequired = 1;
+    
+    [view addGestureRecognizer:tap];
+}
+
+-(void) didSelectHeaderAtIndex:(UIGestureRecognizer *)gestureView {
+    
+    for (UIView *view in gestureView.view.subviews) {
+        
+        if([view isKindOfClass:[UIButton class]]){
+            UIButton *btn = (UIButton *)view;
+            
+            if(btn.tag >= 10000){
+                [self headerButtonPendingAction:btn];
+                
+                return;
+            }
+            else{
+                [self headerButtonAction:btn];
+
+            }
+        }
+    }
+    
+    
 }
 
 #pragma mark - UITableViewDelegate
@@ -248,7 +318,8 @@
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    return [self createHeaderViewForIndex:section];
+    UIView *view = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"HeaderView"];
+    return [self createHeaderViewForIndex:section forView:view];
 }
 
 #pragma  mark - UITableViewDataSource
@@ -348,28 +419,32 @@
 
     }];
     
-    NSInteger delayOffset = 0;
-    
+    CGFloat delayOffset = 0;
     if(selectedSection != -1){
         
         delayOffset = 0.5;
         
         previousSelected = selectedSection;
-        
+
         [self.tableview beginUpdates];
         
         MyCircle *circle = [self.familyList objectAtIndex:selectedSection];
         
         if([circle isKindOfClass:[MyCircle class]]){
             
+            
             NSMutableArray *indexPathList = [self createNumberOfRow:circle.requestList.count forSection:selectedSection];
             [self.tableview deleteRowsAtIndexPaths:indexPathList withRowAnimation:UITableViewRowAnimationFade];
+            [self.tableview reloadSections:[NSIndexSet indexSetWithIndex:selectedSection] withRowAnimation:UITableViewRowAnimationNone];
             
         }
         else {
-           
+            
              [self.tableview deleteRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:0 inSection:previousSelected],nil] withRowAnimation:UITableViewRowAnimationFade];
-        }
+            
+            [self.tableview reloadSections:[NSIndexSet indexSetWithIndex:previousSelected] withRowAnimation:UITableViewRowAnimationNone];
+            
+            }
 
         
         [self.tableview endUpdates];
@@ -378,7 +453,7 @@
         
     }
     
-  else if(previousSelected != sender.tag)
+   if(previousSelected != sender.tag)
         {
         
         selectedSection = sender.tag;
@@ -406,24 +481,30 @@
     }
     else if (previousSelected == sender.tag){
         
-        selectedSection = sender.tag;
-        previousSelected = -1;
-        
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, delayOffset * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-            
-        [self.tableview beginUpdates];
-            
-            MyCircle *circle = [self.familyList objectAtIndex:selectedSection];
-            
-            if([circle isKindOfClass:[MyCircle class]]){
-                NSMutableArray *indexPathList = [self createNumberOfRow:circle.requestList.count forSection:selectedSection];
-                [self.tableview insertRowsAtIndexPaths:indexPathList withRowAnimation:UITableViewRowAnimationMiddle];
-            }
-            else {
-                [self.tableview insertRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:0 inSection:selectedSection],nil] withRowAnimation:UITableViewRowAnimationMiddle];
-            }
-            [self.tableview endUpdates];
-        });
+         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.0 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+             
+             if(delayOffset == 0){
+                 
+                 selectedSection = sender.tag;
+                 previousSelected = -1;
+                 
+                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, delayOffset * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+                     
+                     [self.tableview beginUpdates];
+                     
+                     MyCircle *circle = [self.familyList objectAtIndex:selectedSection];
+                     
+                     if([circle isKindOfClass:[MyCircle class]]){
+                         NSMutableArray *indexPathList = [self createNumberOfRow:circle.requestList.count forSection:selectedSection];
+                         [self.tableview insertRowsAtIndexPaths:indexPathList withRowAnimation:UITableViewRowAnimationMiddle];
+                     }
+                     else {
+                         [self.tableview insertRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:0 inSection:selectedSection],nil] withRowAnimation:UITableViewRowAnimationMiddle];
+                     }
+                     [self.tableview endUpdates];
+                 });
+             }
+         });
     }
 }
 
@@ -548,7 +629,7 @@
 
     UIButton *temp = sender;
     NSLog(@"%ld",(long)temp.tag);
-    NSString *str=  [NSString stringWithFormat:@"A message has been sent to %@",[self.PendingCount objectForKey:[NSString stringWithFormat:@"%ld",(long)temp.tag]]];
+    NSString *str=  [NSString stringWithFormat:@"A message has been sent to %@",[self.PendingCount objectForKey:[NSString stringWithFormat:@"%ld",(long)temp.tag - 10000]]];
     
     UIAlertView *Alert = [[UIAlertView alloc] initWithTitle:@"Request Pending" message:str delegate:self cancelButtonTitle:@"Withdraw request" otherButtonTitles:@"Resend Request", nil];
     [Alert show];

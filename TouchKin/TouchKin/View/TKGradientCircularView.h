@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-IB_DESIGNABLE
+//IB_DESIGNABLE
 @interface TKGradientCircularView : UIView
+@property (nonatomic,assign) CGFloat ratio;
 
 -(void) startAnimating;
 @end

@@ -10,7 +10,7 @@
 
 @interface TKGradientCircularView()
 
-@property (nonatomic,assign) CGFloat ratio;
+//@property (nonatomic,assign) CGFloat ratio;
 @property (nonatomic, assign) CGFloat updatedRatio;
 
 @end
@@ -23,10 +23,12 @@
     self = [super initWithCoder:coder];
     if (self) {
         
+        self.backgroundColor = [UIColor clearColor];
+        
         NSDate *today = [NSDate date]; //Get a date object for today's date
         NSCalendar *c = [NSCalendar currentCalendar];
-        NSRange days = [c rangeOfUnit:NSDayCalendarUnit
-                               inUnit:NSMonthCalendarUnit
+        NSRange days = [c rangeOfUnit: NSCalendarUnitDay
+                               inUnit:NSCalendarUnitMonth
                               forDate:today];
         
         

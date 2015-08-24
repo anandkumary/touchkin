@@ -98,6 +98,8 @@
     [model postPath:@"user/add-care-receiver" withParameter:dict withHandler:^(MLClient *sender, id responseObject, NSError *error) {
         NSLog(@"resp = %@",responseObject);
         app.networkActivityIndicatorVisible = NO;
+        
+        [[TKDataEngine sharedManager] getMyFamilyInfo];
 
     }];
 }

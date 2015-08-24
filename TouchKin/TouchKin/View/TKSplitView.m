@@ -60,6 +60,9 @@
 
 -(void) setSplitlist:(NSDictionary *)splitlist {
     
+    self.backgroundColor = [UIColor clearColor];
+
+    
     _splitlist = splitlist;
     
     [self setNeedsDisplay];

@@ -16,7 +16,7 @@
 
 @end
 
-IB_DESIGNABLE
+//IB_DESIGNABLE
 @interface TKPassCodeView : UIView
 
 @property (nonatomic, assign) id <TKPassCodeViewDelegate> delegate;

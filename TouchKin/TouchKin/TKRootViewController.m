@@ -66,6 +66,9 @@ static NSString * const KINTROSCREEN = @"TKIntroVC";
     //MyFamilyCircle
     
      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(stopLoader) name:@"MyFamilyCircle" object:nil];
+    
+     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(stopLoader) name:@"MyFamilyCircleError" object:nil];
+    
    
     //Network Updates
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:@"kReachabilityChangedNotification" object:nil];

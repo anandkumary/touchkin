@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "UserActivity.h"
+#import "UserLastUpdate.h"
 
 @interface OthersCircle : NSObject
 
@@ -24,6 +25,7 @@
 @property (nonatomic, strong) NSMutableArray *homeList;
 @property (nonatomic, strong) NSMutableArray *connectionList;
 @property (nonatomic, strong) UserActivity *userStatus;
+@property (nonatomic, strong) UserLastUpdate *lastTouch;
 @property (nonatomic, assign) BOOL didReceiveTouch;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dict;

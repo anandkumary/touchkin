@@ -21,6 +21,7 @@
 -(id) fetchObjectForIndex:(NSInteger)index;
 
 -(void) hideRightBarButton;
+-(NSString *) getLeftNavTitle;
 
 -(void) addLeftSideImage:(UIImage *)image forTarget:(id)target;
 -(void) addLeftSideTitle:(NSString *)title forTarget:(id)target;

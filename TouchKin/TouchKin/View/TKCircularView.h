@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 
-IB_DESIGNABLE
+//IB_DESIGNABLE
 @interface TKCircularView : UIView
 
 @property (nonatomic) CGFloat trackWidth;

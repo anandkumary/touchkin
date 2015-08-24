@@ -12,7 +12,7 @@
 #import <CoreTelephony/CTTelephonyNetworkInfo.h>
 #import <CoreTelephony/CTCarrier.h>
 #import "Reachability.h"
-
+#import "TKDataManager.h"
 
 @interface AppDelegate ()
 @property(nonatomic, assign) NetworkStatus internetStatus;
@@ -52,6 +52,9 @@
     [self updateInterfaceWithReachability:self.wifiReachability];
     
   //  [self updateCarrierInfo];
+    
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
+
     
     [self setUpTokenRegistration:application];
     
@@ -196,15 +199,33 @@
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
  
-    NSLog(@"notification = %@",userInfo);
-    [[TKDataEngine sharedManager] receivedTouchForuserID:userInfo[@"id"] withType:userInfo[@"type"]];
+    
+    //[[UIApplication sharedApplication] setApplicationIconBadgeNumber:1];
 
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        NSInteger count = [[TKDataManager sharedInstance] getNotificationCount];
+        
+        [[UIApplication sharedApplication] setApplicationIconBadgeNumber:count+1];
+        
+    });
+
+    
+    [[TKDataEngine sharedManager] receivedTouchForuserID:userInfo[@"id"] withType:userInfo[@"type"]];
+    [[TKDataManager sharedInstance] saveNotificationForDict:userInfo withBlock:^(BOOL success, id responseObject) {
+        
+        
+    }];
 }
 
 - (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forRemoteNotification:(NSDictionary *)userInfo completionHandler:(void(^)())completionHandler
 {
     
     NSLog(@"notification = %@",userInfo);
+    
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:2];
+
     
     //handle the actions
     if ([identifier isEqualToString:@"declineAction"]){
@@ -214,5 +235,52 @@
         
     }
 }
+
+//- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult result))completionHandler {
+//    
+//    NSLog(@"notification2 = %@",userInfo);
+//
+//    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:3];
+//
+//}
+
+-(void) showAlertViewWithText:(NSString *)alertText alertType:(AlertType)type withHandler:(MLAlertBlock)block {
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        UIAlertController *alertController= [UIAlertController
+                                             alertControllerWithTitle:@"TouchKin"
+                                             message:alertText
+                                             preferredStyle:UIAlertControllerStyleAlert];
+        
+        NSString *defaultString = @"OK";
+        
+        if( type == ALERTWITHYESNOTYPE){
+            defaultString = @"NO";
+            
+            UIAlertAction *first = [UIAlertAction actionWithTitle: @"YES" style: UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                
+                block(1, nil);
+            }];
+            [alertController addAction: first];
+            
+        }
+        
+        UIAlertAction *alertAction = [UIAlertAction actionWithTitle: defaultString
+                                                              style: UIAlertActionStyleDestructive
+                                                            handler: ^(UIAlertAction *action) {
+                                                                block(0, nil);
+                                                                
+                                                            }];
+        
+        [alertController addAction: alertAction];
+        
+        
+        [self.window.rootViewController presentViewController:alertController animated: YES completion: nil];
+    });
+    
+}
+
+
 
 @end

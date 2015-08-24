@@ -6,6 +6,12 @@
 //  Copyright (c) 2015 Anand kumar. All rights reserved.
 //
 
+typedef NS_ENUM(NSInteger, AlertType) {
+    
+    ALERTDEFAULTTYPE,
+    ALERTWITHYESNOTYPE
+};
+
 typedef NS_ENUM(NSInteger, DashboardType) {
     
     DASHBOARDIMAGETYPE,

@@ -11,6 +11,7 @@
 #import "MYCircle.h"
 #import "OthersCircle.h"
 #import "MyConnection.h"
+#import "AppDelegate.h"
 
 static NSString * const KDEVICETOKEN = @"deviceToken";
 static NSString * const KSESSIONID = @"id";
@@ -139,13 +140,31 @@ static NSString * const KGENDER = @"gender";
     self.familyList = nil;
     
     [self.model getRequestPath:@"user/family" withParameter:nil withHandler:^(id responseObject, NSError *error) {
-                
-        NSDictionary *dict = responseObject;
-                
-        [self parseCareGiverFor:dict[@"care_givers"]];
-        [self parseCareReciverFor:dict[@"care_receivers"]];
         
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"MyFamilyCircle" object:nil];
+        
+        if(error == nil){
+            
+            NSDictionary *dict = responseObject;
+            
+            [self parseCareGiverFor:dict[@"care_givers"]];
+            [self parseCareReciverFor:dict[@"care_receivers"]];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"MyFamilyCircle" object:nil];
+        }
+        else {
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"MyFamilyCircleError" object:nil];
+           
+            AppDelegate *appDel = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+            [appDel showAlertViewWithText:@"Oops something went worng. \n Please try Again" alertType:ALERTDEFAULTTYPE withHandler:^(NSInteger alertTag, NSError *error) {
+                
+                if(alertTag == 0){
+                    [self getMyFamilyInfo];
+                }
+            }];
+        }
+                
+       
     }];
 }
 
@@ -155,30 +174,44 @@ static NSString * const KGENDER = @"gender";
         self.familyList = [[NSMutableArray alloc] init];
     }
     
-    MyCircle *circle = [[MyCircle alloc] initWithArray:careGiverList];
-    circle.userName = @"Me";
-    circle.userId = [[TKDataEngine sharedManager] getUserId];
-    
-    [self.familyList addObject:circle];
+    if(careGiverList.count){
+        
+        MyCircle *circle = [[MyCircle alloc] initWithArray:careGiverList];
+        circle.userName = @"Me";
+        circle.userId = [[TKDataEngine sharedManager] getUserId];
+        
+        [self.familyList addObject:circle];
+    }
+    else {
+        MyCircle *circle = [[MyCircle alloc] init];
+        circle.userName = @"Me";
+        circle.userId = [[TKDataEngine sharedManager] getUserId];
+        
+        [self.familyList addObject:circle];
+    }
     
 }
 
 -(void) parseCareReciverFor:(NSArray *)careRecList {
-   
-    if(!self.familyList){
-        self.familyList = [[NSMutableArray alloc] init];
-    }
     
-    for (NSDictionary *dict in careRecList) {
+    if(careRecList.count){
+      
+        if(!self.familyList){
+            self.familyList = [[NSMutableArray alloc] init];
+        }
         
+        for (NSDictionary *dict in careRecList) {
+            
             OthersCircle *circle = [[OthersCircle alloc] initWithDictionary:dict];
             
             if([dict[@"care_receiver_status"] isEqualToString:@"pending"]){
                 circle.isPending = YES;
             }
             [self.familyList addObject:circle];
-        
+            
+        }
     }
+   
 }
 
 -(void) getNewConnectionRequest {
@@ -186,29 +219,35 @@ static NSString * const KGENDER = @"gender";
     MLNetworkModel *mdl = [[MLNetworkModel alloc] init];
     
     [mdl getRequestPath:@"user/connection-requests" withParameter:nil withHandler:^(id responseObject, NSError *error) {
+        
+        NSDictionary *dictionary = responseObject;
+        
+        if(error == nil && ![dictionary isKindOfClass:[NSDictionary class]]) {
+            
+            for (NSDictionary *dict in responseObject) {
+                
+                NSLog(@"res =%@",dict);
+                
+                MyCircle *circle = [self.familyList objectAtIndex:0];
+                
+                if(!circle.requestList){
+                    circle.requestList = [[NSMutableArray alloc] init];
+                }
+                
+                MyConnection *connection = [[MyConnection alloc] init];
+                connection.requestId = dict[@"id"];
+                connection.nickName = dict[@"care_giver"][@"first_name"];
+                connection.mobile  = dict[@"care_giver"][@"mobile"];
+                connection.userId  = dict[@"care_giver"][@"id"];
+                connection.yob     = [dict[@"care_giver"][@"yob"] intValue];
+                
+                [circle.requestList addObject:connection];
+                
+            }
+        }
        
         NSLog(@"new connection = %@", responseObject);
         
-        for (NSDictionary *dict in responseObject) {
-            
-            NSLog(@"res =%@",dict);
-            
-        MyCircle *circle = [self.familyList objectAtIndex:0];
-            
-        if(!circle.requestList){
-        circle.requestList = [[NSMutableArray alloc] init];
-        }
-        
-            MyConnection *connection = [[MyConnection alloc] init];
-            connection.requestId = dict[@"id"];
-            connection.nickName = dict[@"care_giver"][@"first_name"];
-            connection.mobile  = dict[@"care_giver"][@"mobile"];
-            connection.userId  = dict[@"care_giver"][@"id"];
-            connection.yob     = [dict[@"care_giver"][@"yob"] intValue];
-            
-            [circle.requestList addObject:connection];
-
-        }
     }];
 }
 

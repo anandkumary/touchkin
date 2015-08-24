@@ -7,6 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Define.h"
+
+typedef void (^MLAlertBlock)(NSInteger alertTag , NSError *error);
+
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
@@ -15,6 +19,8 @@
 @property (nonatomic, assign) BOOL isConnectedTo3G;
 
 -(BOOL) isNetWorkConnected;
+
+-(void) showAlertViewWithText:(NSString *)alertText alertType:(AlertType)type withHandler:(MLAlertBlock)block;
 
 @end
 

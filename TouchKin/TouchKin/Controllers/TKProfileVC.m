@@ -61,11 +61,15 @@
     
     if(!image){
      
-        
-        [self.avatar setImageWithURL:url placeholderImage:nil options:SDWebImageHighPriority completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+        [self.avatar sd_setImageWithURL:url placeholderImage:nil options:SDWebImageRetryFailed completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             
             self.avatar.image = image;
+
         }];
+        
+//        [self.avatar setImageWithURL:url placeholderImage:nil options:SDWebImageHighPriority completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+//            
+//        }];
 
     }
     
@@ -258,7 +262,10 @@
            
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
             [[TKDataEngine sharedManager] setUserInfo:userInfo];
-
+            
+            if([self.getLeftNavTitle isEqualToString:@"Skip"]){
+                [self dismissViewControllerAnimated:YES completion:nil];
+            }
         });
         
         

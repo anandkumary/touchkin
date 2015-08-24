@@ -13,5 +13,7 @@
 
 @property (nonatomic, weak)IBOutlet  MKMapView *mapView;
 
+@property (nonatomic, strong) NSArray *annotationList;
+
 @property (nonatomic, assign) CLLocationCoordinate2D location;
 @end

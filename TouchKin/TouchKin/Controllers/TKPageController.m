@@ -8,6 +8,7 @@
 
 #import "TKPageController.h"
 #import "TKCircularView.h"
+#import "UIColor+Navigation.h"
 #import "UILabel+Attribute.h"
 #import "MyHomeLocation.h"
 #import "TKDataEngine.h"
@@ -20,6 +21,7 @@
 
 @property (weak, nonatomic) IBOutlet UIView *bgImage;
 @property (weak, nonatomic) IBOutlet TKCircularView *circularView;
+@property (weak, nonatomic) IBOutlet UILabel *bgLetterLbl;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bgImageViewConstriant;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomLabelConstraint;
@@ -39,6 +41,11 @@
     self.dashboardView.mapView = self.mapView;
 
     self.dashboardView.type = self.boardType;
+    
+    self.bgLetterLbl.layer.cornerRadius = self.bgLetterLbl.frame.size.width/2;
+    self.bgLetterLbl.clipsToBounds = YES;
+    
+    self.bgLetterLbl.backgroundColor = [UIColor randomColor];
     
    CGFloat height = [UIScreen mainScreen].bounds.size.height;
     
@@ -91,6 +98,9 @@
     self.gradientCircle.hidden = YES;
     self.splitView.hidden = YES;
     
+    self.dashboardView.avatar.transform = CGAffineTransformMakeScale(1.18, 1.18);
+    self.bgLetterLbl.transform = CGAffineTransformMakeScale(1.18, 1.18);
+    
     [self updateMyConnectionData];
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -102,6 +112,8 @@
     
     NSString *urlString = [NSString stringWithFormat:@"https://s3-ap-southeast-1.amazonaws.com/touchkin-dev/avatars/%@.jpeg",_connection.userId];
     self.dashboardView.urlString = urlString;
+    
+    self.bgLetterLbl.text = [_connection.fname substringToIndex:1];
     
     NSString *dateString = [[TKDataEngine sharedManager] getTimeFromCurrentDate];
     
@@ -119,6 +131,8 @@
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         self.splitView.splitlist = circle.userStatus;
+        self.splitView.ratio = self.gradientCircle.ratio;
+        [self.splitView addKnobAnimtation];
     });
     
 }
@@ -149,6 +163,8 @@
     
     [self.topLabel setText:name highlightText:msg withColor:nil];
     
+    self.bgLetterLbl.text = [self.others.fname substringToIndex:1];
+
 
 }
 
@@ -159,6 +175,10 @@
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         self.splitView.splitlist = others.userStatus.activityStatus;
+        self.splitView.ratio = self.gradientCircle.ratio;
+        
+        [self.splitView addKnobAnimtation];
+
     });
     
     if(others.homeList.count){
@@ -170,8 +190,15 @@
 
     }
     
+    self.bgLetterLbl.hidden = YES;
+    
+    self.bgLetterLbl.text = [self.others.fname substringToIndex:1];
+
+
     switch (self.boardType) {
         case DASHBOARDIMAGETYPE: {
+            
+            self.bgLetterLbl.hidden = NO;
             
             [self addTextForImageDashboard];
             
@@ -197,7 +224,17 @@
         }
         case DASHBOARDMAPTYPE: {
             
-            NSString *lastHours = [[TKDataEngine sharedManager] lastUpdateTimeFromDateString:_others.updateTime];
+            NSString *lastHours = @"";
+            if(_others.homeList.count){
+                
+                MyHomeLocation *location = [_others.homeList objectAtIndex:0];
+                lastHours =  [[TKDataEngine sharedManager] lastUpdateTimeFromDateString:location.updatedTime];
+            }
+            else {
+               lastHours =  [[TKDataEngine sharedManager] lastUpdateTimeFromDateString:_others.updateTime];
+            }
+            
+            
             [self.topLabel setText:[NSString stringWithFormat:@"%@ is at work",others.fname]];
             
             [self.bottomLabel setText:[NSString stringWithFormat:@"%@ left home %@ ago",others.fname,lastHours] highlightText:lastHours withColor:nil];
@@ -232,7 +269,6 @@
     }
     
     self.dashboardView.urlString = urlString;
-
 }
 
 -(void)imageRippleEffect:(UIGestureRecognizer *)gesture {

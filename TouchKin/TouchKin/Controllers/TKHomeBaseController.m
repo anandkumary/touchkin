@@ -7,7 +7,9 @@
 //
 
 #import "TKHomeBaseController.h"
+#import "UIColor+Navigation.h"
 #import "TKHomeBaseNavigationView.h"
+#import "TKDataManager.h"
 #import "TKBaseViewController.h"
 #import "AppDelegate.h"
 #import "TKDataEngine.h"
@@ -23,12 +25,48 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self
+     selector:@selector(handleDataModelChange:)
+     name:NSManagedObjectContextObjectsDidChangeNotification
+     object:nil];
+    
     [self initailizeNavigation];
+    
+    NSInteger count = [[TKDataManager sharedInstance] getNotificationCount];
+
+    if(count){
+        [self.navView.rightButton setTitle:[NSString stringWithFormat:@" %d ",count] forState:UIControlStateNormal];
+    }
+    else{
+        [self.navView.rightButton setTitle:@"" forState:UIControlStateNormal];
+   
+    }
+    
+    [self.navView.rightButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    self.navView.rightButton.titleLabel.layer.cornerRadius = 9.0;
+   // self.navView.rightButton.titleLabel.backgroundColor = [UIColor redColor];
+    self.navView.rightButton.titleLabel.layer.backgroundColor = [UIColor navigationColor].CGColor;
+
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)handleDataModelChange:(NSNotification*)note {
+    
+    NSInteger count = [[TKDataManager sharedInstance] getNotificationCount];
+    
+    if(count){
+       
+        [self.navView.rightButton setTitle:[NSString stringWithFormat:@" %d ",count] forState:UIControlStateNormal];
+    }
+    else {
+        
+    }
 }
 
 
@@ -71,6 +109,10 @@
 -(void) setType:(NavigationType)type {
     _type = type;
     [self.navView setNavType:type];
+    
+    if(NAVIGATIONTYPENORMAL == type){
+        self.navView.collectionView.hidden = YES;
+    }
 }
 
 -(void) menuButtonAction:(UIButton *)sender {
@@ -84,6 +126,8 @@
 -(void) hideRightBarButton {
     
     self.navView.rightButton.hidden = YES;
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NSManagedObjectContextObjectsDidChangeNotification object:nil];
 }
 
 -(void) addLeftSideImage:(UIImage *)image forTarget:(id)target {
@@ -95,7 +139,9 @@
 
 -(void) addRightSideImage:(UIImage *)image forTarget:(id)target {
     
-    [self.navView.rightButton setImage:image forState:UIControlStateNormal];
+    if(image){
+        [self.navView.rightButton setImage:image forState:UIControlStateNormal];
+    }
     
     [self.navView.rightButton addTarget:target action:@selector(navRightBarAction:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -129,6 +175,11 @@
     [self.navView.rightButton addTarget:target action:@selector(navRightBarAction:) forControlEvents:UIControlEventTouchUpInside];
 }
 
+-(NSString *) getLeftNavTitle{
+    
+   return  self.navView.leftButton.titleLabel.text;
+}
+
 -(void) reloadGroupData {
     
     self.navView.groupList = [[TKDataEngine sharedManager] familyList];
@@ -138,9 +189,30 @@
     
     NSMutableArray *array = [[NSMutableArray alloc] initWithArray:[[TKDataEngine sharedManager] familyList]];
     
-    [array removeObjectAtIndex:0];
+    MyCircle * myCircle = (MyCircle *)[array objectAtIndex:0];
     
-     self.navView.groupList = array;
+    NSMutableArray  *myConnection = [NSMutableArray arrayWithArray: myCircle.myConnectionList];
+    
+    for (id obj in array) {
+        
+        if(![obj isKindOfClass:[MyCircle class]]){
+            
+            OthersCircle *others =(OthersCircle *)obj;
+            
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"userId CONTAINS[cd] %@",others.userId];
+            
+            NSArray *filterResult = [myConnection filteredArrayUsingPredicate:predicate];
+
+            if(!filterResult.count){
+                [myConnection addObject:obj];
+  
+            }
+        }
+    }
+    
+    //[array removeObjectAtIndex:0];
+    
+     self.navView.groupList = myConnection;
     
     [self.view bringSubviewToFront:self.navView];
 
@@ -179,5 +251,13 @@
     [self addChildViewController:addVC];
     [self.view addSubview:addVC.view];
     [addVC didMoveToParentViewController:self];
+}
+
+-(void)navleftBarAction:(id)sender{
+    
+}
+
+-(void)navRightBarAction:(id)sender {
+    
 }
 @end

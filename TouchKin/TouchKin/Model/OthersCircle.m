@@ -44,16 +44,43 @@
         self.yob   = [dict[@"yob"] intValue];
         self.updateTime = dict[@"updatedAt"];
         
-        if(dict[@"places"]){
-            
-            [self initializePlacefor:dict[@"places"]];
-        }
-        
+//        if(dict[@"places"]){
+//            
+//            [self initializePlacefor:dict[@"places"]];
+//        }
+        [self fetchLocation];
         [self getOtherFamilyInfo];
         [self getCurrentUserStatus];
         
     }
     return self;
+}
+
+-(void) fetchLocation {
+    
+    MLNetworkModel *model = [[MLNetworkModel alloc] init];
+
+    [model getRequestPath:[NSString stringWithFormat:@"location/fetch/%@",self.userId] withParameter:nil withHandler:^(id responseObject, NSError *error) {
+        
+        if(error == nil){
+            
+            for (NSDictionary *dict in responseObject) {
+                NSLog(@"location = %@",dict);
+                
+                if(!self.homeList){
+                    self.homeList = [[NSMutableArray alloc] init];
+                }
+
+                MyHomeLocation *location = [[MyHomeLocation alloc] init];
+                location.longitude = dict[@"point"][@"x"];
+                location.latitude  = dict[@"point"][@"y"];
+                location.updatedTime = dict[@"updatedAt"];
+                location.locationObjectId = dict[@"id"];
+                
+                [self.homeList addObject:location];
+            }
+        }
+    }];
 }
 
 -(void) initializePlacefor:(NSDictionary *)placeList {

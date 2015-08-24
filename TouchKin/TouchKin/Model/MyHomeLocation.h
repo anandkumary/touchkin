@@ -12,5 +12,7 @@
 
 @property (nonatomic, copy) NSString * longitude;
 @property (nonatomic, copy) NSString * latitude;
+@property (nonatomic, copy) NSString * updatedTime;
+@property (nonatomic, copy) NSString * locationObjectId;
 
 @end

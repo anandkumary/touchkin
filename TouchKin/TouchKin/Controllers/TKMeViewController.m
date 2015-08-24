@@ -15,6 +15,7 @@
 #import "TKCameraVC.h"
 #import "TKAlertView.h"
 #import "UILabel+Attribute.h"
+#import "TKNotificationViewController.h"
 
 #import <AudioToolbox/AudioServices.h>
 
@@ -42,7 +43,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.navTitle = @"Me";
+    self.navTitle = @"My Family";
     
     self.mapView = [[MKMapView alloc] init];
     self.mapView.delegate = self;
@@ -71,12 +72,20 @@
     
     self.isSelectedUserPending = NO;
     
+    [self addRightSideImage:nil forTarget:self];
+    
 }
 
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void) navRightBarAction:(UIButton *)sender {
+    TKNotificationViewController *ctr = [self.storyboard instantiateViewControllerWithIdentifier:@"TKNotificationViewController"];
+    
+    [self presentViewController:ctr animated:YES completion:nil];
 }
 
 -(void) addtapGestureForMap {
@@ -91,6 +100,12 @@
 -(void) addMyCircleObserver {
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateMyCircle:) name:@"MyFamilyCircle" object:nil];
+    
+     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateMyCircleError:) name:@"MyFamilyCircleError" object:nil];
+}
+
+-(void)updateMyCircleError:(NSNotification *)notify{
+    
 }
 
 -(void)updateMyCircle:(NSNotification *)notify {
@@ -105,13 +120,18 @@
         
         MyCircle *circle = [self.familyList objectAtIndex:0];
         
-        [self getActivityForId:circle.userId forObject:circle];
+        if([circle isKindOfClass:[MyCircle class]]){
+            
+            [self getActivityForId:circle.userId forObject:circle];
+            
+        }
         
         [[TKDataEngine sharedManager] setCurrentUserId:circle.userId];
-        
+
         [self addDefaultpages];
         
         [self reloadGroupData];
+       
     });
 }
 
@@ -209,9 +229,13 @@
     }
     else {
         
-        [childViewController setConnection:[circle.myConnectionList objectAtIndex:index] withUserStatus:circle.userStatus];
+        if(circle.myConnectionList.count){
+             [childViewController setConnection:[circle.myConnectionList objectAtIndex:index] withUserStatus:circle.userStatus];
+        }
+        else {
+            //ADD Care Givers
+        }
         
-      //  childViewController.connection = [circle.myConnectionList objectAtIndex:index];
     }
     
     CGRect frame = childViewController.view.frame;
@@ -254,11 +278,20 @@
 }
 
 -(void) handleGesture:(UIGestureRecognizer *)gesture {
+    
+    NSLog(@"selected = %d",     self.selctedIndex );
+    
+    OthersCircle *circle = [self.familyList objectAtIndex:self.selctedIndex];
    
     MapViewController *mvc = [self.storyboard instantiateViewControllerWithIdentifier:@"MapViewController"];
-    mvc.location = self.mapView.region.center;
+   // mvc.location = self.mapView.region.center;
     
-    [self presentViewController:mvc animated:YES completion:nil];
+    [self presentViewController:mvc animated:YES completion:^{
+        mvc.annotationList = circle.homeList;
+
+    }];
+    
+
 }
 
 #pragma mark - Get Activity
@@ -269,7 +302,13 @@
     
     [model getRequestPath:[NSString stringWithFormat:@"activity/current/%@",userId] withParameter:nil withHandler:^(id responseObject, NSError *error) {
         
-        circle.lastTouch = [[UserLastUpdate alloc] initWithDict:responseObject[@"last_touch"]];
+        if(responseObject[@"last_touch"]){
+            
+            UserLastUpdate *lastUpdated = [[UserLastUpdate alloc] initWithDict:responseObject[@"last_touch"]];
+             circle.lastTouch = lastUpdated;
+        }
+       
+        
         circle.userStatus = responseObject[@"current_month_activity"];
     }];
 }
@@ -327,6 +366,15 @@
         else {
             OthersCircle *others = pageContr.others;
             mobile = others.userId;
+            
+            
+            TKPageController *initialViewController = [self viewControllerAtIndex:0];
+            
+            initialViewController.view.clipsToBounds = YES;
+            
+            NSArray *viewControllers = [NSArray arrayWithObject:initialViewController];
+            
+            [self.pageController setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionReverse animated:YES completion:nil];
         }
         
         NSDictionary *dict = @{@"receivingUserId" : mobile};
@@ -339,10 +387,13 @@
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)( 5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             
             sender.selected = NO;
-            [sender setTitle:@"send a video" forState:UIControlStateNormal];
+            [sender setTitle:@"send a Touch" forState:UIControlStateNormal];
             [pageContr updateMyConnectionData];
 
         });
+        
+        [sender setTitle:@"send a Video" forState:UIControlStateNormal];
+
         
     }
     else {

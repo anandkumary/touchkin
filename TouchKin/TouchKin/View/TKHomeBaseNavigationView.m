@@ -12,6 +12,7 @@
 #import "UIImageView+WebCache.h"
 #import "MyCircle.h"
 #import "OthersCircle.h"
+#import "MyConnection.h"
 #import "reuseLabel.h"
 
 @interface TKHomeBaseNavigationView()<TKHeaderTitleDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
@@ -168,10 +169,22 @@
 
         if(![circle isKindOfClass:[MyCircle class]]){
             
-            others = (OthersCircle *)circle;
-            userId = others.userId;
-            userName =others.fname;
-            [cell.userNameLabel setText:userName];
+            if([circle isKindOfClass:[MyConnection class]]){
+               
+             MyConnection *others = (MyConnection *)circle;
+                userId = others.userId;
+                userName =others.fname;
+                [cell.userNameLabel setText:userName];
+            }
+            else {
+               
+                others = (OthersCircle *)circle;
+                userId = others.userId;
+                userName =others.fname;
+                [cell.userNameLabel setText:userName];
+            }
+            
+           
 
         }
         else if([circle isKindOfClass:[MyCircle class]]){
