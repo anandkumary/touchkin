@@ -10,8 +10,10 @@
 #import "TKNetworkManager.h"
 #import "Country.h"
 #import "TKCountryVC.h"
+#import "TKContactVC.h"
 
-@interface TKAddNewVC ()<TKCountryDelegate,UITextFieldDelegate>
+@interface TKAddNewVC ()<TKCountryDelegate,UITextFieldDelegate,TKContactVCDelegate>
+
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *topConstraint;
 @property (weak, nonatomic) IBOutlet UITextField *userNametxt;
 @property (weak, nonatomic) IBOutlet UITextField *mobileNumbertxt;
@@ -50,15 +52,25 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    
+    TKContactVC *contactVc = (TKContactVC *)[segue destinationViewController];
+    
+    contactVc.delegate = self;
 }
-*/
+
+-(void)Contact:(TKContactVC *)controller withName:(NSString *)name andMobileNumber:(NSString *)mobile {
+    
+    self.userNametxt.text = name;
+    self.mobileNumbertxt.text = mobile;
+}
+
 - (IBAction)addContactbutton:(id)sender
 {
     

@@ -164,13 +164,22 @@
 
 -(void) addRightSideTitle:(NSString *)title forTarget:(id)target {
     
-    [self.navView.rightButton setTitle:title forState:UIControlStateNormal];
     
     [self.navView.rightButton setImage:nil forState:UIControlStateNormal];
     
     [self.navView.rightButton.titleLabel setFont:[UIFont systemFontOfSize:14]];
     
-    self.navView.rightButton.titleLabel.textColor = [UIColor lightGrayColor];
+    self.navView.rightButton.titleLabel.layer.cornerRadius = 0;
+    
+    self.navView.rightButton.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0);
+
+    //self.navView.rightButton.titleLabel.textColor = [UIColor lightGrayColor];
+    
+    [self.navView.rightButton setTitle:title forState:UIControlStateNormal];
+    [self.navView.rightButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+
+    self.navView.rightButton.titleLabel.backgroundColor = [UIColor whiteColor];
+    
     
     [self.navView.rightButton addTarget:target action:@selector(navRightBarAction:) forControlEvents:UIControlEventTouchUpInside];
 }

@@ -50,7 +50,21 @@
 }
 
 -(void)navRightBarAction:(id)sender {
-    
+   
+    if(self.selectedrow != -1) {
+        
+        if([self.delegate respondsToSelector:@selector(Contact:withName:andMobileNumber:)]){
+            YMLPhoneContactPerson *person = [self.contactList objectAtIndex:self.selectedrow];
+            NSString *phoneNumber =[person.phoneNumbers objectAtIndex:0];
+           // NSLog(@"%@%@",person.firstName,phoneNumber);
+//            if (person.phoneNumbers) {
+//                NSString *str = [NSString stringWithFormat:@"%@",person.phoneNumbers[0]];
+//            }
+            [self.delegate Contact:self withName:person.firstName andMobileNumber:phoneNumber];
+            
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }
+    }
 }
 
 /*

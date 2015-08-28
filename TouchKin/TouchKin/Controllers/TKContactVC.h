@@ -8,6 +8,15 @@
 
 #import "TKHomeBaseController.h"
 
-@interface TKContactVC : TKHomeBaseController
+@class TKContactVC;
 
+@protocol TKContactVCDelegate <NSObject>
+
+@optional
+-(void)Contact:(TKContactVC *)controller withName:(NSString *)name andMobileNumber:(NSString *)mobile;
+
+@end
+
+@interface TKContactVC : TKHomeBaseController
+@property (nonatomic, assign)id<TKContactVCDelegate> delegate;
 @end
