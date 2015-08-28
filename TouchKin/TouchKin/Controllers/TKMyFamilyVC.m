@@ -32,6 +32,7 @@
 @property (nonatomic, strong) NSMutableArray *familyList;
 @property (nonatomic,strong) UIRefreshControl *refreshControl;
 @property (nonatomic,strong) NSMutableDictionary *PendingCount;
+@property (nonatomic, strong) UIButton *tempBtn;
 - (IBAction)CareForSomeoneAction:(id)sender;
 
 @end
@@ -424,6 +425,14 @@
         
         delayOffset = 0.5;
         
+        
+        [UIView animateWithDuration:0.4 animations:^{
+            
+            self.tempBtn.transform = CGAffineTransformIdentity;
+            
+        }];
+        
+        
         previousSelected = selectedSection;
 
         [self.tableview beginUpdates];
@@ -435,14 +444,14 @@
             
             NSMutableArray *indexPathList = [self createNumberOfRow:circle.requestList.count forSection:selectedSection];
             [self.tableview deleteRowsAtIndexPaths:indexPathList withRowAnimation:UITableViewRowAnimationFade];
-            [self.tableview reloadSections:[NSIndexSet indexSetWithIndex:selectedSection] withRowAnimation:UITableViewRowAnimationNone];
+          //  [self.tableview reloadSections:[NSIndexSet indexSetWithIndex:selectedSection] withRowAnimation:UITableViewRowAnimationNone];
             
         }
         else {
             
              [self.tableview deleteRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:0 inSection:previousSelected],nil] withRowAnimation:UITableViewRowAnimationFade];
             
-            [self.tableview reloadSections:[NSIndexSet indexSetWithIndex:previousSelected] withRowAnimation:UITableViewRowAnimationNone];
+           // [self.tableview reloadSections:[NSIndexSet indexSetWithIndex:previousSelected] withRowAnimation:UITableViewRowAnimationNone];
             
             }
 
@@ -455,6 +464,8 @@
     
    if(previousSelected != sender.tag)
         {
+            
+        self.tempBtn = sender;
         
         selectedSection = sender.tag;
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, delayOffset * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
@@ -480,6 +491,9 @@
        
     }
     else if (previousSelected == sender.tag){
+        
+        self.tempBtn = sender;
+
         
          dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.0 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
              

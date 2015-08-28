@@ -28,6 +28,7 @@
 
 @property (nonatomic, assign) NSInteger selctedIndex;
 @property (nonatomic, assign) NSInteger childIndex;
+@property (weak, nonatomic) IBOutlet UIPageControl *pageIndicator;
 
 @property (nonatomic, assign) BOOL isSelectedUserPending;
 
@@ -67,6 +68,7 @@
     [self addtapGestureForMap];
     
     // [self setDelegate:self];
+    self.pageIndicator.hidden = YES;
     
     [self.callBtn addTarget:self action:@selector(callButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -116,6 +118,8 @@
         
         self.selctedIndex = 0;
         
+        self.pageIndicator.currentPage = 0;
+        
         self.navTitle = @"My Family";
         
         MyCircle *circle = [self.familyList objectAtIndex:0];
@@ -138,6 +142,8 @@
 -(void) addDefaultpages {
     
     dispatch_async(dispatch_get_main_queue(), ^{
+        
+        self.pageIndicator.currentPage = 0;
         
         TKPageController *initialViewController = [self viewControllerAtIndex:0];
         
@@ -171,7 +177,12 @@
     NSUInteger index = [(TKPageController *)viewController index];
     
     if (index == 0) {
+        //Page 0
+        self.pageIndicator.currentPage = 0;
         return nil;
+    }
+    else {
+        self.pageIndicator.currentPage = self.pageIndicator.currentPage - 1;
     }
     
     index--;
@@ -183,8 +194,19 @@
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController {
     
+    
+    
     NSUInteger index = [(TKPageController *)viewController index];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        self.pageIndicator.currentPage = index;
+
+    });
+    
+
     index++;
+    
     if(self.selctedIndex == 0){
         MyCircle *circle = [self.familyList objectAtIndex:self.selctedIndex];
         
@@ -249,6 +271,8 @@
 
 -(void) didSelectHeaderTitleAtIndex:(NSInteger)index withUserId:(NSString *)userId {
     
+    self.pageIndicator.hidden = (index == 0) ? YES : NO;
+
     self.selctedIndex = index;
     
     [[TKDataEngine sharedManager] setCurrentUserId:userId];
@@ -263,6 +287,17 @@
 //- (NSInteger)presentationCountForPageViewController:(UIPageViewController *)pageViewController {
 //    // The number of items reflected in the page indicator.
 //    
+//    NSInteger count = 0;
+//    
+//    if(self.selctedIndex != 0){
+//        
+//        MyCircle *circle = [self.familyList objectAtIndex:self.selctedIndex];
+//
+//        count = circle.myConnectionList.count;
+//    }
+//    else{
+//        count = 3;
+//    }
 //    return 0;
 //}
 //
