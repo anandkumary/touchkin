@@ -80,8 +80,20 @@
 -(void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self.gradientCircle startAnimating];
+    CGFloat delay = 0.5;
+     if(self.boardType != DASHBOARDIMAGETYPE){
+         delay = 0.0;
+     }
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        if(self.boardType == DASHBOARDIMAGETYPE){
+            
+            [self.gradientCircle startAnimating];
+
+        }
+        else {
+            [self.gradientCircle forceMoveGradientCircle];
+        }
         
     });
 
@@ -129,9 +141,11 @@
     
     self.dashboardView.urlString = urlString;
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         self.splitView.splitlist = circle.userStatus;
         self.splitView.ratio = self.gradientCircle.ratio;
+        self.splitView.boardType = self.boardType;
+
         [self.splitView addKnobAnimtation];
     });
     
@@ -173,9 +187,11 @@
     
      NSString *urlString = [NSString stringWithFormat:@"https://s3-ap-southeast-1.amazonaws.com/touchkin-dev/avatars/%@.jpeg",others.userId];
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         self.splitView.splitlist = others.userStatus.activityStatus;
         self.splitView.ratio = self.gradientCircle.ratio;
+        
+        self.splitView.boardType = self.boardType;
         
         [self.splitView addKnobAnimtation];
 

@@ -7,10 +7,14 @@
 //
 
 #import "TKSplitView.h"
+#import "Define.h"
+
 //IB_DESIGNABLE
 @interface KnobView : TKSplitView
 
 @property (nonatomic, assign) CGFloat ratio;
+
+@property (nonatomic, assign) DashboardType boardType;
 
 -(void) addKnobAnimtation;
 @end

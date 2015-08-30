@@ -12,7 +12,7 @@
 
 //@property (nonatomic,assign) CGFloat ratio;
 @property (nonatomic, assign) CGFloat updatedRatio;
-
+@property (nonatomic, strong) NSTimer *timer;
 @end
 
 @implementation TKGradientCircularView
@@ -111,16 +111,48 @@
 
 -(void) startAnimating {
     
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:0.01
+                                                  target:self
+                                                selector:@selector(timerFired:)
+                                                userInfo:nil
+                                                 repeats:YES];
+    
+    
+//    if(self.ratio >= self.updatedRatio){
+//        
+//        [UIView animateWithDuration:0.1 delay:0.0 options:0 animations:^{
+//            self.updatedRatio += 0.009;
+//            [self setNeedsDisplay];
+//            
+//        } completion:^(BOOL finished) {
+//            [self startAnimating];
+//        }];
+//        
+//    }
+}
+
+-(void) forceMoveGradientCircle{
+    
+    self.updatedRatio = self.ratio;
+    
+    [self setNeedsDisplay];
+    
+}
+
+- (void)timerFired:(NSTimer *)timer
+{
     if(self.ratio >= self.updatedRatio){
+        self.updatedRatio += 0.0075;
         
-        [UIView animateWithDuration:0.1 delay:0.0 options:0 animations:^{
-            self.updatedRatio += 0.009;
-            [self setNeedsDisplay];
-            
-        } completion:^(BOOL finished) {
-            [self startAnimating];
-        }];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"updateRatio" object:nil userInfo:@{@"ratio" : @(self.updatedRatio)}];
         
+        [self setNeedsDisplay];
+    }
+    else {
+        
+         [[NSNotificationCenter defaultCenter] postNotificationName:@"updateRatio" object:nil userInfo:@{@"stop" : @(YES)}];
+        
+        [self.timer invalidate];
     }
 }
 

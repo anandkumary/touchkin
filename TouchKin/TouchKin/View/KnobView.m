@@ -12,6 +12,7 @@
 
 @interface KnobView()
 @property (nonatomic, strong) CAShapeLayer *circularLayer;
+@property (nonatomic, assign) CGFloat startAngle;
 @end
 @implementation KnobView
 
@@ -24,6 +25,7 @@
     
     self.backgroundColor = [UIColor clearColor];
 
+    self.startAngle = 0;
     
     [self addKnob];
 }
@@ -55,35 +57,102 @@
         
         // [self.circularLayer insertSublayer:knob atIndex:[self.circularLayer.sublayers count]];
         
+        CGFloat angle = (360 - 5) * self.ratio;
+
         self.circularLayer.masksToBounds = NO;
         
-        self.circularLayer.transform = CATransform3DRotate(self.circularLayer.transform, DEGREES_TO_RADIANS(-90), 0.0, 0.0, 1.0);
+        self.circularLayer.transform = CATransform3DIdentity;
+        
+        
+        if(self.boardType == DASHBOARDIMAGETYPE){
+            
+             self.circularLayer.transform = CATransform3DRotate(self.circularLayer.transform, DEGREES_TO_RADIANS(-90), 0.0, 0.0, 1.0);
+        }
+        else {
+            
+             self.circularLayer.transform = CATransform3DRotate(self.circularLayer.transform, DEGREES_TO_RADIANS(angle + 10), 0.0, 0.0, 1.0);
+        }
+        
     }
     
-
-
 }
 
 -(void) addKnobAnimtation {
     
-    [self animate];
+   // [self animate];
+    if(self.boardType == DASHBOARDIMAGETYPE){
+       [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateKnobStatus:) name:@"updateRatio" object:nil];
+    }
+    else {
+        [self animate];
+    }
+    
+}
+
+- (void)dealloc
+{
+   // NSLog(@"dealloc");
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+
 }
 
 -(void) animate {
     
-    CGFloat angle = (360-5) * self.ratio;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        CGFloat angle = (360-5) * self.ratio;
+        
+        CABasicAnimation *spinAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
+        spinAnimation.fromValue = [NSNumber numberWithFloat:DEGREES_TO_RADIANS(0)];
+        spinAnimation.toValue = [NSNumber numberWithFloat:DEGREES_TO_RADIANS(angle)];
+        spinAnimation.duration = 0.0;
+        spinAnimation.cumulative = YES;
+        spinAnimation.additive = YES;
+        spinAnimation.removedOnCompletion = NO;
+        spinAnimation.fillMode = kCAFillModeForwards;
+        
+        [self.circularLayer addAnimation:spinAnimation forKey:@"spinAnimation"];
+    });
     
-    CABasicAnimation *spinAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
-    spinAnimation.fromValue = [NSNumber numberWithFloat:DEGREES_TO_RADIANS(0)];
-    spinAnimation.toValue = [NSNumber numberWithFloat:DEGREES_TO_RADIANS(angle)];
-    spinAnimation.duration = 0.7;
-    spinAnimation.cumulative = YES;
-    spinAnimation.additive = YES;
-    spinAnimation.removedOnCompletion = NO;
-    spinAnimation.fillMode = kCAFillModeForwards;
-    
-    [self.circularLayer addAnimation:spinAnimation forKey:@"spinAnimation"];
+
  
+}
+
+-(void)updateKnobStatus:(NSNotification *)note {
+  //  NSLog(@"user %@",note.userInfo);
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        if(note.userInfo[@"ratio"]){
+            
+            CGFloat ratio = [note.userInfo[@"ratio"] floatValue];
+            
+            
+            CGFloat angle = (360-5) * ratio;
+            
+            // self.circularLayer.transform = CATransform3DRotate(self.circularLayer.transform, DEGREES_TO_RADIANS(-90 + angle), 0.0, 0.0, 1.0);
+            CABasicAnimation *spinAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
+            spinAnimation.fromValue = [NSNumber numberWithFloat:DEGREES_TO_RADIANS(self.startAngle)];
+            spinAnimation.toValue = [NSNumber numberWithFloat:DEGREES_TO_RADIANS(angle)];
+            spinAnimation.duration = 0.1;
+            spinAnimation.cumulative = YES;
+            spinAnimation.additive = YES;
+            spinAnimation.removedOnCompletion = NO;
+            spinAnimation.fillMode = kCAFillModeForwards;
+            
+            self.startAngle = angle;
+            
+            
+            [self.circularLayer addAnimation:spinAnimation forKey:@"spinAnimation"];
+        }
+        else {
+            [[NSNotificationCenter defaultCenter] removeObserver:self];
+        }
+        
+    });
+    
+    
 }
 
 

@@ -12,4 +12,5 @@
 @property (nonatomic,assign) CGFloat ratio;
 
 -(void) startAnimating;
+-(void) forceMoveGradientCircle;
 @end

@@ -193,9 +193,7 @@
 
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController {
-    
-    
-    
+        
     NSUInteger index = [(TKPageController *)viewController index];
     
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -222,6 +220,10 @@
     if (index == 3 || self.selctedIndex == 0 || self.isSelectedUserPending) {
         return nil;
     }
+//    else {
+//        TKPageController *cnt =  (TKPageController *)viewController;
+//        [cnt.splitView addKnobAnimtation];
+//    }
     
     return [self viewControllerAtIndex:index];
     
@@ -248,6 +250,8 @@
         
         childViewController.others = (OthersCircle *)circle;
         self.isSelectedUserPending = childViewController.others.isPending;
+        
+        self.pageIndicator.numberOfPages = (self.isSelectedUserPending) ? 1 : 3;
     }
     else {
         
@@ -314,7 +318,7 @@
 
 -(void) handleGesture:(UIGestureRecognizer *)gesture {
     
-    NSLog(@"selected = %d",     self.selctedIndex );
+  //  NSLog(@"selected = %d",     self.selctedIndex );
     
     OthersCircle *circle = [self.familyList objectAtIndex:self.selctedIndex];
    
