@@ -57,21 +57,22 @@
         
         // [self.circularLayer insertSublayer:knob atIndex:[self.circularLayer.sublayers count]];
         
-        CGFloat angle = (360 - 5) * self.ratio;
+       // CGFloat angle = (360 - 5) * self.ratio;
 
         self.circularLayer.masksToBounds = NO;
         
-        self.circularLayer.transform = CATransform3DIdentity;
+       // self.circularLayer.transform = CATransform3DIdentity;
         
+          self.circularLayer.transform = CATransform3DRotate(self.circularLayer.transform, DEGREES_TO_RADIANS(-90), 0.0, 0.0, 1.0);
         
-        if(self.boardType == DASHBOARDIMAGETYPE){
-            
-             self.circularLayer.transform = CATransform3DRotate(self.circularLayer.transform, DEGREES_TO_RADIANS(-90), 0.0, 0.0, 1.0);
-        }
-        else {
-            
-             self.circularLayer.transform = CATransform3DRotate(self.circularLayer.transform, DEGREES_TO_RADIANS(angle + 10), 0.0, 0.0, 1.0);
-        }
+//        if(self.boardType == DASHBOARDIMAGETYPE){
+//             self.circularLayer.transform = CATransform3DRotate(self.circularLayer.transform, DEGREES_TO_RADIANS(-90), 0.0, 0.0, 1.0);
+//           
+//        }
+//        else {
+//            
+//             self.circularLayer.transform = CATransform3DRotate(self.circularLayer.transform, DEGREES_TO_RADIANS(angle + 10), 0.0, 0.0, 1.0);
+//        }
         
     }
     
@@ -79,13 +80,19 @@
 
 -(void) addKnobAnimtation {
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateKnobStatus:) name:@"updateRatio" object:nil];
+    
+    self.circularLayer.transform = CATransform3DIdentity;
+    
+    self.circularLayer.transform = CATransform3DRotate(self.circularLayer.transform, DEGREES_TO_RADIANS(-90), 0.0, 0.0, 1.0);
+
+    
    // [self animate];
-    if(self.boardType == DASHBOARDIMAGETYPE){
-       [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateKnobStatus:) name:@"updateRatio" object:nil];
-    }
-    else {
-        [self animate];
-    }
+//    if(self.boardType == DASHBOARDIMAGETYPE){
+//          }
+//    else {
+//        [self animate];
+//    }
     
 }
 

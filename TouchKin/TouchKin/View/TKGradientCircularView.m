@@ -141,19 +141,24 @@
 
 - (void)timerFired:(NSTimer *)timer
 {
-    if(self.ratio >= self.updatedRatio){
-        self.updatedRatio += 0.0075;
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
         
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"updateRatio" object:nil userInfo:@{@"ratio" : @(self.updatedRatio)}];
-        
-        [self setNeedsDisplay];
-    }
-    else {
-        
-         [[NSNotificationCenter defaultCenter] postNotificationName:@"updateRatio" object:nil userInfo:@{@"stop" : @(YES)}];
-        
-        [self.timer invalidate];
-    }
+        if(self.ratio >= self.updatedRatio){
+            self.updatedRatio += 0.0095;
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"updateRatio" object:nil userInfo:@{@"ratio" : @(self.updatedRatio)}];
+            
+            [self setNeedsDisplay];
+        }
+        else {
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"updateRatio" object:nil userInfo:@{@"stop" : @(YES)}];
+            
+            [self.timer invalidate];
+        }
+    });
+ 
 }
 
 

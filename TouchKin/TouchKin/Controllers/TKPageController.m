@@ -86,14 +86,15 @@
      }
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        if(self.boardType == DASHBOARDIMAGETYPE){
-            
+       // if(self.boardType == DASHBOARDIMAGETYPE)
+        {
+            [self.splitView addKnobAnimtation];
             [self.gradientCircle startAnimating];
 
         }
-        else {
-            [self.gradientCircle forceMoveGradientCircle];
-        }
+//        else {
+//            [self.gradientCircle forceMoveGradientCircle];
+//        }
         
     });
 
