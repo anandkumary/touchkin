@@ -111,24 +111,24 @@
 
 -(void) startAnimating {
     
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:0.01
-                                                  target:self
-                                                selector:@selector(timerFired:)
-                                                userInfo:nil
-                                                 repeats:YES];
+//    self.timer = [NSTimer scheduledTimerWithTimeInterval:0.0001
+//                                                  target:self
+//                                                selector:@selector(timerFired:)
+//                                                userInfo:nil
+//                                                 repeats:YES];
     
     
-//    if(self.ratio >= self.updatedRatio){
-//        
-//        [UIView animateWithDuration:0.1 delay:0.0 options:0 animations:^{
-//            self.updatedRatio += 0.009;
-//            [self setNeedsDisplay];
-//            
-//        } completion:^(BOOL finished) {
-//            [self startAnimating];
-//        }];
-//        
-//    }
+    if(self.ratio >= self.updatedRatio){
+        
+        [UIView animateWithDuration:0.1 delay:0.0 options:0 animations:^{
+            self.updatedRatio += 0.09;
+            [self setNeedsDisplay];
+            
+        } completion:^(BOOL finished) {
+            [self startAnimating];
+        }];
+        
+    }
 }
 
 -(void) forceMoveGradientCircle{

@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "Define.h"
 @interface TKAddNewVC : UIViewController
+
+@property (nonatomic, assign) AddCareGivers careType;
+@property (nonatomic, copy) NSString *mobileNumber;
 
 @end

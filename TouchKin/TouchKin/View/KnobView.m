@@ -80,14 +80,14 @@
 
 -(void) addKnobAnimtation {
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateKnobStatus:) name:@"updateRatio" object:nil];
-    
-    self.circularLayer.transform = CATransform3DIdentity;
-    
-    self.circularLayer.transform = CATransform3DRotate(self.circularLayer.transform, DEGREES_TO_RADIANS(-90), 0.0, 0.0, 1.0);
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateKnobStatus:) name:@"updateRatio" object:nil];
+//    
+//    self.circularLayer.transform = CATransform3DIdentity;
+//    
+//    self.circularLayer.transform = CATransform3DRotate(self.circularLayer.transform, DEGREES_TO_RADIANS(-90), 0.0, 0.0, 1.0);
 
     
-   // [self animate];
+    [self animate];
 //    if(self.boardType == DASHBOARDIMAGETYPE){
 //          }
 //    else {
@@ -113,7 +113,7 @@
         CABasicAnimation *spinAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
         spinAnimation.fromValue = [NSNumber numberWithFloat:DEGREES_TO_RADIANS(0)];
         spinAnimation.toValue = [NSNumber numberWithFloat:DEGREES_TO_RADIANS(angle)];
-        spinAnimation.duration = 0.0;
+        spinAnimation.duration = 0.4;
         spinAnimation.cumulative = YES;
         spinAnimation.additive = YES;
         spinAnimation.removedOnCompletion = NO;

@@ -33,6 +33,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+        
+    
     
     self.bgImage.layer.cornerRadius = self.bgImage.frame.size.width/2;
     
@@ -82,7 +84,7 @@
     
     CGFloat delay = 0.5;
      if(self.boardType != DASHBOARDIMAGETYPE){
-         delay = 0.0;
+         delay = 0.1;
      }
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -148,6 +150,9 @@
         self.splitView.boardType = self.boardType;
 
         [self.splitView addKnobAnimtation];
+
+        [self.gradientCircle startAnimating];
+        
     });
     
 }
