@@ -13,6 +13,7 @@
 #import "MyHomeLocation.h"
 #import "TKDataEngine.h"
 #import "UserActivity.h"
+#import "TKHomeBaseController.h"
 #import <AudioToolbox/AudioServices.h>
 
 
@@ -22,7 +23,7 @@
 @property (weak, nonatomic) IBOutlet UIView *bgImage;
 @property (weak, nonatomic) IBOutlet TKCircularView *circularView;
 @property (weak, nonatomic) IBOutlet UILabel *bgLetterLbl;
-
+@property (nonatomic,strong) UIButton *button;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bgImageViewConstriant;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomLabelConstraint;
 
@@ -73,8 +74,10 @@
         
     }
     
-  //  [self.topLabel setText:@"Its 7:30 am for Eric in New York" highlightText:@"7:30 am" withColor:nil];
+    [self.topLabel setText:@"Add Care Giver For YourSelf" highlightText:@"Add Care Givers" withColor:nil];
     
+    [self.bottomLabel setText:@"" highlightText:@"" withColor:nil];
+
 }
 
 -(void) viewWillAppear:(BOOL)animated {
@@ -83,13 +86,28 @@
     CGFloat delay = 0.5;
      if(self.boardType != DASHBOARDIMAGETYPE){
          delay = 0.0;
+         self.dashboardView.type = self.boardType;
      }
+    if(self.boardType == DASHBOARDNOCAREGIVERS){
+        self.bgLetterLbl.hidden = YES;
+        self.gradientCircle.hidden = YES;
+        self.splitView.hidden = YES;
+        
+        self.button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, self.bgLetterLbl.frame.size.width, self.bgLetterLbl.frame.size.height)];
+        [self.button addTarget:self action:@selector(addCareReceiver:) forControlEvents:UIControlEventTouchUpInside];
+        [self.button setBackgroundColor:[UIColor clearColor]];
+        [self.dashboardView addSubview:_button];
+    }
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+       dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
       //Perform animation
         
     });
 
+}
+
+-(IBAction)addCareReceiver:(id)sender{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"open AddNewVC" object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -276,6 +294,11 @@
             
             [self.bottomLabel setText:[NSString stringWithFormat:@"Last update on %@ ago", lastTime] highlightText:lastTime withColor:nil];
 
+            break;
+        }
+        case DASHBOARDNOCAREGIVERS:{
+            
+            
             break;
         }
             

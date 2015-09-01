@@ -48,6 +48,9 @@
     self.navView.rightButton.titleLabel.layer.cornerRadius = 9.0;
    // self.navView.rightButton.titleLabel.backgroundColor = [UIColor redColor];
     self.navView.rightButton.titleLabel.layer.backgroundColor = [UIColor navigationColor].CGColor;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(homeBaseDidTapCareForSomeone:) name:@"open AddNewVC" object:nil];
+
 
 }
 
