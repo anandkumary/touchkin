@@ -167,9 +167,9 @@
                              
                     TKProfileVC *profile = [self.storyboard instantiateViewControllerWithIdentifier:@"TKProfileVC"];
                              
-                                                  profile.profileType = LOGINPROFILE;
+                        profile.profileType = LOGINPROFILE;
                              
-                                                  [self.navigationController pushViewController:profile animated:YES];
+                        [self.navigationController pushViewController:profile animated:YES];
                                               });
                                               }
                      

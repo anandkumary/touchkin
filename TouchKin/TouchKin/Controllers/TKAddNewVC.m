@@ -18,7 +18,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *userNametxt;
 @property (weak, nonatomic) IBOutlet UITextField *mobileNumbertxt;
 @property (weak, nonatomic) IBOutlet UIButton *stdCodeBtn;
-@property (weak, nonatomic) IBOutlet UITextField *enterName;
+@property (weak, nonatomic) IBOutlet UITextField *enter_Name;
 @property (nonatomic, assign) CGFloat spaceConstriant;
 @property (strong, nonatomic) NSArray *countryList;
 @property (nonatomic,copy) NSString *CRmobile;
@@ -79,7 +79,7 @@
 }
 - (IBAction)AddButtonAction:(id)sender
 {
-    if (![self.userNametxt.text isEqualToString:@""] && ![self.enterName.text isEqualToString:@""] && ![self.mobileNumbertxt.text isEqualToString:@""]) {
+    if (![self.userNametxt.text isEqualToString:@""] && ![self.enter_Name.text isEqualToString:@""] && ![self.mobileNumbertxt.text isEqualToString:@""]) {
         if (self.careType == ADDCAREGIVERSFORME) {
             NSString *str = [NSString stringWithFormat:@"%@%@",self.stdCodeBtn.titleLabel.text,self.mobileNumbertxt.text];
             
@@ -187,7 +187,7 @@
     
     [self.userNametxt resignFirstResponder];
     [self.mobileNumbertxt resignFirstResponder];
-    [self.enterName resignFirstResponder];
+    [self.enter_Name resignFirstResponder];
     return YES;
     
 }
