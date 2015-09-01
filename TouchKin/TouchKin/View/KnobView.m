@@ -86,19 +86,12 @@
     
     self.circularLayer.transform = CATransform3DRotate(self.circularLayer.transform, DEGREES_TO_RADIANS(-90), 0.0, 0.0, 1.0);
 
-    
-   // [self animate];
-//    if(self.boardType == DASHBOARDIMAGETYPE){
-//          }
-//    else {
-//        [self animate];
-//    }
-    
 }
 
 - (void)dealloc
 {
    // NSLog(@"dealloc");
+    //[self animate];
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 
@@ -122,8 +115,6 @@
         [self.circularLayer addAnimation:spinAnimation forKey:@"spinAnimation"];
     });
     
-
- 
 }
 
 -(void)updateKnobStatus:(NSNotification *)note {
@@ -142,7 +133,7 @@
             CABasicAnimation *spinAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
             spinAnimation.fromValue = [NSNumber numberWithFloat:DEGREES_TO_RADIANS(self.startAngle)];
             spinAnimation.toValue = [NSNumber numberWithFloat:DEGREES_TO_RADIANS(angle)];
-            spinAnimation.duration = 0.1;
+            spinAnimation.duration = 0.01;
             spinAnimation.cumulative = YES;
             spinAnimation.additive = YES;
             spinAnimation.removedOnCompletion = NO;

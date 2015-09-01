@@ -70,7 +70,7 @@
     CGContextStrokePath(context);
     
     
-    CGFloat progressRatio = self.updatedRatio; //self.ratio;
+    CGFloat progressRatio = self.ratio;
         
     UIBezierPath *processPath = [UIBezierPath bezierPath];
     processPath.lineCapStyle = kCGLineCapRound;
@@ -111,11 +111,11 @@
 
 -(void) startAnimating {
     
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:0.01
-                                                  target:self
-                                                selector:@selector(timerFired:)
-                                                userInfo:nil
-                                                 repeats:YES];
+//    self.timer = [NSTimer scheduledTimerWithTimeInterval:0.01
+//                                                  target:self
+//                                                selector:@selector(timerFired:)
+//                                                userInfo:nil
+//                                                 repeats:YES];
     
     
 //    if(self.ratio >= self.updatedRatio){

@@ -18,6 +18,7 @@
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect {
     // Drawing code
+    [super drawRect:rect];
     
     CGFloat offset = 5;
     

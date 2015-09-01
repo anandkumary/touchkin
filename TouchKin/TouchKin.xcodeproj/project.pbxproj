@@ -110,6 +110,8 @@
 		44EA49A41B59F0E50027C368 /* TKMyConnectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 44EA49A21B59F0E50027C368 /* TKMyConnectionCell.m */; };
 		44EA49A51B59F0E50027C368 /* TKMyConnectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44EA49A31B59F0E50027C368 /* TKMyConnectionCell.xib */; };
 		44EECE6A1B8AC267007509FF /* TKNotificationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 44EECE691B8AC267007509FF /* TKNotificationCell.m */; };
+		44F23F341B9550D6008B0D38 /* TKOverLaySplitterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 44F23F331B9550D6008B0D38 /* TKOverLaySplitterView.m */; };
+		44F23F371B955215008B0D38 /* TKKnob.m in Sources */ = {isa = PBXBuildFile; fileRef = 44F23F361B955215008B0D38 /* TKKnob.m */; };
 		900E34001B73647C006A8FCF /* reuseLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 900E33FF1B73647C006A8FCF /* reuseLabel.m */; };
 		90D9821B1B6CB54100EFB084 /* TKMessagePreviewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 90D9821A1B6CB54100EFB084 /* TKMessagePreviewVC.m */; };
 /* End PBXBuildFile section */
@@ -318,6 +320,10 @@
 		44EA49A31B59F0E50027C368 /* TKMyConnectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TKMyConnectionCell.xib; sourceTree = "<group>"; };
 		44EECE681B8AC267007509FF /* TKNotificationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKNotificationCell.h; sourceTree = "<group>"; };
 		44EECE691B8AC267007509FF /* TKNotificationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKNotificationCell.m; sourceTree = "<group>"; };
+		44F23F321B9550D6008B0D38 /* TKOverLaySplitterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKOverLaySplitterView.h; sourceTree = "<group>"; };
+		44F23F331B9550D6008B0D38 /* TKOverLaySplitterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKOverLaySplitterView.m; sourceTree = "<group>"; };
+		44F23F351B955215008B0D38 /* TKKnob.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKKnob.h; sourceTree = "<group>"; };
+		44F23F361B955215008B0D38 /* TKKnob.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKKnob.m; sourceTree = "<group>"; };
 		900E33FE1B73647C006A8FCF /* reuseLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = reuseLabel.h; sourceTree = "<group>"; };
 		900E33FF1B73647C006A8FCF /* reuseLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = reuseLabel.m; sourceTree = "<group>"; };
 		90D982191B6CB54100EFB084 /* TKMessagePreviewVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKMessagePreviewVC.h; sourceTree = "<group>"; };
@@ -444,16 +450,17 @@
 				442A94391B5FD90700C07A4F /* Passcode */,
 				4441FAA61B5694EB00A7B7F9 /* TKNavigationView.h */,
 				4441FAA71B5694EB00A7B7F9 /* TKNavigationView.m */,
-				44384B0A1B572A8600C8E35A /* TKCircularView.h */,
-				44384B0B1B572A8600C8E35A /* TKCircularView.m */,
+				44F23F381B955F19008B0D38 /* Should be Removed */,
 				44675E8C1B6A8A98003B0F9F /* TKSplitView.h */,
 				44675E8F1B6A92A9003B0F9F /* TKSplitView.m */,
 				44911C7D1B6A7A5B0070E327 /* TKGradientCircularView.h */,
 				44675E911B6A92CE003B0F9F /* TKGradientCircularView.m */,
+				44F23F321B9550D6008B0D38 /* TKOverLaySplitterView.h */,
+				44F23F331B9550D6008B0D38 /* TKOverLaySplitterView.m */,
+				44F23F351B955215008B0D38 /* TKKnob.h */,
+				44F23F361B955215008B0D38 /* TKKnob.m */,
 				4457B3521B882EF00071D065 /* AnnotationView.h */,
 				4457B3531B882EF00071D065 /* AnnotationView.m */,
-				445D113C1B857C97009E4531 /* KnobView.h */,
-				445D113D1B857C97009E4531 /* KnobView.m */,
 				4413826E1B57FAD300DFB0BC /* TKSideMenuView.h */,
 				4413826F1B57FAD300DFB0BC /* TKSideMenuView.m */,
 				44C9DB091B588B3300714340 /* TKHomeBaseNavigationView.h */,
@@ -700,6 +707,17 @@
 			name = SDImageCache;
 			sourceTree = "<group>";
 		};
+		44F23F381B955F19008B0D38 /* Should be Removed */ = {
+			isa = PBXGroup;
+			children = (
+				445D113C1B857C97009E4531 /* KnobView.h */,
+				445D113D1B857C97009E4531 /* KnobView.m */,
+				44384B0A1B572A8600C8E35A /* TKCircularView.h */,
+				44384B0B1B572A8600C8E35A /* TKCircularView.m */,
+			);
+			name = "Should be Removed";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -844,6 +862,7 @@
 				445B025C1B5E7F0F004696B3 /* Country.m in Sources */,
 				445175891B55E7D900EDEF97 /* MLNetworkModel.m in Sources */,
 				90D9821B1B6CB54100EFB084 /* TKMessagePreviewVC.m in Sources */,
+				44F23F371B955215008B0D38 /* TKKnob.m in Sources */,
 				44C9DB101B588E8400714340 /* TKHeaderTitleView.m in Sources */,
 				900E34001B73647C006A8FCF /* reuseLabel.m in Sources */,
 				44091E631B5C8A83008BB282 /* UILabel+Attribute.m in Sources */,
@@ -891,6 +910,7 @@
 				44D702361B73C2A500BF21FD /* SDWebImageDownloaderOperation.m in Sources */,
 				4457B34E1B881F1B0071D065 /* Notification.m in Sources */,
 				44A58A0B1B628900001742D8 /* OthersCircle.m in Sources */,
+				44F23F341B9550D6008B0D38 /* TKOverLaySplitterView.m in Sources */,
 				447F83D21B67CCD7006B2839 /* TKNetworkManager.m in Sources */,
 				4441FAA41B56937000A7B7F9 /* UIColor+Navigation.m in Sources */,
 				442A943C1B5FD92B00C07A4F /* TKPassCodeField.m in Sources */,

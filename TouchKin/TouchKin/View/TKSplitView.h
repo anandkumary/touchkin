@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
-//IB_DESIGNABLE
-@interface TKSplitView : UIView
+#import "TKGradientCircularView.h"
+IB_DESIGNABLE
+@interface TKSplitView : TKGradientCircularView
 
 @property (nonatomic, strong) NSDictionary *splitlist;
 @end

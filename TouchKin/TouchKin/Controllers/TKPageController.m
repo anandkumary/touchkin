@@ -86,15 +86,7 @@
      }
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-       // if(self.boardType == DASHBOARDIMAGETYPE)
-        {
-            [self.splitView addKnobAnimtation];
-            [self.gradientCircle startAnimating];
-
-        }
-//        else {
-//            [self.gradientCircle forceMoveGradientCircle];
-//        }
+      //Perform animation
         
     });
 
@@ -143,11 +135,11 @@
     self.dashboardView.urlString = urlString;
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        self.splitView.splitlist = circle.userStatus;
-        self.splitView.ratio = self.gradientCircle.ratio;
-        self.splitView.boardType = self.boardType;
-
-        [self.splitView addKnobAnimtation];
+      //  self.splitView.splitlist = circle.userStatus;
+//        self.splitView.ratio = self.gradientCircle.ratio;
+//        self.splitView.boardType = self.boardType;
+//
+//        [self.splitView addKnobAnimtation];
     });
     
 }
@@ -188,13 +180,19 @@
     
      NSString *urlString = [NSString stringWithFormat:@"https://s3-ap-southeast-1.amazonaws.com/touchkin-dev/avatars/%@.jpeg",others.userId];
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        self.splitView.splitlist = others.userStatus.activityStatus;
-        self.splitView.ratio = self.gradientCircle.ratio;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         
-        self.splitView.boardType = self.boardType;
+        self.gradientCircle.splitlist = others.userStatus.activityStatus;
+
+        //Perform animation
         
-        [self.splitView addKnobAnimtation];
+        [self.splitView animate];
+
+//        self.splitView.ratio = self.gradientCircle.ratio;
+//        
+//        self.splitView.boardType = self.boardType;
+//        
+//        [self.splitView addKnobAnimtation];
 
     });
     
