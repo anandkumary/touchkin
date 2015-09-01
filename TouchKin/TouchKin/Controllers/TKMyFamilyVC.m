@@ -17,9 +17,10 @@
 #import "UIImageView+WebCache.h"
 #import "TKAddNewVC.h"
 #import "MLNetworkModel.h"
-
+#import "Define.h"
 #import "UIColor+Navigation.h"
-
+#import "TKAddNewVC.h"
+#import "TKAddNicknameVC.h"
 
 @interface TKMyFamilyVC () <TKMyFamilyCollectionCellDelegate,TKMyFamilyRequestCellDelegate>{
     
@@ -33,6 +34,13 @@
 @property (nonatomic,strong) UIRefreshControl *refreshControl;
 @property (nonatomic,strong) NSMutableDictionary *PendingCount;
 @property (nonatomic, strong) UIButton *tempBtn;
+
+@property (nonatomic,assign) AddCareGivers careType;
+
+@property (nonatomic,strong) NSString *CGMobile;
+
+
+
 - (IBAction)CareForSomeoneAction:(id)sender;
 
 @end
@@ -49,7 +57,6 @@
     previousSelected= -1;
     
     self.tableview.backgroundColor = [UIColor whiteColor];
-    
     self.type = NAVIGATIONTYPENORMAL;
     self.title = @"My Family";
     self.PendingCount = [[NSMutableDictionary alloc]init];
@@ -131,8 +138,6 @@
         
         view =view1;
     }
-    
-    
     
     
     UIImageView *img = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 70, 70)];
@@ -386,31 +391,35 @@
         MyCircle *circle = [self.familyList objectAtIndex:indexPath.section];
         
         if([circle isKindOfClass:[MyCircle class]]){
-            
+            self.careType = ADDCAREGIVERSFORME;
             cell.familyType = MYFAMILYTYPE;
             cell.connectList = circle.myConnectionList;
             cell.delegate = self;
             cell.accessoryType = UITableViewCellAccessoryNone;
-
+            
         }else {
             
             OthersCircle *others = [self.familyList objectAtIndex:indexPath.section];
             
+            self.careType = ADDCAREGIVERSFOROTHERS;
             cell.familyType = OTHERSFAMILYTYPE;
             cell.connectList = others.connectionList;
+            self.CGMobile = [NSString stringWithFormat:@"%@",others.mobile];
             cell.delegate = self;
             
             cell.accessoryType = UITableViewCellAccessoryNone;
-
-//            if (others.isPending) {
-//                cell.accessoryType = UITableViewCellAccessoryDetailButton;
-//            }
+            
+            //            if (others.isPending) {
+            //                cell.accessoryType = UITableViewCellAccessoryDetailButton;
+            //            }
         }
         
         return cell;
     }
     
 }
+
+
 
 -(void) headerButtonAction:(UIButton *) sender {
     
@@ -541,7 +550,8 @@
 -(void) didCellSelectAtIndex:(NSInteger)index {
     
     TKAddNewVC *addVC = [self.storyboard instantiateViewControllerWithIdentifier:@"TKAddNewVC"];
-    
+    addVC.careType = self.careType;
+    addVC.mobileNumber = self.CGMobile;
     [self addChildViewController:addVC];
     [self.view addSubview:addVC.view];
     [addVC didMoveToParentViewController:self];
@@ -595,35 +605,43 @@
     
     NSDictionary *requestDict = @{@"requestId": connect.userId};
     
-    MLNetworkModel *model = [[MLNetworkModel alloc] init];
+    TKAddNicknameVC *nickName =[self.storyboard instantiateViewControllerWithIdentifier:@"TKAddNicknameVC"];
+    nickName.dict = requestDict;
+    nickName.avatarImage = cell.avatar.image;
+    [self addChildViewController:nickName];
+    [self.view addSubview:nickName.view];
+    [nickName didMoveToParentViewController:self];
+
     
-    [model postRequestPath:[NSString stringWithFormat:@"user/connection-request/%@/accept",connect.requestId] withParameter:requestDict withHandler:^(id responseObject, NSError *error) {
-        
-        NSLog(@"response = %@",responseObject);
-        
-        if(error ==  nil) {
-            
-            NSArray *array = responseObject;
-            
-            NSDictionary *dict = [array objectAtIndex:0];
-            
-            if([dict[@"status"] isEqualToString:@"closed"] ){
-                
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    
-                    [circle.requestList removeObject:connect];
-                    
-                    [self.tableview reloadData];
-                    
-                });
-            }
-            else {
-                
-                
-            }
-        }
-        
-    }];
+//    MLNetworkModel *model = [[MLNetworkModel alloc] init];
+//    
+//    [model postRequestPath:[NSString stringWithFormat:@"user/connection-request/%@/accept",connect.requestId] withParameter:requestDict withHandler:^(id responseObject, NSError *error) {
+//        
+//        NSLog(@"response = %@",responseObject);
+//        
+//        if(error ==  nil) {
+//            
+//            NSArray *array = responseObject;
+//            
+//            NSDictionary *dict = [array objectAtIndex:0];
+//            
+//            if([dict[@"status"] isEqualToString:@"closed"] ){
+//                
+//                dispatch_async(dispatch_get_main_queue(), ^{
+//                    
+//                    [circle.requestList removeObject:connect];
+//                    
+//                    [self.tableview reloadData];
+//                    
+//                });
+//            }
+//            else {
+//                
+//                
+//            }
+//        }
+//        
+//    }];
     
 
 }
@@ -631,7 +649,7 @@
 - (IBAction)CareForSomeoneAction:(id)sender
 {
     TKAddNewVC *addVC = [self.storyboard instantiateViewControllerWithIdentifier:@"TKAddNewVC"];
-    
+    addVC.careType = self.careType;
     [self addChildViewController:addVC];
     [self.view addSubview:addVC.view];
     [addVC didMoveToParentViewController:self];

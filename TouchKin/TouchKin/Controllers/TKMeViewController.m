@@ -28,6 +28,7 @@
 
 @property (nonatomic, assign) NSInteger selctedIndex;
 @property (nonatomic, assign) NSInteger childIndex;
+@property (nonatomic,assign) NSInteger pageCount;
 @property (weak, nonatomic) IBOutlet UIPageControl *pageIndicator;
 
 @property (nonatomic, assign) BOOL isSelectedUserPending;
@@ -144,14 +145,23 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         
         self.pageIndicator.currentPage = 0;
+        self.pageController = [self.storyboard instantiateViewControllerWithIdentifier:@"PageViewController"];
+        self.pageController.dataSource = self;
         
-        TKPageController *initialViewController = [self viewControllerAtIndex:0];
+    TKPageController *initialViewController = [self viewControllerAtIndex:0];
         
-        initialViewController.view.clipsToBounds = YES;
-        
+       // initialViewController.view.clipsToBounds = YES;
+
         NSArray *viewControllers = [NSArray arrayWithObject:initialViewController];
         
         [self.pageController setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
+        
+        self.pageController.view.frame = CGRectMake(0 ,0, self.containerView.frame.size.width, self.containerView.frame.size.height-25);
+        
+        [self addChildViewController:_pageController];
+        [self.containerView addSubview:_pageController.view];
+        [self.pageController didMoveToParentViewController:self];
+
     });
     
    
@@ -252,11 +262,13 @@
         self.isSelectedUserPending = childViewController.others.isPending;
         
         self.pageIndicator.numberOfPages = (self.isSelectedUserPending) ? 1 : 3;
+        self.pageCount = (self.isSelectedUserPending) ? 1 : 3;
     }
     else {
-        
+        self.pageCount = circle.myConnectionList.count;
         if(circle.myConnectionList.count){
              [childViewController setConnection:[circle.myConnectionList objectAtIndex:index] withUserStatus:circle.userStatus];
+            
         }
         else {
             //ADD Care Givers
@@ -264,10 +276,10 @@
         
     }
     
-    CGRect frame = childViewController.view.frame;
-    frame.size.height = self.containerView.frame.size.height;
-    childViewController.view.frame = frame;
-    
+//    CGRect frame = childViewController.view.frame;
+//    frame.size.height = self.containerView.frame.size.height - 50;
+//    childViewController.view.frame = frame;
+//    
     return childViewController;
     
 }
@@ -275,40 +287,29 @@
 
 -(void) didSelectHeaderTitleAtIndex:(NSInteger)index withUserId:(NSString *)userId {
     
-    self.pageIndicator.hidden = (index == 0) ? YES : NO;
+    self.pageIndicator.hidden = (index == 0) ? YES : YES;
 
     self.selctedIndex = index;
     
     [[TKDataEngine sharedManager] setCurrentUserId:userId];
-    
+   
+    [self.pageController.view removeFromSuperview];
     self.pageController.dataSource = nil;
     self.pageController.dataSource = self;
-    
     [self addDefaultpages];
     
 }
 
-//- (NSInteger)presentationCountForPageViewController:(UIPageViewController *)pageViewController {
-//    // The number of items reflected in the page indicator.
-//    
-//    NSInteger count = 0;
-//    
-//    if(self.selctedIndex != 0){
-//        
-//        MyCircle *circle = [self.familyList objectAtIndex:self.selctedIndex];
-//
-//        count = circle.myConnectionList.count;
-//    }
-//    else{
-//        count = 3;
-//    }
-//    return 0;
-//}
-//
-//- (NSInteger)presentationIndexForPageViewController:(UIPageViewController *)pageViewController {
-//    // The selected item reflected in the page indicator.
-//    return 0;
-//}
+- (NSInteger)presentationCountForPageViewController:(UIPageViewController *)pageViewController {
+    // The number of items reflected in the page indicator.
+    
+    return self.pageCount;
+}
+
+- (NSInteger)presentationIndexForPageViewController:(UIPageViewController *)pageViewController {
+    // The selected item reflected in the page indicator.
+    return 0;
+}
 
 - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
 {
@@ -406,43 +407,44 @@
             OthersCircle *others = pageContr.others;
             mobile = others.userId;
             
-            
-            TKPageController *initialViewController = [self viewControllerAtIndex:0];
-            
-            initialViewController.view.clipsToBounds = YES;
-            
-            NSArray *viewControllers = [NSArray arrayWithObject:initialViewController];
-            
-            [self.pageController setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionReverse animated:YES completion:nil];
+            if (pageContr.index != 0) {
+                [self.pageIndicator setCurrentPage:0];
+                TKPageController *initialViewController = [self viewControllerAtIndex:0];
+                initialViewController.view.clipsToBounds = YES;
+                [initialViewController.topLabel setText:@"Sending a touch..."];
+                [initialViewController.bottomLabel setText:@"Share a moment with video?"];
+                
+                NSArray *viewControllers = [NSArray arrayWithObject:initialViewController];
+                [self.pageController setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionReverse animated:YES completion:nil];
+                
+            }
         }
-        
-        NSDictionary *dict = @{@"receivingUserId" : mobile};
-        
-        [model postRequestPath:@"touch/add" withParameter:dict
-                   withHandler:^(id responseObject, NSError *error) {
-                       
-                   }];
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)( 5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             
             sender.selected = NO;
-            [sender setTitle:@"send a Touch" forState:UIControlStateNormal];
-            [pageContr updateMyConnectionData];
-
+            [sender setTitle:@"Send a Touch" forState:UIControlStateNormal];
+            NSDictionary *dict = @{@"receivingUserId" : mobile};
+            
+            [model postRequestPath:@"touch/add" withParameter:dict
+                       withHandler:^(id responseObject, NSError *error) {
+                       }];
+            [self.pageController.view removeFromSuperview];
+            [self addDefaultpages];
+            
         });
         
-        [sender setTitle:@"send a Video" forState:UIControlStateNormal];
-
+        [sender setTitle:@"Add a Video" forState:UIControlStateNormal];
         
     }
     else {
         
-        [sender setTitle:@"send a Touch" forState:UIControlStateNormal];
-
+        [sender setTitle:@"Send a Touch" forState:UIControlStateNormal];
+        
         [self openImagePicker];
-
+        
     }
-
+    
 }
 
 -(void) openImagePicker {

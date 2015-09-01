@@ -18,9 +18,10 @@
 @property (weak, nonatomic) IBOutlet UITextField *userNametxt;
 @property (weak, nonatomic) IBOutlet UITextField *mobileNumbertxt;
 @property (weak, nonatomic) IBOutlet UIButton *stdCodeBtn;
-
+@property (weak, nonatomic) IBOutlet UITextField *enterName;
 @property (nonatomic, assign) CGFloat spaceConstriant;
 @property (strong, nonatomic) NSArray *countryList;
+@property (nonatomic,copy) NSString *CRmobile;
 
 @end
 
@@ -31,7 +32,8 @@
     // Do any additional setup after loading the view.
     
     self.spaceConstriant = self.topConstraint.constant;
-    
+    self.CRmobile = [NSString stringWithFormat:@"%@",self.mobileNumber];
+
     NSLocale *currentLocale = [NSLocale currentLocale];  // get the current locale.
     NSString *countryCode = [currentLocale objectForKey:NSLocaleCountryCode];
     
@@ -74,23 +76,44 @@
 - (IBAction)addContactbutton:(id)sender
 {
     
-    
 }
 - (IBAction)AddButtonAction:(id)sender
 {
-    NSString *str = [NSString stringWithFormat:@"%@%@",self.stdCodeBtn.titleLabel.text,self.mobileNumbertxt.text];
-    
-    [TKNetworkManager sendRequestForUser:self.userNametxt.text withMobileNumber:str];
-    
-    [UIView animateWithDuration:0.4 animations:^{
-        self.topConstraint.constant = self.spaceConstriant;
-        [self.view layoutIfNeeded];
-        
-    } completion:^(BOOL finished) {
-        
-        [self.view removeFromSuperview];
-        [self removeFromParentViewController];
-    }];
+    if (![self.userNametxt.text isEqualToString:@""] && ![self.enterName.text isEqualToString:@""] && ![self.mobileNumbertxt.text isEqualToString:@""]) {
+        if (self.careType == ADDCAREGIVERSFORME) {
+            NSString *str = [NSString stringWithFormat:@"%@%@",self.stdCodeBtn.titleLabel.text,self.mobileNumbertxt.text];
+            
+                    [TKNetworkManager sendRequestForUser:self.userNametxt.text withMobileNumber:str];
+            
+                    [UIView animateWithDuration:0.4 animations:^{
+                        self.topConstraint.constant = self.spaceConstriant;
+                        [self.view layoutIfNeeded];
+            
+                    } completion:^(BOOL finished) {
+            
+                        [self.view removeFromSuperview];
+                        [self removeFromParentViewController];
+                    }];
+        }else{
+            NSString *str = [NSString stringWithFormat:@"%@%@",self.stdCodeBtn.titleLabel.text,self.mobileNumbertxt.text];
+            NSLog(@"%@",self.CRmobile);
+                    [TKNetworkManager sendRequestForCareReceiverUser:self.userNametxt.text withcareGivermobileno:str withMobileNumber:self.CRmobile];
+            
+                    [UIView animateWithDuration:0.4 animations:^{
+                        self.topConstraint.constant = self.spaceConstriant;
+                        [self.view layoutIfNeeded];
+                        
+                    } completion:^(BOOL finished) {
+                        
+                        [self.view removeFromSuperview];
+                        [self removeFromParentViewController];
+                    }];
+        }
+
+    }else{
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Data Missing" message:@"Please Enter details in all Fields" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+        [alert show];
+    }
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -112,7 +135,6 @@
             [self.view layoutIfNeeded];
             
         }];
-
         
     }else if (height == 568.00){
         [UIView animateWithDuration:0.4 animations:^{
@@ -121,7 +143,6 @@
             [self.view layoutIfNeeded];
             
         }];
-        
         
     }
     else if (height >= 667.00){
@@ -134,9 +155,8 @@
         }];
 
     }
-
-    
 }
+
 -(void)textFieldDidEndEditing:(UITextField *)textField{
     [UIView animateWithDuration:0.4 animations:^{
         
@@ -144,15 +164,12 @@
         [self.view layoutIfNeeded];
         
     }];
-
 }
 
 -(IBAction)countryCodeButtonAction:(id)sender {
     
     TKCountryVC *countryVC = [self.storyboard instantiateViewControllerWithIdentifier:@"TKCountryVC"];
-    
     countryVC.delegate = self;
-    
     [self presentViewController:countryVC animated:YES completion:nil];
     
 }
@@ -170,6 +187,7 @@
     
     [self.userNametxt resignFirstResponder];
     [self.mobileNumbertxt resignFirstResponder];
+    [self.enterName resignFirstResponder];
     return YES;
     
 }

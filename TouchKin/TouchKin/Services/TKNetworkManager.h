@@ -18,4 +18,6 @@
 
 + (void) sendRequestForUser:(NSString *)userName withMobileNumber:(NSString *)mobile;
 
++ (void) sendRequestForCareReceiverUser:(NSString *)userName withcareGivermobileno:(NSString *)CGmobile withMobileNumber:(NSString *)mobile;
+
 @end

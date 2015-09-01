@@ -114,6 +114,7 @@
 		44F23F371B955215008B0D38 /* TKKnob.m in Sources */ = {isa = PBXBuildFile; fileRef = 44F23F361B955215008B0D38 /* TKKnob.m */; };
 		900E34001B73647C006A8FCF /* reuseLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 900E33FF1B73647C006A8FCF /* reuseLabel.m */; };
 		90D9821B1B6CB54100EFB084 /* TKMessagePreviewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 90D9821A1B6CB54100EFB084 /* TKMessagePreviewVC.m */; };
+		90E0986D1B94643E0059E099 /* TKAddNicknameVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 90E0986C1B94643E0059E099 /* TKAddNicknameVC.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -328,6 +329,8 @@
 		900E33FF1B73647C006A8FCF /* reuseLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = reuseLabel.m; sourceTree = "<group>"; };
 		90D982191B6CB54100EFB084 /* TKMessagePreviewVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKMessagePreviewVC.h; sourceTree = "<group>"; };
 		90D9821A1B6CB54100EFB084 /* TKMessagePreviewVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKMessagePreviewVC.m; sourceTree = "<group>"; };
+		90E0986B1B94643E0059E099 /* TKAddNicknameVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKAddNicknameVC.h; sourceTree = "<group>"; };
+		90E0986C1B94643E0059E099 /* TKAddNicknameVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKAddNicknameVC.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -591,6 +594,8 @@
 				4414D88B1B6913F100363447 /* TKAddNewVC.m */,
 				448FE9D61B6AF38E004397FB /* TKContactVC.h */,
 				448FE9D71B6AF38E004397FB /* TKContactVC.m */,
+				90E0986B1B94643E0059E099 /* TKAddNicknameVC.h */,
+				90E0986C1B94643E0059E099 /* TKAddNicknameVC.m */,
 				90D982191B6CB54100EFB084 /* TKMessagePreviewVC.h */,
 				90D9821A1B6CB54100EFB084 /* TKMessagePreviewVC.m */,
 				4457B3581B885CBF0071D065 /* TKNotificationViewController.h */,
@@ -847,6 +852,7 @@
 				4451755A1B55DD2D00EDEF97 /* main.m in Sources */,
 				4403D4E11B61BF5C006000B8 /* YLImagePickerController.m in Sources */,
 				4490136D1B5A4D23007B312C /* TKMyFamilyRequestCell.m in Sources */,
+				90E0986D1B94643E0059E099 /* TKAddNicknameVC.m in Sources */,
 				44C9DB0B1B588B3300714340 /* TKHomeBaseNavigationView.m in Sources */,
 				44724D721B6512B100B56851 /* TKKinBookCollectionCell.m in Sources */,
 				44D7023B1B73C2A500BF21FD /* UIImage+MultiFormat.m in Sources */,

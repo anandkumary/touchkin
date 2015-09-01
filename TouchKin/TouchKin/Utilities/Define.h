@@ -34,3 +34,10 @@ typedef NS_ENUM(NSInteger, ProfileType) {
     DASHBOARDPROFILE,
     LOGINPROFILE
 };
+
+
+typedef NS_ENUM(NSInteger, AddCareGivers) {
+    ADDCAREGIVERSFORME,
+    ADDCAREGIVERSFOROTHERS
+    
+};

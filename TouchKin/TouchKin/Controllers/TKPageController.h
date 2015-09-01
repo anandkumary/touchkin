@@ -17,7 +17,7 @@
 #import "TKSplitView.h"
 #import <MapKit/MapKit.h>
 
-@interface TKPageController : UIViewController
+@interface TKPageController : UIViewController<UIPageViewControllerDelegate>
 
 @property (assign, nonatomic) NSInteger index;
 

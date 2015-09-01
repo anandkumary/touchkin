@@ -104,6 +104,24 @@
     }];
 }
 
++ (void) sendRequestForCareReceiverUser:(NSString *)userName withcareGivermobileno:(NSString *)CGmobile withMobileNumber:(NSString *)mobile {
+    
+    NSDictionary *dict =  @{@"mobile":mobile, @"care_giver_mobile_no":CGmobile
+                            ,@"care_giver_nickname": userName};
+    
+    MLNetworkModel *model = [[MLNetworkModel alloc] init];
+    
+    UIApplication* app = [UIApplication sharedApplication];
+    app.networkActivityIndicatorVisible = YES;
+    
+    [model postPath:@"user/add-care-receiver" withParameter:dict withHandler:^(MLClient *sender, id responseObject, NSError *error) {
+        NSLog(@"resp = %@",responseObject);
+        app.networkActivityIndicatorVisible = NO;
+        
+        [[TKDataEngine sharedManager] getMyFamilyInfo];
+        
+    }];
+}
 
 + (void) uploadVideoFor:(NSURL *)videoUrl withUserID:(NSString *)userList {
     NSLog(@"POSTING");
