@@ -331,7 +331,6 @@
 
     }];
     
-
 }
 
 #pragma mark - Get Activity

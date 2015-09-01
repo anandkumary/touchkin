@@ -11,10 +11,10 @@
 
 @interface TKAddNicknameVC()<UITextFieldDelegate>
 
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *topConstraints;
-@property (weak, nonatomic) IBOutlet UIImageView *avatarPics;
-@property (weak, nonatomic) IBOutlet UILabel *userNames;
-@property (weak, nonatomic) IBOutlet UITextField *addNickNames;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *topconstraint;
+@property (weak, nonatomic) IBOutlet UIImageView *avatarPic;
+@property (weak, nonatomic) IBOutlet UILabel *userName;
+@property (weak, nonatomic) IBOutlet UITextField *addNickName;
 @property (nonatomic, assign) CGFloat spaceConstriant;
 
 @end
@@ -24,13 +24,13 @@
 -(void)viewDidLoad{
     [super viewDidLoad];
     [self addinfo];
-    self.spaceConstriant = self.topConstraints.constant;
-    self.addNickNames.delegate = self;
+    self.spaceConstriant = self.topconstraint.constant;
+    self.addNickName.delegate = self;
    // [self.addNickName addTarget:self action:@selector(textFieldShouldReturn:) forControlEvents:UIControlEventTouchUpInside];
-    self.avatarPics.layer.cornerRadius = self.avatarPics.frame.size.width/2;
-    self.avatarPics.layer.borderColor = [UIColor orangeColor].CGColor;
-    self.avatarPics.layer.borderWidth = 2.0;
-    self.avatarPics.clipsToBounds = YES;
+    self.avatarPic.layer.cornerRadius = self.avatarPic.frame.size.width/2;
+    self.avatarPic.layer.borderColor = [UIColor orangeColor].CGColor;
+    self.avatarPic.layer.borderWidth = 2.0;
+    self.avatarPic.clipsToBounds = YES;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -38,7 +38,8 @@
 }
 -(void) addinfo
 {
-    self.avatarPics.image = _avatarImage;
+    self.avatarPic.image = _avatarImage;
+    self.userName.text = _name;
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
@@ -48,42 +49,42 @@
     if(height == 480.00){
         
         [UIView animateWithDuration:0.4 animations:^{
-            self.topConstraints.constant = +150;
+            self.topconstraint.constant = +150;
             [self.view layoutIfNeeded];
         }];
         
     }else if (height == 568.00){
         
         [UIView animateWithDuration:0.4 animations:^{
-            self.topConstraints.constant = +50;
+            self.topconstraint.constant = +50;
             [self.view layoutIfNeeded];
         }];
     }
     else if (height >= 667.00){
         
         [UIView animateWithDuration:0.4 animations:^{
-            self.topConstraints.constant = +25;
+            self.topconstraint.constant = +25;
             [self.view layoutIfNeeded];
         }];
     }
 }
 -(void)textFieldDidEndEditing:(UITextField *)textField{
     [UIView animateWithDuration:0.4 animations:^{
-        self.topConstraints.constant = self.spaceConstriant;
+        self.topconstraint.constant = self.spaceConstriant;
         [self.view layoutIfNeeded];
     }];
 }
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
-    [self.addNickNames resignFirstResponder];
+    [self.addNickName resignFirstResponder];
     return YES;
 }
 
 - (IBAction)addnickNameActions:(id)sender {
     
-    if (![_addNickNames.text isEqualToString:@""]) {
+    if (![_addNickName.text isEqualToString:@""]) {
         NSString *str = [NSString stringWithFormat:@"%@",_dict[@"requestId"]];
-        [_dict setValue:_addNickNames.text forKey:@"nickname"];
+        [_dict setValue:_addNickName.text forKey:@"nickname"];
     MLNetworkModel *model = [[MLNetworkModel alloc] init];
 
     [model postRequestPath:[NSString stringWithFormat:@"user/connection-request/%@/accept",str] withParameter:_dict withHandler:^(id responseObject, NSError *error) {

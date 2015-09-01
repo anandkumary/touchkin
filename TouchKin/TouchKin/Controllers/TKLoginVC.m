@@ -131,7 +131,7 @@
         
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         
-        //NSLog(@"res %@",responseObject);
+        NSLog(@"res %@",responseObject);
         if(![responseObject objectForKey:@"message"]){
             
             TKDataEngine *engine =  [TKDataEngine sharedManager];
@@ -142,7 +142,7 @@
             
              [[NSNotificationCenter defaultCenter] postNotificationName:@"LoginSuccess" object:nil];
             
-             if(responseObject[@"first_name"]){
+             if(![responseObject objectForKey:@"first_name"]){
                  
                  dispatch_async(dispatch_get_main_queue(), ^{
                      
@@ -156,18 +156,29 @@
                      }
                      
                  });
-             }
-             else {
-                 
-            dispatch_async(dispatch_get_main_queue(), ^{
+             }else{
+                 dispatch_async(dispatch_get_main_queue(), ^{
                      
-                     TKProfileVC *profile = [self.storyboard instantiateViewControllerWithIdentifier:@"TKProfileVC"];
+                     if(responseObject[@"mobile_verified"]){
+                         [self dismissViewControllerAnimated:YES completion:nil];
+                     }
+                     else{
+                         dispatch_async(dispatch_get_main_queue(), ^{
+                             
+                    TKProfileVC *profile = [self.storyboard instantiateViewControllerWithIdentifier:@"TKProfileVC"];
+                             
+                                                  profile.profileType = LOGINPROFILE;
+                             
+                                                  [self.navigationController pushViewController:profile animated:YES];
+                                              });
+                                              }
                      
-                     profile.profileType = LOGINPROFILE;
-                     
-                     [self.navigationController pushViewController:profile animated:YES];
                  });
              }
+//             else {
+//                 
+//
+//             }
             
           
         }

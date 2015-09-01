@@ -10,7 +10,8 @@
 
 @interface TKAddNicknameVC : UIViewController
 
-@property (weak,nonatomic) NSMutableDictionary *dict;
-@property (weak,nonatomic) UIImage *avatarImage;
+@property (strong,nonatomic) NSMutableDictionary *dict;
+@property (strong,nonatomic) UIImage *avatarImage;
+@property (strong,nonatomic) NSString *name;
 
 @end

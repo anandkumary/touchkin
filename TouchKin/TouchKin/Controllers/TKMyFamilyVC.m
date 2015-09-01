@@ -606,12 +606,12 @@
     NSDictionary *requestDict = @{@"requestId": connect.userId};
     
     TKAddNicknameVC *nickName =[self.storyboard instantiateViewControllerWithIdentifier:@"TKAddNicknameVC"];
-    nickName.dict = requestDict;
+    nickName.dict = [requestDict mutableCopy];
     nickName.avatarImage = cell.avatar.image;
+    nickName.name = cell.textLabel.text;
     [self addChildViewController:nickName];
     [self.view addSubview:nickName.view];
     [nickName didMoveToParentViewController:self];
-
     
 //    MLNetworkModel *model = [[MLNetworkModel alloc] init];
 //    

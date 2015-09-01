@@ -184,12 +184,12 @@
     
     CAShapeLayer *circleLayer = [CAShapeLayer layer];
     UIBezierPath *path2 = [UIBezierPath bezierPathWithOvalInRect:
-                           CGRectMake(0,_ratioView.frame.origin.y, self.view.frame.size.width, 320.0f)];
+                           CGRectMake(0,_ratioView.frame.origin.y, self.view.frame.size.width,self.view.frame.size.width)];
     [path2 setUsesEvenOddFillRule:YES];
     [circleLayer setPath:[path2 CGPath]];
     [circleLayer setFillColor:[[UIColor clearColor] CGColor]];
     
-    UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, 320, self.view.bounds.size.height) cornerRadius:0];
+    UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height) cornerRadius:0];
     [path appendPath:path2];
     [path setUsesEvenOddFillRule:YES];
     
