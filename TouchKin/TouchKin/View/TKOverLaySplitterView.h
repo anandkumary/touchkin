@@ -14,4 +14,7 @@
 @property (nonatomic, assign) CGFloat endedPoint;
 @property (nonatomic, assign) NSInteger totalDays;
 @property (nonatomic, assign) CGFloat ratio;
+
+@property (nonatomic,assign) CGFloat startedPoint;
+
 @end

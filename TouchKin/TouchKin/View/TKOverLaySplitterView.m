@@ -45,6 +45,8 @@
     CGFloat start  = (-M_PI_2 + self.startPoint);
     CGFloat endPoint = (-M_PI_2 + (0.213 * self.totalDays));
     
+    self.startedPoint = start;
+    
     self.endedPoint = endPoint - 0.213;
     
     CGContextRef context = UIGraphicsGetCurrentContext();

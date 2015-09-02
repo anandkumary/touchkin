@@ -41,7 +41,51 @@
     
     [super drawRect:rect];
     
-    [self addKnob];
+    CGRect rect1 = rect;
+    
+    rect1.origin.x -= 10;
+    rect1.origin.y -= 10;
+    rect1.size.width -= 20;
+    rect1.size.height -= 20;
+    
+    const NSUInteger kNumCircles = 1u;
+    
+    CGFloat height = CGRectGetHeight(rect1) - 0;
+    
+    CGFloat smallCircleRadius = height / 10.0f;
+    
+    CGRect bigCircleRect = CGRectInset(rect1, smallCircleRadius / 2.0f, smallCircleRadius / 2.0f);
+    CGFloat bigCircleRadius = CGRectGetHeight(bigCircleRect) / 2.0f;
+    
+    CGPoint rectCenter = CGPointMake(CGRectGetMidX(rect), CGRectGetMidY(rect));
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGContextSetLineWidth(context, 2.0f);
+    
+    CGFloat alpha = self.startedPoint;
+    
+    
+    // for (NSUInteger i = 0; i < kNumCircles; i++)
+    {
+        CGPoint smallCircleCenter = CGPointMake(rectCenter.x  + bigCircleRadius * cos(alpha) - smallCircleRadius/2.0f , rectCenter.y  + bigCircleRadius * sin(alpha) - smallCircleRadius / 2.0f );
+        
+        
+        CGRect smallCircleRect = CGRectMake(smallCircleCenter.x,smallCircleCenter.y,smallCircleRadius,smallCircleRadius);
+        
+        CGContextSetStrokeColorWithColor(context,[UIColor greenColor].CGColor);
+        
+        CGContextAddEllipseInRect(context, smallCircleRect);
+        
+        CGContextSetFillColorWithColor(context,[UIColor greenColor].CGColor);
+        CGContextFillEllipseInRect(context, smallCircleRect);
+        
+        CGContextStrokePath(context);
+        alpha += M_PI / (kNumCircles / 2.0f);
+    }
+    
+    
+   // [self addKnob];
 }
 
 
@@ -93,9 +137,9 @@
     
     self.startPoint = self.percentage;
     
-    self.endAnglePoint += self.minAngle;
+    //self.endAnglePoint += self.minAngle;
 
-    [self startKnobAnimation:self.endAnglePoint];
+    //[self startKnobAnimation:self.endAnglePoint];
 }
 
 -(void) startKnobAnimation:(CGFloat)endAngle {
