@@ -54,6 +54,9 @@
    CGFloat height = [UIScreen mainScreen].bounds.size.height;
     
     if(height == 480){
+        
+        self.topLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:16];
+        self.bottomLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:16];
     
         self.bgImage.transform = CGAffineTransformMakeScale(0.9, 0.9);
         
@@ -154,6 +157,7 @@
     NSString *urlString = [NSString stringWithFormat:@"https://s3-ap-southeast-1.amazonaws.com/touchkin-dev/avatars/%@.jpeg",circle.userId];
     
     self.dashboardView.urlString = urlString;
+    self.dashboardView.layer.borderWidth =  0.0;
         
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         
@@ -200,6 +204,10 @@
     
     dispatch_async(dispatch_get_main_queue(), ^{
         self.knobView.hidden = NO;
+        
+        self.dashboardView.layer.borderWidth =  2.0;
+        self.dashboardView.layer.borderColor = [UIColor whiteColor].CGColor;
+
     });
     
      NSString *urlString = [NSString stringWithFormat:@"https://s3-ap-southeast-1.amazonaws.com/touchkin-dev/avatars/%@.jpeg",others.userId];

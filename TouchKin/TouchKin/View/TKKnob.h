@@ -10,7 +10,7 @@
 #import <UIKit/UIKit.h>
 #import "Define.h"
 
-//IB_DESIGNABLE
+IB_DESIGNABLE
 
 @interface TKKnob : UIView //TKOverLaySplitterView
 

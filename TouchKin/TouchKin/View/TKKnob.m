@@ -64,10 +64,10 @@
      
         CGRect rect1 = rect;
         
-        rect1.origin.x += 2;
-        rect1.origin.y += 2;
-        rect1.size.width += 4;
-        rect1.size.height += 4;
+//        rect1.origin.x += 7;
+//        rect1.origin.y += 7;
+//        rect1.size.width += 14;
+//        rect1.size.height += 14;
         
         const NSUInteger kNumCircles = 1u;
         
@@ -83,6 +83,7 @@
         CGContextRef context = UIGraphicsGetCurrentContext();
         
         CGContextSetLineWidth(context, 2.0f);
+
         
         CGFloat alpha = self.startAnglePoint;
         
@@ -94,7 +95,7 @@
             
             CGRect smallCircleRect = CGRectMake(smallCircleCenter.x,smallCircleCenter.y,smallCircleRadius,smallCircleRadius);
             
-            CGContextSetStrokeColorWithColor(context,[UIColor whiteColor].CGColor);
+            CGContextSetStrokeColorWithColor(context,[UIColor clearColor].CGColor);
             
             CGContextAddEllipseInRect(context, smallCircleRect);
             

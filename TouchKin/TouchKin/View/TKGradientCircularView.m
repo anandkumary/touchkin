@@ -47,14 +47,14 @@
 - (void)drawRect:(CGRect)rect {
     // Drawing code
     
-    CGFloat offset = 5;
+    CGFloat offset = 10;
     
     CGFloat width = self.bounds.size.width - offset;
     CGFloat height = self.bounds.size.height - offset;
     
     CGPoint center = CGPointMake(width/2 + offset/2, (height)/2 + offset/2);
     
-    CGFloat lineWidth = 10.0f;
+    CGFloat lineWidth = 8.0f;
 
     
     CGFloat radius = (width - lineWidth)/2;
@@ -65,12 +65,12 @@
     CGContextRef context = UIGraphicsGetCurrentContext();
 
     CGContextSetStrokeColorWithColor(context, [UIColor colorWithRed:(205.0/255.0) green:(204.0/255.0) blue:(204.0/255.0) alpha:1.0].CGColor);
-    CGContextSetLineWidth(context, 16);
+    CGContextSetLineWidth(context, 8);
     CGContextAddArc(context, center.x,center.y, radius, startAngle,endAngle + 10, 0);
     CGContextStrokePath(context);
     
     
-    CGFloat progressRatio = self.ratio;
+    CGFloat progressRatio =  self.ratio;
         
     UIBezierPath *processPath = [UIBezierPath bezierPath];
     processPath.lineCapStyle = kCGLineCapRound;
