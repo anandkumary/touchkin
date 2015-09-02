@@ -330,24 +330,10 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="iuw-8A-UQW">
-                                <rect key="frame" x="168" y="496" width="39" height="37"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="37" id="X7Q-o4-Gze"/>
-                                    <constraint firstAttribute="width" constant="39" id="rYx-yW-Tf9"/>
-                                </constraints>
-                                <color key="pageIndicatorTintColor" red="0.80916834174032781" green="0.82792771460000003" blue="0.82384464047824768" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="currentPageIndicatorTintColor" red="0.82792771460000003" green="0.40837003220000001" blue="0.1081567574" alpha="1" colorSpace="calibratedRGB"/>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="169" y="496" width="39" height="37"/>
-                                </variation>
-                            </pageControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="udT-X9-ILB" secondAttribute="trailing" constant="59" id="3xx-VO-JbE"/>
-                            <constraint firstItem="iuw-8A-UQW" firstAttribute="top" secondItem="Ydb-aO-5kZ" secondAttribute="bottom" constant="-43" id="57S-OD-INd"/>
-                            <constraint firstAttribute="centerX" secondItem="iuw-8A-UQW" secondAttribute="centerX" id="88x-as-gvB"/>
                             <constraint firstItem="KDH-MC-tKJ" firstAttribute="top" secondItem="udT-X9-ILB" secondAttribute="bottom" constant="22" id="RPx-DX-lZ4"/>
                             <constraint firstItem="Ydb-aO-5kZ" firstAttribute="top" secondItem="xnQ-9v-AwA" secondAttribute="bottom" constant="70" id="Wtf-h7-ADN"/>
                             <constraint firstAttribute="trailing" secondItem="Ydb-aO-5kZ" secondAttribute="trailing" id="Zqr-FE-Gm9"/>
@@ -362,7 +348,6 @@
                     <connections>
                         <outlet property="callBtn" destination="udT-X9-ILB" id="wwC-dg-kqd"/>
                         <outlet property="containerView" destination="Ydb-aO-5kZ" id="fDc-bG-lh7"/>
-                        <outlet property="pageIndicator" destination="iuw-8A-UQW" id="uB6-5c-2jO"/>
                         <outlet property="sendTouchBtn" destination="taT-qF-1w2" id="uhM-n5-gb5"/>
                     </connections>
                 </viewController>

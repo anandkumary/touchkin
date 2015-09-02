@@ -9,15 +9,12 @@
 #import "TKDashboardView.h"
 #import "AppDelegate.h"
 #import "UIImageView+WebCache.h"
-
 #define METERS_PER_MILE 1609.344
 
 
 @interface TKDashboardView() <MKMapViewDelegate>
-
 @property (nonatomic, strong) UIImageView *batteryImage;
 @property (nonatomic, strong) UILabel *batteryLbl;
-
 @property (nonatomic, strong) UIImageView *cellularImage;
 @property (nonatomic, strong) UIImageView *wifiImage;
 @end
@@ -81,7 +78,14 @@
             
             break;
         }
+        case DASHBOARDNOCAREGIVERS:{
+            [self createAvatar];
             
+            self.avatar.image = [UIImage imageNamed:@"add_avatar"];
+            
+            
+            break;
+        }
         default:
             break;
     }
@@ -90,6 +94,7 @@
 -(void) setMapView:(MKMapView *)mapView {
     _mapView = mapView;
 }
+
 
 -(void) createMapView {
     
@@ -148,6 +153,7 @@
         self.avatar.layer.cornerRadius = self.avatar.frame.size.width/2;
         
         self.avatar.clipsToBounds = YES;
+    
     }
 }
 

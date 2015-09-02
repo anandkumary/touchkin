@@ -16,7 +16,8 @@ typedef NS_ENUM(NSInteger, DashboardType) {
     
     DASHBOARDIMAGETYPE,
     DASHBOARDMAPTYPE,
-    DASHBOARDCELLULARTYPE
+    DASHBOARDCELLULARTYPE,
+    DASHBOARDNOCAREGIVERS
 };
 
 typedef NS_ENUM(NSInteger, NavigationType) {

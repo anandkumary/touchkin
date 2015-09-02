@@ -29,7 +29,6 @@
 @property (nonatomic, assign) NSInteger selctedIndex;
 @property (nonatomic, assign) NSInteger childIndex;
 @property (nonatomic,assign) NSInteger pageCount;
-@property (weak, nonatomic) IBOutlet UIPageControl *pageIndicator;
 
 @property (nonatomic, assign) BOOL isSelectedUserPending;
 
@@ -46,7 +45,8 @@
     // Do any additional setup after loading the view.
     
     self.navTitle = @"My Family";
-    
+    self.callBtn.hidden = YES;
+    self.sendTouchBtn.hidden = YES;
     self.mapView = [[MKMapView alloc] init];
     self.mapView.delegate = self;
     
@@ -69,7 +69,6 @@
     [self addtapGestureForMap];
     
     // [self setDelegate:self];
-    self.pageIndicator.hidden = YES;
     
     [self.callBtn addTarget:self action:@selector(callButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -119,7 +118,6 @@
         
         self.selctedIndex = 0;
         
-        self.pageIndicator.currentPage = 0;
         
         self.navTitle = @"My Family";
         
@@ -144,7 +142,6 @@
     
     dispatch_async(dispatch_get_main_queue(), ^{
         
-        self.pageIndicator.currentPage = 0;
         self.pageController = [self.storyboard instantiateViewControllerWithIdentifier:@"PageViewController"];
         self.pageController.dataSource = self;
         
@@ -188,12 +185,9 @@
     
     if (index == 0) {
         //Page 0
-        self.pageIndicator.currentPage = 0;
         return nil;
     }
-    else {
-        self.pageIndicator.currentPage = self.pageIndicator.currentPage - 1;
-    }
+    
     
     index--;
     
@@ -206,11 +200,6 @@
         
     NSUInteger index = [(TKPageController *)viewController index];
     
-    dispatch_async(dispatch_get_main_queue(), ^{
-        
-        self.pageIndicator.currentPage = index;
-
-    });
     
 
     index++;
@@ -218,10 +207,12 @@
     if(self.selctedIndex == 0){
         MyCircle *circle = [self.familyList objectAtIndex:self.selctedIndex];
         
-
+        
         if(index == circle.myConnectionList.count){
             return nil;
         }
+        
+        if (circle.myConnectionList.count == 0)return nil;
         
         return [self viewControllerAtIndex:index];
 
@@ -245,9 +236,11 @@
     childViewController.index = index;
     
     self.childIndex = index;
-    
     if(self.selctedIndex != 0){
         childViewController.boardType = index % 3;
+        self.callBtn.hidden = NO;
+        self.sendTouchBtn.hidden = NO;
+
     }
     
     if(childViewController.boardType == DASHBOARDMAPTYPE){
@@ -261,17 +254,25 @@
         childViewController.others = (OthersCircle *)circle;
         self.isSelectedUserPending = childViewController.others.isPending;
         
-        self.pageIndicator.numberOfPages = (self.isSelectedUserPending) ? 1 : 3;
+        //self.pageIndicator.numberOfPages = (self.isSelectedUserPending) ? 1 : 3;
         self.pageCount = (self.isSelectedUserPending) ? 1 : 3;
+        self.callBtn.hidden = NO;
+        self.sendTouchBtn.hidden = NO;
+
     }
     else {
         self.pageCount = circle.myConnectionList.count;
         if(circle.myConnectionList.count){
              [childViewController setConnection:[circle.myConnectionList objectAtIndex:index] withUserStatus:circle.userStatus];
-            
+            self.callBtn.hidden = NO;
+            self.sendTouchBtn.hidden = NO;
+
         }
         else {
             //ADD Care Givers
+            self.pageCount = 1;
+            childViewController.boardType = DASHBOARDNOCAREGIVERS;
+            //childViewController.boardType = index % 1;
         }
         
     }
@@ -287,7 +288,7 @@
 
 -(void) didSelectHeaderTitleAtIndex:(NSInteger)index withUserId:(NSString *)userId {
     
-    self.pageIndicator.hidden = (index == 0) ? YES : YES;
+    //self.pageIndicator.hidden = (index == 0) ? YES : NO;
 
     self.selctedIndex = index;
     
@@ -384,6 +385,7 @@
 }
 - (IBAction)sendTouchBtnAction:(UIButton *)sender {
     
+    
     if(!sender.selected){
         
         sender.selected = YES;
@@ -407,7 +409,6 @@
             mobile = others.userId;
             
             if (pageContr.index != 0) {
-                [self.pageIndicator setCurrentPage:0];
                 TKPageController *initialViewController = [self viewControllerAtIndex:0];
                 initialViewController.view.clipsToBounds = YES;
                 [initialViewController.topLabel setText:@"Sending a touch..."];
