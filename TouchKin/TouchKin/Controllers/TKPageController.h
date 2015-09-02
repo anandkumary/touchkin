@@ -13,6 +13,7 @@
 #import "MyConnection.h"
 #import "TKDashboardView.h"
 #import "TKKnob.h"
+#import "TKOverLaySplitterView.h"
 #import "TKGradientCircularView.h"
 #import "TKSplitView.h"
 #import <MapKit/MapKit.h>
@@ -31,7 +32,7 @@
 
 @property (weak, nonatomic) IBOutlet TKDashboardView *dashboardView;
 @property (weak, nonatomic) IBOutlet TKSplitView *gradientCircle;
-@property (weak, nonatomic) IBOutlet TKKnob *splitView;
+@property (weak, nonatomic) IBOutlet TKOverLaySplitterView *splitView;
 @property (weak, nonatomic) IBOutlet UILabel *topLabel;
 @property (weak, nonatomic) IBOutlet UILabel *bottomLabel;
 

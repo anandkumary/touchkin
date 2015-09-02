@@ -9,14 +9,21 @@
 #import "TKOverLaySplitterView.h"
 
 @interface TKOverLaySplitterView ()
+@property (nonatomic, strong) NSTimer *timer;
+@property (nonatomic, assign) CGFloat percentage;
 
 @end
 @implementation TKOverLaySplitterView
+
+
 
 - (instancetype)initWithCoder:(NSCoder *)coder
 {
     self = [super initWithCoder:coder];
     if (self) {
+        
+        self.percentage = 0;
+
         self.startPoint = 0.0;
         
         NSDate *today = [NSDate date]; //Get a date object for today's date
@@ -30,6 +37,11 @@
         NSDateComponents *components = [c components:NSCalendarUnitDay fromDate:today];
 
          self.ratio = (CGFloat)components.day / (CGFloat)days.length;
+        self.currentDay = components.day;
+        
+        if(self.currentDay > self.totalDays){
+            self.currentDay = self.totalDays;
+        }
     }
     return self;
 }
@@ -59,12 +71,38 @@
 
 }
 
--(void) setStartPoint:(CGFloat)startPoint {
+//-(void) setStartPoint:(CGFloat)startPoint {
+//    
+//    _startPoint = startPoint;
+//    
+//    [self setNeedsDisplay];
+//}
+
+- (void)timerFired:(NSTimer *)timer
+{
+    self.percentage += 0.05;
+    CGFloat fullCircleRatio = 0.201666;
+    CGFloat totalPercent = (fullCircleRatio  * self.currentDay);
+    if (self.percentage >= totalPercent) {
+        [self.timer invalidate];
+    }
     
-    _startPoint = startPoint;
+    self.startPoint = self.percentage;
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"knobNotification" object:nil userInfo:@{@"knob":@(self.startPoint),@"type":@(self.dashboardType)}];
     
     [self setNeedsDisplay];
+
 }
 
+
+-(void) animate {
+    
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:0.04
+                                                  target:self
+                                                selector:@selector(timerFired:)
+                                                userInfo:nil
+                                                 repeats:YES];
+}
 
 @end

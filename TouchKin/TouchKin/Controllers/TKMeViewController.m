@@ -47,6 +47,7 @@
     self.navTitle = @"My Family";
     self.callBtn.hidden = YES;
     self.sendTouchBtn.hidden = YES;
+    
     self.mapView = [[MKMapView alloc] init];
     self.mapView.delegate = self;
     
@@ -118,7 +119,6 @@
         
         self.selctedIndex = 0;
         
-        
         self.navTitle = @"My Family";
         
         MyCircle *circle = [self.familyList objectAtIndex:0];
@@ -142,9 +142,6 @@
     
     dispatch_async(dispatch_get_main_queue(), ^{
         
-        self.pageController = [self.storyboard instantiateViewControllerWithIdentifier:@"PageViewController"];
-        self.pageController.dataSource = self;
-        
     TKPageController *initialViewController = [self viewControllerAtIndex:0];
         
        // initialViewController.view.clipsToBounds = YES;
@@ -154,10 +151,7 @@
         [self.pageController setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
         
         self.pageController.view.frame = CGRectMake(0 ,0, self.containerView.frame.size.width, self.containerView.frame.size.height-25);
-        
-        [self addChildViewController:_pageController];
-        [self.containerView addSubview:_pageController.view];
-        [self.pageController didMoveToParentViewController:self];
+
 
     });
     
@@ -277,24 +271,20 @@
         
     }
     
-//    CGRect frame = childViewController.view.frame;
-//    frame.size.height = self.containerView.frame.size.height - 50;
-//    childViewController.view.frame = frame;
-//    
+    CGRect frame = childViewController.view.frame;
+    frame.size.height = self.containerView.frame.size.height - 50;
+    childViewController.view.frame = frame;
+
     return childViewController;
     
 }
 
 
 -(void) didSelectHeaderTitleAtIndex:(NSInteger)index withUserId:(NSString *)userId {
-    
-    //self.pageIndicator.hidden = (index == 0) ? YES : NO;
-
-    self.selctedIndex = index;
+     self.selctedIndex = index;
     
     [[TKDataEngine sharedManager] setCurrentUserId:userId];
    
-    [self.pageController.view removeFromSuperview];
     self.pageController.dataSource = nil;
     self.pageController.dataSource = self;
     [self addDefaultpages];
@@ -303,7 +293,9 @@
 
 - (NSInteger)presentationCountForPageViewController:(UIPageViewController *)pageViewController {
     // The number of items reflected in the page indicator.
-    
+    if(self.selctedIndex == 0){
+        return 0;
+    }
     return self.pageCount;
 }
 

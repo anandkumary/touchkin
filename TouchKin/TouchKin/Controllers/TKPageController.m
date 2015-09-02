@@ -26,6 +26,7 @@
 @property (nonatomic,strong) UIButton *button;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bgImageViewConstriant;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomLabelConstraint;
+@property (weak, nonatomic) IBOutlet TKKnob *knobView;
 
 @end
 
@@ -42,6 +43,8 @@
     self.dashboardView.mapView = self.mapView;
 
     self.dashboardView.type = self.boardType;
+    
+    self.knobView.hidden = YES;
     
     self.bgLetterLbl.layer.cornerRadius = self.bgLetterLbl.frame.size.width/2;
     self.bgLetterLbl.clipsToBounds = YES;
@@ -151,13 +154,12 @@
     NSString *urlString = [NSString stringWithFormat:@"https://s3-ap-southeast-1.amazonaws.com/touchkin-dev/avatars/%@.jpeg",circle.userId];
     
     self.dashboardView.urlString = urlString;
-    
+        
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-      //  self.splitView.splitlist = circle.userStatus;
-//        self.splitView.ratio = self.gradientCircle.ratio;
-//        self.splitView.boardType = self.boardType;
-//
-//        [self.splitView addKnobAnimtation];
+        
+        self.knobView.hidden = YES;
+
+        self.knobView.circleType = DASHBOARDMyCIRCLE;
     });
     
 }
@@ -196,21 +198,21 @@
 -(void) setOthers:(OthersCircle *)others {
     _others = others;
     
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.knobView.hidden = NO;
+    });
+    
      NSString *urlString = [NSString stringWithFormat:@"https://s3-ap-southeast-1.amazonaws.com/touchkin-dev/avatars/%@.jpeg",others.userId];
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        
+
         self.gradientCircle.splitlist = others.userStatus.activityStatus;
-
         //Perform animation
-        
+        self.knobView.circleType = DASHBOARDOTHERCIRCLE;
+        self.knobView.dashboardType = self.boardType;
+ 
+        self.splitView.dashboardType = self.boardType;
         [self.splitView animate];
-
-//        self.splitView.ratio = self.gradientCircle.ratio;
-//        
-//        self.splitView.boardType = self.boardType;
-//        
-//        [self.splitView addKnobAnimtation];
 
     });
     

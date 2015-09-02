@@ -36,6 +36,12 @@ typedef NS_ENUM(NSInteger, ProfileType) {
     LOGINPROFILE
 };
 
+typedef NS_ENUM(NSInteger, CircleType) {
+    DASHBOARDMyCIRCLE,
+    DASHBOARDOTHERCIRCLE
+};
+
+
 
 typedef NS_ENUM(NSInteger, AddCareGivers) {
     ADDCAREGIVERSFORME,
