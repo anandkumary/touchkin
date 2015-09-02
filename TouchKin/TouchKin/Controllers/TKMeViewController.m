@@ -144,14 +144,13 @@
         
     TKPageController *initialViewController = [self viewControllerAtIndex:0];
         
-       // initialViewController.view.clipsToBounds = YES;
+        initialViewController.view.clipsToBounds = YES;
 
         NSArray *viewControllers = [NSArray arrayWithObject:initialViewController];
         
         [self.pageController setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
         
         self.pageController.view.frame = CGRectMake(0 ,0, self.containerView.frame.size.width, self.containerView.frame.size.height-25);
-
 
     });
     
@@ -194,8 +193,6 @@
         
     NSUInteger index = [(TKPageController *)viewController index];
     
-    
-
     index++;
     
     if(self.selctedIndex == 0){
@@ -234,7 +231,6 @@
         childViewController.boardType = index % 3;
         self.callBtn.hidden = NO;
         self.sendTouchBtn.hidden = NO;
-
     }
     
     if(childViewController.boardType == DASHBOARDMAPTYPE){
@@ -260,25 +256,23 @@
              [childViewController setConnection:[circle.myConnectionList objectAtIndex:index] withUserStatus:circle.userStatus];
             self.callBtn.hidden = NO;
             self.sendTouchBtn.hidden = NO;
-
         }
         else {
+            
             //ADD Care Givers
             self.pageCount = 1;
             childViewController.boardType = DASHBOARDNOCAREGIVERS;
             //childViewController.boardType = index % 1;
         }
-        
     }
     
     CGRect frame = childViewController.view.frame;
-    frame.size.height = self.containerView.frame.size.height - 50;
+    frame.size.height = self.containerView.frame.size.height - 25;
     childViewController.view.frame = frame;
 
     return childViewController;
     
 }
-
 
 -(void) didSelectHeaderTitleAtIndex:(NSInteger)index withUserId:(NSString *)userId {
      self.selctedIndex = index;
@@ -301,6 +295,7 @@
 
 - (NSInteger)presentationIndexForPageViewController:(UIPageViewController *)pageViewController {
     // The selected item reflected in the page indicator.
+
     return 0;
 }
 
@@ -421,7 +416,6 @@
             [model postRequestPath:@"touch/add" withParameter:dict
                        withHandler:^(id responseObject, NSError *error) {
                        }];
-            [self.pageController.view removeFromSuperview];
             [self addDefaultpages];
             
         });

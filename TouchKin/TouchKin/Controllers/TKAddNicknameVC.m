@@ -8,6 +8,7 @@
 
 #import "TKAddNicknameVC.h"
 #import "MLNetworkModel.h"
+#import "TKDataEngine.h"
 
 @interface TKAddNicknameVC()<UITextFieldDelegate>
 
@@ -90,12 +91,16 @@
     [model postRequestPath:[NSString stringWithFormat:@"user/connection-request/%@/accept",str] withParameter:_dict withHandler:^(id responseObject, NSError *error) {
         NSLog(@"response = %@",responseObject);
                 if(error ==  nil) {
+                    
+                    [[TKDataEngine sharedManager] getMyFamilyInfo];
+                    
+                    [self.view removeFromSuperview];
+                    [self removeFromParentViewController];
+
                     }
                     else {
                     }
             }];
-        [self.view removeFromSuperview];
-        [self removeFromParentViewController];
         
     }else{
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Data Missing" message:@"Please Enter Nick name for accepting Person otherwise request will not be accepted" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];

@@ -603,7 +603,7 @@
     
     MyConnection *connect = circle.requestList[indexPath.row - 1];
     
-    NSDictionary *requestDict = @{@"requestId": connect.userId};
+    NSDictionary *requestDict = @{@"requestId": connect.requestId};
     
     TKAddNicknameVC *nickName =[self.storyboard instantiateViewControllerWithIdentifier:@"TKAddNicknameVC"];
     nickName.dict = [requestDict mutableCopy];

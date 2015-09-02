@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8187.4" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="sIz-HX-5ps">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="sIz-HX-5ps">
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8151.3"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -102,14 +101,6 @@
             </objects>
             <point key="canvasLocation" x="-2093.5" y="812.5"/>
         </scene>
-        <!--Page View Controller-->
-        <scene sceneID="55f-dx-Yta">
-            <objects>
-                <pageViewController storyboardIdentifier="PageViewController" autoresizesArchivedViewToFullSize="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="g4o-I7-eWg" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="NzR-3b-1oV" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1180.5" y="1392.75"/>
-        </scene>
         <!--Page Controller-->
         <scene sceneID="w7R-nO-Mex">
             <objects>
@@ -127,7 +118,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="wgr-Fh-GZv"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="16"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
                                 <color key="textColor" red="0.91764705879999997" green="0.41176470590000003" blue="0.1529411765" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -160,11 +151,15 @@
                                 <color key="backgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="vUK-ys-egY" secondAttribute="bottom" constant="6" id="0MU-cQ-fci"/>
-                                    <constraint firstItem="QUm-Fl-FnP" firstAttribute="top" secondItem="Xcq-6n-nmB" secondAttribute="top" constant="20" id="0WM-ob-mP9"/>
+                                    <constraint firstItem="QUm-Fl-FnP" firstAttribute="top" secondItem="Xcq-6n-nmB" secondAttribute="top" constant="20" id="0WM-ob-mP9">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="16"/>
+                                    </constraint>
                                     <constraint firstItem="vUK-ys-egY" firstAttribute="leading" secondItem="Xcq-6n-nmB" secondAttribute="leading" constant="6" id="1CX-gy-5Sm"/>
                                     <constraint firstAttribute="bottom" secondItem="vjl-eN-CQ5" secondAttribute="bottom" constant="6" id="6NB-Kb-X61"/>
                                     <constraint firstItem="vUK-ys-egY" firstAttribute="top" secondItem="Xcq-6n-nmB" secondAttribute="top" constant="6" id="8kX-j6-z4r"/>
-                                    <constraint firstAttribute="bottom" secondItem="QUm-Fl-FnP" secondAttribute="bottom" constant="20" id="C4U-L7-qDw"/>
+                                    <constraint firstAttribute="bottom" secondItem="QUm-Fl-FnP" secondAttribute="bottom" constant="20" id="C4U-L7-qDw">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="16"/>
+                                    </constraint>
                                     <constraint firstAttribute="width" constant="180" id="Cxx-Vm-zzZ"/>
                                     <constraint firstAttribute="bottom" secondItem="YMi-zF-YTx" secondAttribute="bottom" constant="20" id="Kne-iU-SOf"/>
                                     <constraint firstItem="P1t-Q4-Kmv" firstAttribute="top" secondItem="Xcq-6n-nmB" secondAttribute="top" constant="6" id="Lvf-OJ-cyM"/>
@@ -178,8 +173,12 @@
                                     <constraint firstItem="vjl-eN-CQ5" firstAttribute="top" secondItem="Xcq-6n-nmB" secondAttribute="top" constant="6" id="jvo-Rp-THQ"/>
                                     <constraint firstAttribute="trailing" secondItem="YMi-zF-YTx" secondAttribute="trailing" constant="20" id="kTV-Vj-oLG"/>
                                     <constraint firstAttribute="height" constant="180" id="nKZ-HD-Kbo"/>
-                                    <constraint firstItem="QUm-Fl-FnP" firstAttribute="leading" secondItem="Xcq-6n-nmB" secondAttribute="leading" constant="20" id="xgM-PX-3ed"/>
-                                    <constraint firstAttribute="trailing" secondItem="QUm-Fl-FnP" secondAttribute="trailing" constant="20" id="zOo-b5-K7J"/>
+                                    <constraint firstItem="QUm-Fl-FnP" firstAttribute="leading" secondItem="Xcq-6n-nmB" secondAttribute="leading" constant="20" id="xgM-PX-3ed">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="16"/>
+                                    </constraint>
+                                    <constraint firstAttribute="trailing" secondItem="QUm-Fl-FnP" secondAttribute="trailing" constant="20" id="zOo-b5-K7J">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="16"/>
+                                    </constraint>
                                     <constraint firstItem="YMi-zF-YTx" firstAttribute="top" secondItem="Xcq-6n-nmB" secondAttribute="top" constant="20" id="zWJ-aE-5bi"/>
                                 </constraints>
                             </view>
@@ -188,12 +187,11 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="scE-R2-aaK"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="16"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
                                 <color key="textColor" red="0.91764705879999997" green="0.41176470590000003" blue="0.1529411765" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="xsG-KK-zye" firstAttribute="top" secondItem="s8X-vd-nf4" secondAttribute="bottom" constant="1" id="6Ev-PP-DEd"/>
                             <constraint firstItem="xsG-KK-zye" firstAttribute="trailing" secondItem="008-HH-Pt3" secondAttribute="trailingMargin" id="7mS-6h-TyP"/>
@@ -221,7 +219,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2I6-wn-res" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-564.5" y="1183.5"/>
+            <point key="canvasLocation" x="-2040.75" y="1438.125"/>
         </scene>
         <!--Map Pop View Controller-->
         <scene sceneID="6Rh-vm-ma8">
@@ -313,11 +311,13 @@
                                 <rect key="frame" x="75" y="496" width="77" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="MeX-VU-Pbr"/>
-                                    <constraint firstAttribute="width" constant="77" id="idg-cc-PvB"/>
+                                    <constraint firstAttribute="width" constant="77" id="idg-cc-PvB">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="100"/>
+                                    </constraint>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
-                                <inset key="titleEdgeInsets" minX="-55" minY="88" maxX="0.0" maxY="0.0"/>
-                                <inset key="imageEdgeInsets" minX="8" minY="0.0" maxX="0.0" maxY="4"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                <inset key="titleEdgeInsets" minX="-57" minY="88" maxX="0.0" maxY="0.0"/>
+                                <inset key="imageEdgeInsets" minX="15" minY="-9" maxX="0.0" maxY="0.0"/>
                                 <state key="normal" title="Send a Touch" image="heartBtn">
                                     <color key="titleColor" red="0.51372549020000002" green="0.51764705879999995" blue="0.5450980392" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -330,12 +330,14 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="udT-X9-ILB">
                                 <rect key="frame" x="223" y="496" width="77" height="100"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="77" id="ecT-zy-lji"/>
+                                    <constraint firstAttribute="width" constant="77" id="ecT-zy-lji">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="100"/>
+                                    </constraint>
                                     <constraint firstAttribute="height" constant="100" id="yAZ-mF-30S"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
-                                <inset key="titleEdgeInsets" minX="-58" minY="87" maxX="0.0" maxY="0.0"/>
-                                <inset key="imageEdgeInsets" minX="9" minY="0.0" maxX="0.0" maxY="4"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                <inset key="titleEdgeInsets" minX="-59" minY="88" maxX="0.0" maxY="0.0"/>
+                                <inset key="imageEdgeInsets" minX="18" minY="-9" maxX="0.0" maxY="0.0"/>
                                 <state key="normal" title="Call" image="callbtn">
                                     <color key="titleColor" red="0.51372549020000002" green="0.51764705879999995" blue="0.5450980392" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -344,14 +346,20 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="udT-X9-ILB" secondAttribute="trailing" constant="59" id="3xx-VO-JbE"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="udT-X9-ILB" secondAttribute="trailing" constant="59" id="3xx-VO-JbE">
+                                <variation key="heightClass=regular-widthClass=compact" constant="49"/>
+                            </constraint>
                             <constraint firstItem="KDH-MC-tKJ" firstAttribute="top" secondItem="udT-X9-ILB" secondAttribute="bottom" constant="22" id="RPx-DX-lZ4"/>
                             <constraint firstItem="Ydb-aO-5kZ" firstAttribute="top" secondItem="xnQ-9v-AwA" secondAttribute="bottom" constant="70" id="Wtf-h7-ADN"/>
                             <constraint firstAttribute="trailing" secondItem="Ydb-aO-5kZ" secondAttribute="trailing" id="Zqr-FE-Gm9"/>
                             <constraint firstItem="KDH-MC-tKJ" firstAttribute="top" secondItem="taT-qF-1w2" secondAttribute="bottom" constant="22" id="h7h-29-iuw"/>
-                            <constraint firstItem="udT-X9-ILB" firstAttribute="leading" secondItem="taT-qF-1w2" secondAttribute="trailing" priority="750" constant="71" id="mX1-5I-1vg"/>
+                            <constraint firstItem="udT-X9-ILB" firstAttribute="leading" secondItem="taT-qF-1w2" secondAttribute="trailing" priority="750" constant="71" id="mX1-5I-1vg">
+                                <variation key="heightClass=regular-widthClass=compact" constant="45"/>
+                            </constraint>
                             <constraint firstItem="Ydb-aO-5kZ" firstAttribute="leading" secondItem="NhD-bx-Lrk" secondAttribute="leading" id="mnq-Zz-JR3"/>
-                            <constraint firstItem="taT-qF-1w2" firstAttribute="leading" secondItem="NhD-bx-Lrk" secondAttribute="leadingMargin" constant="59" id="p97-jE-0Ug"/>
+                            <constraint firstItem="taT-qF-1w2" firstAttribute="leading" secondItem="NhD-bx-Lrk" secondAttribute="leadingMargin" constant="59" id="p97-jE-0Ug">
+                                <variation key="heightClass=regular-widthClass=compact" constant="49"/>
+                            </constraint>
                             <constraint firstItem="KDH-MC-tKJ" firstAttribute="top" secondItem="Ydb-aO-5kZ" secondAttribute="bottom" constant="79" id="xLi-ug-XqI"/>
                         </constraints>
                     </view>
@@ -2271,7 +2279,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ve7-FV-OEm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="429.75" y="1237.125"/>
+            <point key="canvasLocation" x="612.75" y="1100.625"/>
         </scene>
     </scenes>
     <resources>
@@ -2279,15 +2287,15 @@
         <image name="avatar" width="24" height="24"/>
         <image name="avatar_android" width="22" height="22"/>
         <image name="btn" width="58" height="58"/>
-        <image name="callbtn" width="53" height="53"/>
-        <image name="camera" width="48" height="48"/>
+        <image name="callbtn" width="65" height="65"/>
+        <image name="camera" width="53" height="53"/>
         <image name="cancel" width="39" height="39"/>
         <image name="cross" width="30" height="30"/>
         <image name="delete" width="54" height="54"/>
         <image name="edit" width="22" height="22"/>
         <image name="goBack" width="48" height="48"/>
         <image name="groupAvatar" width="24" height="22"/>
-        <image name="heartBtn" width="53" height="53"/>
+        <image name="heartBtn" width="65" height="65"/>
         <image name="kinbook" width="24" height="24"/>
         <image name="like" width="54" height="54"/>
         <image name="like_sel" width="54" height="54"/>
@@ -2298,7 +2306,7 @@
         <image name="radio" width="20" height="20"/>
         <image name="radio_sel" width="20" height="20"/>
         <image name="sendatouch" width="50" height="50"/>
-        <image name="stop" width="37" height="37"/>
+        <image name="stop" width="53" height="53"/>
         <image name="swapCam" width="37" height="37"/>
         <image name="videobtn" width="53" height="53"/>
     </resources>
