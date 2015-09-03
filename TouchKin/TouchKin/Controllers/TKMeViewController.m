@@ -19,10 +19,12 @@
 
 #import <AudioToolbox/AudioServices.h>
 
-@interface TKMeViewController ()<UIPageViewControllerDataSource,MKMapViewDelegate>
+@interface TKMeViewController ()<UIPageViewControllerDataSource,MKMapViewDelegate,TKNotificationHandlerProtocol>
 @property (weak, nonatomic) IBOutlet UIView *containerView;
 
 @property (strong, nonatomic) UIPageViewController *pageController;
+@property (nonatomic, strong) UIPageControl *pageIndicator;
+
 
 @property (nonatomic, strong) NSMutableArray *familyList;
 
@@ -69,6 +71,8 @@
     
     [self addtapGestureForMap];
     
+    [self getPageIndicator];
+    
     // [self setDelegate:self];
     
     [self.callBtn addTarget:self action:@selector(callButtonAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -87,6 +91,8 @@
 
 -(void) navRightBarAction:(UIButton *)sender {
     TKNotificationViewController *ctr = [self.storyboard instantiateViewControllerWithIdentifier:@"TKNotificationViewController"];
+    
+    ctr.delegate = self;
     
     [self presentViewController:ctr animated:YES completion:nil];
 }
@@ -287,7 +293,9 @@
 
 - (NSInteger)presentationCountForPageViewController:(UIPageViewController *)pageViewController {
     // The number of items reflected in the page indicator.
+    self.pageIndicator.hidden = NO;
     if(self.selctedIndex == 0){
+        self.pageIndicator.hidden = YES;
         return 0;
     }
     return self.pageCount;
@@ -297,6 +305,16 @@
     // The selected item reflected in the page indicator.
 
     return 0;
+}
+
+-(void)getPageIndicator {
+    
+    for (UIView *view in self.pageController.view.subviews) {
+        
+        if([view isKindOfClass:[UIPageControl class]]){
+            self.pageIndicator = (UIPageControl *)view;
+        }
+    }
 }
 
 - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
@@ -438,6 +456,40 @@
     TKCameraVC *cam = [self.storyboard instantiateViewControllerWithIdentifier:@"TKCameraVC"];
     
     [self presentViewController:cam animated:YES completion:nil];
+}
+
+-(void) didNotificationSelectedForUserId:(id)userId {
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"userId CONTAINS[cd] %@",userId];
+    
+    NSArray *array = [self.familyList filteredArrayUsingPredicate:predicate];
+    
+    if(array.count){
+        MyCircle *circle = [array objectAtIndex:0];
+        
+        if([circle isKindOfClass:[OthersCircle class]]){
+            OthersCircle *others = (OthersCircle *)circle;
+            
+            self.selctedIndex = [self.familyList indexOfObject:others];
+            
+            [[TKDataEngine sharedManager] setCurrentUserId:userId];
+            
+            self.pageController.dataSource = nil;
+            self.pageController.dataSource = self;
+            [self addDefaultpages];
+        }
+        else {
+            
+            self.selctedIndex = 0;
+            [[TKDataEngine sharedManager] setCurrentUserId:userId];
+
+            self.pageController.dataSource = nil;
+            self.pageController.dataSource = self;
+            [self addDefaultpages];
+            
+        }
+    }
+    
 }
 
 @end

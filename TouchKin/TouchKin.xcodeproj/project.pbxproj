@@ -312,6 +312,7 @@
 		44D7022F1B73C2A500BF21FD /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
 		44E58E041B74B77A00937BCD /* UserActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserActivity.h; sourceTree = "<group>"; };
 		44E58E051B74B77A00937BCD /* UserActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserActivity.m; sourceTree = "<group>"; };
+		44E95B741B97EE6100B96D1C /* TKNotificationHandlerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKNotificationHandlerProtocol.h; sourceTree = "<group>"; };
 		44EA49971B59D5FE0027C368 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		44EA49991B59D6C70027C368 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		44EA499B1B59D7420027C368 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
@@ -657,6 +658,7 @@
 				44A58A041B627EB9001742D8 /* MyHomeLocation.m */,
 				442C3AD01B70E72300DB9293 /* kinBook.h */,
 				442C3AD11B70E72300DB9293 /* kinBook.m */,
+				44E95B741B97EE6100B96D1C /* TKNotificationHandlerProtocol.h */,
 			);
 			path = Model;
 			sourceTree = "<group>";

@@ -86,4 +86,15 @@
 }
 
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    Notification *note = [self.notificationList objectAtIndex:indexPath.row];
+
+    if([self.delegate respondsToSelector:@selector(didNotificationSelectedForUserId:)]){
+        [self.delegate didNotificationSelectedForUserId:note.userId];
+    }
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 @end

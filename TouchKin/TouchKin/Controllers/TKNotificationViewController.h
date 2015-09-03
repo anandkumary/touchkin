@@ -7,8 +7,8 @@
 //
 
 #import "TKHomeBaseController.h"
-
+#import "TKNotificationHandlerProtocol.h"
 //IB_DESIGNABLE
 @interface TKNotificationViewController : TKHomeBaseController
-
+@property (nonatomic, assign) id<TKNotificationHandlerProtocol> delegate;
 @end
