@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="sIz-HX-5ps">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="sIz-HX-5ps">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -176,7 +176,7 @@
                                     <constraint firstItem="YMi-zF-YTx" firstAttribute="top" secondItem="Xcq-6n-nmB" secondAttribute="top" constant="20" id="zWJ-aE-5bi"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kfi-PJ-EfZ">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.97999999999999998" translatesAutoresizingMaskIntoConstraints="NO" id="Kfi-PJ-EfZ">
                                 <rect key="frame" x="16" y="251" width="343" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="scE-R2-aaK"/>
@@ -213,7 +213,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2I6-wn-res" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2069.5" y="1693.5"/>
+            <point key="canvasLocation" x="-2093.5" y="1547.5"/>
         </scene>
         <!--Map Pop View Controller-->
         <scene sceneID="6Rh-vm-ma8">
@@ -360,6 +360,7 @@
                     <tabBarItem key="tabBarItem" title="Me" image="avatar" id="0Pr-1a-x57"/>
                     <connections>
                         <outlet property="callBtn" destination="udT-X9-ILB" id="wwC-dg-kqd"/>
+                        <outlet property="containerConstraint" destination="xLi-ug-XqI" id="vaH-JB-GPp"/>
                         <outlet property="containerView" destination="Ydb-aO-5kZ" id="fDc-bG-lh7"/>
                         <outlet property="sendTouchBtn" destination="taT-qF-1w2" id="uhM-n5-gb5"/>
                     </connections>

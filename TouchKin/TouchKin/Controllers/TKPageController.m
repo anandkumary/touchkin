@@ -67,6 +67,18 @@
         
         [self.view layoutIfNeeded];
     }
+    else if (height == 568){
+        
+        self.bgImage.transform = CGAffineTransformMakeScale(1.18, 1.18);
+        
+        self.bgImageViewConstriant.constant += 12;
+        self.bottomLabelConstraint.constant += 8;
+        
+        [self.bgImage layoutIfNeeded];
+        
+        [self.view layoutIfNeeded];
+        
+    }
     else if (height >= 667.0){
         
         self.bgImage.transform = CGAffineTransformMakeScale(1.4, 1.4);

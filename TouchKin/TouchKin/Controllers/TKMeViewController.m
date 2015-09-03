@@ -21,6 +21,7 @@
 
 @interface TKMeViewController ()<UIPageViewControllerDataSource,MKMapViewDelegate,TKNotificationHandlerProtocol>
 @property (weak, nonatomic) IBOutlet UIView *containerView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *containerConstraint;
 
 @property (strong, nonatomic) UIPageViewController *pageController;
 @property (nonatomic, strong) UIPageControl *pageIndicator;
@@ -72,6 +73,16 @@
     [self addtapGestureForMap];
     
     [self getPageIndicator];
+    
+    CGFloat height = [UIScreen mainScreen].bounds.size.height;
+    
+    if(height == 480.00){
+    
+    }else if(height == 568.00){
+        self.containerConstraint.constant += 15;
+    }else if (height >= 667.00){
+        
+    }
     
     // [self setDelegate:self];
     
