@@ -25,19 +25,18 @@
     CGFloat width = self.bounds.size.width - offset;
     CGFloat height = self.bounds.size.height - offset;
     
-    CGFloat lineWidth = 10.0f;
-
+    CGFloat lineWidth = 10.5f;
     
     CGPoint center = CGPointMake(width/2 + offset/2, (height)/2 + offset/2);
     CGFloat radius = (width - lineWidth)/2;
-    CGFloat startAngle = -(((float)M_PI / 2) + 0.07); // 90 degrees
-                                              // CGFloat endAngle = (2 * (float)M_PI) + startAngle;
+    CGFloat startAngle = -(((float)M_PI / 2) + 0.07);
+    // 90 degrees
+    // CGFloat endAngle = (2 * (float)M_PI) + startAngle;
     
     CGContextRef context = UIGraphicsGetCurrentContext();
 
-    
     CGContextSetStrokeColorWithColor(context, [UIColor colorWithRed:(244.0/255.0) green:(243.0/255.0) blue:(243.0/255.0) alpha:1.0].CGColor);
-    CGContextSetLineWidth(context, 10);
+    CGContextSetLineWidth(context, 10.5f);
     
     CGFloat j= 0.0;
     
@@ -62,7 +61,6 @@
 -(void) setSplitlist:(NSDictionary *)splitlist {
     
     self.backgroundColor = [UIColor clearColor];
-
     
     _splitlist = splitlist;
     

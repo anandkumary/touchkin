@@ -41,16 +41,14 @@
         
         NSData *imgData = (__bridge NSData*)ABPersonCopyImageDataWithFormat(record, kABPersonImageFormatThumbnail);
      
-        [contactPerson setImageData:imgData];        
+        [contactPerson setImageData:imgData];
+        CFRelease((__bridge CFTypeRef)(imgData));
     }
-
-    
     
     // Email
     ABMultiValueRef emailMultiValueRef = ABRecordCopyValue(record, kABPersonEmailProperty);
     [contactPerson setEmails:[NSMutableArray arrayWithArray:(__bridge_transfer NSArray *)ABMultiValueCopyArrayOfAllValues(emailMultiValueRef)]];
     CFRelease(emailMultiValueRef);
-    
     
     
     // Phone number
@@ -146,7 +144,7 @@
         
         ABMultiValueRef phoneNumbers = ABRecordCopyValue(record, kABPersonPhoneProperty);
         CFIndex phoneCount = ABMultiValueGetCount(phoneNumbers);
-        
+        CFRelease(phoneNumbers);
         if(phoneCount){
             //NSLog(@"add phone %@",phoneNumbers);
             [contacts addObject:[self parseContact:record]];
@@ -172,7 +170,7 @@
         
         ABMultiValueRef phoneNumbers = ABRecordCopyValue(record, kABPersonPhoneProperty);
         CFIndex phoneCount = ABMultiValueGetCount(phoneNumbers);
-        
+        CFRelease(phoneNumbers);
         if(phoneCount){
            // NSLog(@"add phone %@",phoneNumbers);
             [contacts addObject:[self parseContact:record]];

@@ -20,7 +20,7 @@
      initWithString:text];
     
     [aText addAttribute:NSForegroundColorAttributeName
-                 value:[UIColor lightGrayColor]
+                  value:[UIColor colorWithRed:234/255.f green:105/255.f blue:39/255.f alpha:1]
                  range:range];
     [self setAttributedText: aText];
     

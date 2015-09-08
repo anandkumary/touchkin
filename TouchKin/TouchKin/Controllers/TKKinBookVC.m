@@ -36,8 +36,8 @@
 
 -(void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
-    NSString *userId = [[TKDataEngine sharedManager] currentUserId];
+    //NSString *userId = nil;
+   // userId = [[TKDataEngine sharedManager] currentUserId];
     MLNetworkModel *model = [[MLNetworkModel alloc] init];
     
     [model getRequestPath:@"/kinbook/messages" withParameter:nil withHandler:^(id responseObject, NSError *error) {
@@ -47,9 +47,7 @@
 
         dispatch_async(dispatch_get_main_queue(), ^{
             [self parseDictionary:responseObject];
-
         });
-        
     }];
     
 }
@@ -159,13 +157,9 @@
             });
         }
     }];
-    
-    
 }
 
 -(void) kinBookDidSelectSendTouch:(TKKinBookCollectionCell *)cell {
-    
-    
     
 }
 

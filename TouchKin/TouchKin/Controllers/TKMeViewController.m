@@ -79,7 +79,7 @@
     if(height == 480.00){
     
     }else if(height == 568.00){
-        self.containerConstraint.constant += 15;
+        self.containerConstraint.constant += 11;
     }else if (height >= 667.00){
         
     }

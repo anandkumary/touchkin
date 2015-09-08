@@ -114,16 +114,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xsG-KK-zye">
-                                <rect key="frame" x="16" y="21" width="343" height="21"/>
+                                <rect key="frame" x="16" y="25" width="343" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="wgr-Fh-GZv"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
-                                <color key="textColor" red="0.91764705879999997" green="0.41176470590000003" blue="0.1529411765" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" red="0.18823529411764706" green="0.18823529411764706" blue="0.18823529411764706" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xcq-6n-nmB">
-                                <rect key="frame" x="93" y="55" width="180" height="180"/>
+                                <rect key="frame" x="93" y="59" width="180" height="180"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P1t-Q4-Kmv" customClass="TKSplitView">
                                         <rect key="frame" x="4" y="4" width="172" height="172"/>
@@ -177,17 +177,17 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.97999999999999998" translatesAutoresizingMaskIntoConstraints="NO" id="Kfi-PJ-EfZ">
-                                <rect key="frame" x="16" y="251" width="343" height="21"/>
+                                <rect key="frame" x="16" y="255" width="343" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="scE-R2-aaK"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
-                                <color key="textColor" red="0.91764705879999997" green="0.41176470590000003" blue="0.1529411765" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" red="0.18823529411764706" green="0.18823529411764706" blue="0.18823529411764706" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="xsG-KK-zye" firstAttribute="top" secondItem="s8X-vd-nf4" secondAttribute="bottom" constant="1" id="6Ev-PP-DEd"/>
+                            <constraint firstItem="xsG-KK-zye" firstAttribute="top" secondItem="s8X-vd-nf4" secondAttribute="bottom" constant="5" id="6Ev-PP-DEd"/>
                             <constraint firstItem="xsG-KK-zye" firstAttribute="trailing" secondItem="008-HH-Pt3" secondAttribute="trailingMargin" id="7mS-6h-TyP"/>
                             <constraint firstAttribute="centerX" secondItem="Xcq-6n-nmB" secondAttribute="centerX" constant="4.5" id="Wla-UJ-f5L"/>
                             <constraint firstItem="xsG-KK-zye" firstAttribute="leading" secondItem="008-HH-Pt3" secondAttribute="leadingMargin" id="Y8r-Y9-4nD"/>
@@ -1330,6 +1330,19 @@
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P7n-nx-5f3">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash_screen" translatesAutoresizingMaskIntoConstraints="NO" id="QV4-2H-CTn">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="QV4-2H-CTn" firstAttribute="centerY" secondItem="P7n-nx-5f3" secondAttribute="centerY" id="9AN-KQ-cPs"/>
+                                    <constraint firstItem="QV4-2H-CTn" firstAttribute="top" secondItem="P7n-nx-5f3" secondAttribute="top" id="K4a-8m-cmN"/>
+                                    <constraint firstAttribute="bottom" secondItem="QV4-2H-CTn" secondAttribute="bottom" id="TxM-Dy-NBf"/>
+                                    <constraint firstAttribute="trailing" secondItem="QV4-2H-CTn" secondAttribute="trailing" id="d9y-Uq-MB5"/>
+                                    <constraint firstItem="QV4-2H-CTn" firstAttribute="centerX" secondItem="P7n-nx-5f3" secondAttribute="centerX" id="ipE-QH-IFz"/>
+                                    <constraint firstItem="QV4-2H-CTn" firstAttribute="leading" secondItem="P7n-nx-5f3" secondAttribute="leading" id="wOE-Ua-OH3"/>
+                                </constraints>
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="arH-co-I1p">
                                 <rect key="frame" x="54" y="575" width="100" height="40"/>
@@ -2301,8 +2314,9 @@
         <image name="radio" width="20" height="20"/>
         <image name="radio_sel" width="20" height="20"/>
         <image name="sendatouch" width="50" height="50"/>
+        <image name="splash_screen" width="640" height="1136"/>
         <image name="stop" width="53" height="53"/>
         <image name="swapCam" width="37" height="37"/>
-        <image name="videobtn" width="53" height="53"/>
+        <image name="videobtn" width="65" height="65"/>
     </resources>
 </document>

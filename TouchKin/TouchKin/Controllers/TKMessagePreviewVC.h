@@ -13,4 +13,6 @@
 
 @property (strong) NSURL *videoURL;
 
+- (void)playerItemDidReachEnd:(NSNotification *)notification;
+
 @end

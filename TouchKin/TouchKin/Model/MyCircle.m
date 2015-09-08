@@ -38,5 +38,8 @@
     
 }
 
+-(void)updateUserStatus:(NSDictionary *)userStat{
+    
+}
 
 @end

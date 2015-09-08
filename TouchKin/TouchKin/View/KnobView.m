@@ -16,7 +16,6 @@
 @end
 @implementation KnobView
 
-
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect {
@@ -101,7 +100,7 @@
     
     dispatch_async(dispatch_get_main_queue(), ^{
         
-        CGFloat angle = (360-5) * self.ratio;
+        CGFloat angle = (360-5) * self.Ratio;
         
         CABasicAnimation *spinAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
         spinAnimation.fromValue = [NSNumber numberWithFloat:DEGREES_TO_RADIANS(0)];

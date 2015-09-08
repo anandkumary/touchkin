@@ -59,6 +59,7 @@
     
     CGFloat radius = (width - lineWidth)/2;
     CGFloat startAngle = - ((float)M_PI / 2); // 90 degrees
+    
     CGFloat endAngle = (2 * (float)M_PI) + startAngle;
 
     
@@ -69,7 +70,6 @@
     CGContextAddArc(context, center.x,center.y, radius, startAngle,endAngle + 10, 0);
     CGContextStrokePath(context);
     
-    
     CGFloat progressRatio =  self.ratio;
         
     UIBezierPath *processPath = [UIBezierPath bezierPath];
@@ -77,15 +77,15 @@
     processPath.lineWidth = lineWidth;
     // endAngle = (self.progress * 2 * (float)M_PI) + startAngle;
     
-    
     endAngle = (progressRatio * 2 * (float)M_PI) + startAngle;
-    CGFloat tmpStartAngle=startAngle;
+    CGFloat tmpStartAngle;
+    tmpStartAngle = startAngle;
     CGFloat shownProgressStep=0.05;
-    
+
     // The size of progress steps to take when rendering progress colors.
     // for (CGFloat shownProgress=0.0;shownProgress <= self.progress ;shownProgress+=shownProgressStep)
     for (CGFloat shownProgress=0.0;shownProgress <= progressRatio ;shownProgress+=shownProgressStep){
-        endAngle=(shownProgress * 2 *(float)M_PI) + startAngle;
+        //endAngle=(shownProgress * 2 *(float)M_PI) + startAngle;
         
         CGFloat rval= ((251.0/255.0) - ( 0.02 * shownProgress));
         //(1.0-shownProgress) + shownProgress;
@@ -93,7 +93,6 @@
         //(1.0-shownProgress);
         CGFloat bval= ((138.0/255.0) - (0.6 * shownProgress));
     
-        
         UIColor *progressColor=[UIColor colorWithRed:rval green:gval blue:bval alpha:1.0];
         [progressColor set];
         

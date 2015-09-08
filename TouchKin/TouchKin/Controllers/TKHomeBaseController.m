@@ -59,6 +59,10 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)didSelectHeaderTitleAtIndex:(NSInteger)index withUserId:(NSString *)userId{
+    
+}
+
 -(void)handleDataModelChange:(NSNotification*)note {
     
     NSInteger count = [[TKDataManager sharedInstance] getNotificationCount];

@@ -69,7 +69,7 @@
 //        rect1.size.width += 14;
 //        rect1.size.height += 14;
         
-        const NSUInteger kNumCircles = 1u;
+       // const NSUInteger kNumCircles = 1u;
         
         CGFloat height = CGRectGetHeight(rect1) - 0;
         
@@ -84,22 +84,18 @@
         
         CGContextSetLineWidth(context, 2.0f);
 
-        
         CGFloat alpha = self.startAnglePoint;
-        
         
         // for (NSUInteger i = 0; i < kNumCircles; i++)
         {
             CGPoint smallCircleCenter = CGPointMake(rectCenter.x  + bigCircleRadius * cos(alpha) - smallCircleRadius/2.0f , rectCenter.y  + bigCircleRadius * sin(alpha) - smallCircleRadius / 2.0f );
             
-            
             CGRect smallCircleRect = CGRectMake(smallCircleCenter.x,smallCircleCenter.y,smallCircleRadius,smallCircleRadius);
             
-            CGContextSetStrokeColorWithColor(context,[UIColor clearColor].CGColor);
-            
+            CGContextSetStrokeColorWithColor(context,[UIColor whiteColor].CGColor);
             CGContextAddEllipseInRect(context, smallCircleRect);
             
-            CGContextSetFillColorWithColor(context,[UIColor greenColor].CGColor);
+            CGContextSetFillColorWithColor(context,[UIColor colorWithRed:49/255.f green:217/255.f blue:93/255.f alpha:1].CGColor);
             
             CGRect smallCircleRect1 = smallCircleRect;
             smallCircleRect1.origin.x -= 1;
@@ -108,9 +104,10 @@
             smallCircleRect1.size.height -= 2;
             
             CGContextFillEllipseInRect(context, smallCircleRect1);
-            
+            CGContextStrokeEllipseInRect(context, smallCircleRect1);
+           //CGContextSetLineWidth(context, 0.5f);
             CGContextStrokePath(context);
-            alpha += M_PI / (kNumCircles / 2.0f);
+            //alpha += M_PI / (kNumCircles / 2.0f);
         }
         
     }
@@ -204,7 +201,7 @@
 //}
 
 
-//-(void) animate {
+-(void) animate {
 //    
 //    self.percentage = (0);
 //    self.actualAngle = (360 - 15) * self.ratio;
@@ -224,7 +221,7 @@
 //                                                userInfo:nil
 //                                                 repeats:YES];
 //    
-//}
+}
 
 
 

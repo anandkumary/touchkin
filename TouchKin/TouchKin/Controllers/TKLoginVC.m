@@ -14,7 +14,7 @@
 #import "TKDataEngine.h"
 #import "TKProfileVC.h"
 #import "MBProgressHUD.h"
-
+#import "TKIntroVC.h"
 #define MAXLENGTH 10
 
 @interface TKLoginVC ()<TKCountryDelegate>
@@ -95,6 +95,11 @@
 }
 - (IBAction)backButtonAction:(id)sender {
     
+    TKIntroVC *introVC = [self.storyboard instantiateViewControllerWithIdentifier:@"TKIntroVC"];
+    
+    
+    [self presentViewController:introVC animated:YES completion:nil];
+
 }
 - (IBAction)forwardButtonAction:(id)sender {
     //[self.navigationView animateTop:^(BOOL onComplete) {

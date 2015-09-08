@@ -32,12 +32,11 @@
     
     [self.resendBtn setTitle:[[TKDataEngine sharedManager] getPhoneNumber] forState:UIControlStateNormal];
     
-    [self.resendBtn addTarget:self action:@selector(resendBtnAction:) forControlEvents:UIControlStateNormal];
+    [self.resendBtn addTarget:self action:@selector(resendBtnAction:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 -(void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
-
 }
 
 - (void)didReceiveMemoryWarning {

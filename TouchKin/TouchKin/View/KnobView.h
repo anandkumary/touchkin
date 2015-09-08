@@ -12,7 +12,7 @@
 //IB_DESIGNABLE
 @interface KnobView : TKSplitView
 
-@property (nonatomic, assign) CGFloat ratio;
+@property (nonatomic, assign) CGFloat Ratio;
 
 @property (nonatomic, assign) DashboardType boardType;
 
