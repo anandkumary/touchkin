@@ -49,13 +49,13 @@ static NSString * const KINTROSCREEN = @"TKIntroVC";
 
     
     tabBarItem1.selectedImage = [[UIImage imageNamed:@"avatar"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
-    tabBarItem1.image = [[UIImage imageNamed:@"avatar"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    tabBarItem1.image = [[UIImage imageNamed:@"avatar"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate ];
     
     tabBarItem2.selectedImage = [[UIImage imageNamed:@"kinbook"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
-    tabBarItem2.image = [[UIImage imageNamed:@"kinbook"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    tabBarItem2.image = [[UIImage imageNamed:@"kinbook"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate ];
     
     tabBarItem3.selectedImage = [[UIImage imageNamed:@"message"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
-    tabBarItem3.image = [[UIImage imageNamed:@"message"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    tabBarItem3.image = [[UIImage imageNamed:@"message"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate ];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fetchOnApplicationLoad) name:@"ApplicationOnLoad" object:nil];
     
